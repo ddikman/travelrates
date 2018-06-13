@@ -30,6 +30,8 @@ class ConverterScreenState extends State<ConverterScreen> {
   @override
   Widget build(BuildContext context) {
 
+    final state = StateContainer.of(context).appState;
+
     final spacing = 12.0;
 
     final cards = new Material(
@@ -39,15 +41,8 @@ class ConverterScreenState extends State<ConverterScreen> {
         padding: EdgeInsets.all(spacing),
         crossAxisSpacing: spacing,
         mainAxisSpacing: spacing,
-        childAspectRatio: 1.1,
-        children: <Widget>[
-          _buildCard('USD'),
-          _buildCard('IDR'),
-          _buildCard('SEK'),
-          _buildCard('SGD'),
-          _buildCard('JPY'),
-          _buildCard('EUR'),
-        ],
+        childAspectRatio: 1.62,
+        children: state.currencies.map(_buildCard).toList(),
       ),
     );
 
@@ -106,6 +101,7 @@ class _CurrencyCardState extends State<CurrencyCard> {
             child: new Padding(
               padding: const EdgeInsets.all(16.0),
               child: new Column(
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
                       widget.currency.name,

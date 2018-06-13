@@ -13,6 +13,8 @@ class AppState {
 
   final CurrencyRepository currencyRepo;
 
+  final List<String> currencies;
+
   double getAmountInCurrency(Currency currency) {
     if (currency.code == currentCurrency.code) {
       return currentAmount;
@@ -29,17 +31,19 @@ class AppState {
     currentAmount: 1.0,
     currentCurrency: null,
     isLoading: true,
-    currencyRepo: null
+    currencyRepo: null,
+    currencies: null
   );
 
-  const AppState({@required this.currentAmount, @required this.currentCurrency, @required this.isLoading, @required this.currencyRepo});
+  const AppState({@required this.currentAmount, @required this.currentCurrency, @required this.isLoading, @required this.currencyRepo, this.currencies});
 
-  AppState copyWith({double amount, Currency currency, bool isLoading}) {
+  AppState copyWith({double amount, Currency currency, bool isLoading, List<String> currencies}) {
     return new AppState(
       currentAmount: amount ?? this.currentAmount,
       currentCurrency: currency ?? this.currentCurrency,
       isLoading: isLoading ?? this.isLoading,
-      currencyRepo: this.currencyRepo
+      currencyRepo: this.currencyRepo,
+      currencies: currencies ?? this.currencies
     );
   }
 }
@@ -80,12 +84,17 @@ class StateContainerState extends State<StateContainer> {
       appState = widget.state;
     } else if (appState.isLoading) {
       final currencyRepository = await CurrencyRepository.loadFrom(DefaultAssetBundle.of(context));
+
+      final defaultCurrencies = <String>['JPY', 'SEK', 'USD', 'EUR', 'PHP', 'IDR'];
+
       final loadedState = new AppState(
         currentAmount: 1.0,
         currentCurrency: currencyRepository.getBaseRateCurrency(),
         isLoading: false,
-        currencyRepo: currencyRepository
+        currencyRepo: currencyRepository,
+        currencies: new List.from(defaultCurrencies)
       );
+
       setState(() {
         appState = loadedState;
       });
@@ -105,6 +114,18 @@ class StateContainerState extends State<StateContainer> {
       data: this,
       child: widget.child,
     );
+  }
+
+  void removeCurrency(String currencyCode) {
+    setState((){
+      appState.currencies.remove(currencyCode);
+    });
+  }
+
+  void addCurrency(String currencyCode) {
+    setState((){
+      appState.currencies.add(currencyCode);
+    });
   }
 
   void setAmount(double amount, Currency currency) {
