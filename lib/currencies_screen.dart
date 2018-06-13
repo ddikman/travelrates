@@ -1,5 +1,6 @@
+import 'package:backpacking_currency_converter/background_container.dart';
+import 'package:backpacking_currency_converter/base_currency_screen.dart';
 import 'package:backpacking_currency_converter/currency.dart';
-import 'package:backpacking_currency_converter/currency_repository.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class CurrenciesScreen extends StatelessWidget {
       return CurrencySelection(currency);
     }).toList();
 
-    return new Padding(
+    final body = new Padding(
       padding: const EdgeInsets.all(8.0),
       child: new Column(
         mainAxisSize: MainAxisSize.min,
@@ -23,14 +24,19 @@ class CurrenciesScreen extends StatelessWidget {
             color: Colors.blue,
             child: TextField(
               decoration: InputDecoration(
-                hintText: 'Search code or name',
-                border: OutlineInputBorder()
+                  hintText: 'Search code or name',
+                  border: OutlineInputBorder()
               ),
             ),
           ),
           new Expanded(child: ListView(children: currencyWidgets)),
         ],
       ),
+    );
+
+    return Scaffold(
+      appBar: AppBar(title: Text('Select currencies')),
+      body: BackgroundContainer(child: body)
     );
   }
 }
