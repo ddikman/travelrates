@@ -9,8 +9,6 @@ class AppState {
 
   final Currency currentCurrency;
 
-  final bool isLoading;
-
   // TODO: this could have a better name
   final bool isReconfiguring;
 
@@ -33,19 +31,17 @@ class AppState {
   static AppState loading() => new AppState(
     currentAmount: 1.0,
     currentCurrency: null,
-    isLoading: true,
     currencyRepo: null,
     currencies: null,
     isReconfiguring: false
   );
 
-  const AppState({@required this.currentAmount, @required this.currentCurrency, @required this.isLoading, @required this.currencyRepo, this.currencies, this.isReconfiguring = false});
+  const AppState({@required this.currentAmount, @required this.currentCurrency, @required this.currencyRepo, this.currencies, this.isReconfiguring = false});
 
-  AppState copyWith({double amount, Currency currency, bool isLoading, List<String> currencies, bool isReconfiguring}) {
+  AppState copyWith({double amount, Currency currency, List<String> currencies, bool isReconfiguring}) {
     return new AppState(
       currentAmount: amount ?? this.currentAmount,
       currentCurrency: currency ?? this.currentCurrency,
-      isLoading: isLoading ?? this.isLoading,
       currencyRepo: this.currencyRepo,
       currencies: currencies ?? this.currencies,
       isReconfiguring: isReconfiguring ?? this.isReconfiguring
@@ -87,23 +83,26 @@ class StateContainerState extends State<StateContainer> {
 
     if (widget.state != null) {
       appState = widget.state;
-    } else if (appState.isLoading) {
-      final currencyRepository = await CurrencyRepository.loadFrom(DefaultAssetBundle.of(context));
+    } else {
+      appState = AppState.loading();
+    }
+  }
 
-      final defaultCurrencies = <String>['JPY', 'SEK', 'USD', 'EUR', 'PHP', 'IDR'];
+  Future<Null> loadState() async {
+    final currencyRepository = await CurrencyRepository.loadFrom(DefaultAssetBundle.of(context));
 
-      final loadedState = new AppState(
+    final defaultCurrencies = <String>['JPY', 'SEK', 'USD', 'EUR', 'PHP', 'IDR'];
+
+    final loadedState = new AppState(
         currentAmount: 1.0,
         currentCurrency: currencyRepository.getBaseRateCurrency(),
-        isLoading: false,
         currencyRepo: currencyRepository,
         currencies: new List.from(defaultCurrencies)
-      );
+    );
 
-      setState(() {
-        appState = loadedState;
-      });
-    }
+    setState(() {
+      appState = loadedState;
+    });
   }
 
 

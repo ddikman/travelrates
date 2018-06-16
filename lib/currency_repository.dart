@@ -1,5 +1,4 @@
 import 'package:backpacking_currency_converter/currency.dart';
-import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 
@@ -56,8 +55,6 @@ class CurrencyRepository {
           )
       );
     }
-
-    await Future.delayed(Duration(seconds: 2));
 
     return CurrencyRepository(
       currencies: currencies,

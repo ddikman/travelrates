@@ -1,5 +1,4 @@
 import 'package:backpacking_currency_converter/background_container.dart';
-import 'package:backpacking_currency_converter/currencies_screen.dart';
 import 'package:backpacking_currency_converter/currency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -62,8 +61,7 @@ class ConverterScreenState extends State<ConverterScreen> {
     return FloatingActionButton(
       child: Icon(Icons.add),
       onPressed: () {
-        Navigator.of(context).push(new MaterialPageRoute(
-            builder: (context) => new CurrenciesScreen()));
+        Navigator.of(context).pushNamed('/addCurrency');
       },
     );
   }
