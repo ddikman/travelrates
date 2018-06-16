@@ -159,26 +159,29 @@ class _CurrencyCardState extends State<CurrencyCard>
       );
     }
 
-    final card = new Material(
-      color: Colors.transparent,
-      child: Card(
-          color: _showInputError ? Colors.red : Colors.blue,
-          child: new InkWell(
-            splashColor: Colors.white,
-            onTap: _cardTapped,
-            child: new Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: new Stack(
-                children: <Widget>[
-                  currencyTitle,
-                  new Align(
-                    alignment: Alignment.centerRight,
-                      child: textInput
-                  )
-                ],
+    final card = new Container(
+      height: 65.0,
+      child: new Material(
+        color: Colors.transparent,
+        child: Card(
+            color: _showInputError ? Colors.red : Colors.blue,
+            child: new InkWell(
+              splashColor: Colors.white,
+              onTap: _cardTapped,
+              child: new Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: new Stack(
+                  children: <Widget>[
+                    currencyTitle,
+                    new Align(
+                      alignment: Alignment.centerRight,
+                        child: textInput
+                    )
+                  ],
+                ),
               ),
-            ),
-          )),
+            )),
+      ),
     );
 
     final animationDelay = Duration(milliseconds: 50 * (widget.index + 1));
