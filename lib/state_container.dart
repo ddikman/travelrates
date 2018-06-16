@@ -11,6 +11,9 @@ class AppState {
 
   final bool isLoading;
 
+  // TODO: this could have a better name
+  final bool isReconfiguring;
+
   final CurrencyRepository currencyRepo;
 
   final List<String> currencies;
@@ -32,18 +35,20 @@ class AppState {
     currentCurrency: null,
     isLoading: true,
     currencyRepo: null,
-    currencies: null
+    currencies: null,
+    isReconfiguring: false
   );
 
-  const AppState({@required this.currentAmount, @required this.currentCurrency, @required this.isLoading, @required this.currencyRepo, this.currencies});
+  const AppState({@required this.currentAmount, @required this.currentCurrency, @required this.isLoading, @required this.currencyRepo, this.currencies, this.isReconfiguring = false});
 
-  AppState copyWith({double amount, Currency currency, bool isLoading, List<String> currencies}) {
+  AppState copyWith({double amount, Currency currency, bool isLoading, List<String> currencies, bool isReconfiguring}) {
     return new AppState(
       currentAmount: amount ?? this.currentAmount,
       currentCurrency: currency ?? this.currentCurrency,
       isLoading: isLoading ?? this.isLoading,
       currencyRepo: this.currencyRepo,
-      currencies: currencies ?? this.currencies
+      currencies: currencies ?? this.currencies,
+      isReconfiguring: isReconfiguring ?? this.isReconfiguring
     );
   }
 }
@@ -114,6 +119,12 @@ class StateContainerState extends State<StateContainer> {
       data: this,
       child: widget.child,
     );
+  }
+
+  void toggleIsReconfiguring() {
+    update(appState.copyWith(
+      isReconfiguring: !appState.isReconfiguring
+    ));
   }
 
   void removeCurrency(String currencyCode) {

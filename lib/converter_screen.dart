@@ -1,5 +1,4 @@
 import 'package:backpacking_currency_converter/background_container.dart';
-import 'package:backpacking_currency_converter/base_currency_screen.dart';
 import 'package:backpacking_currency_converter/currencies_screen.dart';
 import 'package:backpacking_currency_converter/currency.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +39,6 @@ class ConverterScreenState extends State<ConverterScreen> {
         padding: EdgeInsets.all(spacing),
         crossAxisSpacing: spacing,
         mainAxisSpacing: spacing,
-        childAspectRatio: 1.62,
         children: state.currencies.map(_buildCard).toList(),
       ),
     );
@@ -50,63 +48,35 @@ class ConverterScreenState extends State<ConverterScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text("What's my \$ worth?"),
+          actions: <Widget>[_buildConfigureActionButton()],
         ),
-        drawer: _buildAppDrawer(context),
-        body: new BackgroundContainer(child: body));
+        floatingActionButton: _buildAddCurrencyButton(),
+        body: new BackgroundContainer(
+            child: new Padding(
+                padding:
+                    EdgeInsets.only(bottom: 80.0), // space for floating button
+                child: body)));
   }
 
-  _buildAppDrawer(BuildContext context) {
-    return new Drawer(
-      child: new ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          new DrawerHeader(
-            child: new Column(
-              children: <Widget>[
-                Text(
-                  "Backpacker currency converter",
-                  style: TextStyle(color: Colors.white, fontSize: 24.0),
-                ),
-                new Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Text(
-                    'Copyright Greycastle AB, 2018',
-                    style: TextStyle(color: Colors.white, fontSize: 12.0),
-                  ),
-                )
-              ],
-            ),
-            decoration: BoxDecoration(color: Colors.blue),
-          ),
-          new ListTile(
-            title: Row(
-              children: <Widget>[
-                new Expanded(child: new Text("Manage currencies")),
-                Icon(Icons.monetization_on, color: Colors.black),
-              ],
-            ),
-            onTap: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new CurrenciesScreen()));
-            },
-          ),
-          new ListTile(
-            title: Row(
-              children: <Widget>[
-                new Expanded(child: new Text('Set base currency')),
-                Icon(Icons.settings, color: Colors.black)
-              ],
-            ),
-            onTap: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new BaseCurrencyScreen()));
-            },
-          )
-        ],
-      ),
+  _buildAddCurrencyButton() {
+    return FloatingActionButton(
+      child: Icon(Icons.add),
+      onPressed: () {
+        Navigator.of(context).push(new MaterialPageRoute(
+            builder: (context) => new CurrenciesScreen()));
+      },
     );
+  }
+
+  _buildConfigureActionButton() {
+    final state = StateContainer.of(context).appState;
+    IconData displayIcon = state.isReconfiguring ? Icons.done : Icons.settings;
+
+    return new IconButton(
+        icon: Icon(displayIcon),
+        onPressed: () {
+          StateContainer.of(context).toggleIsReconfiguring();
+        });
   }
 }
 
@@ -145,6 +115,45 @@ class _CurrencyCardState extends State<CurrencyCard> {
 
     final inputFontSize = 24.0;
 
+    Widget currencyTitle = Text(widget.currency.name,
+        style: Theme.of(context).textTheme.body1.copyWith(fontSize: 14.0));
+
+    Widget textInput = TextField(
+      focusNode: focusNode,
+      controller: textEditingController,
+      style: Theme.of(context).textTheme.body1.copyWith(
+            fontSize: inputFontSize,
+          ),
+      keyboardType: TextInputType.number,
+      textAlign: TextAlign.right,
+      decoration: InputDecoration(
+          isDense: true,
+          suffixText: "${widget.currency.code}",
+          suffixStyle: Theme
+              .of(context)
+              .textTheme
+              .body1
+              .copyWith(fontSize: inputFontSize / 2),
+          border: InputBorder.none,
+          errorText: _showInputError ? 'Input a valid decimal.' : null,
+          errorStyle: TextStyle(
+            color: Colors.white,
+          )),
+      onSubmitted: _newValueReceived,
+    );
+
+    // if we're editing, add an edit button
+    if (state.isReconfiguring) {
+      textInput = IconButton(
+        padding: EdgeInsets.all(0.0),
+        iconSize: 24.0,
+        icon: Icon(Icons.remove_circle, color: Colors.red),
+        onPressed: () {
+          StateContainer.of(context).removeCurrency(widget.currency.code);
+        },
+      );
+    }
+
     return new Material(
       color: Colors.transparent,
       child: Card(
@@ -156,38 +165,7 @@ class _CurrencyCardState extends State<CurrencyCard> {
               padding: const EdgeInsets.all(16.0),
               child: new Column(
                 mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(widget.currency.name,
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .body1
-                          .copyWith(fontSize: 14.0)),
-                  TextField(
-                    focusNode: focusNode,
-                    controller: textEditingController,
-                    style: Theme.of(context).textTheme.body1.copyWith(
-                          fontSize: inputFontSize,
-                        ),
-                    keyboardType: TextInputType.number,
-                    textAlign: TextAlign.right,
-                    decoration: InputDecoration(
-                        isDense: true,
-                        suffixText: "${widget.currency.code}",
-                        suffixStyle: Theme
-                            .of(context)
-                            .textTheme
-                            .body1
-                            .copyWith(fontSize: inputFontSize / 2),
-                        border: InputBorder.none,
-                        errorText:
-                            _showInputError ? 'Input a valid decimal.' : null,
-                        errorStyle: TextStyle(
-                          color: Colors.white,
-                        )),
-                    onSubmitted: _newValueReceived,
-                  )
-                ],
+                children: <Widget>[currencyTitle, textInput],
               ),
             ),
           )),

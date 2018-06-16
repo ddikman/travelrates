@@ -1,3 +1,4 @@
+import 'package:backpacking_currency_converter/background_container.dart';
 import 'package:flutter/material.dart';
 
 import 'package:backpacking_currency_converter/state_container.dart';
@@ -25,6 +26,7 @@ class _AppRootState extends State<AppRoot> {
       theme: new ThemeData(
           primarySwatch: Colors.blue,
           iconTheme: baseTheme.primaryIconTheme.copyWith(color: Colors.white),
+          hintColor: Colors.transparent, // borders of textfield hints
           textTheme: baseTheme.textTheme
               .copyWith(body1: TextStyle(color: Colors.white))),
       home: state.isLoading ? _buildLoadingScreen() : new ConverterScreen(),
@@ -33,14 +35,16 @@ class _AppRootState extends State<AppRoot> {
 
   _buildLoadingScreen() {
     final loaderColor = AlwaysStoppedAnimation<Color>(Colors.white);
-    return new Center(
-        child: new Container(
-      width: 120.0,
-      height: 120.0,
-      child: CircularProgressIndicator(
-        strokeWidth: 5.0,
-        valueColor: loaderColor,
-      ),
-    ));
+    return new BackgroundContainer(
+      child: new Center(
+          child: new Container(
+        width: 120.0,
+        height: 120.0,
+        child: CircularProgressIndicator(
+          strokeWidth: 5.0,
+          valueColor: loaderColor,
+        ),
+      )),
+    );
   }
 }

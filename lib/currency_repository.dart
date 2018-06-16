@@ -16,7 +16,8 @@ class CurrencyRepository {
   Currency getBaseRateCurrency() => getCurrencyByCode(baseRate);
 
   Currency getCurrencyByCode(String code) {
-    var matches = currencies.where((currency) => currency.code == code);
+    code = code.toUpperCase();
+    var matches = currencies.where((currency) => currency.code.toUpperCase() == code);
     if (matches.isEmpty) {
       print("Found no currency with code [$code] among ${currencies
           .length} currencies");
@@ -26,7 +27,7 @@ class CurrencyRepository {
   }
 
   List<Currency> getAllCurrencies() {
-    return currencies;
+    return new List.from(currencies);
   }
 
   static Future<CurrencyRepository> loadFrom(AssetBundle assets) async {
