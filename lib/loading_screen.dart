@@ -1,7 +1,7 @@
 
 import 'dart:async';
 
-import 'package:backpacking_currency_converter/AnimateIn.dart';
+import 'package:backpacking_currency_converter/animate_in.dart';
 import 'package:backpacking_currency_converter/background_container.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:backpacking_currency_converter/AnimateIn.dart';
+import 'package:backpacking_currency_converter/animate_in.dart';
 import 'package:backpacking_currency_converter/background_container.dart';
 import 'package:backpacking_currency_converter/currency.dart';
 import 'package:flutter/material.dart';
@@ -35,11 +35,8 @@ class ConverterScreenState extends State<ConverterScreen> {
       color: Colors.transparent,
       child: new Padding(
         padding: const EdgeInsets.only(bottom: 60.0), // add space for float button
-        child: GridView.count(
-          crossAxisCount: 2,
+        child: new ListView(
           padding: EdgeInsets.all(spacing),
-          crossAxisSpacing: spacing,
-          mainAxisSpacing: spacing,
           children: state.currencies
               .map((currency) => _buildCard(index++, currency))
               .toList(),
@@ -127,13 +124,13 @@ class _CurrencyCardState extends State<CurrencyCard>
         style: Theme.of(context).textTheme.body1.copyWith(fontSize: 14.0));
 
     Widget textInput = TextField(
+      textAlign: TextAlign.right,
       focusNode: focusNode,
       controller: textEditingController,
       style: Theme.of(context).textTheme.body1.copyWith(
             fontSize: inputFontSize,
           ),
       keyboardType: TextInputType.number,
-      textAlign: TextAlign.right,
       decoration: InputDecoration(
           isDense: true,
           suffixText: "${widget.currency.code}",
@@ -152,16 +149,13 @@ class _CurrencyCardState extends State<CurrencyCard>
 
     // if we're editing, add an edit button
     if (state.isReconfiguring) {
-      textInput = new Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: IconButton(
-          padding: EdgeInsets.all(0.0),
-          iconSize: 48.0,
-          icon: Icon(Icons.delete, color: Colors.white),
-          onPressed: () {
-            StateContainer.of(context).removeCurrency(widget.currency.code);
-          },
-        ),
+      textInput = IconButton(
+        padding: EdgeInsets.all(0.0),
+        iconSize: 24.0,
+        icon: Icon(Icons.delete, color: Colors.white),
+        onPressed: () {
+          StateContainer.of(context).removeCurrency(widget.currency.code);
+        },
       );
     }
 
@@ -173,10 +167,15 @@ class _CurrencyCardState extends State<CurrencyCard>
             splashColor: Colors.white,
             onTap: _cardTapped,
             child: new Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: new Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[currencyTitle, textInput],
+              padding: const EdgeInsets.all(4.0),
+              child: new Stack(
+                children: <Widget>[
+                  currencyTitle,
+                  new Align(
+                    alignment: Alignment.centerRight,
+                      child: textInput
+                  )
+                ],
               ),
             ),
           )),
