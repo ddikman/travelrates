@@ -1,3 +1,4 @@
+import 'package:backpacking_currency_converter/AnimateIn.dart';
 import 'package:backpacking_currency_converter/background_container.dart';
 import 'package:backpacking_currency_converter/currency.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +16,12 @@ class ConverterScreen extends StatefulWidget {
 }
 
 class ConverterScreenState extends State<ConverterScreen> {
-  Widget _buildCard(String currencyCode) {
+  Widget _buildCard(int index, String currencyCode) {
     final state = StateContainer.of(context).appState;
 
     var currency = state.currencyRepo.getCurrencyByCode(currencyCode);
     return CurrencyCard(
-      currency: currency,
-      onNewAmount: (value) {},
-    );
+        currency: currency, onNewAmount: (value) {}, index: index);
   }
 
   @override
@@ -31,14 +30,20 @@ class ConverterScreenState extends State<ConverterScreen> {
 
     final spacing = 12.0;
 
+    int index = 0;
     final cards = new Material(
       color: Colors.transparent,
-      child: GridView.count(
-        crossAxisCount: 2,
-        padding: EdgeInsets.all(spacing),
-        crossAxisSpacing: spacing,
-        mainAxisSpacing: spacing,
-        children: state.currencies.map(_buildCard).toList(),
+      child: new Padding(
+        padding: const EdgeInsets.only(bottom: 60.0), // add space for float button
+        child: GridView.count(
+          crossAxisCount: 2,
+          padding: EdgeInsets.all(spacing),
+          crossAxisSpacing: spacing,
+          mainAxisSpacing: spacing,
+          children: state.currencies
+              .map((currency) => _buildCard(index++, currency))
+              .toList(),
+        ),
       ),
     );
 
@@ -46,24 +51,23 @@ class ConverterScreenState extends State<ConverterScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("What's my \$ worth?"),
+          title: Text("How much is.."),
           actions: <Widget>[_buildConfigureActionButton()],
         ),
         floatingActionButton: _buildAddCurrencyButton(),
-        body: new BackgroundContainer(
-            child: new Padding(
-                padding:
-                    EdgeInsets.only(bottom: 80.0), // space for floating button
-                child: body)));
+        floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+        body: new BackgroundContainer(child: body));
   }
 
   _buildAddCurrencyButton() {
-    return FloatingActionButton(
+    final floatingButton = FloatingActionButton(
       child: Icon(Icons.add),
       onPressed: () {
         Navigator.of(context).pushNamed('/addCurrency');
       },
     );
+
+    return floatingButton;
   }
 
   _buildConfigureActionButton() {
@@ -83,7 +87,12 @@ class CurrencyCard extends StatefulWidget {
 
   final ValueChanged<double> onNewAmount;
 
-  CurrencyCard({@required this.currency, @required this.onNewAmount});
+  final int index;
+
+  CurrencyCard(
+      {@required this.currency,
+      @required this.onNewAmount,
+      @required this.index});
 
   @override
   _CurrencyCardState createState() {
@@ -91,7 +100,8 @@ class CurrencyCard extends StatefulWidget {
   }
 }
 
-class _CurrencyCardState extends State<CurrencyCard> {
+class _CurrencyCardState extends State<CurrencyCard>
+    with TickerProviderStateMixin {
   bool _showInputError = false;
 
   final FocusNode focusNode = FocusNode();
@@ -100,8 +110,8 @@ class _CurrencyCardState extends State<CurrencyCard> {
 
   @override
   void initState() {
-    super.initState();
     focusNode.addListener(gotFocus);
+    super.initState();
   }
 
   @override
@@ -142,17 +152,20 @@ class _CurrencyCardState extends State<CurrencyCard> {
 
     // if we're editing, add an edit button
     if (state.isReconfiguring) {
-      textInput = IconButton(
-        padding: EdgeInsets.all(0.0),
-        iconSize: 24.0,
-        icon: Icon(Icons.remove_circle, color: Colors.red),
-        onPressed: () {
-          StateContainer.of(context).removeCurrency(widget.currency.code);
-        },
+      textInput = new Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: IconButton(
+          padding: EdgeInsets.all(0.0),
+          iconSize: 48.0,
+          icon: Icon(Icons.delete, color: Colors.white),
+          onPressed: () {
+            StateContainer.of(context).removeCurrency(widget.currency.code);
+          },
+        ),
       );
     }
 
-    return new Material(
+    final card = new Material(
       color: Colors.transparent,
       child: Card(
           color: _showInputError ? Colors.red : Colors.blue,
@@ -168,6 +181,10 @@ class _CurrencyCardState extends State<CurrencyCard> {
             ),
           )),
     );
+
+    final animationDelay = Duration(milliseconds: 50 * (widget.index + 1));
+
+    return new AnimateIn(child: card, delay: animationDelay);
   }
 
   void _newValueReceived(String valueString) {

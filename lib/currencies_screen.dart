@@ -107,7 +107,7 @@ class _CurrencySelectionState extends State<CurrencySelection> {
     final state = StateContainer.of(context).appState;
     _alreadyAdded = state.currencies.contains(widget.currency.code);
 
-    return Card(
+    final currencyCard = Card(
       color: Colors.blue,
       child: new Padding(
         padding: const EdgeInsets.all(8.0),
@@ -124,6 +124,8 @@ class _CurrencySelectionState extends State<CurrencySelection> {
         ),
       ),
     );
+
+    return currencyCard;
   }
 
   _buildAddIcon() {
