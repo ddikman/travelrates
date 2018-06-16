@@ -1,6 +1,7 @@
 
 import 'dart:async';
 
+import 'package:backpacking_currency_converter/AnimateIn.dart';
 import 'package:backpacking_currency_converter/background_container.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
 import 'package:flutter/material.dart';
@@ -29,17 +30,26 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loaderColor = AlwaysStoppedAnimation<Color>(Colors.white);
     return new BackgroundContainer(
       child: new Center(
           child: new Container(
             width: 120.0,
             height: 120.0,
-            child: CircularProgressIndicator(
-              strokeWidth: 5.0,
-              valueColor: loaderColor,
-            ),
+            child: _animated(_loader()),
           )),
     );
+  }
+
+  _loader() {
+    final loaderColor = AlwaysStoppedAnimation<Color>(Colors.white);
+
+    return CircularProgressIndicator(
+      strokeWidth: 5.0,
+      valueColor: loaderColor,
+    );
+  }
+
+  Widget _animated(Widget child) {
+    return new AnimateIn(child: child, move: false);
   }
 }
