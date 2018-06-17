@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:backpacking_currency_converter/currency.dart';
 import 'package:backpacking_currency_converter/currency_repository.dart';
@@ -29,24 +32,44 @@ class AppState {
   }
 
   static AppState loading() => new AppState(
-    currentAmount: 1.0,
-    currentCurrency: null,
-    currencyRepo: null,
-    currencies: null,
-    isReconfiguring: false
-  );
+      currentAmount: 1.0,
+      currentCurrency: null,
+      currencyRepo: null,
+      currencies: null,
+      isReconfiguring: false);
 
-  const AppState({@required this.currentAmount, @required this.currentCurrency, @required this.currencyRepo, this.currencies, this.isReconfiguring = false});
+  const AppState(
+      {@required this.currentAmount,
+      @required this.currentCurrency,
+      @required this.currencyRepo,
+      this.currencies,
+      this.isReconfiguring = false});
 
-  AppState copyWith({double amount, Currency currency, List<String> currencies, bool isReconfiguring}) {
+  AppState copyWith(
+      {double amount,
+      Currency currency,
+      List<String> currencies,
+      bool isReconfiguring}) {
     return new AppState(
-      currentAmount: amount ?? this.currentAmount,
-      currentCurrency: currency ?? this.currentCurrency,
-      currencyRepo: this.currencyRepo,
-      currencies: currencies ?? this.currencies,
-      isReconfiguring: isReconfiguring ?? this.isReconfiguring
-    );
+        currentAmount: amount ?? this.currentAmount,
+        currentCurrency: currency ?? this.currentCurrency,
+        currencyRepo: this.currencyRepo,
+        currencies: currencies ?? this.currencies,
+        isReconfiguring: isReconfiguring ?? this.isReconfiguring);
   }
+
+  Map<String, dynamic> toJson() => {
+    'currentAmount': currentAmount,
+    'currentCurrency': currentCurrency.code,
+    'currencies': currencies
+  };
+
+  AppState.fromJson(Map<String, dynamic> json, CurrencyRepository repository) :
+        this.currencyRepo = repository,
+        this.isReconfiguring = false,
+        this.currencies = List.castFrom(json['currencies']),
+        this.currentCurrency = repository.getCurrencyByCode(json['currentCurrency']),
+        this.currentAmount = json['currentAmount'];
 }
 
 class StateContainer extends StatefulWidget {
@@ -60,7 +83,7 @@ class StateContainer extends StatefulWidget {
 
   static StateContainerState of(BuildContext context) {
     return (context.inheritFromWidgetOfExactType(_InheritedStateContainer)
-    as _InheritedStateContainer)
+            as _InheritedStateContainer)
         .data;
   }
 
@@ -70,6 +93,11 @@ class StateContainer extends StatefulWidget {
 
 class StateContainerState extends State<StateContainer> {
   AppState appState;
+
+  Future<bool> get _persistedStateExists async {
+    final stateFile = await _localFile;
+    return await stateFile.exists();
+  }
 
   @override
   void initState() {
@@ -89,27 +117,45 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<Null> loadState() async {
-    final currencyRepository = await CurrencyRepository.loadFrom(DefaultAssetBundle.of(context));
+    print('loading currency rates from disk..');
+    final currencyRepository =
+        await CurrencyRepository.loadFrom(DefaultAssetBundle.of(context));
 
-    final defaultCurrencies = <String>['JPY', 'SEK', 'USD', 'EUR', 'PHP', 'IDR'];
+    if (await _persistedStateExists) {
+      print('found persisted state, loading that..');
+      final persistedState = await _loadState(currencyRepository);
+      setState((){
+        appState = persistedState;
+      });
+    } else {
+      print('no persisted state found, opening app with default state..');
+      final defaultCurrencies = <String>[
+        'JPY',
+        'SEK',
+        'USD',
+        'EUR',
+        'IDR'
+      ];
 
-    final loadedState = new AppState(
-        currentAmount: 1.0,
-        currentCurrency: currencyRepository.getBaseRateCurrency(),
-        currencyRepo: currencyRepository,
-        currencies: new List.from(defaultCurrencies)
-    );
+      final defaultState = new AppState(
+          currentAmount: 1.0,
+          currentCurrency: currencyRepository.getBaseRateCurrency(),
+          currencyRepo: currencyRepository,
+          currencies: new List.from(defaultCurrencies)
+      );
 
-    setState(() {
-      appState = loadedState;
-    });
+      setState(() {
+        appState = defaultState;
+      });
+    }
   }
 
-
-  void update(AppState state) {
+  void _updateState(AppState state) {
     setState(() {
       appState = state;
     });
+
+    _persistState(appState);
   }
 
   @override
@@ -121,28 +167,45 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void toggleIsReconfiguring() {
-    update(appState.copyWith(
-      isReconfiguring: !appState.isReconfiguring
-    ));
+    _updateState(appState.copyWith(isReconfiguring: !appState.isReconfiguring));
   }
 
   void removeCurrency(String currencyCode) {
-    setState((){
-      appState.currencies.remove(currencyCode);
-    });
+    final currencies = List<String>.from(appState.currencies);
+    currencies.remove(currencyCode);
+    _updateState(appState.copyWith(currencies: currencies));
   }
 
   void addCurrency(String currencyCode) {
-    setState((){
-      appState.currencies.add(currencyCode);
-    });
+    final currencies = List<String>.from(appState.currencies);
+    currencies.add(currencyCode);
+    _updateState(appState.copyWith(currencies: currencies));
   }
 
   void setAmount(double amount, Currency currency) {
-    update(appState.copyWith(
-      amount: amount,
-      currency: currency
-    ));
+    _updateState(appState.copyWith(amount: amount, currency: currency));
+  }
+
+  Future<Null> _persistState(AppState appState) async {
+    print('persisting app state..');
+    final stateFile = await _localFile;
+    await stateFile.writeAsString(json.encode(appState.toJson()));
+  }
+
+  Future<String> get _localDirectory async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
+
+  Future<File> get _localFile async {
+    final directory = await _localDirectory;
+    return new File('$directory/state.json');
+  }
+
+  Future<AppState> _loadState(CurrencyRepository currencyRepository) async {
+    final stateFile = await _localFile;
+    final stateJson = json.decode(await stateFile.readAsString());
+    return AppState.fromJson(stateJson, currencyRepository);
   }
 }
 

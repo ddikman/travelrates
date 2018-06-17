@@ -2,13 +2,15 @@ name: backpacking_currency_converter
 description: Handy multi-currency converter specifically for backpackers.
 
 dependencies:
-  intl: "^0.15.6"
+  intl: ^0.15.6
+  path_provider: ^0.4.1
   flutter:
     sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+
 
 dev_dependencies:
   flutter_test:
