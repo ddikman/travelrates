@@ -1,6 +1,7 @@
 import 'package:backpacking_currency_converter/animate_in.dart';
 import 'package:backpacking_currency_converter/background_container.dart';
 import 'package:backpacking_currency_converter/currency.dart';
+import 'package:backpacking_currency_converter/position_finder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,6 +17,7 @@ class ConverterScreen extends StatefulWidget {
 }
 
 class ConverterScreenState extends State<ConverterScreen> {
+
   Widget _buildCard(int index, String currencyCode) {
     final state = StateContainer.of(context).appState;
 
@@ -45,7 +47,9 @@ class ConverterScreenState extends State<ConverterScreen> {
       ),
     );
 
-    final body = new Container(color: Colors.transparent, child: cards);
+    final body = new PositionFinder(
+      child: new Container(color: Colors.transparent, child: cards)
+    );
 
     return Scaffold(
         appBar: AppBar(

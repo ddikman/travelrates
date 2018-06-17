@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:backpacking_currency_converter/country.dart';
+import 'package:flutter/src/services/asset_bundle.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:backpacking_currency_converter/currency.dart';
@@ -18,6 +20,8 @@ class AppState {
   final CurrencyRepository currencyRepo;
 
   final List<String> currencies;
+
+  final List<Country> countries;
 
   double getAmountInCurrency(Currency currency) {
     if (currency.code == currentCurrency.code) {
@@ -43,33 +47,39 @@ class AppState {
       @required this.currentCurrency,
       @required this.currencyRepo,
       this.currencies,
-      this.isReconfiguring = false});
+      this.isReconfiguring = false,
+      this.countries});
 
   AppState copyWith(
       {double amount,
       Currency currency,
       List<String> currencies,
-      bool isReconfiguring}) {
+      bool isReconfiguring,
+      List<Country> countries}) {
     return new AppState(
         currentAmount: amount ?? this.currentAmount,
         currentCurrency: currency ?? this.currentCurrency,
         currencyRepo: this.currencyRepo,
         currencies: currencies ?? this.currencies,
-        isReconfiguring: isReconfiguring ?? this.isReconfiguring);
+        isReconfiguring: isReconfiguring ?? this.isReconfiguring,
+        countries: countries ?? this.countries);
   }
 
   Map<String, dynamic> toJson() => {
-    'currentAmount': currentAmount,
-    'currentCurrency': currentCurrency.code,
-    'currencies': currencies
-  };
+        'currentAmount': currentAmount,
+        'currentCurrency': currentCurrency.code,
+        'currencies': currencies
+      };
 
-  AppState.fromJson(Map<String, dynamic> json, CurrencyRepository repository) :
-        this.currencyRepo = repository,
+  AppState.fromJson(Map<String, dynamic> json, CurrencyRepository repository,
+      List<Country> countries)
+      : this.currencyRepo = repository,
         this.isReconfiguring = false,
         this.currencies = List.castFrom(json['currencies']),
-        this.currentCurrency = repository.getCurrencyByCode(json['currentCurrency']),
-        this.currentAmount = json['currentAmount'];
+        this.currentCurrency =
+            repository.getCurrencyByCode(json['currentCurrency']),
+        this.currentAmount = json['currentAmount'],
+        this.countries = countries;
 }
 
 class StateContainer extends StatefulWidget {
@@ -121,28 +131,27 @@ class StateContainerState extends State<StateContainer> {
     final currencyRepository =
         await CurrencyRepository.loadFrom(DefaultAssetBundle.of(context));
 
+    final countries = await _loadCountries(DefaultAssetBundle.of(context));
+    countries.sort((countryA, countryB) {
+      return countryA.name.toLowerCase().compareTo(countryB.name.toLowerCase());
+    });
+
     if (await _persistedStateExists) {
       print('found persisted state, loading that..');
-      final persistedState = await _loadState(currencyRepository);
-      setState((){
+      final persistedState = await _loadState(currencyRepository, countries);
+      setState(() {
         appState = persistedState;
       });
     } else {
       print('no persisted state found, opening app with default state..');
-      final defaultCurrencies = <String>[
-        'JPY',
-        'SEK',
-        'USD',
-        'EUR',
-        'IDR'
-      ];
+      final defaultCurrencies = <String>['JPY', 'SEK', 'USD', 'EUR', 'IDR'];
 
       final defaultState = new AppState(
           currentAmount: 1.0,
           currentCurrency: currencyRepository.getBaseRateCurrency(),
           currencyRepo: currencyRepository,
-          currencies: new List.from(defaultCurrencies)
-      );
+          currencies: new List.from(defaultCurrencies),
+          countries: countries);
 
       setState(() {
         appState = defaultState;
@@ -202,10 +211,18 @@ class StateContainerState extends State<StateContainer> {
     return new File('$directory/state.json');
   }
 
-  Future<AppState> _loadState(CurrencyRepository currencyRepository) async {
+  Future<AppState> _loadState(
+      CurrencyRepository currencyRepository, List<Country> countries) async {
     final stateFile = await _localFile;
     final stateJson = json.decode(await stateFile.readAsString());
-    return AppState.fromJson(stateJson, currencyRepository);
+    return AppState.fromJson(stateJson, currencyRepository, countries);
+  }
+
+  Future<List<Country>> _loadCountries(AssetBundle assets) async {
+    final countriesJson = await assets.loadString('assets/data/countries.json');
+
+    final List countriesList = JsonDecoder().convert(countriesJson);
+    return countriesList.map((country) => Country.fromJson(country)).toList();
   }
 }
 

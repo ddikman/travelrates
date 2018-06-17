@@ -4,7 +4,6 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-
 class CurrencyRepository {
   // TODO: encapsulate?
   final List<Currency> currencies;
@@ -16,7 +15,8 @@ class CurrencyRepository {
 
   Currency getCurrencyByCode(String code) {
     code = code.toUpperCase();
-    var matches = currencies.where((currency) => currency.code.toUpperCase() == code);
+    var matches =
+        currencies.where((currency) => currency.code.toUpperCase() == code);
     if (matches.isEmpty) {
       print("Found no currency with code [$code] among ${currencies
           .length} currencies");
@@ -30,7 +30,8 @@ class CurrencyRepository {
   }
 
   static Future<CurrencyRepository> loadFrom(AssetBundle assets) async {
-    final currenciesJson = await assets.loadString('assets/data/currencies.json');
+    final currenciesJson =
+        await assets.loadString('assets/data/currencies.json');
 
     final currencies = new List<Currency>();
     final Map currenciesMap = JsonDecoder().convert(currenciesJson);
@@ -46,19 +47,14 @@ class CurrencyRepository {
       // double to avoid casting issue
       var rate = code == baseRateCurrencyCode ? 1.0 : rates[code];
 
-      currencies.add(
-          Currency(
-              symbol: currencyMap['symbol_native'],
-              name: currencyMap['name'],
-              code: code,
-              rate: rate
-          )
-      );
+      currencies.add(Currency(
+          symbol: currencyMap['symbol_native'],
+          name: currencyMap['name'],
+          code: code,
+          rate: rate));
     }
 
     return CurrencyRepository(
-      currencies: currencies,
-      baseRate: baseRateCurrencyCode
-    );
+        currencies: currencies, baseRate: baseRateCurrencyCode);
   }
 }

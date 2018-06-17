@@ -1,6 +1,7 @@
 import 'package:backpacking_currency_converter/background_container.dart';
 import 'package:backpacking_currency_converter/currency.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
+import 'package:backpacking_currency_converter/country.dart';
 import 'package:flutter/material.dart';
 
 class CurrenciesScreen extends StatefulWidget {
@@ -78,9 +79,13 @@ class CurrenciesScreenState extends State<CurrenciesScreen> {
       });
 
       if (filter.isNotEmpty) {
+        final List<Country> matchingCountries = List.from(state.countries);
+        matchingCountries.retainWhere((country) => country.name.toLowerCase().contains(filter));
+
         currencies.retainWhere((currency) {
           return currency.name.toLowerCase().contains(filter) ||
-              currency.code.toLowerCase().contains(filter);
+              currency.code.toLowerCase().contains(filter) ||
+              matchingCountries.any((country) => country.currencyCode == currency.code);
         });
       }
     });
@@ -107,6 +112,27 @@ class _CurrencySelectionState extends State<CurrencySelection> {
     final state = StateContainer.of(context).appState;
     _alreadyAdded = state.currencies.contains(widget.currency.code);
 
+
+    Widget textWidget = Text(
+    "${widget.currency.name}, ${widget.currency.symbol}",
+    style: TextStyle(fontSize: 18.0),
+    );
+
+    final relatedCountries = state.countries.where((country) => country.currencyCode == widget.currency.code).toList();
+    if (relatedCountries.length > 1) {
+      final countryNames = relatedCountries.map((country) => country.name).join(", ");
+      textWidget = Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          textWidget,
+          Text(
+            countryNames,
+            style: TextStyle(fontSize: 10.0)
+          )
+        ],
+      );
+    }
+
     final currencyCard = Card(
       color: Colors.blue,
       child: new Padding(
@@ -114,10 +140,7 @@ class _CurrencySelectionState extends State<CurrencySelection> {
         child: Row(
           children: <Widget>[
             new Expanded(
-              child: Text(
-                "${widget.currency.name}, ${widget.currency.symbol}",
-                style: TextStyle(fontSize: 18.0),
-              ),
+              child: textWidget
             ),
             _buildAddIcon()
           ],
