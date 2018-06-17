@@ -34,7 +34,8 @@ class ConverterScreenState extends State<ConverterScreen> {
     final cards = new Material(
       color: Colors.transparent,
       child: new Padding(
-        padding: const EdgeInsets.only(bottom: 60.0), // add space for float button
+        padding: const EdgeInsets.only(bottom: 60.0),
+        // add space for float button
         child: new ListView(
           padding: EdgeInsets.all(spacing),
           children: state.currencies
@@ -118,38 +119,38 @@ class _CurrencyCardState extends State<CurrencyCard>
 
     textEditingController.text = _formatValue(currentValue);
 
-    final inputFontSize = 24.0;
+    final currencyAmountFontSize = 24.0;
 
     Widget currencyTitle = Text(widget.currency.name,
         style: Theme.of(context).textTheme.body1.copyWith(fontSize: 14.0));
 
-    Widget textInput = TextField(
-      textAlign: TextAlign.right,
-      focusNode: focusNode,
-      controller: textEditingController,
-      style: Theme.of(context).textTheme.body1.copyWith(
-            fontSize: inputFontSize,
+    Widget currencyAmount = Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: <Widget>[
+        Text(
+          _formatValue(currentValue),
+          style: Theme.of(context).textTheme.body1.copyWith(
+            fontSize: currencyAmountFontSize
           ),
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(
-          isDense: true,
-          suffixText: "${widget.currency.code}",
-          suffixStyle: Theme
-              .of(context)
-              .textTheme
-              .body1
-              .copyWith(fontSize: inputFontSize / 2),
-          border: InputBorder.none,
-          errorText: _showInputError ? 'Input a valid decimal.' : null,
-          errorStyle: TextStyle(
-            color: Colors.white,
-          )),
-      onSubmitted: _newValueReceived,
+        ),
+        new Padding(
+          padding: const EdgeInsets.only(bottom: 4.0, left: 4.0),
+          child: Text(
+            widget.currency.code,
+            style: Theme
+                .of(context)
+                .textTheme
+                .body1
+                .copyWith(fontSize: currencyAmountFontSize / 2)
+          ),
+        )
+      ],
     );
 
     // if we're editing, add an edit button
     if (state.isReconfiguring) {
-      textInput = IconButton(
+      currencyAmount = IconButton(
         padding: EdgeInsets.all(0.0),
         iconSize: 24.0,
         icon: Icon(Icons.delete, color: Colors.white),
@@ -174,9 +175,7 @@ class _CurrencyCardState extends State<CurrencyCard>
                   children: <Widget>[
                     currencyTitle,
                     new Align(
-                      alignment: Alignment.centerRight,
-                        child: textInput
-                    )
+                        alignment: Alignment.centerRight, child: currencyAmount)
                   ],
                 ),
               ),
@@ -190,6 +189,7 @@ class _CurrencyCardState extends State<CurrencyCard>
   }
 
   void _newValueReceived(String valueString) {
+    print("trying to convert $valueString ${widget.currency.code}");
     double amount = double.tryParse(valueString);
     if (amount == null) {
       setState(() {
@@ -206,8 +206,12 @@ class _CurrencyCardState extends State<CurrencyCard>
   }
 
   void _cardTapped() {
-    print('${widget.currency.name} was pressed');
-    focusText();
+    showDialog(
+        context: context,
+        builder: (context) => new ConvertDialog(
+              currencyCode: widget.currency.code,
+              onSubmitted: _newValueReceived,
+            ));
   }
 
   void focusText() {
@@ -241,5 +245,58 @@ class _CurrencyCardState extends State<CurrencyCard>
     }
 
     return format.format(currentValue);
+  }
+}
+
+class ConvertDialog extends StatelessWidget {
+  final ValueChanged<String> onSubmitted;
+
+  final String currencyCode;
+
+  final textFieldController = new TextEditingController();
+
+  ConvertDialog({Key key, this.onSubmitted, this.currencyCode})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final textField = new TextField(
+      controller: textFieldController,
+      autofocus: true,
+      keyboardType: TextInputType.number,
+      onSubmitted: (value) => _submit(context),
+      decoration: InputDecoration(
+          border: OutlineInputBorder(), labelText: '$currencyCode to convert'),
+    );
+
+    final submitButton = new Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: new Center(
+        child: new FlatButton(
+          onPressed: () => _submit(context),
+          child: new Text(
+            'Convert',
+            style: TextStyle(color: Colors.white),
+          ),
+          color: Colors.blue,
+        ),
+      ),
+    );
+
+    return new Dialog(
+      child: new Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: new Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[textField, submitButton],
+        ),
+      ),
+    );
+  }
+
+  _submit(BuildContext context) {
+    Navigator.of(context).pop();
+    onSubmitted(textFieldController.text);
   }
 }
