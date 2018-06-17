@@ -102,22 +102,14 @@ class _CurrencyCardState extends State<CurrencyCard>
     with TickerProviderStateMixin {
   bool _showInputError = false;
 
-  final FocusNode focusNode = FocusNode();
-
   final TextEditingController textEditingController = TextEditingController();
-
-  @override
-  void initState() {
-    focusNode.addListener(gotFocus);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     final state = StateContainer.of(context).appState;
     var currentValue = state.getAmountInCurrency(widget.currency);
 
-    textEditingController.text = _formatValue(currentValue);
+    textEditingController.text = formatValue(currentValue);
 
     final currencyAmountFontSize = 24.0;
 
@@ -129,7 +121,7 @@ class _CurrencyCardState extends State<CurrencyCard>
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         Text(
-          _formatValue(currentValue),
+          formatValue(currentValue),
           style: Theme.of(context).textTheme.body1.copyWith(
             fontSize: currencyAmountFontSize
           ),
@@ -190,7 +182,7 @@ class _CurrencyCardState extends State<CurrencyCard>
 
   void _newValueReceived(String valueString) {
     print("trying to convert $valueString ${widget.currency.code}");
-    double amount = double.tryParse(valueString);
+    double amount = double.tryParse(valueString.replaceAll(',', ''));
     if (amount == null) {
       setState(() {
         _showInputError = true;
@@ -213,39 +205,6 @@ class _CurrencyCardState extends State<CurrencyCard>
               onSubmitted: _newValueReceived,
             ));
   }
-
-  void focusText() {
-    FocusScope.of(context).requestFocus(focusNode);
-  }
-
-  void selectAllText() {
-    final textLength = textEditingController.value.text.length;
-    textEditingController.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: textLength,
-        affinity: TextAffinity.upstream);
-  }
-
-  void gotFocus() {
-    selectAllText();
-  }
-
-  _formatValue(double currentValue) {
-    final locale = Intl.getCurrentLocale();
-    NumberFormat format;
-    if (currentValue < 100) {
-      format = NumberFormat('###,###.##', locale);
-    } else if (currentValue < 10000) {
-      format = NumberFormat('###,###', locale);
-    } else {
-      // if we have a number above 10k
-      // it's better we start removing insignificant numbers
-      currentValue = (currentValue / 100.0).roundToDouble() * 100.0;
-      format = NumberFormat('###,###', locale);
-    }
-
-    return format.format(currentValue);
-  }
 }
 
 class ConvertDialog extends StatelessWidget {
@@ -264,6 +223,10 @@ class ConvertDialog extends StatelessWidget {
       controller: textFieldController,
       autofocus: true,
       keyboardType: TextInputType.number,
+      inputFormatters: [
+        new WhitelistingTextInputFormatter(new RegExp(r'[\d\.]+')),
+        new CurrencyInputFormatter()
+      ],
       onSubmitted: (value) => _submit(context),
       decoration: InputDecoration(
           border: OutlineInputBorder(), labelText: '$currencyCode to convert'),
@@ -299,4 +262,43 @@ class ConvertDialog extends StatelessWidget {
     Navigator.of(context).pop();
     onSubmitted(textFieldController.text);
   }
+}
+
+// credits to Mr Jorge Viera @ stack overflow:
+// https://stackoverflow.com/questions/50395032/flutter-textfield-with-currency-format
+class CurrencyInputFormatter extends TextInputFormatter {
+
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+
+    if(newValue.selection.baseOffset == 0){
+      print(true);
+      return newValue;
+    } else if (newValue.text.endsWith('.')) {
+      return newValue;
+    }
+
+    double value = double.parse(newValue.text.replaceAll(',', ''));
+    final formatted = formatValue(value);
+
+    return newValue.copyWith(
+        text: formatted,
+        selection: new TextSelection.collapsed(offset: formatted.length));
+  }
+}
+
+String formatValue(double value) {
+  final locale = Intl.getCurrentLocale();
+  NumberFormat format;
+  if (value < 100) {
+    format = NumberFormat('###,###.##', locale);
+  } else if (value < 10000) {
+    format = NumberFormat('###,###', locale);
+  } else {
+    // if we have a number above 10k
+    // it's better we start removing insignificant numbers
+    value = (value / 100.0).roundToDouble() * 100.0;
+    format = NumberFormat('###,###', locale);
+  }
+
+  return format.format(value);
 }
