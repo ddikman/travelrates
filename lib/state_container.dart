@@ -224,6 +224,17 @@ class StateContainerState extends State<StateContainer> {
     final List countriesList = JsonDecoder().convert(countriesJson);
     return countriesList.map((country) => Country.fromJson(country)).toList();
   }
+
+  void reorder({String item, String placeAfter}) {
+    print("reordering $item to be after $placeAfter..");
+    final currencies = List<String>.from(appState.currencies);
+    currencies.remove(item);
+    final newPosition = currencies.indexOf(placeAfter) + 1;
+    currencies.insert(newPosition, item);
+    _updateState(appState.copyWith(
+      currencies: currencies
+    ));
+  }
 }
 
 class _InheritedStateContainer extends InheritedWidget {

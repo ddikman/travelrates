@@ -9,4 +9,9 @@ class Currency {
   final double rate;
 
   Currency({this.symbol, this.name, this.code, this.rate});
+
+  @override
+  String toString() {
+    return "$name, $symbol";
+  }
 }

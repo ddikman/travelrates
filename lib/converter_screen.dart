@@ -1,13 +1,12 @@
 import 'package:backpacking_currency_converter/animate_in.dart';
 import 'package:backpacking_currency_converter/background_container.dart';
+import 'package:backpacking_currency_converter/convert_dialog.dart';
 import 'package:backpacking_currency_converter/currency.dart';
+import 'package:backpacking_currency_converter/currency_input_formatter.dart';
 import 'package:backpacking_currency_converter/position_finder.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'package:intl/intl.dart';
-
 import 'package:backpacking_currency_converter/state_container.dart';
+
+import 'package:flutter/material.dart';
 
 class ConverterScreen extends StatefulWidget {
   @override
@@ -17,26 +16,31 @@ class ConverterScreen extends StatefulWidget {
 }
 
 class ConverterScreenState extends State<ConverterScreen> {
-
   Widget _buildCard(int index, String currencyCode) {
     final state = StateContainer.of(context).appState;
 
     var currency = state.currencyRepo.getCurrencyByCode(currencyCode);
-    return CurrencyCard(
-        currency: currency, onNewAmount: (value) {}, index: index);
+    final card = CurrencyCard(
+        currency: currency,
+        onNewAmount: (value) {},
+        index: index,
+        animate: false);
+
+    return _withReorderDropArea(card);
   }
 
   @override
   Widget build(BuildContext context) {
     final state = StateContainer.of(context).appState;
 
-    final spacing = 12.0;
+    const spacing = 12.0;
+    const floatingButtonSpacing = 60.0;
 
     int index = 0;
     final cards = new Material(
       color: Colors.transparent,
       child: new Padding(
-        padding: const EdgeInsets.only(bottom: 60.0),
+        padding: const EdgeInsets.only(bottom: floatingButtonSpacing),
         // add space for float button
         child: new ListView(
           padding: EdgeInsets.all(spacing),
@@ -48,8 +52,7 @@ class ConverterScreenState extends State<ConverterScreen> {
     );
 
     final body = new PositionFinder(
-      child: new Container(color: Colors.transparent, child: cards)
-    );
+        child: new Container(color: Colors.transparent, child: cards));
 
     return Scaffold(
         appBar: AppBar(
@@ -82,19 +85,69 @@ class ConverterScreenState extends State<ConverterScreen> {
           StateContainer.of(context).toggleIsReconfiguring();
         });
   }
+
+  Widget _withReorderDropArea(CurrencyCard card) {
+
+    const iconSize = 24.0;
+    final dropArea = new Align(
+      alignment: Alignment.bottomCenter,
+      child: new DragTarget<Currency>(
+        builder: (BuildContext context, List candidateData, List rejectedData) {
+          bool hovered = candidateData.isNotEmpty;
+          final dropAreaHeight = hovered ? (CurrencyCard.height + iconSize) : CurrencyCard.height;
+          return new FractionallySizedBox(
+            widthFactor: 1.0,
+            child: Container(
+              height: dropAreaHeight,
+              alignment: Alignment.bottomCenter,
+              child: Opacity(
+                opacity: hovered ? 1.0 : 0.0,
+                child: Icon(
+                  Icons.add_circle,
+                  color: Colors.white,
+                  size: 24.0,
+                ),
+              ),
+            ),
+          );
+        },
+        onAccept: (value) {
+          // handle the reorder. since we dropped the other card on this card
+          // it means we want to place it _after_ this card
+          StateContainer.of(context).reorder(
+            item: value.code,
+            placeAfter: card.currency.code
+          );
+        },
+        onWillAccept: (value) => value.code != card.currency.code,
+      ),
+    );
+
+    return Stack(
+      children: <Widget>[
+        card,
+        dropArea
+      ],
+    );
+  }
 }
 
 class CurrencyCard extends StatefulWidget {
+  static const height = 65.0;
+
   final Currency currency;
 
   final ValueChanged<double> onNewAmount;
 
   final int index;
 
+  final bool animate;
+
   CurrencyCard(
       {@required this.currency,
       @required this.onNewAmount,
-      @required this.index});
+      @required this.index,
+      this.animate = false});
 
   @override
   _CurrencyCardState createState() {
@@ -108,80 +161,122 @@ class _CurrencyCardState extends State<CurrencyCard>
 
   final TextEditingController textEditingController = TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
-    final state = StateContainer.of(context).appState;
-    var currentValue = state.getAmountInCurrency(widget.currency);
-
-    textEditingController.text = formatValue(currentValue);
-
+  _currencyAmount(double amount) {
     final currencyAmountFontSize = 24.0;
-
-    Widget currencyTitle = Text(widget.currency.name,
-        style: Theme.of(context).textTheme.body1.copyWith(fontSize: 14.0));
-
-    Widget currencyAmount = Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         Text(
-          formatValue(currentValue),
-          style: Theme.of(context).textTheme.body1.copyWith(
-            fontSize: currencyAmountFontSize
-          ),
+          CurrencyInputFormatter.formatValue(amount),
+          style: Theme
+              .of(context)
+              .textTheme
+              .body1
+              .copyWith(fontSize: currencyAmountFontSize),
         ),
         new Padding(
           padding: const EdgeInsets.only(bottom: 4.0, left: 4.0),
-          child: Text(
-            widget.currency.code,
-            style: Theme
-                .of(context)
-                .textTheme
-                .body1
-                .copyWith(fontSize: currencyAmountFontSize / 2)
+          child: Text(widget.currency.code,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .body1
+                  .copyWith(fontSize: currencyAmountFontSize / 2)),
+        )
+      ],
+    );
+  }
+
+  get _deleteIcon {
+    return IconButton(
+      padding: EdgeInsets.all(0.0),
+      iconSize: 24.0,
+      icon: Icon(Icons.delete, color: Colors.white),
+      onPressed: () {
+        StateContainer.of(context).removeCurrency(widget.currency.code);
+      },
+    );
+  }
+
+  _asDraggable(Widget child) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    return new Draggable(
+        data: widget.currency,
+        affinity: Axis.vertical,
+        child: child,
+        childWhenDragging: Opacity(opacity: 0.5, child: child,),
+        feedback: new Opacity(
+          opacity: 0.8,
+          child: new Container(
+            width: screenWidth - 16.0 * 2,
+            child: Card(
+              color: Colors.blue,
+              child: Center(
+                  child: new Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text('${widget.currency.name}',
+                        style: TextStyle(color: Colors.white)),
+                  )),
+            ),
           ),
+        )
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = StateContainer.of(context).appState;
+
+    var currentValue = state.getAmountInCurrency(widget.currency);
+
+    textEditingController.text =
+        CurrencyInputFormatter.formatValue(currentValue);
+
+    Widget currencyTitle = Text(widget.currency.name,
+        style: Theme.of(context).textTheme.body1.copyWith(fontSize: 14.0));
+
+
+    final contents = new Stack(
+      children: <Widget>[
+        currencyTitle,
+        new Align(
+            alignment: Alignment.centerRight,
+            child: state.isReconfiguring ? _deleteIcon : _currencyAmount(currentValue)
         )
       ],
     );
 
-    // if we're editing, add an edit button
     if (state.isReconfiguring) {
-      currencyAmount = IconButton(
-        padding: EdgeInsets.all(0.0),
-        iconSize: 24.0,
-        icon: Icon(Icons.delete, color: Colors.white),
-        onPressed: () {
-          StateContainer.of(context).removeCurrency(widget.currency.code);
-        },
-      );
+      final moveHandle = new Align(
+        alignment: Alignment.bottomLeft,
+          child: Icon(Icons.dehaze, size: 24.0, color: Colors.white));
+      contents.children.insert(0, moveHandle);
     }
 
     final card = new Container(
-      height: 65.0,
+      height: CurrencyCard.height,
       child: new Material(
         color: Colors.transparent,
         child: Card(
             color: _showInputError ? Colors.red : Colors.blue,
             child: new InkWell(
               splashColor: Colors.white,
-              onTap: _cardTapped,
+              onTap: state.isReconfiguring ? null : _cardTapped,
               child: new Padding(
                 padding: const EdgeInsets.all(4.0),
-                child: new Stack(
-                  children: <Widget>[
-                    currencyTitle,
-                    new Align(
-                        alignment: Alignment.centerRight, child: currencyAmount)
-                  ],
-                ),
+                child: contents
               ),
             )),
       ),
     );
 
-    final animationDelay = Duration(milliseconds: 50 * (widget.index + 1));
+    return _asDraggable(widget.animate ? _animated(card) : card);
+  }
 
-    return new AnimateIn(child: card, delay: animationDelay);
+  _animated(Widget child) {
+    final animationDelay = Duration(milliseconds: 50 * (widget.index + 1));
+    return new AnimateIn(child: child, delay: animationDelay);
   }
 
   void _newValueReceived(String valueString) {
@@ -209,100 +304,4 @@ class _CurrencyCardState extends State<CurrencyCard>
               onSubmitted: _newValueReceived,
             ));
   }
-}
-
-class ConvertDialog extends StatelessWidget {
-  final ValueChanged<String> onSubmitted;
-
-  final String currencyCode;
-
-  final textFieldController = new TextEditingController();
-
-  ConvertDialog({Key key, this.onSubmitted, this.currencyCode})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final textField = new TextField(
-      controller: textFieldController,
-      autofocus: true,
-      keyboardType: TextInputType.number,
-      inputFormatters: [
-        new WhitelistingTextInputFormatter(new RegExp(r'[\d\.]+')),
-        new CurrencyInputFormatter()
-      ],
-      onSubmitted: (value) => _submit(context),
-      decoration: InputDecoration(
-          border: OutlineInputBorder(), labelText: '$currencyCode to convert'),
-    );
-
-    final submitButton = new Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: new Center(
-        child: new FlatButton(
-          onPressed: () => _submit(context),
-          child: new Text(
-            'Convert',
-            style: TextStyle(color: Colors.white),
-          ),
-          color: Colors.blue,
-        ),
-      ),
-    );
-
-    return new Dialog(
-      child: new Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: new Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[textField, submitButton],
-        ),
-      ),
-    );
-  }
-
-  _submit(BuildContext context) {
-    Navigator.of(context).pop();
-    onSubmitted(textFieldController.text);
-  }
-}
-
-// credits to Mr Jorge Viera @ stack overflow:
-// https://stackoverflow.com/questions/50395032/flutter-textfield-with-currency-format
-class CurrencyInputFormatter extends TextInputFormatter {
-
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-
-    if(newValue.selection.baseOffset == 0){
-      print(true);
-      return newValue;
-    } else if (newValue.text.endsWith('.')) {
-      return newValue;
-    }
-
-    double value = double.parse(newValue.text.replaceAll(',', ''));
-    final formatted = formatValue(value);
-
-    return newValue.copyWith(
-        text: formatted,
-        selection: new TextSelection.collapsed(offset: formatted.length));
-  }
-}
-
-String formatValue(double value) {
-  final locale = Intl.getCurrentLocale();
-  NumberFormat format;
-  if (value < 100) {
-    format = NumberFormat('###,###.##', locale);
-  } else if (value < 10000) {
-    format = NumberFormat('###,###', locale);
-  } else {
-    // if we have a number above 10k
-    // it's better we start removing insignificant numbers
-    value = (value / 100.0).roundToDouble() * 100.0;
-    format = NumberFormat('###,###', locale);
-  }
-
-  return format.format(value);
 }
