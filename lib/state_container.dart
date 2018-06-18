@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:backpacking_currency_converter/country.dart';
-import 'package:flutter/src/services/asset_bundle.dart';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:backpacking_currency_converter/currency.dart';
@@ -82,7 +82,8 @@ class AppState {
         this.countries = countries;
 }
 
-class StateContainer extends StatefulWidget {
+class
+StateContainer extends StatefulWidget {
   final Widget child;
   final AppState state;
 
@@ -144,13 +145,12 @@ class StateContainerState extends State<StateContainer> {
       });
     } else {
       print('no persisted state found, opening app with default state..');
-      final defaultCurrencies = <String>['JPY', 'SEK', 'USD', 'EUR', 'IDR'];
 
       final defaultState = new AppState(
           currentAmount: 1.0,
           currentCurrency: currencyRepository.getBaseRateCurrency(),
           currencyRepo: currencyRepository,
-          currencies: new List.from(defaultCurrencies),
+          currencies: new List<String>(),
           countries: countries);
 
       setState(() {

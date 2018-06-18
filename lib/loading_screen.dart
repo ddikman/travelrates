@@ -31,9 +31,16 @@ class _LoadingScreenState extends State<LoadingScreen>
   }
 
   Future<Null> _loadState() async {
-    await StateContainer.of(context).loadState();
+    final stateContainer = StateContainer.of(context);
+    await stateContainer.loadState();
     await _animationController.reverse();
     Navigator.of(context).pushReplacementNamed('/home');
+
+    if (stateContainer.appState.currencies.isEmpty) {
+      // there's no easy way to guess the users preffered currency since locale is
+      // language and not country so instead, let the user select her first currency
+      Navigator.of(context).pushNamed('/addCurrency');
+    }
   }
 
   @override
