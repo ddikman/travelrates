@@ -30,40 +30,42 @@ class CurrenciesScreenState extends State<CurrenciesScreen> {
     }).toList();
 
     final searchField = new Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextField(
-        autofocus: true,
-        onChanged: _filterCurrencies,
-        style: TextStyle(
-          color: AppTheme.accentColor
+      padding: EdgeInsets.all(14.0),
+      child: new Container(
+        padding: new EdgeInsets.all(4.0),
+        decoration: BoxDecoration(
+          color: AppTheme.accentColor,
+          borderRadius: new BorderRadius.all(new Radius.circular(10.0)),
         ),
-        decoration: InputDecoration(
-            labelText: 'Search currency code or name',
-            labelStyle: TextStyle(
-              color: AppTheme.accentColor,
-            ),
-            border: OutlineInputBorder()
+        child: TextField(
+          autofocus: true,
+          onChanged: _filterCurrencies,
+          style: TextStyle(
+            color: AppTheme.primaryColor
+          ),
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.all(4.0),
+              labelText: "Search country or currency code",
+              hintText: "Search country or currency code",
+            border: InputBorder.none
+          ),
         ),
       ),
     );
 
     final body = new Padding(
       padding: const EdgeInsets.all(8.0),
-      child: new Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          new Card(
-            color: AppTheme.primaryColor,
-            child: searchField
-          ),
-          new Expanded(child: ListView(children: currencyWidgets)),
-        ],
-      ),
+      child: ListView(children: currencyWidgets)
     );
 
     return Scaffold(
-      appBar: AppBar(title: Text('Select currencies')),
+      appBar: AppBar(
+          title: Text('Select currencies'),
+        bottom: new PreferredSize(
+          child: searchField,
+          preferredSize: const Size.fromHeight(60.0),
+        ),
+      ),
       body: BackgroundContainer(child: body)
     );
   }

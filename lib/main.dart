@@ -30,7 +30,7 @@ class _AppRootState extends State<AppRoot> {
       theme: new ThemeData(
           primarySwatch: AppTheme.primaryColor,
           iconTheme: baseTheme.primaryIconTheme.copyWith(color: AppTheme.accentColor),
-          hintColor: Colors.transparent, // borders of textfield hints
+          hintColor: AppTheme.accentColor, // borders of textfield hints
           textTheme: baseTheme.textTheme
               .copyWith(body1: TextStyle(color: AppTheme.accentColor))),
       home: new LoadingScreen(),
