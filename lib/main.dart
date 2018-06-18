@@ -25,7 +25,7 @@ class _AppRootState extends State<AppRoot> {
     final baseTheme = Theme.of(context);
 
     return new MaterialApp(
-      title: 'Backpacker currency control',
+      title: 'How much is',
       theme: new ThemeData(
           primarySwatch: Colors.blue,
           iconTheme: baseTheme.primaryIconTheme.copyWith(color: Colors.white),
