@@ -1,4 +1,5 @@
 import 'package:backpacking_currency_converter/animate_in.dart';
+import 'package:backpacking_currency_converter/app_theme.dart';
 import 'package:backpacking_currency_converter/background_container.dart';
 import 'package:backpacking_currency_converter/convert_dialog.dart';
 import 'package:backpacking_currency_converter/currency.dart';
@@ -104,7 +105,7 @@ class ConverterScreenState extends State<ConverterScreen> {
                 opacity: hovered ? 1.0 : 0.0,
                 child: Icon(
                   Icons.add_circle,
-                  color: Colors.white,
+                  color: AppTheme.accentColor,
                   size: 24.0,
                 ),
               ),
@@ -192,7 +193,7 @@ class _CurrencyCardState extends State<CurrencyCard>
     return IconButton(
       padding: EdgeInsets.all(0.0),
       iconSize: 24.0,
-      icon: Icon(Icons.delete, color: Colors.white),
+      icon: Icon(Icons.delete, color: AppTheme.accentColor),
       onPressed: () {
         StateContainer.of(context).removeCurrency(widget.currency.code);
       },
@@ -211,12 +212,12 @@ class _CurrencyCardState extends State<CurrencyCard>
           child: new Container(
             width: screenWidth - 16.0 * 2,
             child: Card(
-              color: Colors.blue,
+              color: AppTheme.primaryColor,
               child: Center(
                   child: new Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text('${widget.currency.name}',
-                        style: TextStyle(color: Colors.white)),
+                        style: TextStyle(color: AppTheme.accentColor)),
                   )),
             ),
           ),
@@ -250,7 +251,7 @@ class _CurrencyCardState extends State<CurrencyCard>
     if (state.isReconfiguring) {
       final moveHandle = new Align(
         alignment: Alignment.bottomLeft,
-          child: Icon(Icons.dehaze, size: 24.0, color: Colors.white));
+          child: Icon(Icons.dehaze, size: 24.0, color: AppTheme.accentColor));
       contents.children.insert(0, moveHandle);
     }
 
@@ -259,9 +260,9 @@ class _CurrencyCardState extends State<CurrencyCard>
       child: new Material(
         color: Colors.transparent,
         child: Card(
-            color: _showInputError ? Colors.red : Colors.blue,
+            color: _showInputError ? Colors.red : AppTheme.primaryColor,
             child: new InkWell(
-              splashColor: Colors.white,
+              splashColor: AppTheme.accentColor,
               onTap: state.isReconfiguring ? null : _cardTapped,
               child: new Padding(
                 padding: const EdgeInsets.all(4.0),

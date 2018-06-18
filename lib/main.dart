@@ -1,3 +1,4 @@
+import 'package:backpacking_currency_converter/app_theme.dart';
 import 'package:backpacking_currency_converter/converter_screen.dart';
 import 'package:backpacking_currency_converter/currencies_screen.dart';
 import 'package:backpacking_currency_converter/loading_screen.dart';
@@ -27,11 +28,11 @@ class _AppRootState extends State<AppRoot> {
     return new MaterialApp(
       title: 'How much is',
       theme: new ThemeData(
-          primarySwatch: Colors.blue,
-          iconTheme: baseTheme.primaryIconTheme.copyWith(color: Colors.white),
+          primarySwatch: AppTheme.primaryColor,
+          iconTheme: baseTheme.primaryIconTheme.copyWith(color: AppTheme.accentColor),
           hintColor: Colors.transparent, // borders of textfield hints
           textTheme: baseTheme.textTheme
-              .copyWith(body1: TextStyle(color: Colors.white))),
+              .copyWith(body1: TextStyle(color: AppTheme.accentColor))),
       home: new LoadingScreen(),
       routes: <String, WidgetBuilder>{
         '/home': (context) => new ConverterScreen(),

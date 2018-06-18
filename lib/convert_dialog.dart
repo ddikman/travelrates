@@ -1,3 +1,4 @@
+import 'package:backpacking_currency_converter/app_theme.dart';
 import 'package:backpacking_currency_converter/currency_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,9 +35,9 @@ class ConvertDialog extends StatelessWidget {
           onPressed: () => _submit(context),
           child: new Text(
             'Convert',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: AppTheme.accentColor),
           ),
-          color: Colors.blue,
+          color: AppTheme.primaryColor,
         ),
       ),
     );

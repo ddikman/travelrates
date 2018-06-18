@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:backpacking_currency_converter/app_theme.dart';
 import 'package:backpacking_currency_converter/background_container.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,7 @@ class _LoadingScreenState extends State<LoadingScreen>
   }
 
   _loader() {
-    final loaderColor = AlwaysStoppedAnimation<Color>(Colors.white);
+    final loaderColor = AlwaysStoppedAnimation<Color>(AppTheme.accentColor);
 
     return CircularProgressIndicator(
       strokeWidth: 5.0,

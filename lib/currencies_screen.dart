@@ -1,3 +1,4 @@
+import 'package:backpacking_currency_converter/app_theme.dart';
 import 'package:backpacking_currency_converter/background_container.dart';
 import 'package:backpacking_currency_converter/currency.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
@@ -34,12 +35,12 @@ class CurrenciesScreenState extends State<CurrenciesScreen> {
         autofocus: true,
         onChanged: _filterCurrencies,
         style: TextStyle(
-          color: Colors.white
+          color: AppTheme.accentColor
         ),
         decoration: InputDecoration(
             labelText: 'Search currency code or name',
             labelStyle: TextStyle(
-              color: Colors.white,
+              color: AppTheme.accentColor,
             ),
             border: OutlineInputBorder()
         ),
@@ -53,7 +54,7 @@ class CurrenciesScreenState extends State<CurrenciesScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           new Card(
-            color: Colors.blue,
+            color: AppTheme.primaryColor,
             child: searchField
           ),
           new Expanded(child: ListView(children: currencyWidgets)),
@@ -134,7 +135,7 @@ class _CurrencySelectionState extends State<CurrencySelection> {
     }
 
     final currencyCard = Card(
-      color: Colors.blue,
+      color: AppTheme.primaryColor,
       child: new Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(

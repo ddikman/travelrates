@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:backpacking_currency_converter/app_theme.dart';
 
 class BackgroundContainer extends StatelessWidget {
 
@@ -15,8 +16,8 @@ class BackgroundContainer extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Colors.blue[100],
-                Colors.blue[300],
+                AppTheme.accentColor.shade800,
+                AppTheme.accentColor.shade200
               ])),
       child: child,
     );
