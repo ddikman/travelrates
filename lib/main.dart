@@ -1,6 +1,6 @@
 import 'package:backpacking_currency_converter/app_theme.dart';
 import 'package:backpacking_currency_converter/converter_screen.dart';
-import 'package:backpacking_currency_converter/currencies_screen.dart';
+import 'package:backpacking_currency_converter/add_currency_screen.dart';
 import 'package:backpacking_currency_converter/loading_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +36,7 @@ class _AppRootState extends State<AppRoot> {
       home: new LoadingScreen(),
       routes: <String, WidgetBuilder>{
         '/home': (context) => new ConverterScreen(),
-        '/addCurrency': (context) => new CurrenciesScreen()
+        '/addCurrency': (context) => new AddCurrencyScreen()
       },
     );
   }

@@ -5,14 +5,14 @@ import 'package:backpacking_currency_converter/state_container.dart';
 import 'package:backpacking_currency_converter/country.dart';
 import 'package:flutter/material.dart';
 
-class CurrenciesScreen extends StatefulWidget {
+class AddCurrencyScreen extends StatefulWidget {
   @override
-  CurrenciesScreenState createState() {
-    return new CurrenciesScreenState();
+  _AddCurrencyScreenState createState() {
+    return new _AddCurrencyScreenState();
   }
 }
 
-class CurrenciesScreenState extends State<CurrenciesScreen> {
+class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
 
   List<Currency> currencies;
 
@@ -60,7 +60,7 @@ class CurrenciesScreenState extends State<CurrenciesScreen> {
 
     return Scaffold(
       appBar: AppBar(
-          title: Text('Select currencies'),
+          title: Text('Add currency'),
         bottom: new PreferredSize(
           child: searchField,
           preferredSize: const Size.fromHeight(60.0),
