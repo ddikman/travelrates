@@ -16,34 +16,22 @@ class ConvertScreen extends StatefulWidget {
 }
 
 class _ConvertScreenState extends State<ConvertScreen> {
-  Widget _buildCard(int index, String currencyCode) {
-    final state = StateContainer.of(context).appState;
 
-    var currency = state.currencyRepo.getCurrencyByCode(currencyCode);
-    final card = CurrencyConvertCard(
-        currency: currency,
-        onNewAmount: (value) {},
-        index: index,
-        animate: false);
-
-    return _withReorderDropArea(card);
-  }
+  static const _listViewSpacing = 12.0;
+  static const _floatingButtonSpacing = 60.0;
 
   @override
   Widget build(BuildContext context) {
     final state = StateContainer.of(context).appState;
 
-    const spacing = 12.0;
-    const floatingButtonSpacing = 60.0;
-
     int index = 0;
     final cards = new Material(
       color: Colors.transparent,
       child: new Padding(
-        padding: const EdgeInsets.only(bottom: floatingButtonSpacing),
+        padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
         // add space for float button
         child: new ListView(
-          padding: EdgeInsets.all(spacing),
+          padding: EdgeInsets.all(_listViewSpacing),
           children: state.currencies
               .map((currency) => _buildCard(index++, currency))
               .toList(),
@@ -62,6 +50,18 @@ class _ConvertScreenState extends State<ConvertScreen> {
         floatingActionButton: _buildAddCurrencyButton(),
         floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
         body: new BackgroundContainer(child: body));
+  }
+
+  Widget _buildCard(int index, String currencyCode) {
+    final state = StateContainer.of(context).appState;
+
+    var currency = state.currencyRepo.getCurrencyByCode(currencyCode);
+    final card = CurrencyConvertCard(
+        currency: currency,
+        onNewAmount: (value) {},
+        index: index);
+
+    return _withReorderDropArea(card);
   }
 
   _buildAddCurrencyButton() {

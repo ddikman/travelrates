@@ -15,13 +15,10 @@ class CurrencyConvertCard extends StatefulWidget {
 
   final int index;
 
-  final bool animate;
-
   CurrencyConvertCard(
       {@required this.currency,
-        @required this.onNewAmount,
-        @required this.index,
-        this.animate = false});
+      @required this.onNewAmount,
+      @required this.index});
 
   @override
   _CurrencyConvertCardState createState() {
@@ -79,7 +76,10 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
         data: widget.currency,
         affinity: Axis.vertical,
         child: child,
-        childWhenDragging: Opacity(opacity: 0.5, child: child,),
+        childWhenDragging: Opacity(
+          opacity: 0.5,
+          child: child,
+        ),
         feedback: new Opacity(
           opacity: 0.8,
           child: new Container(
@@ -88,14 +88,13 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
               color: AppTheme.primaryColor,
               child: Center(
                   child: new Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text('${widget.currency.name}',
-                        style: TextStyle(color: AppTheme.accentColor)),
-                  )),
+                padding: const EdgeInsets.all(16.0),
+                child: Text('${widget.currency.name}',
+                    style: TextStyle(color: AppTheme.accentColor)),
+              )),
             ),
           ),
-        )
-    );
+        ));
   }
 
   @override
@@ -110,14 +109,14 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
     Widget currencyTitle = Text(widget.currency.name,
         style: Theme.of(context).textTheme.body1.copyWith(fontSize: 14.0));
 
-
     final contents = new Stack(
       children: <Widget>[
         currencyTitle,
         new Align(
             alignment: Alignment.centerRight,
-            child: state.isReconfiguring ? _deleteIcon : _currencyAmount(currentValue)
-        )
+            child: state.isReconfiguring
+                ? _deleteIcon
+                : _currencyAmount(currentValue))
       ],
     );
 
@@ -138,18 +137,16 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
               splashColor: AppTheme.accentColor,
               onTap: state.isReconfiguring ? null : _cardTapped,
               child: new Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: contents
-              ),
+                  padding: const EdgeInsets.all(4.0), child: contents),
             )),
       ),
     );
 
-    return _asDraggable(widget.animate ? _animated(card) : card);
+    return _asDraggable(_animated(card));
   }
 
   _animated(Widget child) {
-    final animationDelay = Duration(milliseconds: 50 * (widget.index + 1));
+    final animationDelay = Duration(milliseconds: 100 * (widget.index + 1));
     return new AnimateIn(child: child, delay: animationDelay);
   }
 
@@ -174,8 +171,8 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
     showDialog(
         context: context,
         builder: (context) => new ConvertDialog(
-          currencyCode: widget.currency.code,
-          onSubmitted: _newValueReceived,
-        ));
+              currencyCode: widget.currency.code,
+              onSubmitted: _newValueReceived,
+            ));
   }
 }
