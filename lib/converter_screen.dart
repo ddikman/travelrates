@@ -10,14 +10,14 @@ import 'package:backpacking_currency_converter/state_container.dart';
 
 import 'package:flutter/material.dart';
 
-class ConverterScreen extends StatefulWidget {
+class ConvertScreen extends StatefulWidget {
   @override
-  ConverterScreenState createState() {
-    return new ConverterScreenState();
+  _ConvertScreenState createState() {
+    return new _ConvertScreenState();
   }
 }
 
-class ConverterScreenState extends State<ConverterScreen> {
+class _ConvertScreenState extends State<ConvertScreen> {
   Widget _buildCard(int index, String currencyCode) {
     final state = StateContainer.of(context).appState;
 

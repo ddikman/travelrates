@@ -25,7 +25,7 @@ class _AppRootState extends State<AppRoot> {
       theme: _constructTheme(),
       home: new LoadingScreen(),
       routes: <String, WidgetBuilder>{
-        AppRoutes.home: (context) => new ConverterScreen(),
+        AppRoutes.home: (context) => new ConvertScreen(),
         AppRoutes.addCurrency: (context) => new AddCurrencyScreen()
       },
     );
