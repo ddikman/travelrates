@@ -21,7 +21,7 @@ class _AppRootState extends State<AppRoot> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'How much is',
+      title: 'TravelRates',
       theme: _constructTheme(),
       home: new LoadingScreen(),
       routes: <String, WidgetBuilder>{

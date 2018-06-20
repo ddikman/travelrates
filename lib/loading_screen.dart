@@ -36,12 +36,12 @@ class _LoadingScreenState extends State<LoadingScreen>
     final stateContainer = StateContainer.of(context);
     await stateContainer.loadState();
     await _animationController.reverse();
-    Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+    await Navigator.of(context).pushReplacementNamed(AppRoutes.home);
 
     if (stateContainer.appState.currencies.isEmpty) {
       // there's no easy way to guess the users preffered currency since locale is
       // language and not country so instead, let the user select her first currency
-      Navigator.of(context).pushNamed(AppRoutes.addCurrency);
+      await Navigator.of(context).pushNamed(AppRoutes.addCurrency);
     }
   }
 
@@ -58,7 +58,7 @@ class _LoadingScreenState extends State<LoadingScreen>
   }
 
   _loader() {
-    final loaderColor = AlwaysStoppedAnimation<Color>(AppTheme.accentColor);
+    final loaderColor = AlwaysStoppedAnimation<Color>(AppTheme.primaryColor);
 
     return CircularProgressIndicator(
       strokeWidth: 5.0,
