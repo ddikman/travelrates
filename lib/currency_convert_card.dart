@@ -13,12 +13,12 @@ class CurrencyConvertCard extends StatefulWidget {
 
   final ValueChanged<double> onNewAmount;
 
-  final int index;
+  final Duration animationDelay;
 
   CurrencyConvertCard(
       {@required this.currency,
       @required this.onNewAmount,
-      @required this.index});
+      @required this.animationDelay});
 
   @override
   _CurrencyConvertCardState createState() {
@@ -146,8 +146,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
   }
 
   _animated(Widget child) {
-    final animationDelay = Duration(milliseconds: 100 * (widget.index + 1));
-    return new AnimateIn(child: child, delay: animationDelay);
+    return new AnimateIn(child: child, delay: widget.animationDelay);
   }
 
   void _newValueReceived(String valueString) {

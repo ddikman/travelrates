@@ -17,8 +17,9 @@ class ConvertScreen extends StatefulWidget {
 
 class _ConvertScreenState extends State<ConvertScreen> {
 
-  static const _listViewSpacing = 12.0;
-  static const _floatingButtonSpacing = 60.0;
+  static const double _listViewSpacing = 12.0;
+  static const double _floatingButtonSpacing = 60.0;
+  static const int _msDelayBetweenItemAppearance = 100;
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +56,14 @@ class _ConvertScreenState extends State<ConvertScreen> {
   Widget _buildCard(int index, String currencyCode) {
     final state = StateContainer.of(context).appState;
 
+    final animationDelay = Duration(
+        milliseconds: _msDelayBetweenItemAppearance * (index + 1)
+    );
     var currency = state.currencyRepo.getCurrencyByCode(currencyCode);
     final card = CurrencyConvertCard(
         currency: currency,
         onNewAmount: (value) {},
-        index: index);
+        animationDelay: animationDelay);
 
     return _withReorderDropArea(card);
   }
