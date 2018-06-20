@@ -1,4 +1,5 @@
 import 'package:backpacking_currency_converter/animate_in.dart';
+import 'package:backpacking_currency_converter/app_routes.dart';
 import 'package:backpacking_currency_converter/app_theme.dart';
 import 'package:backpacking_currency_converter/background_container.dart';
 import 'package:backpacking_currency_converter/convert_dialog.dart';
@@ -69,7 +70,7 @@ class ConverterScreenState extends State<ConverterScreen> {
     final floatingButton = FloatingActionButton(
       child: Icon(Icons.add),
       onPressed: () {
-        Navigator.of(context).pushNamed('/addCurrency');
+        Navigator.of(context).pushNamed(AppRoutes.addCurrency);
       },
     );
 

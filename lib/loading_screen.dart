@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:backpacking_currency_converter/app_routes.dart';
 import 'package:backpacking_currency_converter/app_theme.dart';
 import 'package:backpacking_currency_converter/background_container.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
@@ -35,12 +36,12 @@ class _LoadingScreenState extends State<LoadingScreen>
     final stateContainer = StateContainer.of(context);
     await stateContainer.loadState();
     await _animationController.reverse();
-    Navigator.of(context).pushReplacementNamed('/home');
+    Navigator.of(context).pushReplacementNamed(AppRoutes.home);
 
     if (stateContainer.appState.currencies.isEmpty) {
       // there's no easy way to guess the users preffered currency since locale is
       // language and not country so instead, let the user select her first currency
-      Navigator.of(context).pushNamed('/addCurrency');
+      Navigator.of(context).pushNamed(AppRoutes.addCurrency);
     }
   }
 
