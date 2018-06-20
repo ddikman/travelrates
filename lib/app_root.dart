@@ -34,8 +34,16 @@ class _AppRootState extends State<AppRoot> {
   _constructTheme() {
     final baseTheme = Theme.of(context);
 
+
+    const baseFont = 'Tahoma';
+    final baseTextStyle = TextStyle(
+        color: AppTheme.accentColor,
+        fontFamily: baseFont
+    );
+
     final textTheme = baseTheme.textTheme.copyWith(
-        body1: TextStyle(color: AppTheme.accentColor)
+        display1: baseTextStyle.copyWith(),
+        body1: baseTextStyle.copyWith(),
     );
 
     final iconTheme = baseTheme.primaryIconTheme.copyWith(

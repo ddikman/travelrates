@@ -41,26 +41,42 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
     textEditingController.text =
         CurrencyInputFormatter.formatValue(currentValue);
 
-    Widget currencyTitle = Text(widget.currency.name,
-        style: Theme.of(context).textTheme.body1.copyWith(fontSize: 14.0));
+    Widget currencyName = Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(widget.currency.name,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.body1.copyWith(fontSize: 14.0)),
+      ),
+    );
 
-    final contents = new Stack(
+    const flagSize = 32.0;
+    final image = Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: new Image(
+          image: new AssetImage('assets/images/flag.png'),
+          width: flagSize,
+          height: flagSize
+        ),
+      ),
+    );
+
+    final contents = new Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        currencyTitle,
+        image,
+        Expanded(child: currencyName),
         new Align(
             alignment: Alignment.centerRight,
             child: state.isReconfiguring
                 ? _deleteIcon
                 : _currencyAmount(currentValue))
-      ],
+      ]
     );
-
-    if (state.isReconfiguring) {
-      final moveHandle = new Align(
-          alignment: Alignment.bottomLeft,
-          child: Icon(Icons.dehaze, size: 24.0, color: AppTheme.accentColor));
-      contents.children.insert(0, moveHandle);
-    }
 
     final card = new Container(
       height: CurrencyConvertCard.height,

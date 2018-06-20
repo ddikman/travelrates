@@ -13,7 +13,6 @@ class AddCurrencyScreen extends StatefulWidget {
 }
 
 class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
-
   List<Currency> currencies;
 
   @override
@@ -24,7 +23,6 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final currencyWidgets = currencies.map((currency) {
       return CurrencySelection(currency);
     }).toList();
@@ -40,34 +38,35 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
         child: TextField(
           autofocus: true,
           onChanged: _filterCurrencies,
-          style: TextStyle(
-            color: AppTheme.primaryColor
-          ),
+          style: TextStyle(color: AppTheme.primaryColor),
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(4.0),
+              contentPadding: EdgeInsets.all(4.0),
               labelText: "Search country or currency code",
+              labelStyle: Theme.of(context).textTheme.display1
+                  .copyWith(
+                fontSize: 14.0,
+                color: AppTheme.primaryColor
+              ),
               hintText: "Search country or currency code",
-            border: InputBorder.none
-          ),
+              border: InputBorder.none),
         ),
       ),
     );
 
     final body = new Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListView(children: currencyWidgets)
-    );
+        padding: const EdgeInsets.all(8.0),
+        child: ListView(children: currencyWidgets));
 
     return Scaffold(
-      appBar: AppBar(
-          title: Text('Add currency'),
-        bottom: new PreferredSize(
-          child: searchField,
-          preferredSize: const Size.fromHeight(60.0),
+        appBar: AppBar(
+          title: Text('ADD CURRENCY'),
+          centerTitle: true,
+          bottom: new PreferredSize(
+            child: searchField,
+            preferredSize: const Size.fromHeight(60.0),
+          ),
         ),
-      ),
-      body: BackgroundContainer(child: body)
-    );
+        body: BackgroundContainer(child: body));
   }
 
   void _filterCurrencies(String filter) {
@@ -78,17 +77,21 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
     setState(() {
       currencies = state.currencyRepo.getAllCurrencies();
       currencies.sort((currencyA, currencyB) {
-        return currencyA.name.toLowerCase().compareTo(currencyB.name.toLowerCase());
+        return currencyA.name
+            .toLowerCase()
+            .compareTo(currencyB.name.toLowerCase());
       });
 
       if (filter.isNotEmpty) {
         final List<Country> matchingCountries = List.from(state.countries);
-        matchingCountries.retainWhere((country) => country.name.toLowerCase().contains(filter));
+        matchingCountries.retainWhere(
+            (country) => country.name.toLowerCase().contains(filter));
 
         currencies.retainWhere((currency) {
           return currency.name.toLowerCase().contains(filter) ||
               currency.code.toLowerCase().contains(filter) ||
-              matchingCountries.any((country) => country.currencyCode == currency.code);
+              matchingCountries
+                  .any((country) => country.currencyCode == currency.code);
         });
       }
     });
@@ -111,27 +114,25 @@ class _CurrencySelectionState extends State<CurrencySelection> {
 
   @override
   Widget build(BuildContext context) {
-
     final state = StateContainer.of(context).appState;
     _alreadyAdded = state.currencies.contains(widget.currency.code);
 
-
     Widget textWidget = Text(
-    "${widget.currency.name}, ${widget.currency.symbol}",
-    style: TextStyle(fontSize: 18.0),
+      "${widget.currency.name}, ${widget.currency.symbol}",
+      style: TextStyle(fontSize: 18.0),
     );
 
-    final relatedCountries = state.countries.where((country) => country.currencyCode == widget.currency.code).toList();
+    final relatedCountries = state.countries
+        .where((country) => country.currencyCode == widget.currency.code)
+        .toList();
     if (relatedCountries.length > 1) {
-      final countryNames = relatedCountries.map((country) => country.name).join(", ");
+      final countryNames =
+          relatedCountries.map((country) => country.name).join(", ");
       textWidget = Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           textWidget,
-          Text(
-            countryNames,
-            style: TextStyle(fontSize: 10.0)
-          )
+          Text(countryNames, style: TextStyle(fontSize: 10.0))
         ],
       );
     }
@@ -141,12 +142,7 @@ class _CurrencySelectionState extends State<CurrencySelection> {
       child: new Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
-          children: <Widget>[
-            new Expanded(
-              child: textWidget
-            ),
-            _buildAddIcon()
-          ],
+          children: <Widget>[new Expanded(child: textWidget), _buildAddIcon()],
         ),
       ),
     );
@@ -155,14 +151,13 @@ class _CurrencySelectionState extends State<CurrencySelection> {
   }
 
   _buildAddIcon() {
-
     final disabledTransparency = _alreadyAdded ? 0.5 : 1.0;
 
     return new GestureDetector(
       child: Icon(
-          Icons.add_circle,
-          size: 24.0,
-          color: Color.fromRGBO(255, 255, 255, disabledTransparency),
+        Icons.add_circle,
+        size: 24.0,
+        color: Color.fromRGBO(255, 255, 255, disabledTransparency),
       ),
       onTap: () {
         final stateContainer = StateContainer.of(context);
@@ -170,8 +165,7 @@ class _CurrencySelectionState extends State<CurrencySelection> {
         if (_alreadyAdded) {
           print("${widget.currency.name} already added, showing snack instead");
           Scaffold.of(context).showSnackBar(new SnackBar(
-              content: Text("${widget.currency.name} is already selected!")
-          ));
+              content: Text("${widget.currency.name} is already selected!")));
         } else {
           stateContainer.addCurrency(widget.currency.code);
 

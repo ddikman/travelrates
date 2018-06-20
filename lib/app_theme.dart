@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
 abstract class AppTheme {
-  static const _primaryColorValue = 0xFF3b9eb8;
+  static const _primaryColorValue = 0xFF4796B2;
 
   static const _accentColorValue = 0xFFF0F0F0;
 
   static const primaryColor = const MaterialColor(
       _primaryColorValue,
     const {
-        50 : const Color(0xFF1e4f5c),
-      100 : const Color(0xFF235f6e),
-      200 : const Color(0xFF296f81),
-      300 : const Color(0xFF2f7e93),
-      400 : const Color(0xFF358ea6),
+        50 : const Color(0xFF244b59),
+      100 : const Color(0xFF2b5a6b),
+      200 : const Color(0xFF32697d),
+      300 : const Color(0xFF39788e),
+      400 : const Color(0xFF4087a0),
       500 : const Color(_primaryColorValue),
-      600 : const Color(0xFF4fa8bf),
-      700 : const Color(0xFF62b1c6),
-      800 : const Color(0xFF76bbcd),
-      900 : const Color(0xFF89c5d4),
+      600 : const Color(0xFF59a1ba),
+      700 : const Color(0xFF6cabc1),
+      800 : const Color(0xFF7eb6c9),
+      900 : const Color(0xFF91c0d1),
     }
   );
 

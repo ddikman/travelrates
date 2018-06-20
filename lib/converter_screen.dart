@@ -61,12 +61,11 @@ class _ConvertScreenState extends State<ConvertScreen> {
         children: cardWidgets
     );
 
-    final body = cardListView;
-
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: Text("How much is.."),
+          title: Text("CONVERT"),
+          centerTitle: true,
           actions: <Widget>[_buildConfigureActionButton()],
         ),
         floatingActionButton: _buildAddCurrencyButton(),
@@ -76,7 +75,7 @@ class _ConvertScreenState extends State<ConvertScreen> {
           // hiding the lowermost content
             child: new Padding(
               padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
-              child: body,
+              child: cardListView,
             ))
     );
   }
@@ -161,7 +160,7 @@ class _ConvertScreenState extends State<ConvertScreen> {
           opacity: hovered ? 1.0 : 0.0,
           child: Icon(
             Icons.add_circle,
-            color: AppTheme.accentColor,
+            color: AppTheme.primaryColor,
             size: iconSize,
           ),
         ),

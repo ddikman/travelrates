@@ -11,14 +11,7 @@ class BackgroundContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                AppTheme.accentColor.shade800,
-                AppTheme.accentColor.shade200
-              ])),
+      color: AppTheme.accentColor,
       child: child,
     );
   }

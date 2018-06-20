@@ -29,13 +29,15 @@ class ConvertDialog extends StatelessWidget {
     );
 
     final submitButton = new Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 8.0),
       child: new Center(
         child: new FlatButton(
           onPressed: () => _submit(context),
           child: new Text(
-            'Convert',
-            style: TextStyle(color: AppTheme.accentColor),
+            'CONVERT',
+            style: Theme.of(context).textTheme.display1.copyWith(
+              fontSize: 16.0
+            ),
           ),
           color: AppTheme.primaryColor,
         ),
