@@ -32,6 +32,54 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
 
   final TextEditingController textEditingController = TextEditingController();
 
+  @override
+  Widget build(BuildContext context) {
+    final state = StateContainer.of(context).appState;
+
+    var currentValue = state.getAmountInCurrency(widget.currency);
+
+    textEditingController.text =
+        CurrencyInputFormatter.formatValue(currentValue);
+
+    Widget currencyTitle = Text(widget.currency.name,
+        style: Theme.of(context).textTheme.body1.copyWith(fontSize: 14.0));
+
+    final contents = new Stack(
+      children: <Widget>[
+        currencyTitle,
+        new Align(
+            alignment: Alignment.centerRight,
+            child: state.isReconfiguring
+                ? _deleteIcon
+                : _currencyAmount(currentValue))
+      ],
+    );
+
+    if (state.isReconfiguring) {
+      final moveHandle = new Align(
+          alignment: Alignment.bottomLeft,
+          child: Icon(Icons.dehaze, size: 24.0, color: AppTheme.accentColor));
+      contents.children.insert(0, moveHandle);
+    }
+
+    final card = new Container(
+      height: CurrencyConvertCard.height,
+      child: new Material(
+        color: Colors.transparent,
+        child: Card(
+            color: _showInputError ? Colors.red : AppTheme.primaryColor,
+            child: new InkWell(
+              splashColor: AppTheme.accentColor,
+              onTap: state.isReconfiguring ? null : _cardTapped,
+              child: new Padding(
+                  padding: const EdgeInsets.all(4.0), child: contents),
+            )),
+      ),
+    );
+
+    return _asDraggable(_animated(card));
+  }
+
   _currencyAmount(double amount) {
     final currencyAmountFontSize = 24.0;
     return Row(
@@ -95,54 +143,6 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
             ),
           ),
         ));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final state = StateContainer.of(context).appState;
-
-    var currentValue = state.getAmountInCurrency(widget.currency);
-
-    textEditingController.text =
-        CurrencyInputFormatter.formatValue(currentValue);
-
-    Widget currencyTitle = Text(widget.currency.name,
-        style: Theme.of(context).textTheme.body1.copyWith(fontSize: 14.0));
-
-    final contents = new Stack(
-      children: <Widget>[
-        currencyTitle,
-        new Align(
-            alignment: Alignment.centerRight,
-            child: state.isReconfiguring
-                ? _deleteIcon
-                : _currencyAmount(currentValue))
-      ],
-    );
-
-    if (state.isReconfiguring) {
-      final moveHandle = new Align(
-          alignment: Alignment.bottomLeft,
-          child: Icon(Icons.dehaze, size: 24.0, color: AppTheme.accentColor));
-      contents.children.insert(0, moveHandle);
-    }
-
-    final card = new Container(
-      height: CurrencyConvertCard.height,
-      child: new Material(
-        color: Colors.transparent,
-        child: Card(
-            color: _showInputError ? Colors.red : AppTheme.primaryColor,
-            child: new InkWell(
-              splashColor: AppTheme.accentColor,
-              onTap: state.isReconfiguring ? null : _cardTapped,
-              child: new Padding(
-                  padding: const EdgeInsets.all(4.0), child: contents),
-            )),
-      ),
-    );
-
-    return _asDraggable(_animated(card));
   }
 
   _animated(Widget child) {

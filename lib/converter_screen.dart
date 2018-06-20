@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:backpacking_currency_converter/app_routes.dart';
 import 'package:backpacking_currency_converter/app_theme.dart';
 import 'package:backpacking_currency_converter/background_container.dart';
+import 'package:backpacking_currency_converter/country.dart';
 import 'package:backpacking_currency_converter/currency.dart';
 import 'package:backpacking_currency_converter/currency_convert_card.dart';
 import 'package:backpacking_currency_converter/position_finder.dart';
@@ -20,40 +23,68 @@ class _ConvertScreenState extends State<ConvertScreen> {
   static const double _floatingButtonSpacing = 60.0;
   static const int _msDelayBetweenItemAppearance = 100;
 
+  // to get scaffold context and then snackbar
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+
+  final PositionFinder _positionFinder = new PositionFinder();
+
+  bool _performedCountryDetection = false;
+
+  @override
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+
+    if (!_performedCountryDetection) {
+      final state = StateContainer
+          .of(context)
+          .appState;
+
+      final country = await _positionFinder.detectNewCountry(state.countries);
+      await _addNewCountry(country);
+      _performedCountryDetection = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final state = StateContainer.of(context).appState;
+    final state = StateContainer
+        .of(context)
+        .appState;
 
     int index = 0;
     final cardWidgets = state.currencies
-        .map((currency) => _buildCard(index++, currency))
+        .map((currency) => _buildCurrencyEntry(index++, currency))
         .toList();
 
-    final cardListView = new Material(
-      color: Colors.transparent,
-      child: new Padding(
-        padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
-        // add space for float button
-        child: new ListView(
-            padding: EdgeInsets.all(_listViewSpacing), children: cardWidgets),
-      ),
+    final cardListView = new ListView(
+        padding: EdgeInsets.all(_listViewSpacing),
+        children: cardWidgets
     );
 
-    final body = new PositionFinder(
-        child: new Container(color: Colors.transparent, child: cardListView));
+    final body = cardListView;
 
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           title: Text("How much is.."),
           actions: <Widget>[_buildConfigureActionButton()],
         ),
         floatingActionButton: _buildAddCurrencyButton(),
         floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-        body: new BackgroundContainer(child: body));
+        body: new BackgroundContainer(
+          // padding the body bottom stops the floating space button from
+          // hiding the lowermost content
+            child: new Padding(
+              padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
+              child: body,
+            ))
+    );
   }
 
   _buildConfigureActionButton() {
-    final state = StateContainer.of(context).appState;
+    final state = StateContainer
+        .of(context)
+        .appState;
     IconData displayIcon = state.isReconfiguring ? Icons.done : Icons.settings;
 
     return new IconButton(
@@ -63,11 +94,13 @@ class _ConvertScreenState extends State<ConvertScreen> {
         });
   }
 
-  Widget _buildCard(int index, String currencyCode) {
-    final state = StateContainer.of(context).appState;
+  Widget _buildCurrencyEntry(int index, String currencyCode) {
+    final state = StateContainer
+        .of(context)
+        .appState;
 
     final animationDelay =
-        Duration(milliseconds: _msDelayBetweenItemAppearance * (index + 1));
+    Duration(milliseconds: _msDelayBetweenItemAppearance * (index + 1));
     var currency = state.currencyRepo.getCurrencyByCode(currencyCode);
     final card = CurrencyConvertCard(
         currency: currency,
@@ -135,4 +168,38 @@ class _ConvertScreenState extends State<ConvertScreen> {
       ),
     );
   }
+
+  Future<Null> _addNewCountry(Country country) async {
+    if (country == null) {
+      return;
+    }
+
+    final stateContainer = StateContainer.of(context);
+    final state = stateContainer.appState;
+    if (state.currencies.contains(country .currencyCode)) {
+      print("detected ${country.name} as current country, currency is already added.");
+      return;
+    }
+
+    print("local currency '${country.currencyCode}' is missing, adding it..");
+    stateContainer.addCurrency(country .currencyCode);
+    final currency = state.currencyRepo.getCurrencyByCode(country .currencyCode);
+    _notifyNewCurrencyAdded(country , currency);
+  }
+
+  void _notifyNewCurrencyAdded(Country country, Currency currency) {
+    final tipDisplaySeconds = 10;
+
+    _scaffoldKey.currentState.showSnackBar(new SnackBar(
+      duration: Duration(seconds: tipDisplaySeconds),
+      action: new SnackBarAction(
+        label: 'Got it!', onPressed: () {
+          // user just acknowledged info, no further action needed
+      },
+      ),
+      content: Text(
+          "Hey! Just noticed you're in ${country.name}, cool! I've added the local currency, ${currency.name} to the conversion list for you. Enjoy!"),
+    ));
+  }
+
 }
