@@ -16,7 +16,6 @@ class ConvertScreen extends StatefulWidget {
 }
 
 class _ConvertScreenState extends State<ConvertScreen> {
-
   static const double _listViewSpacing = 12.0;
   static const double _floatingButtonSpacing = 60.0;
   static const int _msDelayBetweenItemAppearance = 100;
@@ -26,22 +25,22 @@ class _ConvertScreenState extends State<ConvertScreen> {
     final state = StateContainer.of(context).appState;
 
     int index = 0;
-    final cards = new Material(
+    final cardWidgets = state.currencies
+        .map((currency) => _buildCard(index++, currency))
+        .toList();
+
+    final cardListView = new Material(
       color: Colors.transparent,
       child: new Padding(
         padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
         // add space for float button
         child: new ListView(
-          padding: EdgeInsets.all(_listViewSpacing),
-          children: state.currencies
-              .map((currency) => _buildCard(index++, currency))
-              .toList(),
-        ),
+            padding: EdgeInsets.all(_listViewSpacing), children: cardWidgets),
       ),
     );
 
     final body = new PositionFinder(
-        child: new Container(color: Colors.transparent, child: cards));
+        child: new Container(color: Colors.transparent, child: cardListView));
 
     return Scaffold(
         appBar: AppBar(
@@ -53,12 +52,22 @@ class _ConvertScreenState extends State<ConvertScreen> {
         body: new BackgroundContainer(child: body));
   }
 
+  _buildConfigureActionButton() {
+    final state = StateContainer.of(context).appState;
+    IconData displayIcon = state.isReconfiguring ? Icons.done : Icons.settings;
+
+    return new IconButton(
+        icon: Icon(displayIcon),
+        onPressed: () {
+          StateContainer.of(context).toggleIsReconfiguring();
+        });
+  }
+
   Widget _buildCard(int index, String currencyCode) {
     final state = StateContainer.of(context).appState;
 
-    final animationDelay = Duration(
-        milliseconds: _msDelayBetweenItemAppearance * (index + 1)
-    );
+    final animationDelay =
+        Duration(milliseconds: _msDelayBetweenItemAppearance * (index + 1));
     var currency = state.currencyRepo.getCurrencyByCode(currencyCode);
     final card = CurrencyConvertCard(
         currency: currency,
@@ -79,61 +88,51 @@ class _ConvertScreenState extends State<ConvertScreen> {
     return floatingButton;
   }
 
-  _buildConfigureActionButton() {
-    final state = StateContainer.of(context).appState;
-    IconData displayIcon = state.isReconfiguring ? Icons.done : Icons.settings;
-
-    return new IconButton(
-        icon: Icon(displayIcon),
-        onPressed: () {
-          StateContainer.of(context).toggleIsReconfiguring();
-        });
-  }
-
   Widget _withReorderDropArea(CurrencyConvertCard card) {
-
-    const iconSize = 24.0;
     final dropArea = new Align(
       alignment: Alignment.bottomCenter,
       child: new DragTarget<Currency>(
         builder: (BuildContext context, List candidateData, List rejectedData) {
           bool hovered = candidateData.isNotEmpty;
-          final dropAreaHeight = hovered ? (CurrencyConvertCard.height + iconSize) : CurrencyConvertCard.height;
-          return new FractionallySizedBox(
-            widthFactor: 1.0,
-            child: Container(
-              height: dropAreaHeight,
-              alignment: Alignment.bottomCenter,
-              child: Opacity(
-                opacity: hovered ? 1.0 : 0.0,
-                child: Icon(
-                  Icons.add_circle,
-                  color: AppTheme.accentColor,
-                  size: 24.0,
-                ),
-              ),
-            ),
-          );
+          return _dropTargetArea(hovered);
         },
         onAccept: (value) {
           // handle the reorder. since we dropped the other card on this card
           // it means we want to place it _after_ this card
-          StateContainer.of(context).reorder(
-            item: value.code,
-            placeAfter: card.currency.code
-          );
+          StateContainer
+              .of(context)
+              .reorder(item: value.code, placeAfter: card.currency.code);
         },
         onWillAccept: (value) => value.code != card.currency.code,
       ),
     );
 
     return Stack(
-      children: <Widget>[
-        card,
-        dropArea
-      ],
+      children: <Widget>[card, dropArea],
+    );
+  }
+
+  Widget _dropTargetArea(bool hovered) {
+    const iconSize = 24.0;
+
+    final dropAreaHeight = hovered
+        ? (CurrencyConvertCard.height + iconSize)
+        : CurrencyConvertCard.height;
+
+    return new FractionallySizedBox(
+      widthFactor: 1.0,
+      child: Container(
+        height: dropAreaHeight,
+        alignment: Alignment.bottomCenter,
+        child: Opacity(
+          opacity: hovered ? 1.0 : 0.0,
+          child: Icon(
+            Icons.add_circle,
+            color: AppTheme.accentColor,
+            size: iconSize,
+          ),
+        ),
+      ),
     );
   }
 }
-
-
