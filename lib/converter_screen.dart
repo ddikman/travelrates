@@ -6,7 +6,7 @@ import 'package:backpacking_currency_converter/background_container.dart';
 import 'package:backpacking_currency_converter/country.dart';
 import 'package:backpacking_currency_converter/currency.dart';
 import 'package:backpacking_currency_converter/currency_convert_card.dart';
-import 'package:backpacking_currency_converter/position_finder.dart';
+import 'package:backpacking_currency_converter/country_detector.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
 
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class _ConvertScreenState extends State<ConvertScreen> {
   // to get scaffold context and then snackbar
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
-  final PositionFinder _positionFinder = new PositionFinder();
+  final CountryDetector _positionFinder = new CountryDetector();
 
   bool _performedCountryDetection = false;
 

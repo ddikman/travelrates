@@ -5,7 +5,7 @@ import 'package:backpacking_currency_converter/country.dart';
 import 'package:geolocation/geolocation.dart';
 import 'package:geocoder/geocoder.dart';
 
-class PositionFinder {
+class CountryDetector {
 
   Future<Country> detectNewCountry(List<Country> knownCountries) async {
     await _requestGeoPosition();
