@@ -41,24 +41,31 @@ class PositionFinder {
     }
   }
 
-
-
   Future<Country> _detectCountry(List<Country> knownCountries, Location location) async {
-    final coordinates =
-    new Coordinates(location.latitude, location.longitude);
-    final addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
 
-    final countryName = addresses.first.countryName;
+    final coordinates = new Coordinates(location.latitude, location.longitude);
 
-    final matchingCountry = knownCountries.firstWhere(
-            (country) => country.name.toLowerCase() == countryName.toLowerCase(),
-        orElse: () => null);
+    try {
+      final countryName = await _getCountry(coordinates);
 
-    if (matchingCountry == null) {
-      print("unknown country '$countryName' detected");
+      final matchingCountry = knownCountries.firstWhere(
+              (country) => country.name.toLowerCase() == countryName.toLowerCase(),
+          orElse: () => null);
+
+      if (matchingCountry == null) {
+        print("unknown country '$countryName' detected");
+        return null;
+      }
+
+      return matchingCountry;
+    } on Exception catch (e) {
+      print("failed to find country based on coordinates [${location.latitude},${location.longitude}]: $e");
       return null;
     }
+  }
 
-    return matchingCountry;
+  Future<String> _getCountry(Coordinates coordinates) async {
+    final addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    return addresses.first.countryName;
   }
 }
