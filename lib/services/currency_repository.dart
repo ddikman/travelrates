@@ -1,4 +1,4 @@
-import 'package:backpacking_currency_converter/currency.dart';
+import 'package:backpacking_currency_converter/model/currency.dart';
 import 'dart:async';
 import 'dart:convert';
 

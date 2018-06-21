@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:backpacking_currency_converter/app_routes.dart';
 import 'package:backpacking_currency_converter/app_theme.dart';
-import 'package:backpacking_currency_converter/background_container.dart';
+import 'package:backpacking_currency_converter/widgets/background_container.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
 import 'package:flutter/material.dart';
 

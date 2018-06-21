@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:backpacking_currency_converter/app_routes.dart';
 import 'package:backpacking_currency_converter/app_theme.dart';
-import 'package:backpacking_currency_converter/background_container.dart';
-import 'package:backpacking_currency_converter/country.dart';
-import 'package:backpacking_currency_converter/currency.dart';
-import 'package:backpacking_currency_converter/currency_convert_card.dart';
-import 'package:backpacking_currency_converter/country_detector.dart';
+import 'package:backpacking_currency_converter/widgets/background_container.dart';
+import 'package:backpacking_currency_converter/model/country.dart';
+import 'package:backpacking_currency_converter/model/currency.dart';
+import 'package:backpacking_currency_converter/screens/convert/currency_convert_card.dart';
+import 'package:backpacking_currency_converter/services/country_detector.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
 
 import 'package:flutter/material.dart';

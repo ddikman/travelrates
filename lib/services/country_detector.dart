@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:backpacking_currency_converter/country.dart';
+import 'package:backpacking_currency_converter/model/country.dart';
 
 import 'package:geolocation/geolocation.dart';
 import 'package:geocoder/geocoder.dart';

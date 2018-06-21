@@ -1,5 +1,5 @@
 import 'package:backpacking_currency_converter/app_theme.dart';
-import 'package:backpacking_currency_converter/currency_input_formatter.dart';
+import 'package:backpacking_currency_converter/screens/convert/currency_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

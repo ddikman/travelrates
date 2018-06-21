@@ -1,4 +1,4 @@
-import 'package:backpacking_currency_converter/app_root.dart';
+import 'package:backpacking_currency_converter/screens/app_root.dart';
 import 'package:flutter/material.dart';
 
 import 'package:backpacking_currency_converter/state_container.dart';

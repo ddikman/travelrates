@@ -1,8 +1,8 @@
-import 'package:backpacking_currency_converter/animate_in.dart';
+import 'package:backpacking_currency_converter/widgets/animate_in.dart';
 import 'package:backpacking_currency_converter/app_theme.dart';
-import 'package:backpacking_currency_converter/convert_dialog.dart';
-import 'package:backpacking_currency_converter/currency.dart';
-import 'package:backpacking_currency_converter/currency_input_formatter.dart';
+import 'package:backpacking_currency_converter/screens/convert/convert_dialog.dart';
+import 'package:backpacking_currency_converter/model/currency.dart';
+import 'package:backpacking_currency_converter/screens/convert/currency_input_formatter.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
 import 'package:flutter/material.dart';
 

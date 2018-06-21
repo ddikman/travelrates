@@ -1,8 +1,8 @@
-import 'package:backpacking_currency_converter/add_currency_screen.dart';
+import 'package:backpacking_currency_converter/screens/add_currency/add_currency_screen.dart';
 import 'package:backpacking_currency_converter/app_routes.dart';
 import 'package:backpacking_currency_converter/app_theme.dart';
-import 'package:backpacking_currency_converter/converter_screen.dart';
-import 'package:backpacking_currency_converter/loading_screen.dart';
+import 'package:backpacking_currency_converter/screens/convert/convert_screen.dart';
+import 'package:backpacking_currency_converter/screens/loading/loading_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoot extends StatefulWidget {

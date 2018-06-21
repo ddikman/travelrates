@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:backpacking_currency_converter/country.dart';
+import 'package:backpacking_currency_converter/model/country.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'package:backpacking_currency_converter/currency.dart';
-import 'package:backpacking_currency_converter/currency_repository.dart';
+import 'package:backpacking_currency_converter/model/currency.dart';
+import 'package:backpacking_currency_converter/services/currency_repository.dart';
 import 'package:flutter/material.dart';
 
 class AppState {
