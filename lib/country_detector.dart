@@ -7,13 +7,13 @@ import 'package:geocoder/geocoder.dart';
 
 class CountryDetector {
 
-  Future<Country> detectNewCountry(List<Country> knownCountries) async {
+  Future<CountryResult> detectNewCountry(List<Country> knownCountries) async {
     await _requestGeoPosition();
 
     final GeolocationResult gpsRequest = await Geolocation.isLocationOperational();
     if (!gpsRequest.isSuccessful) {
       print('geolocation is disabled, cannot detect current country.');
-      return null;
+      return CountryResult.failed;
     }
 
     final gpsLocationRequest = await Geolocation
@@ -22,7 +22,7 @@ class CountryDetector {
 
     if (!gpsLocationRequest.isSuccessful) {
       print("failed to get geolocation: ${gpsLocationRequest.error.toString()}");
-      return null;
+      return CountryResult.failed;
     }
 
     return await _detectCountry(knownCountries, gpsLocationRequest.location);
@@ -41,31 +41,58 @@ class CountryDetector {
     }
   }
 
-  Future<Country> _detectCountry(List<Country> knownCountries, Location location) async {
+  Future<CountryResult> _detectCountry(List<Country> knownCountries, Location location) async {
 
     final coordinates = new Coordinates(location.latitude, location.longitude);
 
     try {
       final countryName = await _getCountry(coordinates);
 
-      final matchingCountry = knownCountries.firstWhere(
-              (country) => country.name.toLowerCase() == countryName.toLowerCase(),
+      final country = knownCountries.firstWhere(
+              (knownCountry) => knownCountry.name.toLowerCase() == countryName.toLowerCase(),
           orElse: () => null);
 
-      if (matchingCountry == null) {
+      if (country == null) {
         print("unknown country '$countryName' detected");
-        return null;
+        return CountryResult.failed;
       }
 
-      return matchingCountry;
+      return CountryResult.withCountry(country);
     } on Exception catch (e) {
       print("failed to find country based on coordinates [${location.latitude},${location.longitude}]: $e");
-      return null;
+      return CountryResult.failed;
     }
   }
 
   Future<String> _getCountry(Coordinates coordinates) async {
     final addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
     return addresses.first.countryName;
+  }
+}
+
+class CountryResult {
+
+  final Country _country;
+
+  final bool _successful;
+
+  // TODO: any way to make private?
+  CountryResult(this._country, this._successful);
+
+  get successful => _successful;
+
+  get country {
+    if (!_successful) {
+      throw new Exception('detecting the country was not successful, ensure .successful is called to check this before calling .country');
+    }
+    return _country;
+  }
+
+  static withCountry(Country country) {
+    return CountryResult(country, true);
+  }
+
+  static get failed {
+    return CountryResult(null, false);
   }
 }

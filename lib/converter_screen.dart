@@ -168,14 +168,16 @@ class _ConvertScreenState extends State<ConvertScreen> {
     );
   }
 
-  Future<Null> _addNewCountry(Country country) async {
-    if (country == null) {
+  Future<Null> _addNewCountry(CountryResult countryResult) async {
+    if (!countryResult.successful) {
       return;
     }
 
+    final country = countryResult.country;
+
     final stateContainer = StateContainer.of(context);
     final state = stateContainer.appState;
-    if (state.currencies.contains(country .currencyCode)) {
+    if (state.currencies.contains(country.currencyCode)) {
       print("detected ${country.name} as current country, currency is already added.");
       return;
     }
