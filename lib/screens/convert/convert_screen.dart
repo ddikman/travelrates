@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:backpacking_currency_converter/app_routes.dart';
+import 'package:backpacking_currency_converter/screens/convert/add_currency_button.dart';
 import 'package:backpacking_currency_converter/screens/convert/selected_currency_list.dart';
+import 'package:backpacking_currency_converter/screens/convert/toggle_configure_button.dart';
 import 'package:backpacking_currency_converter/widgets/background_container.dart';
 import 'package:backpacking_currency_converter/model/country.dart';
 import 'package:backpacking_currency_converter/model/currency.dart';
@@ -18,8 +19,6 @@ class ConvertScreen extends StatefulWidget {
 }
 
 class _ConvertScreenState extends State<ConvertScreen> {
-
-  static const double _floatingButtonSpacing = 60.0;
 
   // to get scaffold context and then snackbar
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
@@ -45,47 +44,32 @@ class _ConvertScreenState extends State<ConvertScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    const _floatingButtonSpacing = 60.0;
+
+    final body = new BackgroundContainer(
+      // padding the body bottom stops the floating space button from
+      // hiding the lowermost content
+        child: new Padding(
+          padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
+          child: new SelectedCurrencyList(),
+        )
+    );
+
+    final appBar = new AppBar(
+      title: new Text("CONVERT"),
+      centerTitle: true,
+      actions: <Widget>[
+        new ToggleConfigureButton()
+      ],
+    );
+
     return Scaffold(
         key: _scaffoldKey,
-        appBar: AppBar(
-          title: Text("CONVERT"),
-          centerTitle: true,
-          actions: <Widget>[_buildConfigureActionButton()],
-        ),
-        floatingActionButton: _buildAddCurrencyButton(),
-        floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-        body: new BackgroundContainer(
-          // padding the body bottom stops the floating space button from
-          // hiding the lowermost content
-            child: new Padding(
-              padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
-              child: new SelectedCurrencyList(),
-            ))
+        appBar: appBar,
+        floatingActionButton: new AddCurrencyButton(),
+        body: body
     );
-  }
-
-  _buildConfigureActionButton() {
-    final state = StateContainer
-        .of(context)
-        .appState;
-    IconData displayIcon = state.isReconfiguring ? Icons.done : Icons.settings;
-
-    return new IconButton(
-        icon: Icon(displayIcon),
-        onPressed: () {
-          StateContainer.of(context).toggleIsReconfiguring();
-        });
-  }
-
-  _buildAddCurrencyButton() {
-    final floatingButton = FloatingActionButton(
-      child: Icon(Icons.add),
-      onPressed: () {
-        Navigator.of(context).pushNamed(AppRoutes.addCurrency);
-      },
-    );
-
-    return floatingButton;
   }
 
   Future<Null> _addNewCountry(CountryResult countryResult) async {
