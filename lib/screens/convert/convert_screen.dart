@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:backpacking_currency_converter/screens/convert/add_currency_button.dart';
+import 'package:backpacking_currency_converter/screens/convert/open_add_currency_screen_button.dart';
 import 'package:backpacking_currency_converter/screens/convert/selected_currency_list.dart';
 import 'package:backpacking_currency_converter/screens/convert/toggle_configure_button.dart';
 import 'package:backpacking_currency_converter/widgets/background_container.dart';
@@ -67,7 +67,7 @@ class _ConvertScreenState extends State<ConvertScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: appBar,
-        floatingActionButton: new AddCurrencyButton(),
+        floatingActionButton: new OpenAddCurrencyScreenButton(),
         body: body
     );
   }
