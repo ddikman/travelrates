@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class SelectedCurrencyList extends StatelessWidget {
-  static const double _listViewSpacing = 12.0;
   static const int _msDelayBetweenItemAppearance = 100;
 
   @override
@@ -22,7 +21,7 @@ class SelectedCurrencyList extends StatelessWidget {
         .toList();
 
     return new ListView(
-        padding: EdgeInsets.all(_listViewSpacing),
+        padding: EdgeInsets.all(8.0),
         children: currencies
     );
   }

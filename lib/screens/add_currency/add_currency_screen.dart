@@ -26,7 +26,7 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
           .appState;
 
       currencyFilter = new CurrencyFilter(state.currencyRepo.currencies, state.countries);
-      applyFilter('');
+      _applyFilter('');
     }
 
     super.didChangeDependencies();
@@ -41,7 +41,7 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
         .toList();
 
     final searchField = new CurrencySearchTextField(
-      filterChanged: applyFilter,
+      filterChanged: _applyFilter,
     );
 
     final body = new Padding(
@@ -60,7 +60,7 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
         body: BackgroundContainer(child: body));
   }
 
-  applyFilter(String filterText) {
+  _applyFilter(String filterText) {
     setState((){
       this.currencies = currencyFilter.getFiltered(filterText);
     });

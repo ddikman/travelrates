@@ -42,7 +42,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
         CurrencyInputFormatter.formatValue(currentValue);
 
     Widget currencyName = Padding(
-      padding: const EdgeInsets.only(left: 8.0),
+      padding: const EdgeInsets.only(left: 10.0),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(widget.currency.name,
@@ -52,35 +52,30 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
       ),
     );
 
-
     final icon = widget.currency.icon;
     const flagSize = 32.0;
-    final image = Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: new Image(
+    final image = Align(
+      alignment: Alignment.centerLeft,
+      child: new Image(
           image: new AssetImage("assets/images/flags/$icon.png"),
           width: flagSize,
-          height: flagSize
-        ),
-      ),
+          height: flagSize),
     );
 
     final contents = new Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        image,
-        Expanded(child: currencyName),
-        new Align(
-            alignment: Alignment.centerRight,
-            child: state.isReconfiguring
-                ? _deleteIcon
-                : _currencyAmount(currentValue))
-      ]
-    );
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          image,
+          Expanded(child: currencyName),
+          new Align(
+              alignment: Alignment.centerRight,
+              child: state.isReconfiguring
+                  ? _deleteIcon
+                  : _currencyAmount(currentValue))
+        ]);
 
     final card = new Container(
+      padding: EdgeInsets.only(bottom: 4.0),
       height: CurrencyConvertCard.height,
       child: new Material(
         color: Colors.transparent,
@@ -90,12 +85,19 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
               splashColor: AppTheme.accentColor,
               onTap: state.isReconfiguring ? null : _cardTapped,
               child: new Padding(
-                  padding: const EdgeInsets.all(4.0), child: contents),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 4.0),
+                  child: contents),
             )),
       ),
     );
 
-    return _asDraggable(_animated(card));
+    Widget result = _animated(card);
+    if (state.isReconfiguring) {
+      result = _asDraggable(result);
+    }
+
+    return result;
   }
 
   _currencyAmount(double amount) {
