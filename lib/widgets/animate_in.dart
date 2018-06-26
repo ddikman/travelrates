@@ -46,14 +46,23 @@ class AnimateInState extends State<AnimateIn> with TickerProviderStateMixin {
       new CurvedAnimation(parent: _controller, curve: Curves.ease),
     );
 
-    new Future.delayed(widget.delay, () => _controller.forward());
+    new Future.delayed(widget.delay, startAnimation);
 
     super.initState();
+  }
+
+  void startAnimation() {
+    // ensure we haven't disposed within the delay
+    if (_controller == null) {
+      return;
+    }
+    _controller.forward();
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _controller = null;
     super.dispose();
   }
 
