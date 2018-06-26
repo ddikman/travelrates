@@ -159,7 +159,7 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
-  void _updateState(AppState state) {
+  void _updateAndPersist(AppState state) {
     setState(() {
       appState = state;
     });
@@ -176,23 +176,26 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void toggleIsReconfiguring() {
-    _updateState(appState.copyWith(isReconfiguring: !appState.isReconfiguring));
+    // update without persisting
+    setState((){
+      appState = appState.copyWith(isReconfiguring: !appState.isReconfiguring);
+    });
   }
 
   void removeCurrency(String currencyCode) {
     final currencies = List<String>.from(appState.currencies);
     currencies.remove(currencyCode);
-    _updateState(appState.copyWith(currencies: currencies));
+    _updateAndPersist(appState.copyWith(currencies: currencies));
   }
 
   void addCurrency(String currencyCode) {
     final currencies = List<String>.from(appState.currencies);
     currencies.add(currencyCode);
-    _updateState(appState.copyWith(currencies: currencies));
+    _updateAndPersist(appState.copyWith(currencies: currencies));
   }
 
   void setAmount(double amount, Currency currency) {
-    _updateState(appState.copyWith(amount: amount, currency: currency));
+    _updateAndPersist(appState.copyWith(amount: amount, currency: currency));
   }
 
   Future<Null> _persistState(AppState appState) async {
@@ -231,7 +234,7 @@ class StateContainerState extends State<StateContainer> {
     currencies.remove(item);
     final newPosition = currencies.indexOf(placeAfter) + 1;
     currencies.insert(newPosition, item);
-    _updateState(appState.copyWith(
+    _updateAndPersist(appState.copyWith(
       currencies: currencies
     ));
   }
