@@ -52,13 +52,15 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
       ),
     );
 
+
+    final icon = widget.currency.icon;
     const flagSize = 32.0;
     final image = Padding(
       padding: const EdgeInsets.all(4.0),
       child: Align(
         alignment: Alignment.centerLeft,
         child: new Image(
-          image: new AssetImage('assets/images/flag.png'),
+          image: new AssetImage("assets/images/flags/$icon.png"),
           width: flagSize,
           height: flagSize
         ),

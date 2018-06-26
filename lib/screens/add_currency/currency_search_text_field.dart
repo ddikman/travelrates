@@ -1,20 +1,25 @@
 import 'package:backpacking_currency_converter/app_theme.dart';
-import 'package:backpacking_currency_converter/model/country.dart';
 import 'package:backpacking_currency_converter/model/currency.dart';
 import 'package:flutter/material.dart';
 
-class CurrencySearchTextField extends StatelessWidget {
+typedef void CurrenciesChanged(List<Currency> currencies);
 
-  final ValueChanged<List<Currency>> filterChanged;
-  final List<Currency> allCurrencies;
-  final List<Country> countries;
+class CurrencySearchTextField extends StatefulWidget {
+
+  final ValueChanged<String> filterChanged;
 
   const CurrencySearchTextField({
     Key key,
     @required this.filterChanged,
-    @required this.allCurrencies,
-    @required this.countries
   }) : super(key: key);
+
+  @override
+  CurrencySearchTextFieldState createState() {
+    return new CurrencySearchTextFieldState();
+  }
+}
+
+class CurrencySearchTextFieldState extends State<CurrencySearchTextField> {
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class CurrencySearchTextField extends StatelessWidget {
 
     final textField = TextField(
       autofocus: true,
-      onChanged: _filterChanged,
+      onChanged: widget.filterChanged,
       style: TextStyle(color: AppTheme.primaryColor),
       decoration: InputDecoration(
           contentPadding: EdgeInsets.all(4.0),
@@ -48,29 +53,5 @@ class CurrencySearchTextField extends StatelessWidget {
         child: textField,
       ),
     );
-  }
-
-  void _filterChanged(String filter) {
-
-    filter = filter.toLowerCase();
-
-    var filteredCurrencies = List.from(allCurrencies);
-
-    if (filter.isNotEmpty) {
-      final List<Country> matchingCountries = List.from(countries);
-      matchingCountries.retainWhere(
-              (country) => country.name.toLowerCase().contains(filter));
-
-      allCurrencies.retainWhere((currency) {
-        return currency.name.toLowerCase().contains(filter) ||
-            currency.code.toLowerCase().contains(filter) ||
-            matchingCountries
-                .any((country) => country.currencyCode == currency.code);
-      });
-    }
-
-
-
-    filterChanged(filteredCurrencies);
   }
 }

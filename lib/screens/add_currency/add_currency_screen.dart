@@ -1,5 +1,5 @@
-import 'package:backpacking_currency_converter/helpers/sorting.dart';
 import 'package:backpacking_currency_converter/screens/add_currency/available_currency_card.dart';
+import 'package:backpacking_currency_converter/screens/add_currency/currency_filter.dart';
 import 'package:backpacking_currency_converter/screens/add_currency/currency_search_text_field.dart';
 import 'package:backpacking_currency_converter/widgets/background_container.dart';
 import 'package:backpacking_currency_converter/model/currency.dart';
@@ -15,17 +15,25 @@ class AddCurrencyScreen extends StatefulWidget {
 
 class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
   List<Currency> currencies;
+  CurrencyFilter currencyFilter;
 
   @override
   void didChangeDependencies() {
-    final currencyRepo = StateContainer.of(context).appState.currencyRepo;
-    currencies = sorted(currencyRepo.getAllCurrencies());
+    // load initial state once
+    if (this.currencyFilter == null) {
+      final state = StateContainer
+          .of(context)
+          .appState;
+
+      currencyFilter = new CurrencyFilter(state.currencyRepo.currencies, state.countries);
+      applyFilter('');
+    }
+
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    final appState = StateContainer.of(context).appState;
 
     final currencyWidgets = this
         .currencies
@@ -33,13 +41,7 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
         .toList();
 
     final searchField = new CurrencySearchTextField(
-      allCurrencies: appState.currencyRepo.getAllCurrencies(),
-      countries: appState.countries,
-      filterChanged: (currencies) {
-        setState(() {
-          this.currencies = sorted(currencies);
-        });
-      },
+      filterChanged: applyFilter,
     );
 
     final body = new Padding(
@@ -58,7 +60,9 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
         body: BackgroundContainer(child: body));
   }
 
-  sorted(List<Currency> currencies) {
-    return alphabeticallySorted(currencies, (currency) => currency.name);
+  applyFilter(String filterText) {
+    setState((){
+      this.currencies = currencyFilter.getFiltered(filterText);
+    });
   }
 }

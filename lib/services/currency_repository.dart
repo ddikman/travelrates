@@ -51,6 +51,7 @@ class CurrencyRepository {
           symbol: currencyMap['symbol_native'],
           name: currencyMap['name'],
           code: code,
+          icon: currencyMap['icon'],
           rate: rate));
     }
 

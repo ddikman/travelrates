@@ -37,9 +37,8 @@ flutter:
     - assets/data/currencies.json
     - assets/data/rates.json
     - assets/data/countries.json
-
-    - assets/images/flag.png
-    - assets/images/2.0x/flag.png
+    - assets/images/flags/
+    - assets/images/flags/2x/
 
   fonts:
     - family: Tahoma
