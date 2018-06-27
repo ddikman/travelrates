@@ -2,7 +2,6 @@ import 'package:backpacking_currency_converter/screens/add_currency/add_currency
 import 'package:backpacking_currency_converter/app_routes.dart';
 import 'package:backpacking_currency_converter/app_theme.dart';
 import 'package:backpacking_currency_converter/screens/convert/convert_screen.dart';
-import 'package:backpacking_currency_converter/screens/loading/loading_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoot extends StatefulWidget {
@@ -13,19 +12,17 @@ class AppRoot extends StatefulWidget {
 }
 
 class _AppRootState extends State<AppRoot> {
-  @override
-  void initState() {
-    super.initState();
-  }
+
+  final mainScreen = new ConvertScreen();
 
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'TravelRates',
       theme: _constructTheme(),
-      home: new LoadingScreen(),
+      home: mainScreen,
       routes: <String, WidgetBuilder>{
-        AppRoutes.home: (context) => new ConvertScreen(),
+        AppRoutes.home: (context) => mainScreen,
         AppRoutes.addCurrency: (context) => new AddCurrencyScreen()
       },
     );

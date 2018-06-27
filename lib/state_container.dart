@@ -127,6 +127,8 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
+  bool get isStateLoaded => appState.countries != null && appState.countries.isNotEmpty;
+
   Future<Null> loadState() async {
     print('loading currency rates from disk..');
     final currencyRepository =
