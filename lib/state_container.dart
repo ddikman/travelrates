@@ -151,7 +151,7 @@ class StateContainerState extends State<StateContainer> {
 
       final defaultState = new AppState(
           currentAmount: 1.0,
-          currentCurrency: currencyRepository.getBaseRateCurrency(),
+          currentCurrency: currencyRepository.baseCurrency,
           currencyRepo: currencyRepository,
           currencies: new List<String>(),
           countries: countries);
