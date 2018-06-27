@@ -26,9 +26,9 @@ class SpinnerState extends State<Spinner> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    super.dispose();
     _animationController.dispose();
     _animationController = null;
+    super.dispose();
   }
 
   @override

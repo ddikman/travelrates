@@ -1,8 +1,5 @@
+import 'package:backpacking_currency_converter/helpers/string_compare.dart';
 import 'package:backpacking_currency_converter/model/currency.dart';
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
 
 class CurrencyRepository {
   // TODO: encapsulate?
@@ -14,12 +11,9 @@ class CurrencyRepository {
   Currency getBaseRateCurrency() => getCurrencyByCode(baseRate);
 
   Currency getCurrencyByCode(String code) {
-    code = code.toUpperCase();
-    var matches =
-        currencies.where((currency) => currency.code.toUpperCase() == code);
+    var matches = currencies.where((currency) => isEqualIgnoreCase(currency.code, code));
     if (matches.isEmpty) {
-      print("Found no currency with code [$code] among ${currencies
-          .length} currencies");
+      print("Found no currency with code [$code] among ${currencies.length} currencies");
       throw StateError("No currency with code $code");
     }
     return matches.first;
@@ -27,35 +21,5 @@ class CurrencyRepository {
 
   List<Currency> getAllCurrencies() {
     return new List.from(currencies);
-  }
-
-  static Future<CurrencyRepository> loadFrom(AssetBundle assets) async {
-    final currenciesJson =
-        await assets.loadString('assets/data/currencies.json');
-
-    final currencies = new List<Currency>();
-    final Map currenciesMap = JsonDecoder().convert(currenciesJson);
-
-    final ratesJson = await assets.loadString('assets/data/rates.json');
-    final Map rates = JsonDecoder().convert(ratesJson)['rates'];
-
-    String baseRateCurrencyCode = 'EUR';
-    for (Map currencyMap in currenciesMap.values) {
-      final code = currencyMap['code'];
-
-      // the base rate is stored as integer in json so make sure it's a
-      // double to avoid casting issue
-      var rate = code == baseRateCurrencyCode ? 1.0 : rates[code];
-
-      currencies.add(Currency(
-          symbol: currencyMap['symbol_native'],
-          name: currencyMap['name'],
-          code: code,
-          icon: currencyMap['icon'],
-          rate: rate));
-    }
-
-    return CurrencyRepository(
-        currencies: currencies, baseRate: baseRateCurrencyCode);
   }
 }

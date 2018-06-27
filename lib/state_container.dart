@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:backpacking_currency_converter/helpers/string_compare.dart';
 import 'package:backpacking_currency_converter/model/country.dart';
+import 'package:backpacking_currency_converter/services/currency_decoder.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -131,13 +133,12 @@ class StateContainerState extends State<StateContainer> {
 
   Future<Null> loadState() async {
     print('loading currency rates from disk..');
-    final currencyRepository =
-        await CurrencyRepository.loadFrom(DefaultAssetBundle.of(context));
+    final defaultAssetBundle = DefaultAssetBundle.of(context);
 
-    final countries = await _loadCountries(DefaultAssetBundle.of(context));
-    countries.sort((countryA, countryB) {
-      return countryA.name.toLowerCase().compareTo(countryB.name.toLowerCase());
-    });
+    final currencyRepository = await _loadRepository(defaultAssetBundle);
+
+    final countries = await _loadCountries(defaultAssetBundle);
+    countries.sort((a, b) => compareIgnoreCase(a.name, b.name));
 
     if (await _persistedStateExists) {
       print('found persisted state, loading that..');
@@ -239,6 +240,13 @@ class StateContainerState extends State<StateContainer> {
     _updateAndPersist(appState.copyWith(
       currencies: currencies
     ));
+  }
+
+  Future<CurrencyRepository> _loadRepository(AssetBundle assets) async {
+    final currencies = await assets.loadString('assets/data/currencies.json');
+    final rates = await assets.loadString('assets/data/rates.json');
+    final decoder = new CurrencyDecoder();
+    return await decoder.decode(currencies, rates);
   }
 }
 
