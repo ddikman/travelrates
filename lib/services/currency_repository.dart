@@ -18,9 +18,9 @@ class CurrencyRepository {
 
   List<Currency> get currencies => List.from(_currencies);
 
-  get baseCurrency => getCurrencyByCode(_baseRate);
+  get baseCurrency => getByCode(_baseRate);
 
-  Currency getCurrencyByCode(String code) {
+  Currency getByCode(String code) {
     var matches = _currencies.where((currency) => isEqualIgnoreCase(currency.code, code));
     if (matches.isEmpty) {
       print("Found no currency with code [$code] among ${_currencies.length} currencies");

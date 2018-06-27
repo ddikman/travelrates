@@ -33,7 +33,7 @@ class SelectedCurrencyList extends StatelessWidget {
 
     final animationDelay =
     Duration(milliseconds: _msDelayBetweenItemAppearance * (index + 1));
-    var currency = state.currencyRepo.getCurrencyByCode(currencyCode);
+    var currency = state.currencyRepo.getByCode(currencyCode);
     final card = CurrencyConvertCard(
         currency: currency,
         onNewAmount: (value) {},

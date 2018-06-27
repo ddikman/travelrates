@@ -79,7 +79,7 @@ class AppState {
         this.isReconfiguring = false,
         this.currencies = List.castFrom(json['currencies']),
         this.currentCurrency =
-            repository.getCurrencyByCode(json['currentCurrency']),
+            repository.getByCode(json['currentCurrency']),
         this.currentAmount = json['currentAmount'],
         this.countries = countries;
 }

@@ -75,7 +75,7 @@ class _ConvertScreenState extends State<ConvertScreen> {
 
     print("local currency '${country.currencyCode}' is missing, adding it..");
     stateContainer.addCurrency(country.currencyCode);
-    final currency = state.currencyRepo.getCurrencyByCode(country.currencyCode);
+    final currency = state.currencyRepo.getByCode(country.currencyCode);
     _notifyNewCurrencyAdded(country, currency);
   }
 
