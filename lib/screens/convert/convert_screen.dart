@@ -28,21 +28,18 @@ class _ConvertScreenState extends State<ConvertScreen> {
   /// Used to wait until spinner fades out
   GlobalKey<SpinnerState> _spinnerKey = new GlobalKey();
 
-  bool loading = true;
-
-  /// Used to keep the spinner from blinking
-  DateTime delaySpinnerUntil;
+  bool loading;
 
   @override
-  Future<Null> didChangeDependencies() async {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
 
-    final stateContainer = StateContainer.of(context);
-    if (stateContainer.isStateLoaded) {
-      return;
-    }
+    loading = true;
+    _loadState().whenComplete(_notLoading);
+  }
 
-    await _loadState(stateContainer);
+  _notLoading() {
+    setState(() => loading = false);
   }
 
   @override
@@ -100,7 +97,7 @@ class _ConvertScreenState extends State<ConvertScreen> {
 
   _buildSpinner() {
     return Center(
-        child: new Spinner(key: _spinnerKey, delayUntil: delaySpinnerUntil));
+        child: new Spinner(key: _spinnerKey, delay: Duration(milliseconds: 500)));
   }
 
   _buildCurrencyList() {
@@ -115,23 +112,11 @@ class _ConvertScreenState extends State<ConvertScreen> {
     ));
   }
 
-  Future<Null> _loadState(StateContainerState stateContainer) async {
-    print('loading state..');
-    setState(() {
-      delaySpinnerUntil = DateTime.now().add(Duration(milliseconds: 250));
-      loading = true;
-    });
-
+  Future<Null> _loadState() async {
+    final stateContainer = StateContainer.of(context);
     await stateContainer.loadState();
-
-    print('state loaded, detecting country..');
     await _detectCountry(stateContainer.appState);
-
-    print('fading out spinner..');
     await _spinnerKey.currentState.stopLoading();
-    setState(() => loading = false);
-
-    print('all good to go!');
   }
 
   Future<Null> _detectCountry(AppState state) async {
