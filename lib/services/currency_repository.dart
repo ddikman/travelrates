@@ -2,24 +2,30 @@ import 'package:backpacking_currency_converter/helpers/string_compare.dart';
 import 'package:backpacking_currency_converter/model/currency.dart';
 
 class CurrencyRepository {
-  // TODO: encapsulate?
-  final List<Currency> currencies;
-  final String baseRate;
 
-  CurrencyRepository({this.currencies, this.baseRate});
+  final List<Currency> _currencies;
 
-  Currency getBaseRateCurrency() => getCurrencyByCode(baseRate);
+  final String _baseRate;
+
+  CurrencyRepository({List<Currency> currencies, String baseRate})
+  : _currencies = currencies,
+    _baseRate = baseRate {
+    assert(_currencies != null);
+    assert(_currencies.isNotEmpty);
+    assert(_baseRate != null);
+    assert(_currencies.any((currency) => isEqualIgnoreCase(currency.code, _baseRate)));
+  }
+
+  List<Currency> get currencies => List.from(_currencies);
+
+  Currency getBaseRateCurrency() => getCurrencyByCode(_baseRate);
 
   Currency getCurrencyByCode(String code) {
-    var matches = currencies.where((currency) => isEqualIgnoreCase(currency.code, code));
+    var matches = _currencies.where((currency) => isEqualIgnoreCase(currency.code, code));
     if (matches.isEmpty) {
-      print("Found no currency with code [$code] among ${currencies.length} currencies");
+      print("Found no currency with code [$code] among ${_currencies.length} currencies");
       throw StateError("No currency with code $code");
     }
     return matches.first;
-  }
-
-  List<Currency> getAllCurrencies() {
-    return new List.from(currencies);
   }
 }
