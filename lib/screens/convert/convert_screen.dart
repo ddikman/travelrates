@@ -96,8 +96,7 @@ class _ConvertScreenState extends State<ConvertScreen> {
   }
 
   _buildSpinner() {
-    return Center(
-        child: new Spinner(key: _spinnerKey, delay: Duration(milliseconds: 500)));
+    return new Spinner(key: _spinnerKey, delay: Duration(milliseconds: 500));
   }
 
   _buildCurrencyList() {

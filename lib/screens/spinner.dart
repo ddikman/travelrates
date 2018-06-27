@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:backpacking_currency_converter/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -55,11 +56,18 @@ class SpinnerState extends State<Spinner> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return new FadeTransition(
-      opacity: _opacity,
-      child: CircularProgressIndicator(
-        strokeWidth: 5.0,
-        valueColor: loaderColor,
+    final size = _calculateSize(context);
+    return Center(
+      child: SizedBox(
+        width: size,
+        height: size,
+        child: new FadeTransition(
+          opacity: _opacity,
+          child: CircularProgressIndicator(
+            strokeWidth: 5.0,
+            valueColor: loaderColor,
+          ),
+        ),
       ),
     );
   }
@@ -72,5 +80,15 @@ class SpinnerState extends State<Spinner> with TickerProviderStateMixin {
     }
 
     await _animationController.reverse();
+  }
+
+  _calculateSize(BuildContext context) {
+    final screenSize = MediaQuery
+        .of(context)
+        .size;
+
+    final limitingSide = min(screenSize.width, screenSize.height);
+    final fillFactor = 0.6;
+    return fillFactor * limitingSide;
   }
 }
