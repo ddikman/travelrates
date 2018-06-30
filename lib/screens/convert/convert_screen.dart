@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:backpacking_currency_converter/screens/convert/open_add_currency_screen_button.dart';
 import 'package:backpacking_currency_converter/screens/convert/selected_currency_list.dart';
@@ -35,7 +36,19 @@ class _ConvertScreenState extends State<ConvertScreen> {
     super.initState();
 
     loading = true;
-    _loadState().whenComplete(_notLoading);
+    _loadState()
+        .timeout(Duration(seconds: 10),
+        onTimeout: () => _initTimeoutMessage())
+        .whenComplete(_notLoading);
+  }
+
+  _initTimeoutMessage() {
+    _scaffoldKey.currentState.showSnackBar(
+      new SnackBar(
+          content: Text("I'm so sorry! Your settings doesn't seem to load correctly. There might be something up with your connectivity or maybe the application itself. Restart and try again or let us know and we'll try to fix it asap!"),
+        duration: Duration(seconds: 10),
+      )
+    );
   }
 
   _notLoading() {
