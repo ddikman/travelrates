@@ -17,6 +17,20 @@ void main() {
     expect(sorted, ['alpha', 'beta', 'ceasar', 'Delta']);
   });
 
+  test('sort helper throws on invalid null list entry', () {
+    final listWithInvalidEntry = <_TestObject>[ null, _TestObject('alpha') ];
+    expect(() => alphabeticallySorted(listWithInvalidEntry, (o) => o.value), throwsA(new isInstanceOf<ArgumentError>()));
+  });
+
+  test('sort helper throws on invalid null property', (){
+    final listWithNullPropertyValue = <_TestObject>[
+      _TestObject(null),
+      _TestObject('alpha')
+    ];
+
+    expect(() => alphabeticallySorted(listWithNullPropertyValue, (o) => o.value), throwsA(new isInstanceOf<ArgumentError>()));
+  });
+
   test('sort helper correctly throws on exceptions', () {
     expect(() => alphabeticallySorted(null, null), throwsA(new isInstanceOf<ArgumentError>()));
     expect(() => nonNull(null, 'name'), throwsA(new isInstanceOf<ArgumentError>()));
