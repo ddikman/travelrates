@@ -5,12 +5,12 @@ class ToggleConfigureButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = StateContainer.of(context).appState;
-    IconData displayIcon = state.isReconfiguring ? Icons.done : Icons.settings;
+    IconData displayIcon = state.isEditing ? Icons.done : Icons.settings;
 
     return new IconButton(
         icon: Icon(displayIcon),
         onPressed: () {
-          StateContainer.of(context).toggleIsReconfiguring();
+          StateContainer.of(context).toggleEditing();
         });
   }
 }

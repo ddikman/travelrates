@@ -1,91 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-import 'package:backpacking_currency_converter/helpers/string_compare.dart';
-import 'package:backpacking_currency_converter/model/country.dart';
-import 'package:backpacking_currency_converter/services/currency_decoder.dart';
-import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:backpacking_currency_converter/app_state.dart';
+import 'package:backpacking_currency_converter/model/conversion_model.dart';
+import 'package:backpacking_currency_converter/model/currency_rate.dart';
+import 'package:backpacking_currency_converter/services/state_loader.dart';
 
 import 'package:backpacking_currency_converter/model/currency.dart';
-import 'package:backpacking_currency_converter/services/currency_repository.dart';
 import 'package:flutter/material.dart';
 
-class AppState {
-  final double currentAmount;
-
-  final Currency currentCurrency;
-
-  // TODO: this could have a better name
-  final bool isReconfiguring;
-
-  final CurrencyRepository currencyRepo;
-
-  final List<String> currencies;
-
-  final List<Country> countries;
-
-  double getAmountInCurrency(Currency currency) {
-    if (currency.code == currentCurrency.code) {
-      return currentAmount;
-    }
-
-    return getAmountInBaseCurrency() * currency.rate;
-  }
-
-  double getAmountInBaseCurrency() {
-    return currentAmount / currentCurrency.rate;
-  }
-
-  static AppState loading() => new AppState(
-      currentAmount: 1.0,
-      currentCurrency: null,
-      currencyRepo: null,
-      currencies: null,
-      isReconfiguring: false);
-
-  const AppState(
-      {@required this.currentAmount,
-      @required this.currentCurrency,
-      @required this.currencyRepo,
-      this.currencies,
-      this.isReconfiguring = false,
-      this.countries});
-
-  AppState copyWith(
-      {double amount,
-      Currency currency,
-      List<String> currencies,
-      bool isReconfiguring,
-      List<Country> countries}) {
-    return new AppState(
-        currentAmount: amount ?? this.currentAmount,
-        currentCurrency: currency ?? this.currentCurrency,
-        currencyRepo: this.currencyRepo,
-        currencies: currencies ?? this.currencies,
-        isReconfiguring: isReconfiguring ?? this.isReconfiguring,
-        countries: countries ?? this.countries);
-  }
-
-  Map<String, dynamic> toJson() => {
-        'currentAmount': currentAmount,
-        'currentCurrency': currentCurrency.code,
-        'currencies': currencies
-      };
-
-  AppState.fromJson(Map<String, dynamic> json, CurrencyRepository repository,
-      List<Country> countries)
-      : this.currencyRepo = repository,
-        this.isReconfiguring = false,
-        this.currencies = List.castFrom(json['currencies']),
-        this.currentCurrency =
-            repository.getByCode(json['currentCurrency']),
-        this.currentAmount = json['currentAmount'],
-        this.countries = countries;
-}
-
-class
-StateContainer extends StatefulWidget {
+class StateContainer extends StatefulWidget {
   final Widget child;
   final AppState state;
 
@@ -105,18 +27,10 @@ StateContainer extends StatefulWidget {
 }
 
 class StateContainerState extends State<StateContainer> {
+
+  final _statePersistence = new StateLoader();
+
   AppState appState;
-
-  Future<bool> get _persistedStateExists async {
-    final stateFile = await _localFile;
-    return await stateFile.exists();
-  }
-
-  @override
-  void initState() {
-    appState = AppState.loading();
-    super.initState();
-  }
 
   @override
   Future<Null> didChangeDependencies() async {
@@ -124,50 +38,7 @@ class StateContainerState extends State<StateContainer> {
 
     if (widget.state != null) {
       appState = widget.state;
-    } else {
-      appState = AppState.loading();
     }
-  }
-
-  bool get isStateLoaded => appState.countries != null && appState.countries.isNotEmpty;
-
-  Future<Null> loadState() async {
-    print('loading currency rates from disk..');
-    final defaultAssetBundle = DefaultAssetBundle.of(context);
-
-    final currencyRepository = await _loadRepository(defaultAssetBundle);
-
-    final countries = await _loadCountries(defaultAssetBundle);
-    countries.sort((a, b) => compareIgnoreCase(a.name, b.name));
-
-    if (await _persistedStateExists) {
-      print('found persisted state, loading that..');
-      final persistedState = await _loadState(currencyRepository, countries);
-      setState(() {
-        appState = persistedState;
-      });
-    } else {
-      print('no persisted state found, opening app with default state..');
-
-      final defaultState = new AppState(
-          currentAmount: 1.0,
-          currentCurrency: currencyRepository.baseCurrency,
-          currencyRepo: currencyRepository,
-          currencies: new List<String>(),
-          countries: countries);
-
-      setState(() {
-        appState = defaultState;
-      });
-    }
-  }
-
-  void _updateAndPersist(AppState state) {
-    setState(() {
-      appState = state;
-    });
-
-    _persistState(appState);
   }
 
   @override
@@ -178,75 +49,61 @@ class StateContainerState extends State<StateContainer> {
     );
   }
 
-  void toggleIsReconfiguring() {
+  void setAppState(AppState state) {
+    setState(() {
+      appState = state;
+    });
+  }
+
+  void _updateAndPersist(AppState state) {
+    setState(() {
+      appState = state;
+    });
+
+    _statePersistence.store(appState);
+  }
+
+  void toggleEditing() {
     // update without persisting
-    setState((){
-      appState = appState.copyWith(isReconfiguring: !appState.isReconfiguring);
+    setState(() {
+      appState = appState.isEditing ? appState.stopEdit() : appState.startEdit();
     });
   }
 
   void removeCurrency(String currencyCode) {
-    final currencies = List<String>.from(appState.currencies);
+    final currencies = List<String>.from(appState.conversion.currencies);
     currencies.remove(currencyCode);
-    _updateAndPersist(appState.copyWith(currencies: currencies));
+    _updateConversion(appState.conversion.withCurrencies(currencies));
   }
 
   void addCurrency(String currencyCode) {
-    final currencies = List<String>.from(appState.currencies);
+    final currencies = List<String>.from(appState.conversion.currencies);
     currencies.add(currencyCode);
-    _updateAndPersist(appState.copyWith(currencies: currencies));
+    _updateConversion(appState.conversion.withCurrencies(currencies));
+  }
+
+  void _updateConversion(ConversionModel conversion) {
+    _updateAndPersist(appState.withConversion(conversion));
   }
 
   void setAmount(double amount, Currency currency) {
-    _updateAndPersist(appState.copyWith(amount: amount, currency: currency));
-  }
-
-  Future<Null> _persistState(AppState appState) async {
-    print('persisting app state..');
-    final stateFile = await _localFile;
-    await stateFile.writeAsString(json.encode(appState.toJson()));
-  }
-
-  Future<String> get _localDirectory async {
-    final directory = await getApplicationDocumentsDirectory();
-    return directory.path;
-  }
-
-  Future<File> get _localFile async {
-    final directory = await _localDirectory;
-    return new File('$directory/state.json');
-  }
-
-  Future<AppState> _loadState(
-      CurrencyRepository currencyRepository, List<Country> countries) async {
-    final stateFile = await _localFile;
-    final stateJson = json.decode(await stateFile.readAsString());
-    return AppState.fromJson(stateJson, currencyRepository, countries);
-  }
-
-  Future<List<Country>> _loadCountries(AssetBundle assets) async {
-    final countriesJson = await assets.loadString('assets/data/countries.json');
-
-    final List countriesList = JsonDecoder().convert(countriesJson);
-    return countriesList.map((country) => Country.fromJson(country)).toList();
+    _updateConversion(appState.conversion
+        .withAmount(amount: amount, currency: currency));
   }
 
   void reorder({String item, String placeAfter}) {
     print("reordering $item to be after $placeAfter..");
-    final currencies = List<String>.from(appState.currencies);
+    final currencies = List<String>.from(appState.conversion.currencies);
     currencies.remove(item);
     final newPosition = currencies.indexOf(placeAfter) + 1;
     currencies.insert(newPosition, item);
-    _updateAndPersist(appState.copyWith(
-      currencies: currencies
-    ));
+    _updateConversion(appState.conversion.withCurrencies(currencies));
   }
 
-  Future<CurrencyRepository> _loadRepository(AssetBundle assets) async {
-    final currencies = await assets.loadString('assets/data/currencies.json');
-    final rates = await assets.loadString('assets/data/rates.json');
-    final decoder = new CurrencyDecoder();
-    return await decoder.decode(currencies, rates);
+  void setRates(List<CurrencyRate> rates) {
+    setState(() {
+      this.appState.availableCurrencies.updateRates(rates);
+    });
   }
 }
 

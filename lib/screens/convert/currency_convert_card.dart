@@ -11,13 +11,10 @@ class CurrencyConvertCard extends StatefulWidget {
 
   final Currency currency;
 
-  final ValueChanged<double> onNewAmount;
-
   final Duration animationDelay;
 
   CurrencyConvertCard(
       {@required this.currency,
-      @required this.onNewAmount,
       @required this.animationDelay});
 
   @override
@@ -36,7 +33,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
   Widget build(BuildContext context) {
     final state = StateContainer.of(context).appState;
 
-    var currentValue = state.getAmountInCurrency(widget.currency);
+    var currentValue = state.conversion.getAmountInCurrency(widget.currency);
 
     textEditingController.text =
         CurrencyInputFormatter.formatValue(currentValue);
@@ -69,7 +66,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
           Expanded(child: currencyName),
           new Align(
               alignment: Alignment.centerRight,
-              child: state.isReconfiguring
+              child: state.isEditing
                   ? _deleteIcon
                   : _currencyAmount(currentValue))
         ]);
@@ -83,7 +80,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
             color: _showInputError ? Colors.red : AppTheme.primaryColor,
             child: new InkWell(
               splashColor: AppTheme.accentColor,
-              onTap: state.isReconfiguring ? null : _cardTapped,
+              onTap: state.isEditing ? null : _cardTapped,
               child: new Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 10.0, vertical: 4.0),
@@ -93,7 +90,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
     );
 
     Widget result = _animated(card);
-    if (state.isReconfiguring) {
+    if (state.isEditing) {
       result = _asDraggable(result);
     }
 

@@ -11,7 +11,7 @@ class AddCurrencyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final alreadyAdded = StateContainer.of(context).appState
-        .currencies.contains(currency.code);
+        .conversion.currencies.contains(currency.code);
 
     final disabledTransparency = alreadyAdded ? 0.5 : 1.0;
 

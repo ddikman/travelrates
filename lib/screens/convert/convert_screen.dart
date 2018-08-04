@@ -1,14 +1,15 @@
 import 'dart:async';
-import 'dart:io';
 
+import 'package:backpacking_currency_converter/app_routes.dart';
+import 'package:backpacking_currency_converter/model/currency_rate.dart';
 import 'package:backpacking_currency_converter/screens/convert/open_add_currency_screen_button.dart';
 import 'package:backpacking_currency_converter/screens/convert/selected_currency_list.dart';
 import 'package:backpacking_currency_converter/screens/convert/toggle_configure_button.dart';
 import 'package:backpacking_currency_converter/screens/spinner.dart';
+import 'package:backpacking_currency_converter/services/currency_decoder.dart';
+import 'package:backpacking_currency_converter/services/rates_loader.dart';
+import 'package:backpacking_currency_converter/services/state_loader.dart';
 import 'package:backpacking_currency_converter/widgets/background_container.dart';
-import 'package:backpacking_currency_converter/model/country.dart';
-import 'package:backpacking_currency_converter/model/currency.dart';
-import 'package:backpacking_currency_converter/services/country_detector.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
 
 import 'package:flutter/material.dart';
@@ -21,10 +22,10 @@ class ConvertScreen extends StatefulWidget {
 }
 
 class _ConvertScreenState extends State<ConvertScreen> {
-  // to get scaffold context and then snackbar
+  // Keep a key for scaffold to use when showing snackbar
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
-  final CountryDetector _positionFinder = new CountryDetector();
+  final _ratesLoader = new RatesLoader();
 
   /// Used to wait until spinner fades out
   GlobalKey<SpinnerState> _spinnerKey = new GlobalKey();
@@ -35,77 +36,51 @@ class _ConvertScreenState extends State<ConvertScreen> {
   void initState() {
     super.initState();
 
-    loading = true;
+    _showLoader();
     _loadState()
-        .timeout(Duration(seconds: 10),
-        onTimeout: () => _initTimeoutMessage())
-        .whenComplete(_notLoading);
+        .whenComplete(_hideLoader)
+        .whenComplete(_addCurrenciesIfMissing);
   }
 
-  _initTimeoutMessage() {
-    _scaffoldKey.currentState.showSnackBar(
-      new SnackBar(
-          content: Text("I'm so sorry! Your settings doesn't seem to load correctly. There might be something up with your connectivity or maybe the application itself. Restart and try again or let us know and we'll try to fix it asap!"),
-        duration: Duration(seconds: 10),
-      )
-    );
+  void _addCurrenciesIfMissing() {
+    final appState = StateContainer.of(context).appState;
+    if (appState.conversion.currencies.isEmpty) {
+      Navigator.of(context).pushNamed(AppRoutes.addCurrency);
+    }
   }
 
-  _notLoading() {
+  void _showLoader() {
+    setState(() => loading = true);
+  }
+
+  void _hideLoader() {
     setState(() => loading = false);
   }
 
   @override
   Widget build(BuildContext context) {
-    final appBar = new AppBar(
-      title: new Text("CONVERT"),
-      centerTitle: true,
-      actions: <Widget>[new ToggleConfigureButton()],
-    );
+    if (loading) {
+      return Scaffold(
+        key: _scaffoldKey,
+        appBar: _buildAppBar(),
+        body: _buildSpinner()
+      );
+    }
 
     return Scaffold(
       key: _scaffoldKey,
-      appBar: appBar,
-      floatingActionButton: loading ? null : new OpenAddCurrencyScreenButton(),
-      body: loading ? _buildSpinner() : _buildCurrencyList(),
+      appBar: _buildAppBar(actions: <Widget>[new ToggleConfigureButton()]),
+      body: _buildCurrencyList(),
+      floatingActionButton: new OpenAddCurrencyScreenButton(),
     );
   }
 
-  Future<Null> _addNewCountry(CountryResult countryResult) async {
-    if (!countryResult.successful) {
-      return;
-    }
-
-    final country = countryResult.country;
-
-    final stateContainer = StateContainer.of(context);
-    final state = stateContainer.appState;
-    if (state.currencies.contains(country.currencyCode)) {
-      print(
-          "detected ${country.name} as current country, currency is already added.");
-      return;
-    }
-
-    print("local currency '${country.currencyCode}' is missing, adding it..");
-    stateContainer.addCurrency(country.currencyCode);
-    final currency = state.currencyRepo.getByCode(country.currencyCode);
-    _notifyNewCurrencyAdded(country, currency);
-  }
-
-  void _notifyNewCurrencyAdded(Country country, Currency currency) {
-    final tipDisplaySeconds = 10;
-
-    _scaffoldKey.currentState.showSnackBar(new SnackBar(
-      duration: Duration(seconds: tipDisplaySeconds),
-      action: new SnackBarAction(
-        label: 'Got it!',
-        onPressed: () {
-          // user just acknowledged info, no further action needed
-        },
-      ),
-      content: Text(
-          "Hey! Just noticed you're in ${country.name}, cool! I've added the local currency, ${currency.name} to the conversion list for you. Enjoy!"),
-    ));
+  AppBar _buildAppBar({List<Widget> actions = const <Widget>[]}) {
+    return new AppBar(
+      title: new Text("CONVERT"),
+      centerTitle: true,
+      actions: actions,
+    );
   }
 
   _buildSpinner() {
@@ -125,14 +100,35 @@ class _ConvertScreenState extends State<ConvertScreen> {
   }
 
   Future<Null> _loadState() async {
+    final defaultAssetBundle = DefaultAssetBundle.of(context);
+
+    final statePersistance = new StateLoader();
+
     final stateContainer = StateContainer.of(context);
-    await stateContainer.loadState();
-    await _detectCountry(stateContainer.appState);
-    await _spinnerKey.currentState.stopLoading();
+    await statePersistance
+        .load(_ratesLoader, defaultAssetBundle)
+        .then((appState) => stateContainer.setAppState(appState));
+
+    // also try to load online rates
+    final rates = await _loadOnlineRates(_ratesLoader);
+    if (rates.isNotEmpty) {
+      stateContainer.setRates(rates);
+    }
+
+    await _spinnerKey.currentState
+        .stopLoading()
+        .timeout(Duration(seconds: 1), onTimeout: () {
+          print('Timed out waiting for spinner to finish fadeout..');
+    });
   }
 
-  Future<Null> _detectCountry(AppState state) async {
-    final country = await _positionFinder.detectNewCountry(state.countries);
-    await _addNewCountry(country);
+  Future<List<CurrencyRate>> _loadOnlineRates(RatesLoader ratesLoader) async {
+    final onlineRates = await ratesLoader.loadOnlineRates();
+    if (!onlineRates.available) {
+      return new List<CurrencyRate>();
+    }
+
+    final decoder = new CurrencyDecoder();
+    return decoder.decodeRates(onlineRates.rates);
   }
 }
