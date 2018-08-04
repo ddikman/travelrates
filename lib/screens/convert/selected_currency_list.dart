@@ -16,7 +16,7 @@ class SelectedCurrencyList extends StatelessWidget {
         .appState;
 
     int index = 0;
-    final currencies = state.currencies
+    final currencies = state.conversion.currencies
         .map((currency) => _buildCurrencyEntry(context, index++, currency))
         .toList();
 
@@ -33,10 +33,9 @@ class SelectedCurrencyList extends StatelessWidget {
 
     final animationDelay =
     Duration(milliseconds: _msDelayBetweenItemAppearance * (index + 1));
-    var currency = state.currencyRepo.getByCode(currencyCode);
+    var currency = state.availableCurrencies.getByCode(currencyCode);
     final card = CurrencyConvertCard(
         currency: currency,
-        onNewAmount: (value) {},
         animationDelay: animationDelay);
 
     return _withReorderDropArea(card, context);

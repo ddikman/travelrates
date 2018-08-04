@@ -8,7 +8,7 @@ class Currency {
 
   final String code;
 
-  final double rate;
+  double rate;
 
   Currency({this.symbol, this.name, this.code, this.icon, this.rate});
 

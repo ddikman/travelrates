@@ -1,5 +1,6 @@
 import 'package:backpacking_currency_converter/helpers/string_compare.dart';
 import 'package:backpacking_currency_converter/model/currency.dart';
+import 'package:backpacking_currency_converter/model/currency_rate.dart';
 
 class CurrencyRepository {
 
@@ -16,7 +17,7 @@ class CurrencyRepository {
     assert(_currencies.any((currency) => isEqualIgnoreCase(currency.code, _baseRate)));
   }
 
-  List<Currency> get currencies => List.from(_currencies);
+  List<Currency> getList() => List.from(_currencies);
 
   get baseCurrency => getByCode(_baseRate);
 
@@ -27,5 +28,18 @@ class CurrencyRepository {
       throw StateError("No currency with code $code");
     }
     return matches.first;
+  }
+
+  void updateRates(List<CurrencyRate> rates) {
+    rates.forEach((rate) => _update(rate.currencyCode, rate.rate));
+  }
+
+  void _update(String currencyCode, double newRate) {
+    var matches = _currencies.where((currency) => isEqualIgnoreCase(currency.code, currencyCode));
+    if (matches.isEmpty) {
+      // for example ANG isn't represented in the currency list
+      return;
+    }
+    matches.first.rate = newRate;
   }
 }

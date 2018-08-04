@@ -4,8 +4,8 @@ description: Handy multi-currency converter specifically for backpackers.
 dependencies:
   intl: ^0.15.6
   path_provider: ^0.4.1
-  geolocation: ^0.2.1
-  geocoder: ^0.0.1
+  http: ^0.11.3+16
+  connectivity: ^0.3.1
   flutter:
     sdk: flutter
 

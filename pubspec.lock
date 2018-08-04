@@ -43,6 +43,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.14.6"
+  connectivity:
+    dependency: "direct main"
+    description:
+      name: connectivity
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.1"
   convert:
     dependency: transitive
     description:
@@ -100,20 +107,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.0-alpha.12"
-  geocoder:
-    dependency: "direct main"
-    description:
-      name: geocoder
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.1"
-  geolocation:
-    dependency: "direct main"
-    description:
-      name: geolocation
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.1"
   glob:
     dependency: transitive
     description:
@@ -129,7 +122,7 @@ packages:
     source: hosted
     version: "0.13.3"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"

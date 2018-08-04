@@ -25,7 +25,7 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
           .of(context)
           .appState;
 
-      currencyFilter = new CurrencyFilter(state.currencyRepo.currencies, state.countries);
+      currencyFilter = new CurrencyFilter(state.availableCurrencies.getList(), state.countries);
       _applyFilter('');
     }
 
