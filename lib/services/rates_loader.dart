@@ -1,10 +1,9 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:backpacking_currency_converter/services/local_storage.dart';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart';
 
@@ -12,19 +11,15 @@ class RatesLoader {
 
   final cacheExpirationDate = DateTime.now().add(Duration(days: 1));
 
-  Future<File> get _cacheFile async {
-    final directory = await _localDirectory;
-    return new File('$directory/rates.json');
-  }
+  final localStorage = new LocalStorage();
 
-  Future<String> get _localDirectory async {
-    final directory = await getApplicationDocumentsDirectory();
-    return directory.path;
+  Future<LocalFile> get _cacheFile async {
+    return localStorage.getFile('rates.json');
   }
 
   Future<bool> _cacheExists() async {
     final file = await _cacheFile;
-    return await file.exists();
+    return await file.exists;
   }
 
   Future<String> load(AssetBundle assets) async {
@@ -40,7 +35,7 @@ class RatesLoader {
 
   Future<String> _readCache() async {
     final file = await _cacheFile;
-    return file.readAsString();
+    return file.contents;
   }
 
   Future<OnlineRatesResult> loadOnlineRates() async {
@@ -83,7 +78,7 @@ class RatesLoader {
 
   _cacheRates(String rates) async {
     final file = await _cacheFile;
-    await file.writeAsString(rates);
+    await file.writeContents(rates);
   }
 
   Future<bool> isOffline() async {
