@@ -17,9 +17,9 @@ class StateContainer extends StatefulWidget {
   });
 
   static StateContainerState of(BuildContext context) {
-    return (context.inheritFromWidgetOfExactType(_InheritedStateContainer)
-            as _InheritedStateContainer)
-        .data;
+    _InheritedStateContainer stateContainer =
+        context.inheritFromWidgetOfExactType(_InheritedStateContainer);
+    return stateContainer.data;
   }
 
   @override
@@ -27,7 +27,6 @@ class StateContainer extends StatefulWidget {
 }
 
 class StateContainerState extends State<StateContainer> {
-
   final _statePersistence = new StateLoader();
 
   AppState appState;
@@ -66,7 +65,8 @@ class StateContainerState extends State<StateContainer> {
   void toggleEditing() {
     // update without persisting
     setState(() {
-      appState = appState.isEditing ? appState.stopEdit() : appState.startEdit();
+      appState =
+          appState.isEditing ? appState.stopEdit() : appState.startEdit();
     });
   }
 
@@ -87,8 +87,8 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void setAmount(double amount, Currency currency) {
-    _updateConversion(appState.conversion
-        .withAmount(amount: amount, currency: currency));
+    _updateConversion(
+        appState.conversion.withAmount(amount: amount, currency: currency));
   }
 
   void reorder({String item, String placeAfter}) {
