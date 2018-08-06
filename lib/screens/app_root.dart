@@ -31,7 +31,6 @@ class _AppRootState extends State<AppRoot> {
   _constructTheme() {
     final baseTheme = Theme.of(context);
 
-
     const baseFont = 'Tahoma';
     final baseTextStyle = TextStyle(
         color: AppTheme.accentColor,
