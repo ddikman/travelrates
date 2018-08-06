@@ -12,7 +12,6 @@ class AppRoot extends StatefulWidget {
 }
 
 class _AppRootState extends State<AppRoot> {
-
   final mainScreen = new ConvertScreen();
 
   @override
@@ -32,19 +31,16 @@ class _AppRootState extends State<AppRoot> {
     final baseTheme = Theme.of(context);
 
     const baseFont = 'Tahoma';
-    final baseTextStyle = TextStyle(
-        color: AppTheme.accentColor,
-        fontFamily: baseFont
-    );
+    final baseTextStyle =
+        TextStyle(color: AppTheme.accentColor, fontFamily: baseFont);
 
     final textTheme = baseTheme.textTheme.copyWith(
-        display1: baseTextStyle.copyWith(),
-        body1: baseTextStyle.copyWith(),
+      display1: baseTextStyle.copyWith(),
+      body1: baseTextStyle.copyWith(),
     );
 
-    final iconTheme = baseTheme.primaryIconTheme.copyWith(
-        color: AppTheme.accentColor
-    );
+    final iconTheme =
+        baseTheme.primaryIconTheme.copyWith(color: AppTheme.accentColor);
 
     return new ThemeData(
       primarySwatch: AppTheme.primaryColor,
