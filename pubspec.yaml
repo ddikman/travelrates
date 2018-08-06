@@ -37,6 +37,8 @@ flutter:
     - assets/data/currencies.json
     - assets/data/rates.json
     - assets/data/countries.json
+
+    # Android studio will warn that these doesn't exist but they do and it works just fine
     - assets/images/flags/
     - assets/images/flags/2x/
 
