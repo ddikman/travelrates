@@ -1,5 +1,6 @@
 stages:
   - test
+  - build
   - deploy
 
 unit_test:
@@ -12,6 +13,15 @@ unit_test:
     paths:
       - coverage/
 
+build:
+  image: brianegan/flutter_lcov:v0.5.1
+  stage: build
+  script:
+    - flutter build apk --release
+    artifacts:
+      paths:
+        - build/app/outputs/apk/app.apk
+
 pages:
   image: alpine
   stage: deploy
@@ -20,6 +30,7 @@ pages:
   script:
     - mkdir public
     - mv coverage/ public/coverage/
+    - mv build/app/outputs/apk/app.apk public/app.apk
   artifacts:
     paths:
       - public
