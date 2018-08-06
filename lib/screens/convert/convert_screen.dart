@@ -102,10 +102,10 @@ class _ConvertScreenState extends State<ConvertScreen> {
   Future<Null> _loadState() async {
     final defaultAssetBundle = DefaultAssetBundle.of(context);
 
-    final statePersistance = new StateLoader();
+    final statePersistence = new StateLoader();
 
     final stateContainer = StateContainer.of(context);
-    await statePersistance
+    await statePersistence
         .load(_ratesLoader, defaultAssetBundle)
         .then((appState) => stateContainer.setAppState(appState));
 
