@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:backpacking_currency_converter/model/async_result.dart';
 import 'package:backpacking_currency_converter/services/api_configuration_loader.dart';
 import 'package:backpacking_currency_converter/services/local_storage.dart';
 import 'package:connectivity/connectivity.dart';
@@ -40,11 +41,11 @@ class RatesLoader {
     return file.contents;
   }
 
-  Future<OnlineRatesResult> loadOnlineRates() async {
+  Future<AsyncResult<String>> loadOnlineRates() async {
     // Check first if we're online
     if (await isOffline()) {
       print('offline, skipping online rates update');
-      return OnlineRatesResult.notAvailable();
+      return AsyncResult.failed();
     }
 
     final apiConfig = await configurationLoader.load();
@@ -56,7 +57,7 @@ class RatesLoader {
       if (response.statusCode != 200) {
         print(
             'failed to get currency codes, server responded with status ${response.statusCode}: \r\n${response.body}');
-        return OnlineRatesResult.notAvailable();
+        return AsyncResult.failed();
       }
 
       // TODO: rewrite to return fully parsed json instead of just validating here
@@ -64,14 +65,14 @@ class RatesLoader {
         final String json = response.body;
         new JsonDecoder().convert(json); // just to validate
         _cacheRates(json);
-        return OnlineRatesResult.withRates(response.body);
+        return AsyncResult.withValue(response.body);
       } on Exception catch (e) {
         print('Online json rates contain invalid json: $e');
-        return OnlineRatesResult.notAvailable();
+        return AsyncResult.failed();
       }
     } on Exception catch (e) {
       print('Failed to retrieve online currency rates: $e}');
-      return OnlineRatesResult.notAvailable();
+      return AsyncResult.failed();
     }
   }
 
@@ -84,27 +85,5 @@ class RatesLoader {
     var connectivity = new Connectivity();
     var connectivityResult = await connectivity.checkConnectivity();
     return connectivityResult == ConnectivityResult.none;
-  }
-}
-
-class OnlineRatesResult {
-  final String _rates;
-
-  final bool available;
-
-  OnlineRatesResult.notAvailable()
-      : this._rates = null,
-        this.available = false;
-
-  OnlineRatesResult.withRates(String rates)
-      : this._rates = rates,
-        this.available = true;
-
-  String get rates {
-    if (!available) {
-      throw StateError(
-          "Cannot get rates when request is not successful, make sure to call .successful first");
-    }
-    return _rates;
   }
 }

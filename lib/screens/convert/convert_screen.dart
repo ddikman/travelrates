@@ -124,11 +124,11 @@ class _ConvertScreenState extends State<ConvertScreen> {
 
   Future<List<CurrencyRate>> _loadOnlineRates(RatesLoader ratesLoader) async {
     final onlineRates = await ratesLoader.loadOnlineRates();
-    if (!onlineRates.available) {
+    if (!onlineRates.successful) {
       return new List<CurrencyRate>();
     }
 
     final decoder = new CurrencyDecoder();
-    return decoder.decodeRates(onlineRates.rates);
+    return decoder.decodeRates(onlineRates.result);
   }
 }
