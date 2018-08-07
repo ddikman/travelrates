@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:backpacking_currency_converter/app_routes.dart';
+import 'package:backpacking_currency_converter/model/async_result.dart';
 import 'package:backpacking_currency_converter/model/currency_rate.dart';
 import 'package:backpacking_currency_converter/screens/convert/open_add_currency_screen_button.dart';
 import 'package:backpacking_currency_converter/screens/convert/selected_currency_list.dart';
@@ -111,8 +112,8 @@ class _ConvertScreenState extends State<ConvertScreen> {
 
     // also try to load online rates
     final rates = await _loadOnlineRates(_ratesLoader);
-    if (rates.isNotEmpty) {
-      stateContainer.setRates(rates);
+    if (rates.successful) {
+      stateContainer.setRates(rates.result);
     }
 
     await _spinnerKey.currentState
@@ -122,13 +123,13 @@ class _ConvertScreenState extends State<ConvertScreen> {
     });
   }
 
-  Future<List<CurrencyRate>> _loadOnlineRates(RatesLoader ratesLoader) async {
+  Future<AsyncResult<List<CurrencyRate>>> _loadOnlineRates(RatesLoader ratesLoader) async {
     final onlineRates = await ratesLoader.loadOnlineRates();
     if (!onlineRates.successful) {
-      return new List<CurrencyRate>();
+      return AsyncResult.failed();
     }
 
     final decoder = new CurrencyDecoder();
-    return decoder.decodeRates(onlineRates.result);
+    return AsyncResult.withValue(decoder.decodeRates(onlineRates.result));
   }
 }
