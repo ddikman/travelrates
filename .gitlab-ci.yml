@@ -1,6 +1,5 @@
 stages:
   - test
-  - build
   - deploy
 
 unit_test:
@@ -12,15 +11,6 @@ unit_test:
   artifacts:
     paths:
       - coverage/
-
-build:
-  image: brianegan/flutter_lcov:v0.5.1
-  stage: build
-  script:
-    - flutter build apk --release
-    artifacts:
-      paths:
-        - build/app/outputs/apk/app.apk
 
 pages:
   image: alpine

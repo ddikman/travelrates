@@ -7,6 +7,23 @@ Handy multi-currency converter specifically for backpackers.
 For help getting started with Flutter, view our online
 [documentation](https://flutter.io/).
 
+## Building releases
+
+### Api tokens
+The hidden api tokens and api url should be stored in json format alike this below in `assets/data/apiConfiguration.json`.
+
+```json
+{
+  "apiToken": "token",
+  "apiUrl": "http://urlpath.com"
+}
+```
+
+### Android
+To build the android release apk you simply run `flutter build apk`. However, before that you'll need to create a local keystore of course.
+Make sure you store this some good place (outside of source control) and then reference it in the a `key.properties` file placed in the `android` folder.
+This is referenced by the `android/app/build.gradle` signing settings.
+
 ## Description
 
 ### Short one

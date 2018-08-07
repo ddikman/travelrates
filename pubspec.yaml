@@ -38,6 +38,11 @@ flutter:
     - assets/data/rates.json
     - assets/data/countries.json
 
+    # Contains the secret api keys, needs to be manually added on each client.
+    # I wish this could be managed in a better way but Flutter currently does not allow
+    # for using build time environment variables so this is the currently recommended approach.
+    - assets/data/apiConfiguration.json
+
     # Android studio will warn that these doesn't exist but they do and it works just fine
     - assets/images/flags/
     - assets/images/flags/2x/

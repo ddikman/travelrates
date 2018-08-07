@@ -8,3 +8,6 @@
 /build
 /captures
 GeneratedPluginRegistrant.java
+
+# ensure we don't check in the secret keystore
+key.properties

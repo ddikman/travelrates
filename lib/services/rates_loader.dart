@@ -1,15 +1,16 @@
-
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:backpacking_currency_converter/services/api_configuration_loader.dart';
 import 'package:backpacking_currency_converter/services/local_storage.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:connectivity/connectivity.dart';
 
 class RatesLoader {
-
   final cacheExpirationDate = DateTime.now().add(Duration(days: 1));
+
+  final configurationLoader = new ApiConfigurationLoader();
 
   final localStorage = new LocalStorage();
 
@@ -29,7 +30,8 @@ class RatesLoader {
       return _readCache();
     }
 
-    print('neither cached rates or online rates are available, using installed rates.');
+    print(
+        'neither cached rates or online rates are available, using installed rates.');
     return await assets.loadString('assets/data/rates.json');
   }
 
@@ -39,24 +41,21 @@ class RatesLoader {
   }
 
   Future<OnlineRatesResult> loadOnlineRates() async {
-
     // Check first if we're online
     if (await isOffline()) {
       print('offline, skipping online rates update');
       return OnlineRatesResult.notAvailable();
     }
 
-    // TODO: committed token
-    // yes these both are hardcoded and committed to git history now
-    // but it's fine, the token will be changed before publishing this
-    const apiToken = '8c09d1b2106a42329c735e807a22d587';
-    const apiUrl = 'http://currencyrates.greycastle.se/';
+    final apiConfig = await configurationLoader.load();
 
     try {
-      final response = await http.get("$apiUrl?token=$apiToken");
+      final response =
+          await http.get("${apiConfig.apiUrl}?token=${apiConfig.apiKey}");
 
       if (response.statusCode != 200) {
-        print('failed to get currency codes, server responded with status ${response.statusCode}: \r\n${response.body}');
+        print(
+            'failed to get currency codes, server responded with status ${response.statusCode}: \r\n${response.body}');
         return OnlineRatesResult.notAvailable();
       }
 
@@ -89,18 +88,22 @@ class RatesLoader {
 }
 
 class OnlineRatesResult {
-
   final String _rates;
 
   final bool available;
 
-  OnlineRatesResult.notAvailable() : this._rates = null, this.available = false;
+  OnlineRatesResult.notAvailable()
+      : this._rates = null,
+        this.available = false;
 
-  OnlineRatesResult.withRates(String rates) : this._rates = rates, this.available = true;
+  OnlineRatesResult.withRates(String rates)
+      : this._rates = rates,
+        this.available = true;
 
   String get rates {
     if (!available) {
-      throw StateError("Cannot get rates when request is not successful, make sure to call .successful first");
+      throw StateError(
+          "Cannot get rates when request is not successful, make sure to call .successful first");
     }
     return _rates;
   }
