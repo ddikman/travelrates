@@ -1,13 +1,10 @@
 import 'dart:async';
 
 import 'package:backpacking_currency_converter/app_routes.dart';
-import 'package:backpacking_currency_converter/model/async_result.dart';
-import 'package:backpacking_currency_converter/model/currency_rate.dart';
 import 'package:backpacking_currency_converter/screens/convert/open_add_currency_screen_button.dart';
 import 'package:backpacking_currency_converter/screens/convert/selected_currency_list.dart';
 import 'package:backpacking_currency_converter/screens/convert/toggle_configure_button.dart';
 import 'package:backpacking_currency_converter/screens/spinner.dart';
-import 'package:backpacking_currency_converter/services/currency_decoder.dart';
 import 'package:backpacking_currency_converter/services/rates_loader.dart';
 import 'package:backpacking_currency_converter/services/state_loader.dart';
 import 'package:backpacking_currency_converter/widgets/background_container.dart';
@@ -111,7 +108,7 @@ class _ConvertScreenState extends State<ConvertScreen> {
         .then((appState) => stateContainer.setAppState(appState));
 
     // also try to load online rates
-    final rates = await _loadOnlineRates(_ratesLoader);
+    final rates = await _ratesLoader.loadOnlineRates();
     if (rates.successful) {
       stateContainer.setRates(rates.result);
     }
@@ -121,15 +118,5 @@ class _ConvertScreenState extends State<ConvertScreen> {
         .timeout(Duration(seconds: 1), onTimeout: () {
           print('Timed out waiting for spinner to finish fadeout..');
     });
-  }
-
-  Future<AsyncResult<List<CurrencyRate>>> _loadOnlineRates(RatesLoader ratesLoader) async {
-    final onlineRates = await ratesLoader.loadOnlineRates();
-    if (!onlineRates.successful) {
-      return AsyncResult.failed();
-    }
-
-    final decoder = new CurrencyDecoder();
-    return AsyncResult.withValue(decoder.decodeRates(onlineRates.result));
   }
 }

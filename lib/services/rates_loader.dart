@@ -1,19 +1,19 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:backpacking_currency_converter/model/async_result.dart';
+import 'package:backpacking_currency_converter/model/currency_rate.dart';
 import 'package:backpacking_currency_converter/services/api_configuration_loader.dart';
+import 'package:backpacking_currency_converter/services/currency_decoder.dart';
 import 'package:backpacking_currency_converter/services/local_storage.dart';
-import 'package:connectivity/connectivity.dart';
+import 'package:backpacking_currency_converter/services/rates_api.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 
 class RatesLoader {
   final cacheExpirationDate = DateTime.now().add(Duration(days: 1));
 
-  final configurationLoader = new ApiConfigurationLoader();
-
   final localStorage = new LocalStorage();
+
+  final decoder = new CurrencyDecoder();
 
   Future<LocalFile> get _cacheFile async {
     return localStorage.getFile('rates.json');
@@ -41,37 +41,19 @@ class RatesLoader {
     return file.contents;
   }
 
-  Future<AsyncResult<String>> loadOnlineRates() async {
-    // Check first if we're online
-    if (await isOffline()) {
-      print('offline, skipping online rates update');
-      return AsyncResult.failed();
-    }
-
-    final apiConfig = await configurationLoader.load();
-
+  Future<AsyncResult<List<CurrencyRate>>> loadOnlineRates() async {
     try {
-      final response =
-          await http.get("${apiConfig.apiUrl}?token=${apiConfig.apiKey}");
-
-      if (response.statusCode != 200) {
-        print(
-            'failed to get currency codes, server responded with status ${response.statusCode}: \r\n${response.body}');
+      final ratesApi = new RatesApi(await new ApiConfigurationLoader().load());
+      final ratesJson = await ratesApi.getCurrentRatesJson();
+      if (!ratesJson.successful) {
         return AsyncResult.failed();
       }
 
-      // TODO: rewrite to return fully parsed json instead of just validating here
-      try {
-        final String json = response.body;
-        new JsonDecoder().convert(json); // just to validate
-        _cacheRates(json);
-        return AsyncResult.withValue(response.body);
-      } on Exception catch (e) {
-        print('Online json rates contain invalid json: $e');
-        return AsyncResult.failed();
-      }
+      final rates = decoder.decodeRates(ratesJson.result);
+      _cacheRates(ratesJson.result);
+      return AsyncResult.withValue(rates);
     } on Exception catch (e) {
-      print('Failed to retrieve online currency rates: $e}');
+      print('Online json rates contain invalid json: $e');
       return AsyncResult.failed();
     }
   }
@@ -79,11 +61,5 @@ class RatesLoader {
   _cacheRates(String rates) async {
     final file = await _cacheFile;
     await file.writeContents(rates);
-  }
-
-  Future<bool> isOffline() async {
-    var connectivity = new Connectivity();
-    var connectivityResult = await connectivity.checkConnectivity();
-    return connectivityResult == ConnectivityResult.none;
   }
 }
