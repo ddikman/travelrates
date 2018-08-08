@@ -2,14 +2,14 @@ import 'package:backpacking_currency_converter/screens/app_root.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'mocks/mock_state.dart';
+import 'mocks/mock_app_state.dart';
 import 'mocks/mocked_state_loader.dart';
 
 void main() {
   testWidgets('Application main widget can be instantiated',
       (WidgetTester tester) async {
 
-    final mockStateLoader = new MockedStateLoader(MockState.buildDefault());
+    final mockStateLoader = new MockedStateLoader(mockAppState());
     final appRoot = new AppRoot(stateLoader: mockStateLoader);
 
     await tester.pumpWidget(new StateContainer(child: appRoot));
