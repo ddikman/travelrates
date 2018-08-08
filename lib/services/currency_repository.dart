@@ -22,7 +22,7 @@ class CurrencyRepository {
 
   List<Currency> getList() => List.from(_currencies);
 
-  get baseCurrency => getByCode(_baseRate);
+  Currency get baseCurrency => getByCode(_baseRate);
 
   Currency getByCode(String code) {
     var matches = _currencies.where((currency) => isEqualIgnoreCase(currency.code, code));
