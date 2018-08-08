@@ -42,19 +42,19 @@ class RatesLoader {
   }
 
   Future<AsyncResult<List<CurrencyRate>>> loadOnlineRates() async {
-    try {
-      final ratesApi = new RatesApi(await new ApiConfigurationLoader().load());
-      final ratesJson = await ratesApi.getCurrentRatesJson();
-      if (!ratesJson.successful) {
-        return AsyncResult.failed();
-      }
+    final ratesApi = new RatesApi(await new ApiConfigurationLoader().load());
+    final ratesJson = await ratesApi.getCurrentRatesJson();
+    if (!ratesJson.successful) {
+      return AsyncResult.failed();
+    }
 
+    try {
       final rates = decoder.decodeRates(ratesJson.result);
       _cacheRates(ratesJson.result);
       return AsyncResult.withValue(rates);
     } on Exception catch (e) {
-      print('Online json rates contain invalid json: $e');
-      return AsyncResult.failed();
+      print('Online rates invalid json: ${ratesJson.result}');
+      throw new FormatException("Online json rates contain invalid json.", e);
     }
   }
 
