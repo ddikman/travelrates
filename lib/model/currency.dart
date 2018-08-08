@@ -10,7 +10,13 @@ class Currency {
 
   double rate;
 
-  Currency({this.symbol, this.name, this.code, this.icon, this.rate});
+  Currency({this.symbol, this.name, this.code, this.icon, this.rate}) {
+    if (symbol == null) ArgumentError.notNull('symbol');
+    if (name == null) ArgumentError.notNull('name');
+    if (code == null) ArgumentError.notNull('code');
+    if (icon == null) ArgumentError.notNull('icon');
+    if (rate == null) ArgumentError.notNull('rate');
+  }
 
   @override
   String toString() {
