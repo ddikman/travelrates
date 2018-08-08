@@ -1,23 +1,14 @@
 import 'package:backpacking_currency_converter/model/currency.dart';
 import 'package:backpacking_currency_converter/services/currency_repository.dart';
 
+import 'mock_currency.dart';
+
 /// helper ot mock a currency repository
 CurrencyRepository mockCurrencyRepository() {
   final currencies = <Currency>[
-    new Currency(
-        name: "Euro", code: "EUR", icon: "EUR", symbol: '€', rate: 1.0),
-    new Currency(
-        name: "Sterling silver",
-        code: "GBP",
-        icon: "GBP",
-        symbol: "£",
-        rate: 0.88),
-    new Currency(
-        name: "United States Dollar",
-        code: "USD",
-        symbol: '\$',
-        icon: "USD",
-        rate: 1.169),
+    MockCurrency.dollar,
+    MockCurrency.euro,
+    MockCurrency.pound
   ];
 
   return new CurrencyRepository(currencies: currencies, baseRate: "EUR");

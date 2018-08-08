@@ -26,10 +26,10 @@ class ConversionModel {
       return currentAmount;
     }
 
-    return getAmountInBaseCurrency() * currency.rate;
+    return _getAmountInBaseCurrency() * currency.rate;
   }
 
-  double getAmountInBaseCurrency() {
+  double _getAmountInBaseCurrency() {
     return currentAmount / currentCurrency.rate;
   }
 
