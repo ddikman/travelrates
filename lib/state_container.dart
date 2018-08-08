@@ -2,7 +2,8 @@ import 'dart:async';
 import 'package:backpacking_currency_converter/app_state.dart';
 import 'package:backpacking_currency_converter/model/conversion_model.dart';
 import 'package:backpacking_currency_converter/model/currency_rate.dart';
-import 'package:backpacking_currency_converter/services/state_loader.dart';
+import 'package:backpacking_currency_converter/services/logger.dart';
+import 'package:backpacking_currency_converter/services/state_persistence.dart';
 
 import 'package:backpacking_currency_converter/model/currency.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,9 @@ class StateContainer extends StatefulWidget {
 }
 
 class StateContainerState extends State<StateContainer> {
-  final _statePersistence = new StateLoader();
+  final _statePersistence = new StatePersistence();
+
+  static final log = new Logger<StateContainerState>();
 
   AppState appState;
 
@@ -92,7 +95,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void reorder({String item, String placeAfter}) {
-    print("reordering $item to be after $placeAfter..");
+    log.event("reordering $item to be after $placeAfter..");
     final currencies = List<String>.from(appState.conversion.currencies);
     currencies.remove(item);
     final newPosition = currencies.indexOf(placeAfter) + 1;

@@ -1,8 +1,11 @@
 import 'package:backpacking_currency_converter/helpers/string_compare.dart';
 import 'package:backpacking_currency_converter/model/currency.dart';
 import 'package:backpacking_currency_converter/model/currency_rate.dart';
+import 'package:backpacking_currency_converter/services/logger.dart';
 
 class CurrencyRepository {
+
+  static final log = new Logger<CurrencyRepository>();
 
   final List<Currency> _currencies;
 
@@ -24,7 +27,7 @@ class CurrencyRepository {
   Currency getByCode(String code) {
     var matches = _currencies.where((currency) => isEqualIgnoreCase(currency.code, code));
     if (matches.isEmpty) {
-      print("Found no currency with code [$code] among ${_currencies.length} currencies");
+      log.error("Found no currency with code [$code] among ${_currencies.length} currencies");
       throw StateError("No currency with code $code");
     }
     return matches.first;

@@ -2,9 +2,16 @@ import 'package:backpacking_currency_converter/screens/add_currency/add_currency
 import 'package:backpacking_currency_converter/app_routes.dart';
 import 'package:backpacking_currency_converter/app_theme.dart';
 import 'package:backpacking_currency_converter/screens/convert/convert_screen.dart';
+import 'package:backpacking_currency_converter/services/state_loader.dart';
 import 'package:flutter/material.dart';
 
 class AppRoot extends StatefulWidget {
+
+  /// injected to allow for state loading replacement
+  final StateLoader stateLoader;
+
+  const AppRoot({Key key, this.stateLoader}) : super(key: key);
+
   @override
   _AppRootState createState() {
     return new _AppRootState();
@@ -12,7 +19,14 @@ class AppRoot extends StatefulWidget {
 }
 
 class _AppRootState extends State<AppRoot> {
-  final mainScreen = new ConvertScreen();
+
+  ConvertScreen mainScreen;
+
+  @override
+  void initState() {
+    mainScreen = new ConvertScreen(stateLoader: widget.stateLoader);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

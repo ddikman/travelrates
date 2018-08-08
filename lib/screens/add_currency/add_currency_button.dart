@@ -1,10 +1,13 @@
 import 'package:backpacking_currency_converter/model/currency.dart';
+import 'package:backpacking_currency_converter/services/logger.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
 import 'package:flutter/material.dart';
 
 class AddCurrencyButton extends StatelessWidget {
 
   final Currency currency;
+
+  static final log = new Logger<AddCurrencyButton>();
 
   const AddCurrencyButton({Key key, this.currency}) : super(key: key);
 
@@ -26,7 +29,7 @@ class AddCurrencyButton extends StatelessWidget {
   }
 
   _displayNotice(BuildContext context) {
-    print("${currency.name} already added, showing snack instead");
+    log.event("${currency.name} already added, showing snack instead");
 
     final snackBar = new SnackBar(
         content: Text("${currency.name} is already selected!")

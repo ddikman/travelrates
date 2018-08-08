@@ -5,6 +5,7 @@ import 'package:backpacking_currency_converter/model/currency_rate.dart';
 import 'package:backpacking_currency_converter/services/api_configuration_loader.dart';
 import 'package:backpacking_currency_converter/services/currency_decoder.dart';
 import 'package:backpacking_currency_converter/services/local_storage.dart';
+import 'package:backpacking_currency_converter/services/logger.dart';
 import 'package:backpacking_currency_converter/services/rates_api.dart';
 import 'package:flutter/services.dart';
 
@@ -14,6 +15,8 @@ class RatesLoader {
   final localStorage = new LocalStorage();
 
   final decoder = new CurrencyDecoder();
+
+  static final log = new Logger<RatesLoader>();
 
   Future<LocalFile> get _cacheFile async {
     return localStorage.getFile('rates.json');
@@ -27,11 +30,11 @@ class RatesLoader {
   Future<String> load(AssetBundle assets) async {
     bool hasCache = await _cacheExists();
     if (hasCache) {
-      print('using fresh cached rates');
+      log.debug('using fresh cached rates');
       return _readCache();
     }
 
-    print(
+    log.debug(
         'neither cached rates or online rates are available, using installed rates.');
     return await assets.loadString('assets/data/rates.json');
   }
@@ -53,7 +56,7 @@ class RatesLoader {
       _cacheRates(ratesJson.result);
       return AsyncResult.withValue(rates);
     } on Exception catch (e) {
-      print('Online rates invalid json: ${ratesJson.result}');
+      log.error('Online rates invalid json: ${ratesJson.result}');
       throw new FormatException("Online json rates contain invalid json.", e);
     }
   }

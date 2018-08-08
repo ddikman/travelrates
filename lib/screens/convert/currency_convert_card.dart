@@ -1,3 +1,4 @@
+import 'package:backpacking_currency_converter/services/logger.dart';
 import 'package:backpacking_currency_converter/widgets/animate_in.dart';
 import 'package:backpacking_currency_converter/app_theme.dart';
 import 'package:backpacking_currency_converter/screens/convert/convert_dialog.dart';
@@ -26,6 +27,8 @@ class CurrencyConvertCard extends StatefulWidget {
 class _CurrencyConvertCardState extends State<CurrencyConvertCard>
     with TickerProviderStateMixin {
   bool _showInputError = false;
+
+  static final log = new Logger<_CurrencyConvertCardState>();
 
   final TextEditingController textEditingController = TextEditingController();
 
@@ -167,7 +170,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
   }
 
   void _newValueReceived(String valueString) {
-    print("trying to convert $valueString ${widget.currency.code}");
+    log.event("converting $valueString ${widget.currency.code}");
     double amount = double.tryParse(valueString.replaceAll(',', ''));
     if (amount == null) {
       setState(() {

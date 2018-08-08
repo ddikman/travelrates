@@ -5,7 +5,7 @@ import 'package:backpacking_currency_converter/screens/convert/open_add_currency
 import 'package:backpacking_currency_converter/screens/convert/selected_currency_list.dart';
 import 'package:backpacking_currency_converter/screens/convert/toggle_configure_button.dart';
 import 'package:backpacking_currency_converter/screens/spinner.dart';
-import 'package:backpacking_currency_converter/services/rates_loader.dart';
+import 'package:backpacking_currency_converter/services/logger.dart';
 import 'package:backpacking_currency_converter/services/state_loader.dart';
 import 'package:backpacking_currency_converter/widgets/background_container.dart';
 import 'package:backpacking_currency_converter/state_container.dart';
@@ -13,6 +13,11 @@ import 'package:backpacking_currency_converter/state_container.dart';
 import 'package:flutter/material.dart';
 
 class ConvertScreen extends StatefulWidget {
+
+  final StateLoader stateLoader;
+
+  const ConvertScreen({Key key, this.stateLoader}) : super(key: key);
+
   @override
   _ConvertScreenState createState() {
     return new _ConvertScreenState();
@@ -23,19 +28,19 @@ class _ConvertScreenState extends State<ConvertScreen> {
   // Keep a key for scaffold to use when showing snackbar
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 
-  final _ratesLoader = new RatesLoader();
-
   /// Used to wait until spinner fades out
   GlobalKey<SpinnerState> _spinnerKey = new GlobalKey();
 
   bool loading;
+
+  static final log = new Logger<_ConvertScreenState>();
 
   @override
   void initState() {
     super.initState();
 
     _showLoader();
-    _loadState()
+    widget.stateLoader.load(context)
         .whenComplete(_hideLoader)
         .whenComplete(_addCurrenciesIfMissing);
   }
@@ -51,7 +56,16 @@ class _ConvertScreenState extends State<ConvertScreen> {
     setState(() => loading = true);
   }
 
-  void _hideLoader() {
+  Future _hideLoader() async {
+
+    // it happened once that the spinner didn't stop so in order to catch
+    // it if it happens again I want to log the error
+    await _spinnerKey.currentState
+        .stopLoading()
+        .timeout(Duration(seconds: 1), onTimeout: () {
+      log.error('Timeout waiting for spinner to finish fadeout..');
+    });
+
     setState(() => loading = false);
   }
 
@@ -95,28 +109,5 @@ class _ConvertScreenState extends State<ConvertScreen> {
       padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
       child: new SelectedCurrencyList(),
     ));
-  }
-
-  Future<Null> _loadState() async {
-    final defaultAssetBundle = DefaultAssetBundle.of(context);
-
-    final statePersistence = new StateLoader();
-
-    final stateContainer = StateContainer.of(context);
-    await statePersistence
-        .load(_ratesLoader, defaultAssetBundle)
-        .then((appState) => stateContainer.setAppState(appState));
-
-    // also try to load online rates
-    final rates = await _ratesLoader.loadOnlineRates();
-    if (rates.successful) {
-      stateContainer.setRates(rates.result);
-    }
-
-    await _spinnerKey.currentState
-        .stopLoading()
-        .timeout(Duration(seconds: 1), onTimeout: () {
-          print('Timed out waiting for spinner to finish fadeout..');
-    });
   }
 }
