@@ -11,7 +11,6 @@ List<T> alphabeticallySorted<T>(List<T> list, String Function(T) property) {
     }
     
     final propertyValue = property(item);
-    print("propertyValue = $propertyValue");
     if (propertyValue == null) {
       throw ArgumentError.value(null, 'list', 'Invalid list element property');
     }
