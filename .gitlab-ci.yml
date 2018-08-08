@@ -20,7 +20,6 @@ pages:
   script:
     - mkdir public
     - mv coverage/ public/coverage/
-    - mv build/app/outputs/apk/app.apk public/app.apk
   artifacts:
     paths:
       - public
