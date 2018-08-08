@@ -10,7 +10,7 @@ void main() {
   final decoder = new CurrencyDecoder();
 
   test('can decode the embedded asset files for currencies and rates', () async {
-    final assets = AssetsFolder.path;
+    final assets = await AssetsFolder.path;
     var currencies = await new File('$assets/currencies.json').readAsString();
     var rates = await new File('$assets/rates.json').readAsString();
     final repository = await decoder.decode(currencies, rates);
