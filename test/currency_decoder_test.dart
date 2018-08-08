@@ -8,9 +8,11 @@ void main() {
   final decoder = new CurrencyDecoder();
 
   test('can decode the embedded asset files for currencies and rates', () async {
-    const basePath = './assets/data';
-    var currencies = await new File('$basePath/currencies.json').readAsString();
-    var rates = await new File('$basePath/rates.json').readAsString();
+    final assetPath = Platform.script.resolve('./assets/data').toFilePath();
+    print('Assets are located at $assetPath');
+
+    var currencies = await new File('$assetPath/currencies.json').readAsString();
+    var rates = await new File('$assetPath/rates.json').readAsString();
     final repository = await decoder.decode(currencies, rates);
 
     expect(repository.baseCurrency.code, 'EUR');
