@@ -24,20 +24,21 @@ void main() {
     expect(model.getAmountInCurrency(MockCurrency.euro), currentAmount);
   });
 
-  test('when changing currency, conversion between should work as expected',
+  test('convertion is done based on the difference between current and exchanged currency rates',
       () {
-    // example, we've currently set the value as 1 USD
-    // then the value in EUR should be 1 USD split by the rate since
-    // the base rate is EUR. If we convert to GBP however, it's first
-    // split by USD to get EUR then multiplied to GBP rate
+
     final model = new ConversionModel(
         currentAmount: 1.0,
         currentCurrency: MockCurrency.dollar,
         currencies: <String>[]);
 
+    // the euro base rate is 1.0 since it's the base rate for all currencies
+    // that means that the dollar rate is only relative to the euro as below
     final expectedEuro = 1.0 / MockCurrency.dollar.rate;
     expect(model.getAmountInCurrency(MockCurrency.euro), expectedEuro);
 
+    // for other currencies, we need to first convert it to euro (as above)
+    // and then following convert those euro down to the new currency rate
     final expectedPound =
         (1.0 / MockCurrency.dollar.rate) * MockCurrency.pound.rate;
     expect(model.getAmountInCurrency(MockCurrency.pound), expectedPound);
