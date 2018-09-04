@@ -1,5 +1,5 @@
-import 'package:travelconverter/app_theme.dart';
-import 'package:travelconverter/screens/convert/currency_input_formatter.dart';
+import 'package:moneyconverter/app_theme.dart';
+import 'package:moneyconverter/screens/convert/currency_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

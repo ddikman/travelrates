@@ -1,10 +1,10 @@
 
 import 'dart:async';
 
-import 'package:travelconverter/services/rates_loader.dart';
-import 'package:travelconverter/services/state_loader.dart';
-import 'package:travelconverter/services/state_persistence.dart';
-import 'package:travelconverter/state_container.dart';
+import 'package:moneyconverter/services/rates_loader.dart';
+import 'package:moneyconverter/services/state_loader.dart';
+import 'package:moneyconverter/services/state_persistence.dart';
+import 'package:moneyconverter/state_container.dart';
 import 'package:flutter/material.dart';
 
 class PersistedStateLoader implements StateLoader {

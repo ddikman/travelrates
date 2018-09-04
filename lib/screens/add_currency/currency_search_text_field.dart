@@ -1,5 +1,5 @@
-import 'package:travelconverter/app_theme.dart';
-import 'package:travelconverter/model/currency.dart';
+import 'package:moneyconverter/app_theme.dart';
+import 'package:moneyconverter/model/currency.dart';
 import 'package:flutter/material.dart';
 
 typedef void CurrenciesChanged(List<Currency> currencies);

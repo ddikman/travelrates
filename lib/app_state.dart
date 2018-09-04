@@ -1,6 +1,6 @@
-import 'package:travelconverter/model/conversion_model.dart';
-import 'package:travelconverter/model/country.dart';
-import 'package:travelconverter/services/currency_repository.dart';
+import 'package:moneyconverter/model/conversion_model.dart';
+import 'package:moneyconverter/model/country.dart';
+import 'package:moneyconverter/services/currency_repository.dart';
 import 'package:flutter/foundation.dart';
 
 class AppState {

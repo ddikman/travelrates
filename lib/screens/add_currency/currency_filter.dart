@@ -1,7 +1,7 @@
 
-import 'package:travelconverter/helpers/sorting.dart';
-import 'package:travelconverter/model/country.dart';
-import 'package:travelconverter/model/currency.dart';
+import 'package:moneyconverter/helpers/sorting.dart';
+import 'package:moneyconverter/model/country.dart';
+import 'package:moneyconverter/model/currency.dart';
 
 class CurrencyFilter
 {

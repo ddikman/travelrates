@@ -1,4 +1,4 @@
-import 'package:travelconverter/model/async_result.dart';
+import 'package:moneyconverter/model/async_result.dart';
 import 'package:test/test.dart';
 
 void main() {

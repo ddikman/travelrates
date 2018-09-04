@@ -1,4 +1,4 @@
-import 'package:travelconverter/model/conversion_model.dart';
+import 'package:moneyconverter/model/conversion_model.dart';
 import 'package:test/test.dart';
 
 import 'mocks/mock_currency.dart';

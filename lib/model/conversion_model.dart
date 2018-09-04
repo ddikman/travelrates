@@ -1,4 +1,4 @@
-import 'package:travelconverter/model/currency.dart';
+import 'package:moneyconverter/model/currency.dart';
 
 /// The user currency conversions
 class ConversionModel {

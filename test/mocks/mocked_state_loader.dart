@@ -1,9 +1,9 @@
 
 import 'dart:async';
 
-import 'package:travelconverter/app_state.dart';
-import 'package:travelconverter/services/state_loader.dart';
-import 'package:travelconverter/state_container.dart';
+import 'package:moneyconverter/app_state.dart';
+import 'package:moneyconverter/services/state_loader.dart';
+import 'package:moneyconverter/state_container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class MockedStateLoader implements StateLoader {

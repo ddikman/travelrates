@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'package:travelconverter/app_state.dart';
-import 'package:travelconverter/model/conversion_model.dart';
-import 'package:travelconverter/model/currency_rate.dart';
-import 'package:travelconverter/services/logger.dart';
-import 'package:travelconverter/services/state_persistence.dart';
+import 'package:moneyconverter/app_state.dart';
+import 'package:moneyconverter/model/conversion_model.dart';
+import 'package:moneyconverter/model/currency_rate.dart';
+import 'package:moneyconverter/services/logger.dart';
+import 'package:moneyconverter/services/state_persistence.dart';
 
-import 'package:travelconverter/model/currency.dart';
+import 'package:moneyconverter/model/currency.dart';
 import 'package:flutter/material.dart';
 
 class StateContainer extends StatefulWidget {

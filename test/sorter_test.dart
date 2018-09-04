@@ -1,4 +1,4 @@
-import 'package:travelconverter/helpers/sorting.dart';
+import 'package:moneyconverter/helpers/sorting.dart';
 import 'package:test/test.dart';
 
 void main() {

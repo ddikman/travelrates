@@ -1,8 +1,8 @@
-import 'package:travelconverter/screens/add_currency/add_currency_screen.dart';
-import 'package:travelconverter/app_routes.dart';
-import 'package:travelconverter/app_theme.dart';
-import 'package:travelconverter/screens/convert/convert_screen.dart';
-import 'package:travelconverter/services/state_loader.dart';
+import 'package:moneyconverter/screens/add_currency/add_currency_screen.dart';
+import 'package:moneyconverter/app_routes.dart';
+import 'package:moneyconverter/app_theme.dart';
+import 'package:moneyconverter/screens/convert/convert_screen.dart';
+import 'package:moneyconverter/services/state_loader.dart';
 import 'package:flutter/material.dart';
 
 class AppRoot extends StatefulWidget {
