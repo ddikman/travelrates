@@ -1,7 +1,7 @@
 
-import 'package:backpacking_currency_converter/helpers/sorting.dart';
-import 'package:backpacking_currency_converter/model/country.dart';
-import 'package:backpacking_currency_converter/model/currency.dart';
+import 'package:travelconverter/helpers/sorting.dart';
+import 'package:travelconverter/model/country.dart';
+import 'package:travelconverter/model/currency.dart';
 
 class CurrencyFilter
 {

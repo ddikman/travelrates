@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:backpacking_currency_converter/helpers/string_compare.dart';
-import 'package:backpacking_currency_converter/model/currency.dart';
-import 'package:backpacking_currency_converter/model/currency_rate.dart';
-import 'package:backpacking_currency_converter/services/currency_repository.dart';
+import 'package:travelconverter/helpers/string_compare.dart';
+import 'package:travelconverter/model/currency.dart';
+import 'package:travelconverter/model/currency_rate.dart';
+import 'package:travelconverter/services/currency_repository.dart';
 
 class CurrencyDecoder {
   static const String _baseRateCurrencyCode = 'EUR';

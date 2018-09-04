@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:backpacking_currency_converter/services/currency_decoder.dart';
+import 'package:travelconverter/services/currency_decoder.dart';
 import 'package:test/test.dart';
 
 import 'helpers/assets_folder.dart';

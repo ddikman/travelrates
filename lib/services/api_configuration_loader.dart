@@ -1,6 +1,6 @@
 import 'dart:async' show Future;
 import 'dart:convert' show json;
-import 'package:backpacking_currency_converter/model/api_configuration.dart';
+import 'package:travelconverter/model/api_configuration.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class ApiConfigurationLoader {

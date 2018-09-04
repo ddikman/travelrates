@@ -1,4 +1,4 @@
-import 'package:backpacking_currency_converter/model/currency_rate.dart';
+import 'package:travelconverter/model/currency_rate.dart';
 import 'package:test/test.dart';
 import 'mocks/mock_currency_repository.dart';
 

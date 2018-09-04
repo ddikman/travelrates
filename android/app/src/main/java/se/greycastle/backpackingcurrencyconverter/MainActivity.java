@@ -1,4 +1,4 @@
-package se.greycastle.backpackingcurrencyconverter;
+package se.greycastle.currencyconverter;
 
 import android.os.Bundle;
 

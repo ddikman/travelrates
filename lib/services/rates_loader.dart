@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:backpacking_currency_converter/model/async_result.dart';
-import 'package:backpacking_currency_converter/model/currency_rate.dart';
-import 'package:backpacking_currency_converter/services/api_configuration_loader.dart';
-import 'package:backpacking_currency_converter/services/currency_decoder.dart';
-import 'package:backpacking_currency_converter/services/local_storage.dart';
-import 'package:backpacking_currency_converter/services/logger.dart';
-import 'package:backpacking_currency_converter/services/rates_api.dart';
+import 'package:travelconverter/model/async_result.dart';
+import 'package:travelconverter/model/currency_rate.dart';
+import 'package:travelconverter/services/api_configuration_loader.dart';
+import 'package:travelconverter/services/currency_decoder.dart';
+import 'package:travelconverter/services/local_storage.dart';
+import 'package:travelconverter/services/logger.dart';
+import 'package:travelconverter/services/rates_api.dart';
 import 'package:flutter/services.dart';
 
 class RatesLoader {

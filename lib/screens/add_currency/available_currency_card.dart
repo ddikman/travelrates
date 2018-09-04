@@ -1,7 +1,7 @@
-import 'package:backpacking_currency_converter/app_theme.dart';
-import 'package:backpacking_currency_converter/model/currency.dart';
-import 'package:backpacking_currency_converter/screens/add_currency/add_currency_button.dart';
-import 'package:backpacking_currency_converter/state_container.dart';
+import 'package:travelconverter/app_theme.dart';
+import 'package:travelconverter/model/currency.dart';
+import 'package:travelconverter/screens/add_currency/add_currency_button.dart';
+import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
 
 class AvailableCurrencyCard extends StatelessWidget {

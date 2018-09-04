@@ -1,9 +1,9 @@
-import 'package:backpacking_currency_converter/screens/add_currency/available_currency_card.dart';
-import 'package:backpacking_currency_converter/screens/add_currency/currency_filter.dart';
-import 'package:backpacking_currency_converter/screens/add_currency/currency_search_text_field.dart';
-import 'package:backpacking_currency_converter/widgets/background_container.dart';
-import 'package:backpacking_currency_converter/model/currency.dart';
-import 'package:backpacking_currency_converter/state_container.dart';
+import 'package:travelconverter/screens/add_currency/available_currency_card.dart';
+import 'package:travelconverter/screens/add_currency/currency_filter.dart';
+import 'package:travelconverter/screens/add_currency/currency_search_text_field.dart';
+import 'package:travelconverter/widgets/background_container.dart';
+import 'package:travelconverter/model/currency.dart';
+import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
 
 class AddCurrencyScreen extends StatefulWidget {

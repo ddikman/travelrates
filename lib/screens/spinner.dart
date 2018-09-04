@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:backpacking_currency_converter/app_theme.dart';
+import 'package:travelconverter/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class Spinner extends StatefulWidget {

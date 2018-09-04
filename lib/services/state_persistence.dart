@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:backpacking_currency_converter/app_state.dart';
-import 'package:backpacking_currency_converter/asset_paths.dart';
-import 'package:backpacking_currency_converter/helpers/string_compare.dart';
-import 'package:backpacking_currency_converter/model/country.dart';
-import 'package:backpacking_currency_converter/services/currency_decoder.dart';
-import 'package:backpacking_currency_converter/services/currency_repository.dart';
-import 'package:backpacking_currency_converter/services/local_storage.dart';
-import 'package:backpacking_currency_converter/services/logger.dart';
-import 'package:backpacking_currency_converter/services/rates_loader.dart';
+import 'package:travelconverter/app_state.dart';
+import 'package:travelconverter/asset_paths.dart';
+import 'package:travelconverter/helpers/string_compare.dart';
+import 'package:travelconverter/model/country.dart';
+import 'package:travelconverter/services/currency_decoder.dart';
+import 'package:travelconverter/services/currency_repository.dart';
+import 'package:travelconverter/services/local_storage.dart';
+import 'package:travelconverter/services/logger.dart';
+import 'package:travelconverter/services/rates_loader.dart';
 import 'package:flutter/services.dart';
 
 /// Loads the app state on startup

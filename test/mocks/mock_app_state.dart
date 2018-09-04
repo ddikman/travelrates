@@ -1,5 +1,5 @@
-import 'package:backpacking_currency_converter/app_state.dart';
-import 'package:backpacking_currency_converter/model/country.dart';
+import 'package:travelconverter/app_state.dart';
+import 'package:travelconverter/model/country.dart';
 
 import 'mock_currency_repository.dart';
 

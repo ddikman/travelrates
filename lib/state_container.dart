@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'package:backpacking_currency_converter/app_state.dart';
-import 'package:backpacking_currency_converter/model/conversion_model.dart';
-import 'package:backpacking_currency_converter/model/currency_rate.dart';
-import 'package:backpacking_currency_converter/services/logger.dart';
-import 'package:backpacking_currency_converter/services/state_persistence.dart';
+import 'package:travelconverter/app_state.dart';
+import 'package:travelconverter/model/conversion_model.dart';
+import 'package:travelconverter/model/currency_rate.dart';
+import 'package:travelconverter/services/logger.dart';
+import 'package:travelconverter/services/state_persistence.dart';
 
-import 'package:backpacking_currency_converter/model/currency.dart';
+import 'package:travelconverter/model/currency.dart';
 import 'package:flutter/material.dart';
 
 class StateContainer extends StatefulWidget {

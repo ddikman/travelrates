@@ -1,5 +1,5 @@
-import 'package:backpacking_currency_converter/screens/app_root.dart';
-import 'package:backpacking_currency_converter/state_container.dart';
+import 'package:travelconverter/screens/app_root.dart';
+import 'package:travelconverter/state_container.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'mocks/mock_app_state.dart';

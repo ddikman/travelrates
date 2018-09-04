@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:backpacking_currency_converter/app_routes.dart';
-import 'package:backpacking_currency_converter/screens/convert/open_add_currency_screen_button.dart';
-import 'package:backpacking_currency_converter/screens/convert/selected_currency_list.dart';
-import 'package:backpacking_currency_converter/screens/convert/toggle_configure_button.dart';
-import 'package:backpacking_currency_converter/screens/spinner.dart';
-import 'package:backpacking_currency_converter/services/logger.dart';
-import 'package:backpacking_currency_converter/services/state_loader.dart';
-import 'package:backpacking_currency_converter/widgets/background_container.dart';
-import 'package:backpacking_currency_converter/state_container.dart';
+import 'package:travelconverter/app_routes.dart';
+import 'package:travelconverter/screens/convert/open_add_currency_screen_button.dart';
+import 'package:travelconverter/screens/convert/selected_currency_list.dart';
+import 'package:travelconverter/screens/convert/toggle_configure_button.dart';
+import 'package:travelconverter/screens/spinner.dart';
+import 'package:travelconverter/services/logger.dart';
+import 'package:travelconverter/services/state_loader.dart';
+import 'package:travelconverter/widgets/background_container.dart';
+import 'package:travelconverter/state_container.dart';
 
 import 'package:flutter/material.dart';
 

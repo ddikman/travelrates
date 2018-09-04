@@ -1,10 +1,10 @@
-import 'package:backpacking_currency_converter/services/logger.dart';
-import 'package:backpacking_currency_converter/widgets/animate_in.dart';
-import 'package:backpacking_currency_converter/app_theme.dart';
-import 'package:backpacking_currency_converter/screens/convert/convert_dialog.dart';
-import 'package:backpacking_currency_converter/model/currency.dart';
-import 'package:backpacking_currency_converter/screens/convert/currency_input_formatter.dart';
-import 'package:backpacking_currency_converter/state_container.dart';
+import 'package:travelconverter/services/logger.dart';
+import 'package:travelconverter/widgets/animate_in.dart';
+import 'package:travelconverter/app_theme.dart';
+import 'package:travelconverter/screens/convert/convert_dialog.dart';
+import 'package:travelconverter/model/currency.dart';
+import 'package:travelconverter/screens/convert/currency_input_formatter.dart';
+import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyConvertCard extends StatefulWidget {

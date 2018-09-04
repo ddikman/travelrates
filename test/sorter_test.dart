@@ -1,4 +1,4 @@
-import 'package:backpacking_currency_converter/helpers/sorting.dart';
+import 'package:travelconverter/helpers/sorting.dart';
 import 'package:test/test.dart';
 
 void main() {

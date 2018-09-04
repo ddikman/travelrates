@@ -1,4 +1,4 @@
-# backpacking_currency_converter
+# TravelRates
 
 Handy multi-currency converter specifically for backpackers.
 

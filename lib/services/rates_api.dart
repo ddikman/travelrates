@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:backpacking_currency_converter/model/api_configuration.dart';
-import 'package:backpacking_currency_converter/model/async_result.dart';
-import 'package:backpacking_currency_converter/services/logger.dart';
+import 'package:travelconverter/model/api_configuration.dart';
+import 'package:travelconverter/model/async_result.dart';
+import 'package:travelconverter/services/logger.dart';
 import 'package:connectivity/connectivity.dart';
 
 import 'package:http/http.dart' as http;

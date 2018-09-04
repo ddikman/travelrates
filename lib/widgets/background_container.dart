@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:backpacking_currency_converter/app_theme.dart';
+import 'package:travelconverter/app_theme.dart';
 
 class BackgroundContainer extends StatelessWidget {
 
