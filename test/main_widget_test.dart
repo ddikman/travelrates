@@ -1,4 +1,4 @@
-import 'package:moneyconverter/screens/app_root.dart';
+import 'package:moneyconverter/app_root.dart';
 import 'package:moneyconverter/state_container.dart';
 import 'package:flutter_test/flutter_test.dart';
 

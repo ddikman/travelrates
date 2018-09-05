@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:moneyconverter/model/currency.dart';
 import 'package:moneyconverter/services/logger.dart';
 import 'package:moneyconverter/state_container.dart';
@@ -32,7 +33,7 @@ class AddCurrencyButton extends StatelessWidget {
     log.event("${currency.name} already added, showing snack instead");
 
     final snackBar = new SnackBar(
-        content: Text("${currency.name} is already selected!")
+        content: Text(_alreadySelectedWarning(currency.name))
     );
 
     Scaffold.of(context).showSnackBar(snackBar);
@@ -44,5 +45,14 @@ class AddCurrencyButton extends StatelessWidget {
 
     // return to previous screen
     Navigator.of(context).pop();
+  }
+
+  String _alreadySelectedWarning(String currencyName) {
+    return Intl.message(
+        "$currencyName is already selected!",
+        name: "_alreadySelectedWarning",
+        desc: "Text displayed when trying to add a currency that is already added.",
+        args: [currencyName]
+    );
   }
 }

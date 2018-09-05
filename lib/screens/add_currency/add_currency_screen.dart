@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:moneyconverter/screens/add_currency/available_currency_card.dart';
 import 'package:moneyconverter/screens/add_currency/currency_filter.dart';
 import 'package:moneyconverter/screens/add_currency/currency_search_text_field.dart';
@@ -50,7 +51,7 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('ADD CURRENCY'),
+          title: Text(_screenTitle),
           centerTitle: true,
           bottom: new PreferredSize(
             child: searchField,
@@ -59,6 +60,11 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
         ),
         body: BackgroundContainer(child: body));
   }
+
+  String get _screenTitle => Intl.message(
+    "ADD CURRENCY",
+    desc: "Add currency screen title."
+  );
 
   _applyFilter(String filterText) {
     setState((){

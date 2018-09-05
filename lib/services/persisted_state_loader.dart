@@ -13,6 +13,9 @@ class PersistedStateLoader implements StateLoader {
 
   @override
   Future load(BuildContext context) async {
+    // first up get the localizations
+
+
     final statePersistence = new StatePersistence();
 
     final stateContainer = StateContainer.of(context);

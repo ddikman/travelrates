@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:intl/intl.dart';
 import 'package:moneyconverter/app_routes.dart';
+import 'package:moneyconverter/l10n/app_localizations.dart';
 import 'package:moneyconverter/screens/convert/open_add_currency_screen_button.dart';
 import 'package:moneyconverter/screens/convert/selected_currency_list.dart';
 import 'package:moneyconverter/screens/convert/toggle_configure_button.dart';
@@ -89,11 +91,15 @@ class _ConvertScreenState extends State<ConvertScreen> {
 
   AppBar _buildAppBar({List<Widget> actions = const <Widget>[]}) {
     return new AppBar(
-      title: new Text("CONVERT"),
+      title: new Text(_screenTitle),
       centerTitle: true,
       actions: actions,
     );
   }
+
+  String get _screenTitle => Intl.message(
+      "CONVERT", desc: "Convert screen main title"
+  );
 
   _buildSpinner() {
     return new Spinner(key: _spinnerKey, delay: Duration(milliseconds: 500));
