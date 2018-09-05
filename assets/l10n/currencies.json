@@ -1,0 +1,592 @@
+{
+    "USD": {
+        "en": "US Dollar",
+        "sv": "Amerikanska Dollar",
+        "ja": "米ドル"
+    },
+    "CAD": {
+        "en": "Canadian Dollar",
+        "sv": "Kanadensiska Dollar",
+        "ja": "カナダドル"
+    },
+    "EUR": {
+        "en": "Euro",
+        "sv": "Euro",
+        "ja": "ユーロ"
+    },
+    "AED": {
+        "en": "United Arab Emirates Dirham",
+        "sv": "Förenade Arabemiratens Dirham",
+        "ja": "アラブ首長国連邦ディルハム"
+    },
+    "AFN": {
+        "en": "Afghan Afghani",
+        "sv": "Afghanska Afghanistan",
+        "ja": "アフガニスタンアフガニスタン"
+    },
+    "ALL": {
+        "en": "Albanian Lek",
+        "sv": "Albanska Lek",
+        "ja": "アルバニア語レック"
+    },
+    "AMD": {
+        "en": "Armenian Dram",
+        "sv": "Armeniska Drama",
+        "ja": "アルメニアドラム"
+    },
+    "ARS": {
+        "en": "Argentine Peso",
+        "sv": "Argentinska Peso",
+        "ja": "アルゼンチンペソ"
+    },
+    "AUD": {
+        "en": "Australian Dollar",
+        "sv": "Australiensiska Dollar",
+        "ja": "オーストラリアドル"
+    },
+    "AZN": {
+        "en": "Azerbaijani Manat",
+        "sv": "Azerbajdzjanska Manat",
+        "ja": "アゼルバイジャンマナト"
+    },
+    "BAM": {
+        "en": "Bosnia-Herzegovina Convertible Mark",
+        "sv": "Bosnien-Hercegovinaska Convertible Mark",
+        "ja": "ボスニア・ヘルツェゴビナ・コンバーチブル・マーク"
+    },
+    "BDT": {
+        "en": "Bangladeshi Taka",
+        "sv": "Bangladeshiska Taka",
+        "ja": "バングラデシュタカ"
+    },
+    "BGN": {
+        "en": "Bulgarian Lev",
+        "sv": "Bulgariska Lev",
+        "ja": "ブルガリアレフ"
+    },
+    "BHD": {
+        "en": "Bahraini Dinar",
+        "sv": "Bahrainiska Dinar",
+        "ja": "バーレーンディナール"
+    },
+    "BIF": {
+        "en": "Burundian Franc",
+        "sv": "Burundianska Franc",
+        "ja": "ブルンジフラン"
+    },
+    "BND": {
+        "en": "Brunei Dollar",
+        "sv": "Bruneiska Dollar",
+        "ja": "ブルネイドル"
+    },
+    "BOB": {
+        "en": "Bolivian Boliviano",
+        "sv": "Bolivianska Boliviano",
+        "ja": "ボリビアのボリビア人"
+    },
+    "BRL": {
+        "en": "Brazilian Real",
+        "sv": "Brasilianska Real",
+        "ja": "ブラジルレアル"
+    },
+    "BWP": {
+        "en": "Botswanan Pula",
+        "sv": "Botswanas Pula",
+        "ja": "ボツワナンプーラ"
+    },
+    "BYR": {
+        "en": "Belarusian Ruble",
+        "sv": "Vitryska Rubel",
+        "ja": "ベラルーシルーブル"
+    },
+    "BZD": {
+        "en": "Belize Dollar",
+        "sv": "Belize Dollar",
+        "ja": "ベリーズドル"
+    },
+    "CDF": {
+        "en": "Congolese Franc",
+        "sv": "Kongolesiska Franc",
+        "ja": "コンゴフラン"
+    },
+    "CHF": {
+        "en": "Swiss Franc",
+        "sv": "Schweiziska Franc",
+        "ja": "スイスフラン"
+    },
+    "CLP": {
+        "en": "Chilean Peso",
+        "sv": "Chilenska Peso",
+        "ja": "チリペソ"
+    },
+    "CNY": {
+        "en": "Chinese Yuan",
+        "sv": "Kinesiska Yuan",
+        "ja": "中国人民元"
+    },
+    "COP": {
+        "en": "Colombian Peso",
+        "sv": "Colombianska Peso",
+        "ja": "コロンビアペソ"
+    },
+    "CRC": {
+        "en": "Costa Rican Colón",
+        "sv": "Costa Rica Colón",
+        "ja": "コスタリカコロン"
+    },
+    "CVE": {
+        "en": "Cape Verdean Escudo",
+        "sv": "Kap Verdeanska Escudo",
+        "ja": "カーボベルデ・エスクード"
+    },
+    "CZK": {
+        "en": "Czech Republic Koruna",
+        "sv": "Tjeckiska Koruna",
+        "ja": "チェコ共和国コルナ"
+    },
+    "DJF": {
+        "en": "Djiboutian Franc",
+        "sv": "Djiboutianska Franc",
+        "ja": "ジブチフラン"
+    },
+    "DKK": {
+        "en": "Danish Krone",
+        "sv": "Danska Kronor",
+        "ja": "デンマーククローネ"
+    },
+    "DOP": {
+        "en": "Dominican Peso",
+        "sv": "Dominikanska Peso",
+        "ja": "ドミニカ共和国ペソ"
+    },
+    "DZD": {
+        "en": "Algerian Dinar",
+        "sv": "Algeriska Dinar",
+        "ja": "アルジェリアディナール"
+    },
+    "EEK": {
+        "en": "Estonian Kroon",
+        "sv": "Estniska Kroon",
+        "ja": "エストニアクルン"
+    },
+    "EGP": {
+        "en": "Egyptian Pound",
+        "sv": "Egyptiska Pund",
+        "ja": "エジプトポンド"
+    },
+    "ERN": {
+        "en": "Eritrean Nakfa",
+        "sv": "Eritreiska Nakfa",
+        "ja": "エリトリアンナクファ"
+    },
+    "ETB": {
+        "en": "Ethiopian Birr",
+        "sv": "Etiopiska Birr",
+        "ja": "エチオピア・ビア"
+    },
+    "GBP": {
+        "en": "British Pound Sterling",
+        "sv": "Brittiska Pund",
+        "ja": "英ポンド"
+    },
+    "GEL": {
+        "en": "Georgian Lari",
+        "sv": "Georgiska Lari",
+        "ja": "グルジアラリ"
+    },
+    "GHS": {
+        "en": "Ghanaian Cedi",
+        "sv": "Ghanesiska Cedi",
+        "ja": "ガーナセディ"
+    },
+    "GNF": {
+        "en": "Guinean Franc",
+        "sv": "Guineanska Franc",
+        "ja": "ギニアフラン"
+    },
+    "GTQ": {
+        "en": "Guatemalan Quetzal",
+        "sv": "Guatemala Quetzal",
+        "ja": "グアテマラケベック"
+    },
+    "HKD": {
+        "en": "Hong Kong Dollar",
+        "sv": "Hongkong-Dollar",
+        "ja": "香港ドル"
+    },
+    "HNL": {
+        "en": "Honduran Lempira",
+        "sv": "Honduras Lempira",
+        "ja": "ホンジュラスレムピラ"
+    },
+    "HRK": {
+        "en": "Croatian Kuna",
+        "sv": "Kroatiska Kuna",
+        "ja": "クロアチアクナ"
+    },
+    "HUF": {
+        "en": "Hungarian Forint",
+        "sv": "Ungerska Forint",
+        "ja": "ハンガリーフォリント"
+    },
+    "IDR": {
+        "en": "Indonesian Rupiah",
+        "sv": "Indonesiska Rupiah",
+        "ja": "インドネシアルピア"
+    },
+    "ILS": {
+        "en": "Israeli New Sheqel",
+        "sv": "Israeliska Nya Shekel",
+        "ja": "イスラエルの新しいシェケル"
+    },
+    "INR": {
+        "en": "Indian Rupee",
+        "sv": "Indiska Rupi",
+        "ja": "インドルピー"
+    },
+    "IQD": {
+        "en": "Iraqi Dinar",
+        "sv": "Irakiska Dinar",
+        "ja": "イラクディナール"
+    },
+    "IRR": {
+        "en": "Iranian Rial",
+        "sv": "Iranska Rialet",
+        "ja": "イランリアル"
+    },
+    "ISK": {
+        "en": "Icelandic Króna",
+        "sv": "Isländska Kronor",
+        "ja": "アイスランドのKróna"
+    },
+    "JMD": {
+        "en": "Jamaican Dollar",
+        "sv": "Jamaicanska Dollar",
+        "ja": "ジャマイカドル"
+    },
+    "JOD": {
+        "en": "Jordanian Dinar",
+        "sv": "Jordanska Dinar",
+        "ja": "ヨルダンディナール"
+    },
+    "JPY": {
+        "en": "Japanese Yen",
+        "sv": "Japanska Yen",
+        "ja": "日本円"
+    },
+    "KES": {
+        "en": "Kenyan Shilling",
+        "sv": "Kenyanska Shilling",
+        "ja": "ケニアシリング"
+    },
+    "KHR": {
+        "en": "Cambodian Riel",
+        "sv": "Kambodjanska Riel",
+        "ja": "カンボジアリエル"
+    },
+    "KMF": {
+        "en": "Comorian Franc",
+        "sv": "Komoriska Franc",
+        "ja": "コモロフラン"
+    },
+    "KRW": {
+        "en": "South Korean Won",
+        "sv": "Sydkoreanska Vann",
+        "ja": "韓国ウォン"
+    },
+    "KWD": {
+        "en": "Kuwaiti Dinar",
+        "sv": "Kuwaiti Dinar",
+        "ja": "クウェートディナール"
+    },
+    "KZT": {
+        "en": "Kazakhstani Tenge",
+        "sv": "Kazakhstani Tenge",
+        "ja": "カザフスタンテンゲ"
+    },
+    "LBP": {
+        "en": "Lebanese Pound",
+        "sv": "Libanesiska Pundet",
+        "ja": "レバノンポンド"
+    },
+    "LKR": {
+        "en": "Sri Lankan Rupee",
+        "sv": "Sri Lanka Rupi",
+        "ja": "スリランカルピー"
+    },
+    "LTL": {
+        "en": "Lithuanian Litas",
+        "sv": "Litauiska Litas",
+        "ja": "リトアニアリタス"
+    },
+    "LVL": {
+        "en": "Latvian Lats",
+        "sv": "Lettiska Lats",
+        "ja": "ラトビアラット"
+    },
+    "LYD": {
+        "en": "Libyan Dinar",
+        "sv": "Libyska Dinar",
+        "ja": "リビアディナール"
+    },
+    "MAD": {
+        "en": "Moroccan Dirham",
+        "sv": "Marockanska Dirham",
+        "ja": "モロッコディルハム"
+    },
+    "MDL": {
+        "en": "Moldovan Leu",
+        "sv": "Moldaviska Leu",
+        "ja": "モルドバン・ルー"
+    },
+    "MGA": {
+        "en": "Malagasy Ariary",
+        "sv": "Malagasiska Ariary",
+        "ja": "マダガスカル・アリアリ"
+    },
+    "MKD": {
+        "en": "Macedonian Denar",
+        "sv": "Makedonska Denar",
+        "ja": "マケドニアデナール"
+    },
+    "MMK": {
+        "en": "Myanma Kyat",
+        "sv": "Myanmaska Kyat",
+        "ja": "ミャンマーチャット"
+    },
+    "MOP": {
+        "en": "Macanese Pataca",
+        "sv": "Macaneseiska Pataca",
+        "ja": "マカディパタカ"
+    },
+    "MUR": {
+        "en": "Mauritian Rupee",
+        "sv": "Mauritianska Rupee",
+        "ja": "モーリシャンルピー"
+    },
+    "MXN": {
+        "en": "Mexican Peso",
+        "sv": "Mexikanska Peso",
+        "ja": "メキシコペソ"
+    },
+    "MYR": {
+        "en": "Malaysian Ringgit",
+        "sv": "Malaysiska Ringgit",
+        "ja": "マレーシアリンギ"
+    },
+    "MZN": {
+        "en": "Mozambican Metical",
+        "sv": "Mocambicanska Metical",
+        "ja": "モザンビーク・メタリック"
+    },
+    "NAD": {
+        "en": "Namibian Dollar",
+        "sv": "Namibisk Dollar",
+        "ja": "ナミビアドル"
+    },
+    "NGN": {
+        "en": "Nigerian Naira",
+        "sv": "Nigerianska Naira",
+        "ja": "ナイジェリアナイラ"
+    },
+    "NIO": {
+        "en": "Nicaraguan Córdoba",
+        "sv": "Nicaragua Córdoba",
+        "ja": "ニカラグアコルドバ"
+    },
+    "NOK": {
+        "en": "Norwegian Krone",
+        "sv": "Norska Kronor",
+        "ja": "ノルウェークローネ"
+    },
+    "NPR": {
+        "en": "Nepalese Rupee",
+        "sv": "Nepalesiska Rupi",
+        "ja": "ネパールルピー"
+    },
+    "NZD": {
+        "en": "New Zealand Dollar",
+        "sv": "Nya Zeelandska Dollar",
+        "ja": "ニュージーランドドル"
+    },
+    "OMR": {
+        "en": "Omani Rial",
+        "sv": "Omani Rial",
+        "ja": "オマーンリアル"
+    },
+    "PAB": {
+        "en": "Panamanian Balboa",
+        "sv": "Panamanska Balboa",
+        "ja": "パナマバルボア"
+    },
+    "PEN": {
+        "en": "Peruvian Nuevo Sol",
+        "sv": "Peruvian Nuevo Sol",
+        "ja": "ペルーヌエボソル"
+    },
+    "PHP": {
+        "en": "Philippine Peso",
+        "sv": "Filippinska Peso",
+        "ja": "フィリピンペソ"
+    },
+    "PKR": {
+        "en": "Pakistani Rupee",
+        "sv": "Pakistanska Rupi",
+        "ja": "パキスタンルピー"
+    },
+    "PLN": {
+        "en": "Polish Zloty",
+        "sv": "Polska Zloty",
+        "ja": "ポーランドズロチ"
+    },
+    "PYG": {
+        "en": "Paraguayan Guarani",
+        "sv": "Paraguayanska Guarani",
+        "ja": "パラグアイ・グアラニ"
+    },
+    "QAR": {
+        "en": "Qatari Rial",
+        "sv": "Qatari Rial",
+        "ja": "カタールリーアル"
+    },
+    "RON": {
+        "en": "Romanian Leu",
+        "sv": "Rumänska Leu",
+        "ja": "ルーマニアのLeu"
+    },
+    "RSD": {
+        "en": "Serbian Dinar",
+        "sv": "Serbiska Dinar",
+        "ja": "セルビアディナール"
+    },
+    "RUB": {
+        "en": "Russian Ruble",
+        "sv": "Ryska Rubel",
+        "ja": "ロシアルーブル"
+    },
+    "RWF": {
+        "en": "Rwandan Franc",
+        "sv": "Rwandiska Franc",
+        "ja": "ルワンダフラン"
+    },
+    "SAR": {
+        "en": "Saudi Riyal",
+        "sv": "Saudiarabiska Riyal",
+        "ja": "サウジリヤル"
+    },
+    "SDG": {
+        "en": "Sudanese Pound",
+        "sv": "Sudanesiska Pund",
+        "ja": "スーダンポンド"
+    },
+    "SEK": {
+        "en": "Swedish Krona",
+        "sv": "Svenska Kronor",
+        "ja": "スウェーデンクローナ"
+    },
+    "SGD": {
+        "en": "Singapore Dollar",
+        "sv": "Singapore Dollar",
+        "ja": "シンガポールドル"
+    },
+    "SOS": {
+        "en": "Somali Shilling",
+        "sv": "Somaliska Shilling",
+        "ja": "ソマリアシリング"
+    },
+    "SYP": {
+        "en": "Syrian Pound",
+        "sv": "Syriska Pund",
+        "ja": "シリアポンド"
+    },
+    "THB": {
+        "en": "Thai Baht",
+        "sv": "Thailändska Baht",
+        "ja": "タイバーツ"
+    },
+    "TND": {
+        "en": "Tunisian Dinar",
+        "sv": "Tunisiska Dinar",
+        "ja": "チュニジアディナール"
+    },
+    "TOP": {
+        "en": "Tongan Paʻanga",
+        "sv": "Tongan Pa'anga",
+        "ja": "トンガンパンガ"
+    },
+    "TRY": {
+        "en": "Turkish Lira",
+        "sv": "Turkiska Lire",
+        "ja": "トルコリラ"
+    },
+    "TTD": {
+        "en": "Trinidad and Tobago Dollar",
+        "sv": "Trinidad Och Tobago Dollar",
+        "ja": "トリニダードトバゴドル"
+    },
+    "TWD": {
+        "en": "New Taiwan Dollar",
+        "sv": "Ny Taiwanesiska Dollar",
+        "ja": "新台湾ドル"
+    },
+    "TZS": {
+        "en": "Tanzanian Shilling",
+        "sv": "Tanzanianska Shilling",
+        "ja": "タンザニアシリング"
+    },
+    "UAH": {
+        "en": "Ukrainian Hryvnia",
+        "sv": "Ukrainska Hryvnia",
+        "ja": "ウクライナ・グリブナ"
+    },
+    "UGX": {
+        "en": "Ugandan Shilling",
+        "sv": "Ugandanska Shilling",
+        "ja": "ウガンダシリング"
+    },
+    "UYU": {
+        "en": "Uruguayan Peso",
+        "sv": "Uruguayanska Peso",
+        "ja": "ウルグアイペソ"
+    },
+    "UZS": {
+        "en": "Uzbekistan Som",
+        "sv": "Uzbekistanska Som",
+        "ja": "ウズベキスタンサム"
+    },
+    "VEF": {
+        "en": "Venezuelan Bolívar",
+        "sv": "Venezuelanska Bolívar",
+        "ja": "ベネズエラボリバル"
+    },
+    "VND": {
+        "en": "Vietnamese Dong",
+        "sv": "Vietnamesiska Dong",
+        "ja": "ベトナムドン"
+    },
+    "XAF": {
+        "en": "CFA Franc BEAC",
+        "sv": "CFA Franc BEAC",
+        "ja": "CFAフランBEAC"
+    },
+    "XOF": {
+        "en": "CFA Franc BCEAO",
+        "sv": "CFA Franc BCEAO",
+        "ja": "CFAフランBCEAO"
+    },
+    "YER": {
+        "en": "Yemeni Rial",
+        "sv": "Yemeni Rial",
+        "ja": "イエメニリアアル"
+    },
+    "ZAR": {
+        "en": "South African Rand",
+        "sv": "Sydafrikanska Rand",
+        "ja": "南アフリカランド"
+    },
+    "ZMK": {
+        "en": "Zambian Kwacha",
+        "sv": "Zambian Kwacha",
+        "ja": "ザンビアクワチャ"
+    }
+}
