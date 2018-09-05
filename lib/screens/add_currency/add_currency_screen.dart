@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:moneyconverter/l10n/app_localizations.dart';
 import 'package:moneyconverter/screens/add_currency/available_currency_card.dart';
 import 'package:moneyconverter/screens/add_currency/currency_filter.dart';
 import 'package:moneyconverter/screens/add_currency/currency_search_text_field.dart';
@@ -26,7 +27,12 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
           .of(context)
           .appState;
 
-      currencyFilter = new CurrencyFilter(state.availableCurrencies.getList(), state.countries);
+      final appLocalization = AppLocalizations.of(context);
+      currencyFilter = new CurrencyFilter(
+          state.availableCurrencies.getList(),
+          state.countries,
+          appLocalization
+      );
       _applyFilter('');
     }
 

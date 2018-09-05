@@ -19,9 +19,9 @@ abstract class AssetsFolder {
     throw StateError('Failed to find the asset folder, something might have changed');
   }
 
-  static Directory get _inParentFolder => _getDirectory('../assets/data');
+  static Directory get _inParentFolder => _getDirectory('../assets');
 
-  static Directory get _inBaseFolder => _getDirectory('./assets/data');
+  static Directory get _inBaseFolder => _getDirectory('./assets');
 
   static Directory _getDirectory(String relative) {
     return new Directory(Platform.script.resolve(relative).toFilePath());

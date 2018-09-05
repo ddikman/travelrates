@@ -1,4 +1,6 @@
 import 'package:moneyconverter/app_theme.dart';
+import 'package:moneyconverter/l10n/app_localizations.dart';
+import 'package:moneyconverter/model/country.dart';
 import 'package:moneyconverter/model/currency.dart';
 import 'package:moneyconverter/screens/add_currency/add_currency_button.dart';
 import 'package:moneyconverter/state_container.dart';
@@ -13,17 +15,20 @@ class AvailableCurrencyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = StateContainer.of(context).appState;
 
+    final localizations = AppLocalizations.of(context);
+
+    final currencyName = localizations.currencies.getLocalized(currency.code);
     Widget textWidget = Text(
-      "${currency.name}, ${currency.symbol}",
+      "$currencyName, ${currency.symbol}",
       style: TextStyle(fontSize: 18.0),
     );
 
     final relatedCountries = state.countries
         .where((country) => country.currencyCode == currency.code)
         .toList();
+
     if (relatedCountries.length > 1) {
-      final countryNames =
-      relatedCountries.map((country) => country.name).join(", ");
+      final countryNames = _concatenateCountryNames(relatedCountries, localizations);
       textWidget = Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -47,5 +52,11 @@ class AvailableCurrencyCard extends StatelessWidget {
     );
 
     return currencyCard;
+  }
+
+  _concatenateCountryNames(List<Country> relatedCountries, AppLocalizations localizations) {
+    return relatedCountries.map((country) {
+      return localizations.countries.getLocalized(country.name);
+    }).join(", ");
   }
 }
