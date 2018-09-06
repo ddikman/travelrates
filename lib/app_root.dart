@@ -32,8 +32,8 @@ class _AppRootState extends State<AppRoot> {
 
   @override
   void initState() {
-    super.initState();
     mainScreen = new ConvertScreen(stateLoader: widget.stateLoader);
+    super.initState();
   }
 
   @override
