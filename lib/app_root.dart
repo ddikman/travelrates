@@ -1,7 +1,4 @@
-import 'dart:io';
 
-import 'package:intl/intl.dart';
-import 'package:moneyconverter/l10n/app_localizations.dart';
 import 'package:moneyconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:moneyconverter/screens/add_currency/add_currency_screen.dart';
 import 'package:moneyconverter/app_routes.dart';
@@ -11,7 +8,6 @@ import 'package:moneyconverter/l10n/app_localizations_delegate.dart';
 import 'package:moneyconverter/services/state_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 class AppRoot extends StatefulWidget {
 
