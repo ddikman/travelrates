@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:moneyconverter/l10n/app_localizations.dart';
 import 'package:moneyconverter/model/currency.dart';
 import 'package:moneyconverter/services/logger.dart';
 import 'package:moneyconverter/state_container.dart';
@@ -32,8 +33,11 @@ class AddCurrencyButton extends StatelessWidget {
   _displayNotice(BuildContext context) {
     log.event("${currency.name} already added, showing snack instead");
 
+    final localizations = AppLocalizations.of(context);
+    var currencyLocalizedName = localizations.currencies.getLocalized(currency.code);
+
     final snackBar = new SnackBar(
-        content: Text(_alreadySelectedWarning(currency.name))
+        content: Text(_alreadySelectedWarning(currencyLocalizedName))
     );
 
     Scaffold.of(context).showSnackBar(snackBar);

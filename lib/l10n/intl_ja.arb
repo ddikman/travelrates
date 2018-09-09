@@ -1,6 +1,6 @@
 {
   "@@last_modified": "2018-09-05T17:58:08.485563",
-  "_alreadySelectedWarning": "{currencyName} すでに選択されています!",
+  "_alreadySelectedWarning": "{currencyName}すでに選択されています!",
   "@_alreadySelectedWarning": {
     "description": "Text displayed when trying to add a currency that is already added.",
     "type": "text",
