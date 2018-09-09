@@ -2,7 +2,7 @@
     "USD": {
         "en": "US Dollar",
         "sv": "Amerikanska Dollar",
-        "ja": "米ドル"
+        "ja": "アメリカドル"
     },
     "CAD": {
         "en": "Canadian Dollar",
@@ -22,12 +22,12 @@
     "AFN": {
         "en": "Afghan Afghani",
         "sv": "Afghanska Afghanistan",
-        "ja": "アフガニスタンアフガニスタン"
+        "ja": "アフガニスタンアフガニ"
     },
     "ALL": {
         "en": "Albanian Lek",
         "sv": "Albanska Lek",
-        "ja": "アルバニア語レック"
+        "ja": "アルバニアレク"
     },
     "AMD": {
         "en": "Armenian Dram",
@@ -52,7 +52,7 @@
     "BAM": {
         "en": "Bosnia-Herzegovina Convertible Mark",
         "sv": "Bosnien-Hercegovinaska Convertible Mark",
-        "ja": "ボスニア・ヘルツェゴビナ・コンバーチブル・マーク"
+        "ja": "ボスニアヘルツェゴビナコンバーチブルマーク"
     },
     "BDT": {
         "en": "Bangladeshi Taka",
@@ -82,7 +82,7 @@
     "BOB": {
         "en": "Bolivian Boliviano",
         "sv": "Bolivianska Boliviano",
-        "ja": "ボリビアのボリビア人"
+        "ja": "ボリビアボリビアーノ"
     },
     "BRL": {
         "en": "Brazilian Real",
@@ -92,7 +92,7 @@
     "BWP": {
         "en": "Botswanan Pula",
         "sv": "Botswanas Pula",
-        "ja": "ボツワナンプーラ"
+        "ja": "ボツワナプラ"
     },
     "BYR": {
         "en": "Belarusian Ruble",
@@ -137,12 +137,12 @@
     "CVE": {
         "en": "Cape Verdean Escudo",
         "sv": "Kap Verdeanska Escudo",
-        "ja": "カーボベルデ・エスクード"
+        "ja": "カーボベルデエスクード"
     },
     "CZK": {
         "en": "Czech Republic Koruna",
         "sv": "Tjeckiska Koruna",
-        "ja": "チェコ共和国コルナ"
+        "ja": "チェココルナ"
     },
     "DJF": {
         "en": "Djiboutian Franc",
@@ -167,7 +167,7 @@
     "EEK": {
         "en": "Estonian Kroon",
         "sv": "Estniska Kroon",
-        "ja": "エストニアクルン"
+        "ja": "エストニアクローン"
     },
     "EGP": {
         "en": "Egyptian Pound",
@@ -182,12 +182,12 @@
     "ETB": {
         "en": "Ethiopian Birr",
         "sv": "Etiopiska Birr",
-        "ja": "エチオピア・ビア"
+        "ja": "エチオピアビア"
     },
     "GBP": {
         "en": "British Pound Sterling",
         "sv": "Brittiska Pund",
-        "ja": "英ポンド"
+        "ja": "イギリスポンド"
     },
     "GEL": {
         "en": "Georgian Lari",
@@ -217,12 +217,12 @@
     "HNL": {
         "en": "Honduran Lempira",
         "sv": "Honduras Lempira",
-        "ja": "ホンジュラスレムピラ"
+        "ja": "ホンジュラスレンピラ"
     },
     "HRK": {
         "en": "Croatian Kuna",
         "sv": "Kroatiska Kuna",
-        "ja": "クロアチアクナ"
+        "ja": "クロアチアクーナ"
     },
     "HUF": {
         "en": "Hungarian Forint",
@@ -237,7 +237,7 @@
     "ILS": {
         "en": "Israeli New Sheqel",
         "sv": "Israeliska Nya Shekel",
-        "ja": "イスラエルの新しいシェケル"
+        "ja": "イスラエル新シェケル"
     },
     "INR": {
         "en": "Indian Rupee",
@@ -257,7 +257,7 @@
     "ISK": {
         "en": "Icelandic Króna",
         "sv": "Isländska Kronor",
-        "ja": "アイスランドのKróna"
+        "ja": "アイスランドクローナ"
     },
     "JMD": {
         "en": "Jamaican Dollar",
@@ -337,12 +337,12 @@
     "MDL": {
         "en": "Moldovan Leu",
         "sv": "Moldaviska Leu",
-        "ja": "モルドバン・ルー"
+        "ja": "モルドバンルー"
     },
     "MGA": {
         "en": "Malagasy Ariary",
         "sv": "Malagasiska Ariary",
-        "ja": "マダガスカル・アリアリ"
+        "ja": "マダガスカルアリアリ"
     },
     "MKD": {
         "en": "Macedonian Denar",
@@ -372,12 +372,12 @@
     "MYR": {
         "en": "Malaysian Ringgit",
         "sv": "Malaysiska Ringgit",
-        "ja": "マレーシアリンギ"
+        "ja": "マレーシアリンギット"
     },
     "MZN": {
         "en": "Mozambican Metical",
         "sv": "Mocambicanska Metical",
-        "ja": "モザンビーク・メタリック"
+        "ja": "モザンビークメタリック"
     },
     "NAD": {
         "en": "Namibian Dollar",
@@ -442,17 +442,17 @@
     "PYG": {
         "en": "Paraguayan Guarani",
         "sv": "Paraguayanska Guarani",
-        "ja": "パラグアイ・グアラニ"
+        "ja": "パラグアイグアラニ"
     },
     "QAR": {
         "en": "Qatari Rial",
         "sv": "Qatari Rial",
-        "ja": "カタールリーアル"
+        "ja": "カタールリヤル"
     },
     "RON": {
         "en": "Romanian Leu",
         "sv": "Rumänska Leu",
-        "ja": "ルーマニアのLeu"
+        "ja": "ルーマニアレイ"
     },
     "RSD": {
         "en": "Serbian Dinar",
@@ -512,7 +512,7 @@
     "TOP": {
         "en": "Tongan Paʻanga",
         "sv": "Tongan Pa'anga",
-        "ja": "トンガンパンガ"
+        "ja": "トンガパアンガ"
     },
     "TRY": {
         "en": "Turkish Lira",
@@ -537,7 +537,7 @@
     "UAH": {
         "en": "Ukrainian Hryvnia",
         "sv": "Ukrainska Hryvnia",
-        "ja": "ウクライナ・グリブナ"
+        "ja": "ウクライナグリブナ"
     },
     "UGX": {
         "en": "Ugandan Shilling",
@@ -572,12 +572,12 @@
     "XOF": {
         "en": "CFA Franc BCEAO",
         "sv": "CFA Franc BCEAO",
-        "ja": "CFAフランBCEAO"
+        "ja": "CFAフラン (BCEAO)"
     },
     "YER": {
         "en": "Yemeni Rial",
         "sv": "Yemeni Rial",
-        "ja": "イエメニリアアル"
+        "ja": "イエメンリアル"
     },
     "ZAR": {
         "en": "South African Rand",

@@ -1,0 +1,29 @@
+{
+  "@@last_modified": "2018-09-05T17:58:08.485563",
+  "_alreadySelectedWarning": "{currencyName} すでに選択されています!",
+  "@_alreadySelectedWarning": {
+    "description": "Text displayed when trying to add a currency that is already added.",
+    "type": "text",
+    "placeholders": {
+      "currencyName": {}
+    }
+  },
+  "ADD CURRENCY": "レート追加",
+  "@ADD CURRENCY": {
+    "description": "Add currency screen title.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "Search country or currency code": "名または国別コードを検索",
+  "@Search country or currency code": {
+    "description": "Help text above currency search field.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "CONVERT": "換算",
+  "@CONVERT": {
+    "description": "Convert screen main title",
+    "type": "text",
+    "placeholders": {}
+  }
+}

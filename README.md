@@ -14,7 +14,7 @@ For help getting started with Flutter, view our online
 Run the Intl commands to scrape code for existing messages that need localizations and then generate code files for these.
 ```bash
 $ flutter pub pub run intl_translation:extract_to_arb --output-dir=lib/l10n lib/**/**/*.dart --output-file=intl_en.arb
-$ flutter pub pub run intl_translation:generate_from_arb --no-use-deferred-loading --output-dir=lib/l10n lib/l10n/app_localizations.dart lib/l10n/intl*.arb
+$ flutter pub pub run intl_translation:generate_from_arb --no-use-deferred-loading --output-dir=lib/l10n lib/**/**/*.dart lib/l10n/intl*.arb
 ```
 
 ### Api tokens
