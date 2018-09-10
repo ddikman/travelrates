@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:moneyconverter/asset_paths.dart';
 
 class CountryNameLocalizations {
@@ -10,9 +10,9 @@ class CountryNameLocalizations {
 
   CountryNameLocalizations(this._countryNames);
 
-  static Future<CountryNameLocalizations> loadFrom(String locale) async {
-    // TODO: find a way to not use the rootBundle here to avoid static accessors
-    final json = await rootBundle.loadString(AssetPaths.localizedCountriesJson);
+  static Future<CountryNameLocalizations> loadFrom(BuildContext context, String locale) async {
+    var assets = DefaultAssetBundle.of(context);
+    final json = await assets.loadString(AssetPaths.localizedCountriesJson);
     final localized = load(json, locale);
     return new CountryNameLocalizations(localized);
   }

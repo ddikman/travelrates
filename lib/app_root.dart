@@ -35,7 +35,7 @@ class _AppRootState extends State<AppRoot> {
       title: 'TravelRates',
       theme: _constructTheme(),
       localizationsDelegates: [
-        const AppLocalizationsDelegate(),
+        AppLocalizationsDelegate(context),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         const FallbackMaterialLocalisationsDelegate()

@@ -16,14 +16,14 @@ class AppLocalizations {
 
   AppLocalizations(this._countries, this._currencies);
 
-  static Future<AppLocalizations> load(Locale locale) async {
+  static Future<AppLocalizations> load(Locale locale, BuildContext context) async {
     final String name = locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
 
     print("Initializing localisations for '$localeName'.");
 
-    final countries = await CountryNameLocalizations.loadFrom(locale.languageCode);
-    final currencies = await CurrencyLocalizations.loadFrom(locale.languageCode);
+    final countries = await CountryNameLocalizations.loadFrom(context, locale.languageCode);
+    final currencies = await CurrencyLocalizations.loadFrom(context, locale.languageCode);
 
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
