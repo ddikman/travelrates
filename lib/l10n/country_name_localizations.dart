@@ -20,19 +20,16 @@ class CountryNameLocalizations {
   static Map<String, String> load(String json, String locale) {
     final countryNames = new Map<String, String>();
 
-    final Map countriesList = JsonDecoder().convert(json);
-    countriesList.forEach((countryName, translations) {
+    final List countries = JsonDecoder().convert(json);
+    countries.forEach((localizedNames) {
+      // map it by the English name
+      var key = localizedNames['en'];
 
-      // default to the key
-      if (locale == 'en') {
-        countryNames[countryName] == countryName;
-        return;
+      if (!localizedNames.containsKey(locale)) {
+         throw new StateError("Missing localization for country '$key' and locale '$locale'.");
       }
 
-       if (!translations.containsKey(locale)) {
-         throw new StateError("Missing localization for country '$countryName' and locale '$locale'.");
-       }
-       countryNames[countryName] = translations[locale];
+      countryNames[key] = localizedNames[locale];
     });
 
     return countryNames;
