@@ -19,11 +19,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m0(currencyName) => "${currencyName} är redan tillagd!";
 
+  static m1(currencyCode) => "${currencyCode} att konvertera";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "ADD CURRENCY" : MessageLookupByLibrary.simpleMessage("VÄLJ VALUTA"),
     "CONVERT" : MessageLookupByLibrary.simpleMessage("KONVERTERA"),
     "Search country or currency code" : MessageLookupByLibrary.simpleMessage("Sök land eller valuta"),
-    "_alreadySelectedWarning" : m0
+    "_alreadySelectedWarning" : m0,
+    "_convertTitle" : m1,
+    "_submitLabel" : MessageLookupByLibrary.simpleMessage("KONVERTERA")
   };
 }

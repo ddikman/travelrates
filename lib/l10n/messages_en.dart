@@ -19,11 +19,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m0(currencyName) => "${currencyName} is already selected!";
 
+  static m1(currencyCode) => "${currencyCode} to convert";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "ADD CURRENCY" : MessageLookupByLibrary.simpleMessage("ADD CURRENCY"),
     "CONVERT" : MessageLookupByLibrary.simpleMessage("CONVERT"),
     "Search country or currency code" : MessageLookupByLibrary.simpleMessage("Search country or currency code"),
-    "_alreadySelectedWarning" : m0
+    "_alreadySelectedWarning" : m0,
+    "_convertTitle" : m1,
+    "_submitLabel" : MessageLookupByLibrary.simpleMessage("CONVERT")
   };
 }

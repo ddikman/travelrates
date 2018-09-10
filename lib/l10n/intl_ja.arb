@@ -20,6 +20,20 @@
     "type": "text",
     "placeholders": {}
   },
+  "_submitLabel": "換算",
+    "@_submitLabel": {
+      "description": "Convert dialog button text",
+      "type": "text",
+      "placeholders": {}
+    },
+    "_convertTitle": "{currencyCode}入力",
+      "@_convertTitle": {
+        "description": "Text displayed at the top of the convert dialog.",
+        "type": "text",
+        "placeholders": {
+          "currencyCode": {}
+        }
+      },
   "CONVERT": "換算",
   "@CONVERT": {
     "description": "Convert screen main title",

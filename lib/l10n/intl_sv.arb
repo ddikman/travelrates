@@ -20,6 +20,20 @@
         "type": "text",
         "placeholders": {}
       },
+    "_submitLabel": "KONVERTERA",
+      "@_submitLabel": {
+        "description": "Convert dialog button text",
+        "type": "text",
+        "placeholders": {}
+      },
+  "_convertTitle": "{currencyCode} att konvertera",
+    "@_convertTitle": {
+      "description": "Text displayed at the top of the convert dialog.",
+      "type": "text",
+      "placeholders": {
+        "currencyCode": {}
+      }
+    },
   "CONVERT": "KONVERTERA",
   "@CONVERT": {
     "description": "Convert screen main title",

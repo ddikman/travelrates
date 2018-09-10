@@ -18,7 +18,6 @@ class CountryNameLocalizations {
   }
 
   static Map<String, String> load(String json, String locale) {
-
     final countryNames = new Map<String, String>();
 
     final Map countriesList = JsonDecoder().convert(json);
@@ -26,7 +25,7 @@ class CountryNameLocalizations {
 
       // default to the key
       if (locale == 'en') {
-        countryName[countryName] == countryName;
+        countryNames[countryName] == countryName;
         return;
       }
 
