@@ -28,7 +28,7 @@ class AvailableCurrencyCard extends StatelessWidget {
         .toList();
 
     if (relatedCountries.length > 1) {
-      final countryNames = _concatenateCountryNames(relatedCountries, localizations);
+      final countryNames = _groupLocalizedNames(relatedCountries, localizations);
       textWidget = Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -54,7 +54,7 @@ class AvailableCurrencyCard extends StatelessWidget {
     return currencyCard;
   }
 
-  _concatenateCountryNames(List<Country> relatedCountries, AppLocalizations localizations) {
+  _groupLocalizedNames(List<Country> relatedCountries, AppLocalizations localizations) {
     return relatedCountries.map((country) {
       return localizations.countries.getLocalized(country.name);
     }).join(", ");
