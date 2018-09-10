@@ -37,11 +37,11 @@ class CountryNameLocalizations {
 
 
   String getLocalized(String countryName) {
-    if (_countryNames.containsKey(countryName)) {
-      return _countryNames[countryName];
+    if (!_countryNames.containsKey(countryName)) {
+      print("Missing localization for country '$countryName'.");
+      return countryName;
     }
 
-    print("Missing localization for country '$countryName'.");
-    return countryName;
+    return _countryNames[countryName];
   }
 }
