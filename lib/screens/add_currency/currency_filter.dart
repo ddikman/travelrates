@@ -16,7 +16,7 @@ class CurrencyFilter {
 
     // no filter => all currencies
     if (filterText.isEmpty) {
-      return _sorted(List.from(this.currencies));
+      return List.from(this.currencies);
     }
 
     final matchingCountries = List<Country>.from(countries);
@@ -28,12 +28,7 @@ class CurrencyFilter {
         _currencyMatchesFilter(currency, filterText) ||
         _currencyMatchesCountry(currency, matchingCountries));
 
-    return _sorted(filteredCurrencies);
-  }
-
-  List<Currency> _sorted(List<Currency> currencies) {
-    return alphabeticallySorted<Currency>(
-        currencies, (currency) => currency.name);
+    return filteredCurrencies;
   }
 
   bool _countryMatchesFilter(Country country, String filterText) {

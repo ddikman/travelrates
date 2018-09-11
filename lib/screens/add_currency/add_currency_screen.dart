@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:moneyconverter/helpers/sorting.dart';
 import 'package:moneyconverter/l10n/app_localizations.dart';
 import 'package:moneyconverter/screens/add_currency/available_currency_card.dart';
 import 'package:moneyconverter/screens/add_currency/currency_filter.dart';
@@ -74,7 +75,12 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
 
   _applyFilter(String filterText) {
     setState((){
-      this.currencies = currencyFilter.getFiltered(filterText);
+      this.currencies = _sorted(currencyFilter.getFiltered(filterText));
     });
+  }
+
+  List<Currency> _sorted(List<Currency> currencies) {
+    return alphabeticallySorted<Currency>(
+        currencies, (currency) => currency.name);
   }
 }
