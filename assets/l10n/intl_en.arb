@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2018-09-10T13:08:26.154627",
+  "@@last_modified": "2018-09-12T23:03:11.955002",
   "_alreadySelectedWarning": "{currencyName} is already selected!",
   "@_alreadySelectedWarning": {
     "description": "Text displayed when trying to add a currency that is already added.",

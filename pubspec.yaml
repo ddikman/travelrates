@@ -40,10 +40,6 @@ flutter:
     - assets/data/rates.json
     - assets/data/countries.json
 
-    # Localization assets
-    - assets/l10n/countries.json
-    - assets/l10n/currencies.json
-
     # Contains the secret api keys, needs to be manually added on each client.
     # I wish this could be managed in a better way but Flutter currently does not allow
     # for using build time environment variables so this is the currently recommended approach.
