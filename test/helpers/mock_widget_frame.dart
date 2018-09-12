@@ -24,7 +24,7 @@ class _MockWidgetFrameState extends State<MockWidgetFrame> {
         state: mockAppState(),
         child: MaterialApp(
             localizationsDelegates: [
-              AppLocalizationsDelegate(context),
+              const AppLocalizationsDelegate(),
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               const FallbackMaterialLocalisationsDelegate()

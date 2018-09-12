@@ -5,9 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:moneyconverter/l10n/app_localizations.dart';
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
-  final BuildContext _context;
 
-  const AppLocalizationsDelegate(this._context);
+  const AppLocalizationsDelegate();
 
   static List<Locale> get supportedLocales => [
     const Locale('en', 'GB'),
@@ -29,6 +28,6 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
 
   @override
   Future<AppLocalizations> load(Locale locale) {
-    return AppLocalizations.load(locale, _context);
+    return AppLocalizations.load(locale);
   }
 }
