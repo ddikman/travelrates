@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:moneyconverter/app_root.dart';
 import 'package:moneyconverter/screens/add_currency/add_currency_screen.dart';
-import 'package:moneyconverter/screens/convert/convert_screen.dart';
 import 'package:moneyconverter/state_container.dart';
 import 'package:flutter_test/flutter_test.dart';
 

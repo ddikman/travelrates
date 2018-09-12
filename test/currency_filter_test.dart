@@ -1,6 +1,5 @@
 import 'package:moneyconverter/l10n/app_localizations.dart';
 import 'package:moneyconverter/l10n/country_localizations.dart';
-import 'package:moneyconverter/l10n/country_name_localizations.dart';
 import 'package:moneyconverter/l10n/currency_localizations.dart';
 import 'package:moneyconverter/model/country.dart';
 import 'package:moneyconverter/screens/add_currency/currency_filter.dart';
