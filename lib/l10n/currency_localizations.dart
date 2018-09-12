@@ -11,7 +11,7 @@ class CurrencyLocalizations {
   CurrencyLocalizations(this._currencies);
 
   static Future<CurrencyLocalizations> loadFrom(BuildContext context, String locale) async {
-    var assets = DefaultAssetBundle.of(context);
+    final assets = DefaultAssetBundle.of(context);
     final json = await assets.loadString(AssetPaths.localizedCurrenciesJson);
     final localized = load(json, locale);
     return new CurrencyLocalizations(localized);

@@ -22,6 +22,8 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
+
     // load initial state once
     if (this.currencyFilter == null) {
       final state = StateContainer
@@ -30,14 +32,11 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
 
       final appLocalization = AppLocalizations.of(context);
       currencyFilter = new CurrencyFilter(
-          state.availableCurrencies.getList(),
           state.countries,
           appLocalization
       );
-      _applyFilter('');
+      _filterCurrencies('');
     }
-
-    super.didChangeDependencies();
   }
 
   @override
@@ -48,8 +47,9 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
         .map((currency) => new AvailableCurrencyCard(currency))
         .toList();
 
+
     final searchField = new CurrencySearchTextField(
-      filterChanged: _applyFilter,
+      filterChanged: _filterCurrencies,
     );
 
     final body = new Padding(
@@ -73,9 +73,13 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
     desc: "Add currency screen title."
   );
 
-  _applyFilter(String filterText) {
+  _filterCurrencies(String filterText) {
+    final state = StateContainer.of(context).appState;
+    final allCurrencies = state.availableCurrencies.getList();
+    final filteredCurrencies = currencyFilter.getFiltered(allCurrencies, filterText);
+
     setState((){
-      this.currencies = _sorted(currencyFilter.getFiltered(filterText));
+      this.currencies = _sorted(filteredCurrencies);
     });
   }
 

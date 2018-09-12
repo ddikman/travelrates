@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:moneyconverter/app_state.dart';
 import 'package:moneyconverter/model/conversion_model.dart';
 import 'package:moneyconverter/model/currency_rate.dart';
@@ -35,12 +34,13 @@ class StateContainerState extends State<StateContainer> {
   AppState appState;
 
   @override
-  Future<Null> didChangeDependencies() async {
-    super.didChangeDependencies();
-
+  void initState() {
     if (widget.state != null) {
+      print("Loaded app with defined state.");
       appState = widget.state;
     }
+
+    super.initState();
   }
 
   @override
