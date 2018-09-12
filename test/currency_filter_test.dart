@@ -1,4 +1,5 @@
 import 'package:moneyconverter/l10n/app_localizations.dart';
+import 'package:moneyconverter/l10n/country_localizations.dart';
 import 'package:moneyconverter/l10n/country_name_localizations.dart';
 import 'package:moneyconverter/l10n/currency_localizations.dart';
 import 'package:moneyconverter/model/country.dart';
@@ -9,17 +10,8 @@ import 'mocks/mock_currency.dart';
 
 void main() {
 
-  final countryLocalizations = new CountryNameLocalizations({
-    "United States": "Amerika",
-    "United Kingdom": "Storbritannien",
-    "Germany": "Tyskland"
-  });
-
-  final currencyLocalizations = new CurrencyLocalizations({
-    "EUR": "Euro",
-    "USD": "Amerikanska dollar",
-    "GBP": "Brittiska pund"
-  });
+  final countryLocalizations = new CountryLocalizations('sv');
+  final currencyLocalizations = new CurrencyLocalizations('sv');
   final localizations = new AppLocalizations(countryLocalizations, currencyLocalizations);
 
   final countries = [
