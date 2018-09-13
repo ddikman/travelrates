@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:moneyconverter/app_theme.dart';
 import 'package:moneyconverter/model/currency.dart';
 import 'package:flutter/material.dart';
@@ -24,16 +25,14 @@ class CurrencySearchTextFieldState extends State<CurrencySearchTextField> {
   @override
   Widget build(BuildContext context) {
 
-    const hint = "Search country or currency code";
-
     final textField = TextField(
       autofocus: true,
       onChanged: widget.filterChanged,
       style: TextStyle(color: AppTheme.primaryColor),
       decoration: InputDecoration(
           contentPadding: EdgeInsets.all(4.0),
-          hintText: hint,
-          labelText: hint,
+          hintText: _hint,
+          labelText: _hint,
           labelStyle: Theme.of(context).textTheme.display1
               .copyWith(
               fontSize: 14.0,
@@ -54,4 +53,9 @@ class CurrencySearchTextFieldState extends State<CurrencySearchTextField> {
       ),
     );
   }
+
+  String get _hint => Intl.message(
+      "Search country or currency code",
+      desc: "Help text above currency search field."
+  );
 }

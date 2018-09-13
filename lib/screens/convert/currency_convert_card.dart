@@ -1,3 +1,4 @@
+import 'package:moneyconverter/l10n/app_localizations.dart';
 import 'package:moneyconverter/services/logger.dart';
 import 'package:moneyconverter/widgets/animate_in.dart';
 import 'package:moneyconverter/app_theme.dart';
@@ -35,6 +36,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
   @override
   Widget build(BuildContext context) {
     final state = StateContainer.of(context).appState;
+    final localization = AppLocalizations.of(context);
 
     var currentValue = state.conversion.getAmountInCurrency(widget.currency);
 
@@ -45,7 +47,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
       padding: const EdgeInsets.only(left: 10.0),
       child: Align(
         alignment: Alignment.centerLeft,
-        child: Text(widget.currency.name,
+        child: Text(localization.currencies.getLocalized(widget.currency.code),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.body1.copyWith(fontSize: 14.0)),

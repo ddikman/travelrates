@@ -1,4 +1,4 @@
-import 'package:moneyconverter/screens/app_root.dart';
+import 'package:moneyconverter/app_root.dart';
 import 'package:moneyconverter/services/persisted_state_loader.dart';
 import 'package:flutter/material.dart';
 

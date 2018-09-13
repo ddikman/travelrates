@@ -9,6 +9,21 @@ For help getting started with Flutter, view our online
 
 ## Building releases
 
+### Generating localizations
+
+Run the Intl commands to scrape code for existing messages that need localizations and then generate code files for these.
+```bash
+$ flutter pub pub run intl_translation:extract_to_arb --output-dir=assets/l10n lib/**/**/*.dart --output-file=intl_en.arb
+$ flutter pub pub run intl_translation:generate_from_arb --no-use-deferred-loading --output-dir=lib/l10n lib/**/**/*.dart assets/l10n/intl*.arb
+```
+
+To generate new localizations for country names and currencies, with NodeJs v10.9+ run (from project root folder):
+```bash
+$ node tools/generate_localizations.js
+```
+
+This will look at the `countries.json` and `currencies.json` files in `assets/l10n/` and generate output dart files with hardcoded maps into the `lib/l10n/` folder.  
+
 ### Api tokens
 The hidden api tokens and api url should be stored in json format alike this below in `assets/data/apiConfiguration.json`.
 

@@ -1,0 +1,43 @@
+{
+  "@@last_modified": "2018-09-12T23:03:11.955002",
+  "_alreadySelectedWarning": "{currencyName} is already selected!",
+  "@_alreadySelectedWarning": {
+    "description": "Text displayed when trying to add a currency that is already added.",
+    "type": "text",
+    "placeholders": {
+      "currencyName": {}
+    }
+  },
+  "ADD CURRENCY": "ADD CURRENCY",
+  "@ADD CURRENCY": {
+    "description": "Add currency screen title.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "Search country or currency code": "Search country or currency code",
+  "@Search country or currency code": {
+    "description": "Help text above currency search field.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_submitLabel": "CONVERT",
+  "@_submitLabel": {
+    "description": "Convert dialog button text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_convertTitle": "{currencyCode} to convert",
+  "@_convertTitle": {
+    "description": "Text displayed at the top of the convert dialog.",
+    "type": "text",
+    "placeholders": {
+      "currencyCode": {}
+    }
+  },
+  "CONVERT": "CONVERT",
+  "@CONVERT": {
+    "description": "Convert screen main title",
+    "type": "text",
+    "placeholders": {}
+  }
+}

@@ -1,4 +1,5 @@
-import 'package:moneyconverter/screens/app_root.dart';
+import 'package:moneyconverter/app_root.dart';
+import 'package:moneyconverter/screens/add_currency/add_currency_screen.dart';
 import 'package:moneyconverter/state_container.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -6,9 +7,8 @@ import 'mocks/mock_app_state.dart';
 import 'mocks/mocked_state_loader.dart';
 
 void main() {
-  testWidgets('Application main widget can be instantiated',
+  testWidgets('When application starts, the add currency screen is displayed first time',
       (WidgetTester tester) async {
-
     final mockStateLoader = new MockedStateLoader(mockAppState());
     final appRoot = new AppRoot(stateLoader: mockStateLoader);
 
@@ -18,5 +18,7 @@ void main() {
     // if we don't do this we'll get an exception complaining that timers
     // haven't been disposed
     await tester.pumpAndSettle();
+
+    expect(find.byType(AddCurrencyScreen), findsOneWidget);
   });
 }

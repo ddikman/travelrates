@@ -2,12 +2,14 @@ name: moneyconverter
 description: Handy multi-currency converter specifically for backpackers.
 
 dependencies:
-  intl: ^0.15.6
   path_provider: ^0.4.1
   http: ^0.11.3+16
   connectivity: ^0.3.1
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -17,9 +19,9 @@ dependencies:
 dev_dependencies:
   flutter_driver:
     sdk: flutter
-
   flutter_test:
     sdk: flutter
+  intl_translation:
 
 
 # For information on the generic Dart part of this file, see the

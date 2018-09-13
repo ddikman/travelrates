@@ -1,0 +1,43 @@
+{
+  "@@last_modified": "2018-09-05T13:03:16.320910",
+    "_alreadySelectedWarning": "{currencyName} är redan tillagd!",
+    "@_alreadySelectedWarning": {
+      "description": "Text displayed when trying to add a currency that is already added.",
+      "type": "text",
+      "placeholders": {
+        "currencyName": {}
+      }
+    },
+    "ADD CURRENCY": "VÄLJ VALUTA",
+      "@ADD CURRENCY": {
+        "description": "Add currency screen title.",
+        "type": "text",
+        "placeholders": {}
+      },
+      "Search country or currency code": "Sök land eller valuta",
+      "@Search country or currency code": {
+        "description": "Help text above currency search field.",
+        "type": "text",
+        "placeholders": {}
+      },
+    "_submitLabel": "KONVERTERA",
+      "@_submitLabel": {
+        "description": "Convert dialog button text",
+        "type": "text",
+        "placeholders": {}
+      },
+  "_convertTitle": "{currencyCode} att konvertera",
+    "@_convertTitle": {
+      "description": "Text displayed at the top of the convert dialog.",
+      "type": "text",
+      "placeholders": {
+        "currencyCode": {}
+      }
+    },
+  "CONVERT": "KONVERTERA",
+  "@CONVERT": {
+    "description": "Convert screen main title",
+    "type": "text",
+    "placeholders": {}
+  }
+}

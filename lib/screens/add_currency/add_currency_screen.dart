@@ -1,3 +1,6 @@
+import 'package:intl/intl.dart';
+import 'package:moneyconverter/helpers/sorting.dart';
+import 'package:moneyconverter/l10n/app_localizations.dart';
 import 'package:moneyconverter/screens/add_currency/available_currency_card.dart';
 import 'package:moneyconverter/screens/add_currency/currency_filter.dart';
 import 'package:moneyconverter/screens/add_currency/currency_search_text_field.dart';
@@ -19,17 +22,21 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
+
     // load initial state once
     if (this.currencyFilter == null) {
       final state = StateContainer
           .of(context)
           .appState;
 
-      currencyFilter = new CurrencyFilter(state.availableCurrencies.getList(), state.countries);
-      _applyFilter('');
+      final appLocalization = AppLocalizations.of(context);
+      currencyFilter = new CurrencyFilter(
+          state.countries,
+          appLocalization
+      );
+      _filterCurrencies('');
     }
-
-    super.didChangeDependencies();
   }
 
   @override
@@ -40,8 +47,9 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
         .map((currency) => new AvailableCurrencyCard(currency))
         .toList();
 
+
     final searchField = new CurrencySearchTextField(
-      filterChanged: _applyFilter,
+      filterChanged: _filterCurrencies,
     );
 
     final body = new Padding(
@@ -50,7 +58,7 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('ADD CURRENCY'),
+          title: Text(_screenTitle),
           centerTitle: true,
           bottom: new PreferredSize(
             child: searchField,
@@ -60,9 +68,23 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
         body: BackgroundContainer(child: body));
   }
 
-  _applyFilter(String filterText) {
+  String get _screenTitle => Intl.message(
+    "ADD CURRENCY",
+    desc: "Add currency screen title."
+  );
+
+  _filterCurrencies(String filterText) {
+    final state = StateContainer.of(context).appState;
+    final allCurrencies = state.availableCurrencies.getList();
+    final filteredCurrencies = currencyFilter.getFiltered(allCurrencies, filterText);
+
     setState((){
-      this.currencies = currencyFilter.getFiltered(filterText);
+      this.currencies = _sorted(filteredCurrencies);
     });
+  }
+
+  List<Currency> _sorted(List<Currency> currencies) {
+    return alphabeticallySorted<Currency>(
+        currencies, (currency) => currency.name);
   }
 }

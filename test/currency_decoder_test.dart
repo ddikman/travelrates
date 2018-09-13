@@ -11,8 +11,8 @@ void main() {
 
   test('can decode the embedded asset files for currencies and rates', () async {
     final assets = await AssetsFolder.path;
-    var currencies = await new File('$assets/currencies.json').readAsString();
-    var rates = await new File('$assets/rates.json').readAsString();
+    var currencies = await new File('$assets/data/currencies.json').readAsString();
+    var rates = await new File('$assets/data/rates.json').readAsString();
     final repository = await decoder.decode(currencies, rates);
 
     expect(repository.baseCurrency.code, 'EUR');

@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:moneyconverter/app_theme.dart';
 import 'package:moneyconverter/screens/convert/currency_input_formatter.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class ConvertDialog extends StatelessWidget {
       ],
       onSubmitted: (value) => _submit(context),
       decoration: InputDecoration(
-          border: OutlineInputBorder(), labelText: '$currencyCode to convert'),
+          border: OutlineInputBorder(), labelText: _convertTitle(currencyCode)),
     );
 
     final submitButton = new Padding(
@@ -34,7 +35,7 @@ class ConvertDialog extends StatelessWidget {
         child: new FlatButton(
           onPressed: () => _submit(context),
           child: new Text(
-            'CONVERT',
+            _submitLabel,
             style: Theme.of(context).textTheme.display1.copyWith(
               fontSize: 16.0
             ),
@@ -53,6 +54,21 @@ class ConvertDialog extends StatelessWidget {
           children: <Widget>[textField, submitButton],
         ),
       ),
+    );
+  }
+
+  String get _submitLabel => Intl.message(
+      "CONVERT",
+      name: '_submitLabel',
+      desc: "Convert dialog button text"
+  );
+
+  String _convertTitle(String currencyCode) {
+    return Intl.message(
+        '$currencyCode to convert',
+        name: "_convertTitle",
+        desc: "Text displayed at the top of the convert dialog.",
+        args: [currencyCode]
     );
   }
 
