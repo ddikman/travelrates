@@ -43,9 +43,18 @@ class AddCurrencyButton extends StatelessWidget {
     Scaffold.of(context).showSnackBar(snackBar);
   }
 
+  int _currentNumberOfCurrencies(StateContainerState stateContainer) {
+    return stateContainer.appState.conversion.currencies.length;
+  }
+
   _addCurrency(BuildContext context) {
-    final stateContainer = StateContainer.of(context);
-    stateContainer.addCurrency(currency.code);
+    final state = StateContainer.of(context);
+    state.addCurrency(currency.code);
+
+    // if it is the first currency we add, it should be the refence 1
+    if (_currentNumberOfCurrencies(state) == 1) {
+      state.setAmount(1.0, currency);
+    }
 
     // return to previous screen
     Navigator.of(context).pop();

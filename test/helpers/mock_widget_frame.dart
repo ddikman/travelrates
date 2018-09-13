@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:moneyconverter/app_state.dart';
 import 'package:moneyconverter/l10n/app_localizations_delegate.dart';
 import 'package:moneyconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:moneyconverter/state_container.dart';
@@ -9,7 +10,9 @@ import '../mocks/mock_app_state.dart';
 class MockWidgetFrame extends StatefulWidget {
   final Widget _child;
 
-  MockWidgetFrame({Widget child}) : this._child = child;
+  final AppState appState;
+
+  MockWidgetFrame({Widget child, this.appState}) : this._child = child;
 
   @override
   _MockWidgetFrameState createState() {
@@ -18,10 +21,11 @@ class MockWidgetFrame extends StatefulWidget {
 }
 
 class _MockWidgetFrameState extends State<MockWidgetFrame> {
+
   @override
   Widget build(BuildContext context) {
     return new StateContainer(
-        state: mockAppState(),
+        state: widget.appState ?? mockAppState(),
         child: MaterialApp(
             localizationsDelegates: [
               const AppLocalizationsDelegate(),
