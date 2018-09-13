@@ -46,9 +46,7 @@ flutter:
     - assets/data/apiConfiguration.json
 
     # Android studio will warn that these doesn't exist but they do and it works just fine
-    // ignore: asset_does_not_exist
     - assets/images/flags/
-    // ignore: asset_does_not_exist
     - assets/images/flags/2x/
 
   fonts:
