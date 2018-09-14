@@ -7,10 +7,8 @@ class AnimateIn extends StatefulWidget {
 
   final Duration delay;
 
-  final bool move;
-
   const AnimateIn(
-      {Key key, this.child, this.delay = Duration.zero, this.move = true})
+      {Key key, this.child, this.delay = Duration.zero})
       : super(key: key);
 
   @override
@@ -20,6 +18,9 @@ class AnimateIn extends StatefulWidget {
 }
 
 class AnimateInState extends State<AnimateIn> with TickerProviderStateMixin {
+
+  static final _defaultDuration = Duration(milliseconds: 400);
+
   Animation<Offset> _animatedPosition;
 
   Animation<double> _animatedOpacity;
@@ -28,8 +29,7 @@ class AnimateInState extends State<AnimateIn> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    _controller = new AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1000));
+    _controller = new AnimationController(vsync: this, duration: _defaultDuration);
 
     _animatedPosition = new Tween<Offset>(
       begin: const Offset(0.0, 0.5),
@@ -68,16 +68,12 @@ class AnimateInState extends State<AnimateIn> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    Widget animation =
-        FadeTransition(child: widget.child, opacity: _animatedOpacity);
-
-    if (widget.move) {
-      animation = SlideTransition(
-        child: animation,
-        position: _animatedPosition,
-      );
-    }
-
-    return animation;
+    return SlideTransition(
+      child: FadeTransition(
+          child: widget.child,
+          opacity: _animatedOpacity
+      ),
+      position: _animatedPosition,
+    );
   }
 }

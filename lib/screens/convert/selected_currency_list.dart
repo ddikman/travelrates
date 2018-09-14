@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class SelectedCurrencyList extends StatelessWidget {
-  static const int _msDelayBetweenItemAppearance = 100;
+  static const int _msDelayBetweenItemAppearance = 60;
 
   @override
   Widget build(BuildContext context) {
