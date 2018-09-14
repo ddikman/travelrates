@@ -35,9 +35,19 @@ The hidden api tokens and api url should be stored in json format alike this bel
 ```
 
 ### Android
+Before building, review the build configuration in `android/app/build.gradle` to make sure the version number has been incremented.
+
 To build the android release apk you simply run `flutter build apk`. However, before that you'll need to create a local keystore of course.
 Make sure you store this some good place (outside of source control) and then reference it in the a `key.properties` file placed in the `android` folder.
 This is referenced by the `android/app/build.gradle` signing settings.
+
+
+### iOS
+First up open xcode and in the `Runner > General` section ensure the version number is updated.
+
+Then run Product > Archive and click `Validate...`.
+
+When this is done you can do `Upload to App Store...`.
 
 ## Description
 

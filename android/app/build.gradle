@@ -29,8 +29,8 @@ android {
         applicationId "se.greycastle.moneyconverter"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 2
-        versionName "1.0"
+        versionCode 3
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
