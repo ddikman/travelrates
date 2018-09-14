@@ -9,8 +9,6 @@ class CurrencySearchTextField extends StatefulWidget {
 
   final ValueChanged<String> filterChanged;
 
-  static final currencySearchTextField = Key("Currency search text field");
-
   const CurrencySearchTextField({
     Key key,
     @required this.filterChanged,
@@ -28,7 +26,6 @@ class CurrencySearchTextFieldState extends State<CurrencySearchTextField> {
   Widget build(BuildContext context) {
 
     final textField = TextField(
-      key: CurrencySearchTextField.currencySearchTextField,
       autofocus: true,
       onChanged: widget.filterChanged,
       style: TextStyle(color: AppTheme.primaryColor),

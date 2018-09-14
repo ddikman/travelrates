@@ -11,9 +11,6 @@ import 'package:flutter/material.dart';
 class CurrencyConvertCard extends StatefulWidget {
   static const height = 65.0;
 
-  static final currencyCodeKey = Key('Currency code');
-  static final currencyAmountKey = Key('Currency amount');
-
   final Currency currency;
 
   final Duration animationDelay;
@@ -112,7 +109,6 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         Text(CurrencyInputFormatter.formatValue(amount),
-          key: CurrencyConvertCard.currencyAmountKey,
           style: Theme
               .of(context)
               .textTheme
@@ -122,7 +118,6 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
         new Padding(
           padding: const EdgeInsets.only(bottom: 4.0, left: 4.0),
           child: Text(widget.currency.code,
-              key: CurrencyConvertCard.currencyCodeKey,
               style: Theme
                   .of(context)
                   .textTheme
