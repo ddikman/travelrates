@@ -18,6 +18,9 @@ class AnimateIn extends StatefulWidget {
 }
 
 class AnimateInState extends State<AnimateIn> with TickerProviderStateMixin {
+
+  static final _defaultDuration = Duration(milliseconds: 400);
+
   Animation<Offset> _animatedPosition;
 
   Animation<double> _animatedOpacity;
@@ -26,8 +29,7 @@ class AnimateInState extends State<AnimateIn> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    _controller = new AnimationController(
-        vsync: this, duration: Duration(milliseconds: 400));
+    _controller = new AnimationController(vsync: this, duration: _defaultDuration);
 
     _animatedPosition = new Tween<Offset>(
       begin: const Offset(0.0, 0.5),
