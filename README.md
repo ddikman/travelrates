@@ -45,7 +45,9 @@ This is referenced by the `android/app/build.gradle` signing settings.
 ### iOS
 First up open xcode and in the `Runner > General` section ensure the version number is updated.
 
-Then run Product > Archive and click `Validate...`.
+From the command line, build an ios package using `flutter build ios --release`.
+
+Then run `Product > Archive` and when that's done click `Validate...`.
 
 When this is done you can do `Upload to App Store...`.
 
