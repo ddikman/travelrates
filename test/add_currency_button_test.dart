@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:moneyconverter/state_container.dart';
 
 import 'helpers/mock_widget_frame.dart';
+import 'mocks/mock_app_state.dart';
 import 'mocks/mock_currency.dart';
 
 void main() {
@@ -30,5 +31,27 @@ void main() {
         expect(appState.conversion.currencies, ['USD']);
         expect(appState.conversion.currentCurrency, dollar);
         expect(appState.conversion.currentAmount, 1.0);
+  });
+
+  testWidgets('When adding a currency already added, displays warning', (WidgetTester tester) async {
+        final dollar = MockCurrency.dollar;
+        final appState = mockAppState();
+        appState.conversion.currencies.add(dollar.code);
+        final widgetFrame = new MockWidgetFrame(
+            appState: appState,
+            child: new Scaffold(
+              body: new AddCurrencyButton(currency: dollar),
+            )
+        );
+
+        await tester.pumpWidget(widgetFrame);
+        await tester.pumpAndSettle();
+
+        // Then press to add
+        await tester.tap(find.byType(Icon));
+        await tester.pumpAndSettle();
+
+        // Then we expect to get a snackbar showing a warning
+        expect(find.text('US Dollar is already selected!'), findsOneWidget);
   });
 }
