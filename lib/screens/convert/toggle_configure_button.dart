@@ -1,4 +1,4 @@
-import 'package:moneyconverter/state_container.dart';
+import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
 
 class ToggleConfigureButton extends StatelessWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:moneyconverter/app_state.dart';
-import 'package:moneyconverter/l10n/app_localizations_delegate.dart';
-import 'package:moneyconverter/l10n/fallback_material_localisations_delegate.dart';
-import 'package:moneyconverter/state_container.dart';
+import 'package:travelconverter/app_state.dart';
+import 'package:travelconverter/l10n/app_localizations_delegate.dart';
+import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
+import 'package:travelconverter/state_container.dart';
 
 import '../mocks/mock_app_state.dart';
 

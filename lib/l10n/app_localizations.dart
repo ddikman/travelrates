@@ -4,9 +4,9 @@ import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:moneyconverter/l10n/country_localizations.dart';
-import 'package:moneyconverter/l10n/currency_localizations.dart';
-import 'package:moneyconverter/l10n/messages_all.dart';
+import 'package:travelconverter/l10n/country_localizations.dart';
+import 'package:travelconverter/l10n/currency_localizations.dart';
+import 'package:travelconverter/l10n/messages_all.dart';
 
 class AppLocalizations {
 

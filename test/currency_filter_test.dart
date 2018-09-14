@@ -1,8 +1,8 @@
-import 'package:moneyconverter/l10n/app_localizations.dart';
-import 'package:moneyconverter/l10n/country_localizations.dart';
-import 'package:moneyconverter/l10n/currency_localizations.dart';
-import 'package:moneyconverter/model/country.dart';
-import 'package:moneyconverter/screens/add_currency/currency_filter.dart';
+import 'package:travelconverter/l10n/app_localizations.dart';
+import 'package:travelconverter/l10n/country_localizations.dart';
+import 'package:travelconverter/l10n/currency_localizations.dart';
+import 'package:travelconverter/model/country.dart';
+import 'package:travelconverter/screens/add_currency/currency_filter.dart';
 import 'package:test/test.dart';
 
 import 'mocks/mock_currency.dart';

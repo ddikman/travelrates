@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:moneyconverter/helpers/string_compare.dart';
-import 'package:moneyconverter/model/currency.dart';
-import 'package:moneyconverter/model/currency_rate.dart';
-import 'package:moneyconverter/services/currency_repository.dart';
+import 'package:travelconverter/helpers/string_compare.dart';
+import 'package:travelconverter/model/currency.dart';
+import 'package:travelconverter/model/currency_rate.dart';
+import 'package:travelconverter/services/currency_repository.dart';
 
 class CurrencyDecoder {
   static const String _baseRateCurrencyCode = 'EUR';

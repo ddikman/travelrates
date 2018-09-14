@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
-import 'package:moneyconverter/l10n/app_localizations.dart';
+import 'package:travelconverter/l10n/app_localizations.dart';
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
 

@@ -1,7 +1,7 @@
-import 'package:moneyconverter/helpers/string_compare.dart';
-import 'package:moneyconverter/model/currency.dart';
-import 'package:moneyconverter/model/currency_rate.dart';
-import 'package:moneyconverter/services/logger.dart';
+import 'package:travelconverter/helpers/string_compare.dart';
+import 'package:travelconverter/model/currency.dart';
+import 'package:travelconverter/model/currency_rate.dart';
+import 'package:travelconverter/services/logger.dart';
 
 class CurrencyRepository {
 

@@ -1,4 +1,4 @@
-import 'package:moneyconverter/helpers/string_compare.dart';
+import 'package:travelconverter/helpers/string_compare.dart';
 import 'package:test/test.dart';
 
 void main() {

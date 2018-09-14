@@ -1,7 +1,7 @@
-import 'package:moneyconverter/helpers/string_compare.dart';
-import 'package:moneyconverter/l10n/app_localizations.dart';
-import 'package:moneyconverter/model/country.dart';
-import 'package:moneyconverter/model/currency.dart';
+import 'package:travelconverter/helpers/string_compare.dart';
+import 'package:travelconverter/l10n/app_localizations.dart';
+import 'package:travelconverter/model/country.dart';
+import 'package:travelconverter/model/currency.dart';
 
 class CurrencyFilter {
   final List<Country> countries;

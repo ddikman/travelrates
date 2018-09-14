@@ -1,9 +1,9 @@
-import 'package:moneyconverter/app_theme.dart';
-import 'package:moneyconverter/l10n/app_localizations.dart';
-import 'package:moneyconverter/model/country.dart';
-import 'package:moneyconverter/model/currency.dart';
-import 'package:moneyconverter/screens/add_currency/add_currency_button.dart';
-import 'package:moneyconverter/state_container.dart';
+import 'package:travelconverter/app_theme.dart';
+import 'package:travelconverter/l10n/app_localizations.dart';
+import 'package:travelconverter/model/country.dart';
+import 'package:travelconverter/model/currency.dart';
+import 'package:travelconverter/screens/add_currency/add_currency_button.dart';
+import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
 
 class AvailableCurrencyCard extends StatelessWidget {

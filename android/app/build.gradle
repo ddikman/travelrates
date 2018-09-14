@@ -26,7 +26,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "se.greycastle.moneyconverter"
+        applicationId "se.greycastle.travelconverter"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 3

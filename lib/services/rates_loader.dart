@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:moneyconverter/model/async_result.dart';
-import 'package:moneyconverter/model/currency_rate.dart';
-import 'package:moneyconverter/services/api_configuration_loader.dart';
-import 'package:moneyconverter/services/currency_decoder.dart';
-import 'package:moneyconverter/services/local_storage.dart';
-import 'package:moneyconverter/services/logger.dart';
-import 'package:moneyconverter/services/rates_api.dart';
+import 'package:travelconverter/model/async_result.dart';
+import 'package:travelconverter/model/currency_rate.dart';
+import 'package:travelconverter/services/api_configuration_loader.dart';
+import 'package:travelconverter/services/currency_decoder.dart';
+import 'package:travelconverter/services/local_storage.dart';
+import 'package:travelconverter/services/logger.dart';
+import 'package:travelconverter/services/rates_api.dart';
 import 'package:flutter/services.dart';
 
 class RatesLoader {

@@ -41,6 +41,18 @@ To build the android release apk you simply run `flutter build apk`. However, be
 Make sure you store this some good place (outside of source control) and then reference it in the a `key.properties` file placed in the `android` folder.
 This is referenced by the `android/app/build.gradle` signing settings.
 
+Recording video and taking screenshots from the connected device is possible using the android debug bridge:
+```bash
+adb devices
+adb shell screenrecord /sdcard/demo.mp4
+adb pull /sdcard/demo.mp4
+```
+
+For screenshots:
+```bash
+adb shell screencap /sdcard/screen.png
+adb pull /sdcard/screen.png
+```
 
 ### iOS
 First up open xcode and in the `Runner > General` section ensure the version number is updated.

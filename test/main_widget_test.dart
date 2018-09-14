@@ -1,6 +1,6 @@
-import 'package:moneyconverter/app_root.dart';
-import 'package:moneyconverter/screens/add_currency/add_currency_screen.dart';
-import 'package:moneyconverter/state_container.dart';
+import 'package:travelconverter/app_root.dart';
+import 'package:travelconverter/screens/add_currency/add_currency_screen.dart';
+import 'package:travelconverter/state_container.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'mocks/mock_app_state.dart';

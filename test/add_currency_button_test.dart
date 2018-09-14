@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:moneyconverter/screens/add_currency/add_currency_button.dart';
+import 'package:travelconverter/screens/add_currency/add_currency_button.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:moneyconverter/state_container.dart';
+import 'package:travelconverter/state_container.dart';
 
 import 'helpers/mock_widget_frame.dart';
 import 'mocks/mock_app_state.dart';

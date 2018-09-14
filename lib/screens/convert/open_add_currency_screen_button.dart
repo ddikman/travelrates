@@ -1,4 +1,4 @@
-import 'package:moneyconverter/app_routes.dart';
+import 'package:travelconverter/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class OpenAddCurrencyScreenButton extends StatelessWidget {

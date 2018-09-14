@@ -1,6 +1,6 @@
-import 'package:moneyconverter/screens/add_currency/add_currency_screen.dart';
+import 'package:travelconverter/screens/add_currency/add_currency_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:moneyconverter/screens/add_currency/available_currency_card.dart';
+import 'package:travelconverter/screens/add_currency/available_currency_card.dart';
 
 import 'helpers/mock_widget_frame.dart';
 

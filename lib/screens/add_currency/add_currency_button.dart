@@ -1,8 +1,8 @@
 import 'package:intl/intl.dart';
-import 'package:moneyconverter/l10n/app_localizations.dart';
-import 'package:moneyconverter/model/currency.dart';
-import 'package:moneyconverter/services/logger.dart';
-import 'package:moneyconverter/state_container.dart';
+import 'package:travelconverter/l10n/app_localizations.dart';
+import 'package:travelconverter/model/currency.dart';
+import 'package:travelconverter/services/logger.dart';
+import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
 
 class AddCurrencyButton extends StatelessWidget {

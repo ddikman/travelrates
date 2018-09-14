@@ -1,12 +1,12 @@
 import 'package:intl/intl.dart';
-import 'package:moneyconverter/helpers/sorting.dart';
-import 'package:moneyconverter/l10n/app_localizations.dart';
-import 'package:moneyconverter/screens/add_currency/available_currency_card.dart';
-import 'package:moneyconverter/screens/add_currency/currency_filter.dart';
-import 'package:moneyconverter/screens/add_currency/currency_search_text_field.dart';
-import 'package:moneyconverter/widgets/background_container.dart';
-import 'package:moneyconverter/model/currency.dart';
-import 'package:moneyconverter/state_container.dart';
+import 'package:travelconverter/helpers/sorting.dart';
+import 'package:travelconverter/l10n/app_localizations.dart';
+import 'package:travelconverter/screens/add_currency/available_currency_card.dart';
+import 'package:travelconverter/screens/add_currency/currency_filter.dart';
+import 'package:travelconverter/screens/add_currency/currency_search_text_field.dart';
+import 'package:travelconverter/widgets/background_container.dart';
+import 'package:travelconverter/model/currency.dart';
+import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
 
 class AddCurrencyScreen extends StatefulWidget {

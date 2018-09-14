@@ -1,4 +1,4 @@
-import 'package:moneyconverter/model/currency.dart';
+import 'package:travelconverter/model/currency.dart';
 
 abstract class MockCurrency {
   static Currency get dollar => new Currency(
