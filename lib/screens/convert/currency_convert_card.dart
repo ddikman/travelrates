@@ -108,8 +108,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
-        Text(
-          CurrencyInputFormatter.formatValue(amount),
+        Text(CurrencyInputFormatter.formatValue(amount),
           style: Theme
               .of(context)
               .textTheme
