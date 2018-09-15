@@ -42,9 +42,12 @@ class _ConvertScreenState extends State<ConvertScreen> {
     super.initState();
 
     _showLoader();
-    widget.stateLoader.load(context)
-        .whenComplete(_hideLoader)
-        .whenComplete(_addCurrenciesIfMissing);
+
+    // TODO: This is a really nasty fix, simply to make sure initState finish executing before this method completes
+    Future.delayed(Duration(milliseconds: 10))
+      .then((val) => widget.stateLoader.load(context))
+      .then((val) => _hideLoader())
+      .then((val) => _addCurrenciesIfMissing());
   }
 
   void _addCurrenciesIfMissing() {
