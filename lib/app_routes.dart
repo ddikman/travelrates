@@ -4,6 +4,6 @@ abstract class AppRoutes {
 
   static const String addCurrency = '/addCurrencyScreen';
 
-  static const String home = '/homeScreen';
+  static const String convert = '/convert';
 
 }

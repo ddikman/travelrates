@@ -1,9 +1,11 @@
+
 import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:travelconverter/screens/add_currency/add_currency_screen.dart';
 import 'package:travelconverter/app_routes.dart';
 import 'package:travelconverter/app_theme.dart';
 import 'package:travelconverter/screens/convert/convert_screen.dart';
 import 'package:travelconverter/l10n/app_localizations_delegate.dart';
+import 'package:travelconverter/screens/loader/initial_loader.dart';
 import 'package:travelconverter/services/state_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,12 +23,19 @@ class AppRoot extends StatefulWidget {
 }
 
 class _AppRootState extends State<AppRoot> {
-  ConvertScreen mainScreen;
+
+  final loaderKey = new GlobalKey<StateLoaderScreenState>();
+
+  bool _stateLoadingBegun = false;
 
   @override
-  void initState() {
-    mainScreen = new ConvertScreen(stateLoader: widget.stateLoader);
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_stateLoadingBegun) {
+      _stateLoadingBegun = true;
+      widget.stateLoader.load(context)
+          .then((val) => loaderKey.currentState.loadCompleted());
+    }
   }
 
   @override
@@ -41,10 +50,10 @@ class _AppRootState extends State<AppRoot> {
         const FallbackMaterialLocalisationsDelegate()
       ],
       supportedLocales: AppLocalizationsDelegate.supportedLocales,
-      home: mainScreen,
       debugShowCheckedModeBanner: false,
+      home: new StateLoaderScreen(key: loaderKey),
       routes: <String, WidgetBuilder>{
-        AppRoutes.home: (context) => mainScreen,
+        AppRoutes.convert: (context) => new ConvertScreen(),
         AppRoutes.addCurrency: (context) => new AddCurrencyScreen()
       },
     );
