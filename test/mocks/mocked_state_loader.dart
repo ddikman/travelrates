@@ -14,7 +14,10 @@ class MockedStateLoader implements StateLoader {
 
   @override
   Future load(BuildContext context) async {
-    final stateContainer = StateContainer.of(context);
-    stateContainer.setAppState(initialState);
+    // Make it async so it's not completed immediately during the build()
+    return Future.microtask(() {
+      final stateContainer = StateContainer.of(context);
+      stateContainer.setAppState(initialState);
+    });
   }
 }

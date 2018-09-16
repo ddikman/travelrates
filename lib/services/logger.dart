@@ -1,7 +1,7 @@
 /// Wrapper for logging enabling use of services such as Firebase in the future.
 class Logger<T> {
 
-  //
+  /// TODO: This doesn't actually work so I might as well change it to a string.
   final String name = T.runtimeType.toString();
 
   void _log(String eventType, String message) {
