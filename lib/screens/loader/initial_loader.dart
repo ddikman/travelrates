@@ -36,6 +36,7 @@ class StateLoaderScreenState extends State<StateLoaderScreen> {
     );
   }
 
+  /// TODO: Make this non-public by listening to an event instead.
   Future loadCompleted() async {
     // it happened once that the spinner didn't stop so in order to catch
     // it if it happens again I want to log the error
@@ -48,6 +49,7 @@ class StateLoaderScreenState extends State<StateLoaderScreen> {
     _chooseLandingScreen();
   }
 
+  /// TODO: Find another way to handle this in app root. Currently I can't because AppRoot is outside Navigator context.
   void _chooseLandingScreen() {
     // home is always home
     Navigator.of(context).pushReplacementNamed(AppRoutes.convert);
