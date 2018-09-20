@@ -8,7 +8,7 @@
         "currencyName": {}
       }
     },
-    "ADD CURRENCY": "VÄLJ VALUTA",
+    "ADD CURRENCY": "Välj Valuta",
       "@ADD CURRENCY": {
         "description": "Add currency screen title.",
         "type": "text",
@@ -34,10 +34,22 @@
         "currencyCode": {}
       }
     },
-  "CONVERT": "KONVERTERA",
-  "@CONVERT": {
+  "ConvertScreen_screenTitle": "Konvertera",
+  "@ConvertScreen_screenTitle": {
     "description": "Convert screen main title",
     "type": "text",
     "placeholders": {}
-  }
+  },
+    "_editButtonLabel": "Ändra",
+      "@_editButtonLabel": {
+        "description": "Text for edit button on currency convert screen",
+        "type": "text",
+        "placeholders": {}
+      },
+      "Edit": "Ändra",
+      "@Edit": {
+        "description": "Title for screen editing currency list",
+        "type": "text",
+        "placeholders": {}
+      }
 }

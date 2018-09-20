@@ -8,6 +8,7 @@ import 'package:travelconverter/widgets/background_container.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
+import 'package:travelconverter/widgets/screen_title_text.dart';
 
 class AddCurrencyScreen extends StatefulWidget {
   @override
@@ -58,7 +59,7 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(_screenTitle),
+          title: ScreenTitleText.show(_screenTitle),
           centerTitle: true,
           bottom: new PreferredSize(
             child: searchField,

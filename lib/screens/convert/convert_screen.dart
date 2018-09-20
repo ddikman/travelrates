@@ -1,15 +1,24 @@
 
+
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/screens/convert/open_add_currency_screen_button.dart';
 import 'package:travelconverter/screens/convert/selected_currency_list.dart';
-import 'package:travelconverter/screens/convert/toggle_configure_button.dart';
+import 'package:travelconverter/screens/convert/goto_configure_button.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/services/state_loader.dart';
 import 'package:travelconverter/widgets/background_container.dart';
 
 import 'package:flutter/material.dart';
+import 'package:travelconverter/widgets/screen_title_text.dart';
 
 class ConvertScreen extends StatefulWidget {
+
+  static String get screenTitle => Intl.message(
+      "CONVERT",
+      name: "ConvertScreen_screenTitle",
+      desc: "Convert screen main title"
+  );
 
   final StateLoader stateLoader;
 
@@ -29,11 +38,10 @@ class _ConvertScreenState extends State<ConvertScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final appBar = new AppBar(
-      title: new Text(_screenTitle),
+      title: ScreenTitleText.show(ConvertScreen.screenTitle),
       centerTitle: true,
-      actions: [ new ToggleConfigureButton() ],
+      actions: [ new GotoConfigureButton() ],
     );
 
     return Scaffold(
@@ -43,10 +51,6 @@ class _ConvertScreenState extends State<ConvertScreen> {
       floatingActionButton: new OpenAddCurrencyScreenButton(),
     );
   }
-
-  String get _screenTitle => Intl.message(
-      "CONVERT", desc: "Convert screen main title"
-  );
 
   _buildCurrencyList() {
     const _floatingButtonSpacing = 60.0;

@@ -48,9 +48,10 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(localization.currencies.getLocalized(widget.currency.code),
-            maxLines: 2,
+            maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.body1.copyWith(fontSize: 14.0)),
+            softWrap: false,
+            style: Theme.of(context).textTheme.body1.copyWith(fontSize: 16.0)),
       ),
     );
 

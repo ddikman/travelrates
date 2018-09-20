@@ -4,6 +4,7 @@ import 'package:travelconverter/app_routes.dart';
 import 'package:travelconverter/app_theme.dart';
 import 'package:travelconverter/screens/convert/convert_screen.dart';
 import 'package:travelconverter/l10n/app_localizations_delegate.dart';
+import 'package:travelconverter/screens/edit_screen/edit_screen.dart';
 import 'package:travelconverter/screens/loader/state_loader_screen.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/services/state_loader.dart';
@@ -42,7 +43,8 @@ class _AppRootState extends State<AppRoot> {
       home: new StateLoaderScreen(stateLoader: widget.stateLoader),
       routes: <String, WidgetBuilder>{
         AppRoutes.convert: (context) => new ConvertScreen(),
-        AppRoutes.addCurrency: (context) => new AddCurrencyScreen()
+        AppRoutes.addCurrency: (context) => new AddCurrencyScreen(),
+        AppRoutes.edit: (context) => new EditScreen()
       },
     );
   }

@@ -38,4 +38,6 @@ abstract class AppTheme {
   );
 
   static final accentColorLight = new Color(0xFFFFFFFF);
+
+  static final red = new Color(0xFFdc002f);
 }
