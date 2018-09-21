@@ -152,7 +152,7 @@ class ReorderableCurrencyCard extends StatefulWidget {
 class ReorderableCurrencyCardState extends State<ReorderableCurrencyCard> {
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    final card = new Container(
       padding: EdgeInsets.only(bottom: 4.0),
       height: CurrencyConvertCard.height,
       child: new Material(
@@ -172,6 +172,35 @@ class ReorderableCurrencyCardState extends State<ReorderableCurrencyCard> {
             )),
       ),
     );
+
+    return _asDraggable(card);
+  }
+
+  Widget _asDraggable(Widget child) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    return new Draggable(
+        data: widget.currency,
+        affinity: Axis.vertical,
+        child: child,
+        childWhenDragging: Opacity(
+          opacity: 0.5,
+          child: child,
+        ),
+        feedback: new Opacity(
+          opacity: 0.8,
+          child: new Container(
+            width: screenWidth - 16.0 * 2,
+            child: Card(
+              color: AppTheme.primaryColor,
+              child: Center(
+                  child: new Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text('${widget.currency.name}',
+                        style: TextStyle(color: AppTheme.accentColor)),
+                  )),
+            ),
+          ),
+        ));
   }
 
   get _cardContents {
