@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2018-09-20T23:21:08.083425",
+  "@@last_modified": "2018-09-23T17:54:57.089919",
   "_alreadySelectedWarning": "{currencyName} is already selected!",
   "@_alreadySelectedWarning": {
     "description": "Text displayed when trying to add a currency that is already added.",
@@ -8,8 +8,8 @@
       "currencyName": {}
     }
   },
-  "ADD CURRENCY": "Add Currency",
-  "@ADD CURRENCY": {
+  "Add Currency": "Add Currency",
+  "@Add Currency": {
     "description": "Add currency screen title.",
     "type": "text",
     "placeholders": {}
