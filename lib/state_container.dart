@@ -94,6 +94,27 @@ class StateContainerState extends State<StateContainer> {
         appState.conversion.withAmount(amount: amount, currency: currency));
   }
 
+  void setRates(List<CurrencyRate> rates) {
+    setState(() {
+      this.appState.availableCurrencies.updateRates(rates);
+    });
+  }
+
+  /// Reorder a currency in the list, newPosition beign the new index, zero-based.
+  void reorderIndex({String item, int newPosition}) {
+    log.event("reordering $item to be at index $newPosition..");
+    final currencies = List<String>.from(appState.conversion.currencies);
+    currencies.remove(item);
+
+    // end of list
+    if (newPosition == currencies.length + 1) {
+        currencies.add(item);
+    } else {
+      currencies.insert(newPosition, item);
+    }
+    _updateConversion(appState.conversion.withCurrencies(currencies));
+  }
+
   void reorder({String item, String placeAfter}) {
     log.event("reordering $item to be after $placeAfter..");
     final currencies = List<String>.from(appState.conversion.currencies);
@@ -101,12 +122,6 @@ class StateContainerState extends State<StateContainer> {
     final newPosition = currencies.indexOf(placeAfter) + 1;
     currencies.insert(newPosition, item);
     _updateConversion(appState.conversion.withCurrencies(currencies));
-  }
-
-  void setRates(List<CurrencyRate> rates) {
-    setState(() {
-      this.appState.availableCurrencies.updateRates(rates);
-    });
   }
 }
 

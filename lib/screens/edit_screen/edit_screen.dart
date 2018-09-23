@@ -44,31 +44,35 @@ class EditScreenState extends State<EditScreen> {
   );
 
   _buildBody() {
-    const _floatingButtonSpacing = 60.0;
-
-    return new BackgroundContainer(
-      // padding the body bottom stops the floating space button from
-      // hiding the lowermost content
-        child: new Padding(
-          padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
-          child: _buildCurrencyList(),
-        ));
+    return new BackgroundContainer(child: _buildCurrencyList());
   }
 
   _buildCurrencyList() {
-    final state = StateContainer
-        .of(context)
-        .appState;
+    final stateContainer = StateContainer.of(context);
+    final state = stateContainer.appState;
 
     int index = 0;
     final currencies = state.conversion.currencies
         .map((currency) => _buildCurrencyEntry(context, index++, currency))
         .toList();
 
-    return new ListView(
-        padding: EdgeInsets.all(8.0),
-        children: currencies
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: new ReorderableListView(
+        children: currencies,
+        onReorder: (int oldIndex, int newIndex) {
+          var moveCurrency = state.conversion.currencies.elementAt(oldIndex);
+          stateContainer.reorderIndex(
+            item: moveCurrency,
+            newPosition: newIndex
+          );
+        },
+      ),
     );
+//    return new ListView(
+//        padding: EdgeInsets.all(8.0),
+//        children: currencies
+//    );
   }
 
   Widget _buildCurrencyEntry(BuildContext context, int index, currencyCode) {
@@ -79,61 +83,12 @@ class EditScreenState extends State<EditScreen> {
     var currency = state.availableCurrencies.getByCode(currencyCode);
     final card = _buildCard(currency);
 
-    return _withReorderDropArea(card, context);
+    return card;
+    //return _withReorderDropArea(card, context);
   }
 
   _buildCard(Currency currency) {
-    return new ReorderableCurrencyCard(currency: currency);
-  }
-
-
-
-  Widget _dropTargetArea(bool hovered, BuildContext context) {
-    const iconSize = 24.0;
-
-    final dropAreaHeight = hovered
-        ? (CurrencyConvertCard.height + iconSize)
-        : CurrencyConvertCard.height;
-
-    return new FractionallySizedBox(
-      widthFactor: 1.0,
-      child: Container(
-        height: dropAreaHeight,
-        alignment: Alignment.bottomCenter,
-        child: Opacity(
-          opacity: hovered ? 1.0 : 0.0,
-          child: Icon(
-            Icons.add_circle,
-            color: AppTheme.primaryColor,
-            size: iconSize,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _withReorderDropArea(ReorderableCurrencyCard card, BuildContext context) {
-    final dropArea = new Align(
-      alignment: Alignment.bottomCenter,
-      child: new DragTarget<Currency>(
-        builder: (BuildContext context, List candidateData, List rejectedData) {
-          bool hovered = candidateData.isNotEmpty;
-          return _dropTargetArea(hovered, context);
-        },
-        onAccept: (value) {
-          // handle the reorder. since we dropped the other card on this card
-          // it means we want to place it _after_ this card
-          StateContainer
-              .of(context)
-              .reorder(item: value.code, placeAfter: card.currency.code);
-        },
-        onWillAccept: (value) => value.code != card.currency.code,
-      ),
-    );
-
-    return Stack(
-      children: <Widget>[card, dropArea],
-    );
+    return new ReorderableCurrencyCard(key: Key(currency.code), currency: currency);
   }
 }
 
@@ -173,34 +128,7 @@ class ReorderableCurrencyCardState extends State<ReorderableCurrencyCard> {
       ),
     );
 
-    return _asDraggable(card);
-  }
-
-  Widget _asDraggable(Widget child) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    return new Draggable(
-        data: widget.currency,
-        affinity: Axis.vertical,
-        child: child,
-        childWhenDragging: Opacity(
-          opacity: 0.5,
-          child: child,
-        ),
-        feedback: new Opacity(
-          opacity: 0.8,
-          child: new Container(
-            width: screenWidth - 16.0 * 2,
-            child: Card(
-              color: AppTheme.primaryColor,
-              child: Center(
-                  child: new Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text('${widget.currency.name}',
-                        style: TextStyle(color: AppTheme.accentColor)),
-                  )),
-            ),
-          ),
-        ));
+    return card;
   }
 
   get _cardContents {
@@ -227,7 +155,12 @@ class ReorderableCurrencyCardState extends State<ReorderableCurrencyCard> {
     return IconButton(
       padding: EdgeInsets.all(0.0),
       iconSize: 32.0,
-      icon: Center(child: Icon(_removeIcon, color: AppTheme.accentColorLight)),
+      icon: Container(
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white
+          ),
+          child: Icon(_removeIcon, color: AppTheme.red)),
       onPressed: () {
         StateContainer.of(context).removeCurrency(widget.currency.code);
       },
