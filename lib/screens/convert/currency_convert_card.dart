@@ -48,9 +48,10 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(localization.currencies.getLocalized(widget.currency.code),
-            maxLines: 2,
+            maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.body1.copyWith(fontSize: 14.0)),
+            softWrap: false,
+            style: Theme.of(context).textTheme.body1.copyWith(fontSize: 16.0)),
       ),
     );
 
@@ -71,9 +72,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
           Expanded(child: currencyName),
           new Align(
               alignment: Alignment.centerRight,
-              child: state.isEditing
-                  ? _deleteIcon
-                  : _currencyAmount(currentValue))
+              child: _currencyAmount(currentValue))
         ]);
 
     final card = new Container(
@@ -85,7 +84,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
             color: _showInputError ? Colors.red : AppTheme.primaryColor,
             child: new InkWell(
               splashColor: AppTheme.accentColor,
-              onTap: state.isEditing ? null : _cardTapped,
+              onTap: _showConvertDialog,
               child: new Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 10.0, vertical: 4.0),
@@ -94,12 +93,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
       ),
     );
 
-    Widget result = _animated(card);
-    if (state.isEditing) {
-      result = _asDraggable(result);
-    }
-
-    return result;
+    return _animated(card);
   }
 
   _currencyAmount(double amount) {
@@ -128,44 +122,6 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
     );
   }
 
-  get _deleteIcon {
-    return IconButton(
-      padding: EdgeInsets.all(0.0),
-      iconSize: 24.0,
-      icon: Icon(Icons.delete, color: AppTheme.accentColor),
-      onPressed: () {
-        StateContainer.of(context).removeCurrency(widget.currency.code);
-      },
-    );
-  }
-
-  _asDraggable(Widget child) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    return new Draggable(
-        data: widget.currency,
-        affinity: Axis.vertical,
-        child: child,
-        childWhenDragging: Opacity(
-          opacity: 0.5,
-          child: child,
-        ),
-        feedback: new Opacity(
-          opacity: 0.8,
-          child: new Container(
-            width: screenWidth - 16.0 * 2,
-            child: Card(
-              color: AppTheme.primaryColor,
-              child: Center(
-                  child: new Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text('${widget.currency.name}',
-                    style: TextStyle(color: AppTheme.accentColor)),
-              )),
-            ),
-          ),
-        ));
-  }
-
   _animated(Widget child) {
     return new AnimateIn(child: child, delay: widget.animationDelay);
   }
@@ -187,12 +143,12 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
     });
   }
 
-  void _cardTapped() {
+  void _showConvertDialog() {
     showDialog(
         context: context,
         builder: (context) => new ConvertDialog(
-              currencyCode: widget.currency.code,
-              onSubmitted: _newValueReceived,
-            ));
+          currencyCode: widget.currency.code,
+          onSubmitted: _newValueReceived,
+        ));
   }
 }

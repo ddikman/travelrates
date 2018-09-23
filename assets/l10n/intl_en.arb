@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2018-09-12T23:03:11.955002",
+  "@@last_modified": "2018-09-23T17:54:57.089919",
   "_alreadySelectedWarning": "{currencyName} is already selected!",
   "@_alreadySelectedWarning": {
     "description": "Text displayed when trying to add a currency that is already added.",
@@ -8,8 +8,8 @@
       "currencyName": {}
     }
   },
-  "ADD CURRENCY": "ADD CURRENCY",
-  "@ADD CURRENCY": {
+  "Add Currency": "Add Currency",
+  "@Add Currency": {
     "description": "Add currency screen title.",
     "type": "text",
     "placeholders": {}
@@ -34,9 +34,21 @@
       "currencyCode": {}
     }
   },
-  "CONVERT": "CONVERT",
-  "@CONVERT": {
+  "ConvertScreen_screenTitle": "Convert",
+  "@ConvertScreen_screenTitle": {
     "description": "Convert screen main title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "_editButtonLabel": "Edit",
+  "@_editButtonLabel": {
+    "description": "Text for edit button on currency convert screen",
+    "type": "text",
+    "placeholders": {}
+  },
+  "Edit": "Edit",
+  "@Edit": {
+    "description": "Title for screen editing currency list",
     "type": "text",
     "placeholders": {}
   }

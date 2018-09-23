@@ -65,14 +65,6 @@ class StateContainerState extends State<StateContainer> {
     _statePersistence.store(appState);
   }
 
-  void toggleEditing() {
-    // update without persisting
-    setState(() {
-      appState =
-          appState.isEditing ? appState.stopEdit() : appState.startEdit();
-    });
-  }
-
   void removeCurrency(String currencyCode) {
     final currencies = List<String>.from(appState.conversion.currencies);
     currencies.remove(currencyCode);
@@ -94,19 +86,25 @@ class StateContainerState extends State<StateContainer> {
         appState.conversion.withAmount(amount: amount, currency: currency));
   }
 
-  void reorder({String item, String placeAfter}) {
-    log.event("reordering $item to be after $placeAfter..");
-    final currencies = List<String>.from(appState.conversion.currencies);
-    currencies.remove(item);
-    final newPosition = currencies.indexOf(placeAfter) + 1;
-    currencies.insert(newPosition, item);
-    _updateConversion(appState.conversion.withCurrencies(currencies));
-  }
-
   void setRates(List<CurrencyRate> rates) {
     setState(() {
       this.appState.availableCurrencies.updateRates(rates);
     });
+  }
+
+  /// Reorder a currency in the list, newPosition beign the new index, zero-based.
+  void reorderCurrency({String item, int newIndex}) {
+    log.event("reordering $item to be at index $newIndex..");
+    final currencies = List<String>.from(appState.conversion.currencies);
+    currencies.remove(item);
+
+    if (newIndex > currencies.length) {
+      // insert at bottom
+      currencies.add(item);
+    } else {
+      currencies.insert(newIndex, item);
+    }
+    _updateConversion(appState.conversion.withCurrencies(currencies));
   }
 }
 

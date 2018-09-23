@@ -34,10 +34,22 @@
           "currencyCode": {}
         }
       },
-  "CONVERT": "換算",
-  "@CONVERT": {
+  "ConvertScreen_screenTitle": "換算",
+  "@ConvertScreen_screenTitle": {
     "description": "Convert screen main title",
     "type": "text",
     "placeholders": {}
-  }
+  },
+  "_editButtonLabel": "編集",
+    "@_editButtonLabel": {
+      "description": "Text for edit button on currency convert screen",
+      "type": "text",
+      "placeholders": {}
+    },
+    "Edit": "編集",
+    "@Edit": {
+      "description": "Title for screen editing currency list",
+      "type": "text",
+      "placeholders": {}
+    }
 }

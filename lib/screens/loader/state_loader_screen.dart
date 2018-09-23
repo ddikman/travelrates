@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:travelconverter/app_routes.dart';
 import 'package:travelconverter/screens/convert/convert_screen.dart';
 import 'package:travelconverter/screens/spinner.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/services/state_loader.dart';
 import 'package:travelconverter/state_container.dart';
+import 'package:travelconverter/widgets/screen_title_text.dart';
 
 class StateLoaderScreen extends StatefulWidget {
 
@@ -35,7 +35,7 @@ class _StateLoaderScreenState extends State<StateLoaderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: new AppBar(
-          title: new Text(_screenTitle),
+          title: ScreenTitleText.show(ConvertScreen.screenTitle),
           centerTitle: true,
         ),
         body: _buildSpinner()
@@ -68,10 +68,6 @@ class _StateLoaderScreenState extends State<StateLoaderScreen> {
   _buildSpinner() {
     return new Spinner(key: _spinnerKey, delay: Duration(milliseconds: 500));
   }
-
-  String get _screenTitle => Intl.message(
-      "CONVERT", desc: "Convert screen main title"
-  );
 
   @override
   void didChangeDependencies() {

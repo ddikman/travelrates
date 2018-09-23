@@ -23,11 +23,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "ADD CURRENCY" : MessageLookupByLibrary.simpleMessage("VÄLJ VALUTA"),
-    "CONVERT" : MessageLookupByLibrary.simpleMessage("KONVERTERA"),
+    "ADD CURRENCY" : MessageLookupByLibrary.simpleMessage("Välj Valuta"),
+    "ConvertScreen_screenTitle" : MessageLookupByLibrary.simpleMessage("Konvertera"),
+    "Edit" : MessageLookupByLibrary.simpleMessage("Ändra"),
     "Search country or currency code" : MessageLookupByLibrary.simpleMessage("Sök land eller valuta"),
     "_alreadySelectedWarning" : m0,
     "_convertTitle" : m1,
+    "_editButtonLabel" : MessageLookupByLibrary.simpleMessage("Ändra"),
     "_submitLabel" : MessageLookupByLibrary.simpleMessage("KONVERTERA")
   };
 }
