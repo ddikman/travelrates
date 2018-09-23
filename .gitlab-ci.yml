@@ -6,6 +6,7 @@ unit_test:
   image: brianegan/flutter_lcov:v0.5.1
   stage: test
   script:
+    - flutter upgrade
     - flutter test --coverage
     - genhtml coverage/lcov.info --output=coverage
   artifacts:
