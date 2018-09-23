@@ -24,10 +24,12 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "ADD CURRENCY" : MessageLookupByLibrary.simpleMessage("レート追加"),
-    "CONVERT" : MessageLookupByLibrary.simpleMessage("換算"),
+    "ConvertScreen_screenTitle" : MessageLookupByLibrary.simpleMessage("換算"),
+    "Edit" : MessageLookupByLibrary.simpleMessage("編集"),
     "Search country or currency code" : MessageLookupByLibrary.simpleMessage("名または国別コードを検索"),
     "_alreadySelectedWarning" : m0,
     "_convertTitle" : m1,
+    "_editButtonLabel" : MessageLookupByLibrary.simpleMessage("編集"),
     "_submitLabel" : MessageLookupByLibrary.simpleMessage("換算")
   };
 }
