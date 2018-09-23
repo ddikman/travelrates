@@ -15,7 +15,7 @@ import 'package:travelconverter/widgets/screen_title_text.dart';
 class ConvertScreen extends StatefulWidget {
 
   static String get screenTitle => Intl.message(
-      "CONVERT",
+      "Convert",
       name: "ConvertScreen_screenTitle",
       desc: "Convert screen main title"
   );
