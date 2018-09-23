@@ -9,6 +9,9 @@ class GotoConfigureButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Since iOS and Android has a little different methods of showing menus
+    // this button has been made platform specific to make both kind of users
+    // feel more at home
     return Platform.isAndroid ? _buildAndroidButton(context) : _buildIOSButton(context);
   }
 
