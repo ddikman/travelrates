@@ -160,7 +160,7 @@ class ReorderableCurrencyCardState extends State<ReorderableCurrencyCard> {
               shape: BoxShape.circle,
               color: Colors.white
           ),
-          child: Icon(_removeIcon, color: AppTheme.red)),
+          child: Icon(_removeIcon, color: AppTheme.deleteColour)),
       onPressed: () {
         StateContainer.of(context).removeCurrency(widget.currency.code);
       },
