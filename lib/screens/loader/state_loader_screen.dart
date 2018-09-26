@@ -45,6 +45,7 @@ class _StateLoaderScreenState extends State<StateLoaderScreen> {
   Future _hideSpinner() async {
     // it happened once that the spinner didn't stop so in order to catch
     // it if it happens again I want to log the error
+    log.debug('state loaded, hiding spinner..');
     await _spinnerKey.currentState
         .stopLoading()
         .timeout(Duration(seconds: 1), onTimeout: () {
@@ -61,6 +62,7 @@ class _StateLoaderScreenState extends State<StateLoaderScreen> {
     // if there's no currencies chosen however, allow user to select one
     final appState = StateContainer.of(context).appState;
     if (appState.conversion.currencies.isEmpty) {
+      log.debug('no currencies chosen, sending user to add currency screen..');
       Navigator.of(context).pushNamed(AppRoutes.addCurrency);
     }
   }
@@ -70,7 +72,7 @@ class _StateLoaderScreenState extends State<StateLoaderScreen> {
   }
 
   @override
-  void didChangeDependencies() {
+  Future didChangeDependencies() async {
     super.didChangeDependencies();
 
     // to ensure we only start loading state once
@@ -78,7 +80,7 @@ class _StateLoaderScreenState extends State<StateLoaderScreen> {
       return;
 
     _isLoading = true;
-    widget.stateLoader.load(context)
+    await widget.stateLoader.load(context)
       .then((val) => _hideSpinner())
       .then((val) => _chooseLandingScreen());
   }

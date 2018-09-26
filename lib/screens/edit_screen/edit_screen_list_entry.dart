@@ -53,9 +53,9 @@ class _EditScreenListEntryState extends State<EditScreenListEntry> {
           new Align(alignment: Alignment.centerLeft, child: _deleteIcon),
           Expanded(
               child: new Align(
-                alignment: Alignment.centerLeft,
-                child: Text(name, style: TextStyle(fontSize: 16.0)),
-              )),
+            alignment: Alignment.centerLeft,
+            child: Text(name, style: TextStyle(fontSize: 16.0)),
+          )),
           new Align(
               alignment: Alignment.centerLeft,
               child: Icon(
@@ -66,13 +66,19 @@ class _EditScreenListEntryState extends State<EditScreenListEntry> {
   }
 
   get _deleteIcon {
+
+    final color =
+        Platform.isAndroid ? AppTheme.accentColor : AppTheme.deleteColour;
+
+    final decoration = Platform.isAndroid
+        ? null
+        : BoxDecoration(shape: BoxShape.circle, color: Colors.white);
+
     return IconButton(
       padding: EdgeInsets.all(0.0),
       iconSize: 32.0,
       icon: Container(
-          decoration:
-          BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-          child: Icon(_removeIcon, color: AppTheme.deleteColour)),
+          decoration: decoration, child: Icon(_removeIcon, color: color)),
       onPressed: () {
         StateContainer.of(context).removeCurrency(widget.currency.code);
       },

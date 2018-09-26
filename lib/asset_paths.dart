@@ -3,6 +3,8 @@ class AssetPaths {
 
   static const countriesJson = 'assets/data/countries.json';
 
+  static const ratesJson = 'assets/data/rates.json';
+
   static const localizedCountriesJson = 'assets/l10n/countries.json';
 
   static const localizedCurrenciesJson = 'assets/l10n/currencies.json';

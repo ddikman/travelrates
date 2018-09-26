@@ -26,6 +26,7 @@ class CurrencySearchTextFieldState extends State<CurrencySearchTextField> {
   Widget build(BuildContext context) {
 
     final textField = TextField(
+      key: Key('searchCurrencyInput'),
       autofocus: true,
       onChanged: widget.filterChanged,
       style: TextStyle(color: AppTheme.primaryColor),

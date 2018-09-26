@@ -45,7 +45,10 @@ class AvailableCurrencyCard extends StatelessWidget {
         child: Row(
           children: <Widget>[
             new Expanded(child: textWidget),
-            new AddCurrencyButton(currency: currency)
+            new AddCurrencyButton(
+                key: Key("addCurrency_${currency.code}"),
+                currency: currency
+            )
           ],
         ),
       ),

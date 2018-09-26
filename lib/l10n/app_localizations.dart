@@ -27,7 +27,9 @@ class AppLocalizations {
 
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      return AppLocalizations(countries, currencies);
+      var appLocalizations = AppLocalizations(countries, currencies);
+      print("Localisations loaded.");
+      return appLocalizations;
     });
   }
 

@@ -20,13 +20,18 @@ class AddCurrencyButton extends StatelessWidget {
 
     final disabledTransparency = alreadyAdded ? 0.5 : 1.0;
 
-    return new GestureDetector(
-      child: Icon(
-        Icons.add_circle,
-        size: 24.0,
-        color: Color.fromRGBO(255, 255, 255, disabledTransparency),
+    return Container(
+      constraints: BoxConstraints.tightFor(width: 24.0, height: 24.0),
+      child: new IconButton(
+        padding: EdgeInsets.all(0.0),
+        iconSize: 24.0,
+        tooltip: 'Add ${currency.code}',
+        icon: Icon(
+          Icons.add_circle,
+          color: Color.fromRGBO(255, 255, 255, disabledTransparency),
+        ),
+        onPressed: () => alreadyAdded ? _displayNotice(context) : _addCurrency(context),
       ),
-      onTap: () => alreadyAdded ? _displayNotice(context) : _addCurrency(context),
     );
   }
 

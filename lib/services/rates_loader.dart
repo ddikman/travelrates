@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:travelconverter/asset_paths.dart';
 import 'package:travelconverter/model/async_result.dart';
 import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/services/api_configuration_loader.dart';
@@ -28,20 +29,22 @@ class RatesLoader {
   }
 
   Future<String> load(AssetBundle assets) async {
+    log.debug('line 31');
     bool hasCache = await _cacheExists();
+    log.debug('line 33');
     if (hasCache) {
       log.debug('using fresh cached rates');
-      return _readCache();
+      return await _readCache();
     }
 
     log.debug(
         'neither cached rates or online rates are available, using installed rates.');
-    return await assets.loadString('assets/data/rates.json');
+    return await assets.loadString(AssetPaths.ratesJson);
   }
 
   Future<String> _readCache() async {
     final file = await _cacheFile;
-    return file.contents;
+    return await file.contents;
   }
 
   Future<AsyncResult<List<CurrencyRate>>> loadOnlineRates() async {

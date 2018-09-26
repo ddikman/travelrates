@@ -48,7 +48,7 @@ class _ConvertScreenState extends State<ConvertScreen> {
       key: _scaffoldKey,
       appBar: appBar,
       body: _buildCurrencyList(),
-      floatingActionButton: new OpenAddCurrencyScreenButton(),
+      floatingActionButton: new OpenAddCurrencyScreenButton(key: Key('addCurrencyButton')),
     );
   }
 

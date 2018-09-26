@@ -17,7 +17,8 @@ class CurrencyConvertCard extends StatefulWidget {
 
   CurrencyConvertCard(
       {@required this.currency,
-      @required this.animationDelay});
+      @required this.animationDelay,
+      Key key}) : super(key: key);
 
   @override
   _CurrencyConvertCardState createState() {

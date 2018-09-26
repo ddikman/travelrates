@@ -33,6 +33,7 @@ class ConvertDialog extends StatelessWidget {
       padding: const EdgeInsets.only(top: 8.0),
       child: new Center(
         child: new FlatButton(
+          key: Key('convertButton'),
           onPressed: () => _submit(context),
           child: new Text(
             _submitLabel,
