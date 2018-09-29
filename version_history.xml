@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="" ?>
+<version-history>
+    <release version="1.2">
+        <en-GB>
+            - Better reordering of currencies
+            - iOS look for iPhone, Android look for Android
+        </en-GB>
+        <ja-JP>
+            -
+        </ja-JP>
+    </release>
+    <release version="1.1">
+        <en-GB>
+            - Translations for Swedish and Japanese
+            - Faster animations
+        </en-GB>
+
+        <ja-JP>
+            - 日本語バージョン追加
+            - 表示速度改善
+        </ja-JP>
+    </release>
+    <release version="1.0">
+        <en-GB>
+            First app release! With support for 250 countries and 168 currencies.
+        </en-GB>
+
+        <ja-JP>
+            初めてのリーリス！２５０国と１６８関数スポート。
+        </ja-JP>
+    </release>
+</version-history>
