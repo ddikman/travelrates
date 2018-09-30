@@ -7,6 +7,10 @@ Handy multi-currency converter specifically for backpackers.
 For help getting started with Flutter, view our online
 [documentation](https://flutter.io/).
 
+## Coverage report
+On merge to master the project creates an lcov report which can be accessed at:
+https://greycastle.gitlab.io/travel-rates/coverage/
+
 ## Building releases
 
 ### Generating localizations
