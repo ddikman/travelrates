@@ -4,9 +4,12 @@
         <en-GB>
             - Better reordering of currencies
             - iOS look for iPhone, Android look for Android
+            - Brighter icon, find it easier
         </en-GB>
         <ja-JP>
-            -
+            - 通貨の並び順を改善しました
+            - iPhoneとAndroidそれぞれデザインを分けました
+            - アイコンを以前より目立つよう改善しました
         </ja-JP>
     </release>
     <release version="1.1">
@@ -26,7 +29,7 @@
         </en-GB>
 
         <ja-JP>
-            初めてのリーリス！２５０国と１６８関数スポート。
+            「TravelRates」アプリ リーリス！２５０ヵ国、１６８通貨対応。
         </ja-JP>
     </release>
 </version-history>
