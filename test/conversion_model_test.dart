@@ -1,5 +1,5 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:travelconverter/model/conversion_model.dart';
-import 'package:test/test.dart';
 
 import 'mocks/mock_currency.dart';
 

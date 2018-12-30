@@ -5,8 +5,14 @@ import 'package:intl/intl.dart';
 // credits to Mr Jorge Viera @ stack overflow:
 // https://stackoverflow.com/questions/50395032/flutter-textfield-with-currency-format
 class CurrencyInputFormatter extends TextInputFormatter {
+
+  final WhitelistingTextInputFormatter whiteListingFormatter = new WhitelistingTextInputFormatter(new RegExp(r'[\d\.]+'));
+
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
+
+    newValue = whiteListingFormatter.formatEditUpdate(oldValue, newValue);
+
     if (newValue.selection.baseOffset == 0) {
       return newValue;
     } else if (newValue.text.endsWith('.')) {

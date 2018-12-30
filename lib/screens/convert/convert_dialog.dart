@@ -21,7 +21,6 @@ class ConvertDialog extends StatelessWidget {
       autofocus: true,
       keyboardType: TextInputType.number,
       inputFormatters: [
-        new WhitelistingTextInputFormatter(new RegExp(r'[\d\.]+')),
         new CurrencyInputFormatter()
       ],
       onSubmitted: (value) => _submit(context),

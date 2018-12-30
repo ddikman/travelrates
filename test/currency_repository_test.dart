@@ -1,5 +1,5 @@
 import 'package:travelconverter/model/currency_rate.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'mocks/mock_currency_repository.dart';
 
 void main() {
@@ -8,7 +8,7 @@ void main() {
 
   test('when requesting missing currency throws state error', () {
     expect(() => repository.getByCode('MISSING'),
-        throwsA(new isInstanceOf<StateError>()));
+        throwsA(isInstanceOf<StateError>()));
   });
 
   test('allows new rates to be set', () {
