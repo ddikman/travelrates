@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -6,40 +8,73 @@ import 'package:intl/intl.dart';
 // https://stackoverflow.com/questions/50395032/flutter-textfield-with-currency-format
 class CurrencyInputFormatter extends TextInputFormatter {
 
-  final WhitelistingTextInputFormatter whiteListingFormatter = new WhitelistingTextInputFormatter(new RegExp(r'[\d\.]+'));
+  final WhitelistingTextInputFormatter whiteListingFormatter = new WhitelistingTextInputFormatter(new RegExp(r'[\d\.,]+'));
+
+  void log(String prefix, TextEditingValue val) {
+    print('${prefix} ${val.text} selection ${val.selection.baseOffset}-${val.selection.extentOffset}');
+  }
 
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
 
-    newValue = whiteListingFormatter.formatEditUpdate(oldValue, newValue);
-
-    if (newValue.selection.baseOffset == 0) {
-      return newValue;
-    } else if (newValue.text.endsWith('.')) {
+    sleep(new Duration(milliseconds: 50));
+    if (oldValue.text == newValue.text) {
       return newValue;
     }
+    print('');
+    log('old', oldValue);
+    log('new', newValue);
+    //return newValue;
 
-    double value = double.parse(newValue.text.replaceAll(',', ''));
-    final formatted = formatValue(value);
+    newValue = whiteListingFormatter.formatEditUpdate(oldValue, newValue);
 
-    return newValue.copyWith(
-        text: formatted,
-        selection: new TextSelection.collapsed(offset: formatted.length));
+    // Split anything below the decimal and join afterwards
+    String newFormatted;
+    if (newValue.text.contains('.')) {
+      var parts = newValue.text.split('.');
+      var real = parts[0];
+      var decimal = parts[1];
+      newFormatted = formatted(real) + '.' + decimal;
+    } else {
+      newFormatted = formatted(newValue.text);
+    }
+
+//    var result = new TextEditingValue(
+//        text: newFormatted,
+//        selection: TextSelection(baseOffset: newFormatted.length, extentOffset: newFormatted.length)
+//    );
+//    log('res', result);
+//    return result;
+      return newValue.copyWith(
+        text: newFormatted,
+          selection: TextSelection(baseOffset: newFormatted.length, extentOffset: newFormatted.length)
+      );
+  }
+
+  String formatted(String input) {
+    // If we can't determine it's value we can't format it either
+    double value = double.tryParse(input.replaceAll(',', ''));
+    if (value == null) {
+      return input;
+    }
+
+    return formatValue(value);
   }
 
   static String formatValue(double value) {
     final locale = Intl.getCurrentLocale();
     NumberFormat format;
-    if (value < 100) {
-      format = NumberFormat('###,###.##', locale);
-    } else if (value < 10000) {
-      format = NumberFormat('###,###', locale);
-    } else {
-      // if we have a number above 10k
-      // it's better we start removing insignificant numbers
-      value = (value / 100.0).roundToDouble() * 100.0;
-      format = NumberFormat('###,###', locale);
-    }
+//    if (value < 100) {
+//      format = NumberFormat('###,###.##', locale);
+//    } else if (value < 10000) {
+//      format = NumberFormat('###,###', locale);
+//    } else {
+//      // if we have a number above 10k
+//      // it's better we start removing insignificant numbers
+//      value = (value / 100.0).roundToDouble() * 100.0;
+//      format = NumberFormat('###,###', locale);
+//    }s
+    format = NumberFormat('###,###.##', locale);
 
     return format.format(value);
   }

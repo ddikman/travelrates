@@ -23,6 +23,7 @@ class ConvertDialog extends StatelessWidget {
       inputFormatters: [
         new CurrencyInputFormatter()
       ],
+      onChanged: (str) => print('recieved: ${str}'),
       onSubmitted: (value) => _submit(context),
       decoration: InputDecoration(
           border: OutlineInputBorder(), labelText: _convertTitle(currencyCode)),
