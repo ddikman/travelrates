@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('Can use convert dialog', (WidgetTester tester) async {
-    String submittedValue;
-    final onSubmitted = (str) => submittedValue = str;
+    double submittedValue;
+    final onSubmitted = (val) => submittedValue = val;
     final convertDialog = new ConvertDialog(onSubmitted: onSubmitted, currencyCode: 'SEK');
     final appContainer = new MaterialApp(home: convertDialog);
 
@@ -23,6 +23,20 @@ void main() {
     await tester.tap(convertButtonFinder);
     await tester.pumpAndSettle();
 
-    expect(submittedValue, '1,000,000');
+    expect(submittedValue, 1000000);
+  });
+
+  testWidgets('Does not trigger convert if no value is given', (WidgetTester tester) async {
+    bool submitCalled = false;
+    final onSubmitted = (str) => submitCalled = true;
+    final convertDialog = new ConvertDialog(onSubmitted: onSubmitted, currencyCode: 'SEK');
+    final appContainer = new MaterialApp(home: convertDialog);
+
+    await tester.pumpWidget(appContainer);
+    final convertButtonFinder = find.byType(FlatButton);
+    await tester.tap(convertButtonFinder);
+    await tester.pumpAndSettle();
+
+    expect(submitCalled, false);
   });
 }

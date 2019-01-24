@@ -10,10 +10,6 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
   final WhitelistingTextInputFormatter whiteListingFormatter = new WhitelistingTextInputFormatter(new RegExp(r'[\d\.,]+'));
 
-  void log(String prefix, TextEditingValue val) {
-    print('${prefix} ${val.text} selection ${val.selection.baseOffset}-${val.selection.extentOffset}');
-  }
-
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
 
@@ -21,10 +17,6 @@ class CurrencyInputFormatter extends TextInputFormatter {
     if (oldValue.text == newValue.text) {
       return newValue;
     }
-    print('');
-    log('old', oldValue);
-    log('new', newValue);
-    //return newValue;
 
     newValue = whiteListingFormatter.formatEditUpdate(oldValue, newValue);
 
@@ -39,12 +31,6 @@ class CurrencyInputFormatter extends TextInputFormatter {
       newFormatted = formatted(newValue.text);
     }
 
-//    var result = new TextEditingValue(
-//        text: newFormatted,
-//        selection: TextSelection(baseOffset: newFormatted.length, extentOffset: newFormatted.length)
-//    );
-//    log('res', result);
-//    return result;
       return newValue.copyWith(
         text: newFormatted,
           selection: TextSelection(baseOffset: newFormatted.length, extentOffset: newFormatted.length)
@@ -63,19 +49,7 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
   static String formatValue(double value) {
     final locale = Intl.getCurrentLocale();
-    NumberFormat format;
-//    if (value < 100) {
-//      format = NumberFormat('###,###.##', locale);
-//    } else if (value < 10000) {
-//      format = NumberFormat('###,###', locale);
-//    } else {
-//      // if we have a number above 10k
-//      // it's better we start removing insignificant numbers
-//      value = (value / 100.0).roundToDouble() * 100.0;
-//      format = NumberFormat('###,###', locale);
-//    }s
-    format = NumberFormat('###,###.##', locale);
-
+    NumberFormat format = NumberFormat('###,###.##', locale);
     return format.format(value);
   }
 }

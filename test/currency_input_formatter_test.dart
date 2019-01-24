@@ -21,11 +21,11 @@ void main() {
     expect(result.text, '1,000');
   });
 
-  test('rounds off to closest thousand', () async {
+  test('formats thousands with seperators but does not round off', () async {
     var oldValue = new TextEditingValue(text: '1000');
     var newValue = new TextEditingValue(text: '10001');
     var result = currencyInputFormatter.formatEditUpdate(oldValue, newValue);
-    expect(result.text, '10,000');
+    expect(result.text, '10,001');
   });
 
   test('ignores leading zeros', () async {
