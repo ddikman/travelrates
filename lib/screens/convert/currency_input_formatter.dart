@@ -13,7 +13,6 @@ class CurrencyInputFormatter extends TextInputFormatter {
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
 
-    sleep(new Duration(milliseconds: 50));
     if (oldValue.text == newValue.text) {
       return newValue;
     }
