@@ -58,7 +58,3 @@ void main() {
     }, tester);
   });
 }
-
-class CurrencyConvertCardPageObject {
-
-}
