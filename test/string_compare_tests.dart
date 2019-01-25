@@ -1,5 +1,5 @@
 import 'package:travelconverter/helpers/string_compare.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('can equal case insensitive', () {

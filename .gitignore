@@ -1,6 +1,11 @@
 .DS_Store
 .dart_tool/
 
+.idea
+
+# ios workspace settings
+ios/Runner.xcworkspace/xcshareddata/
+
 .packages
 .pub/
 

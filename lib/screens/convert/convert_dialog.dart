@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ConvertDialog extends StatelessWidget {
-  final ValueChanged<String> onSubmitted;
+  final ValueChanged<double> onSubmitted;
 
   final String currencyCode;
 
@@ -21,7 +21,6 @@ class ConvertDialog extends StatelessWidget {
       autofocus: true,
       keyboardType: TextInputType.number,
       inputFormatters: [
-        new WhitelistingTextInputFormatter(new RegExp(r'[\d\.]+')),
         new CurrencyInputFormatter()
       ],
       onSubmitted: (value) => _submit(context),
@@ -74,6 +73,8 @@ class ConvertDialog extends StatelessWidget {
 
   _submit(BuildContext context) {
     Navigator.of(context).pop();
-    onSubmitted(textFieldController.text);
+    final value = double.tryParse(textFieldController.text.replaceAll(',', ''));
+    if (value != null)
+      onSubmitted(value);
   }
 }

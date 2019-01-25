@@ -1,10 +1,10 @@
+import 'package:intl/intl.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/widgets/animate_in.dart';
 import 'package:travelconverter/app_theme.dart';
 import 'package:travelconverter/screens/convert/convert_dialog.dart';
 import 'package:travelconverter/model/currency.dart';
-import 'package:travelconverter/screens/convert/currency_input_formatter.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
 
@@ -27,11 +27,8 @@ class CurrencyConvertCard extends StatefulWidget {
 
 class _CurrencyConvertCardState extends State<CurrencyConvertCard>
     with TickerProviderStateMixin {
-  bool _showInputError = false;
 
   static final log = new Logger<_CurrencyConvertCardState>();
-
-  final TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +36,6 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
     final localization = AppLocalizations.of(context);
 
     var currentValue = state.conversion.getAmountInCurrency(widget.currency);
-
-    textEditingController.text =
-        CurrencyInputFormatter.formatValue(currentValue);
 
     Widget currencyName = Padding(
       padding: const EdgeInsets.only(left: 10.0),
@@ -81,7 +75,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
       child: new Material(
         color: Colors.transparent,
         child: Card(
-            color: _showInputError ? Colors.red : AppTheme.primaryColor,
+            color: AppTheme.primaryColor,
             child: new InkWell(
               splashColor: AppTheme.accentColor,
               onTap: _showConvertDialog,
@@ -102,7 +96,8 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
-        Text(CurrencyInputFormatter.formatValue(amount),
+        Text(_formatValue(amount),
+          key: Key('ValueDisplay'),
           style: Theme
               .of(context)
               .textTheme
@@ -126,21 +121,28 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
     return new AnimateIn(child: child, delay: widget.animationDelay);
   }
 
-  void _newValueReceived(String valueString) {
-    log.event("converting $valueString ${widget.currency.code}");
-    double amount = double.tryParse(valueString.replaceAll(',', ''));
-    if (amount == null) {
-      setState(() {
-        _showInputError = true;
-      });
-      return;
+  String _formatValue(double value) {
+    final locale = Intl.getCurrentLocale();
+    NumberFormat format;
+    if (value < 100) {
+      format = NumberFormat('###,###.##', locale);
+    } else if (value < 10000) {
+      format = NumberFormat('###,###', locale);
+    } else {
+      // if we have a number above 10k
+      // it's better we start removing insignificant numbers
+      value = (value / 100.0).roundToDouble() * 100.0;
+      format = NumberFormat('###,###', locale);
     }
 
+    format = NumberFormat('###,###.##', locale);
+    return format.format(value);
+  }
+
+  void _newValueReceived(double value) {
+    log.event("converting $value ${widget.currency.code}");
     final stateContainer = StateContainer.of(context);
-    stateContainer.setAmount(amount, widget.currency);
-    setState(() {
-      _showInputError = false;
-    });
+    stateContainer.setAmount(value, widget.currency);
   }
 
   void _showConvertDialog() {
