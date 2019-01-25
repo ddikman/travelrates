@@ -4,7 +4,7 @@
 .idea
 
 # ios workspace settings
-ios/Runner.xcworkspace/xcsshareddata
+ios/Runner.xcworkspace/xcshareddata/
 
 .packages
 .pub/
