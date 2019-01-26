@@ -19,15 +19,19 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
     newValue = whiteListingFormatter.formatEditUpdate(oldValue, newValue);
 
+    // If a comma has been entered, treat it as a decimal
+    // the comma input is an issue with the iOS 10 update
+    var newText = newValue.text.replaceAll(new RegExp(',\$'), '.');
+
     // Split anything below the decimal and join afterwards
     String newFormatted;
-    if (newValue.text.contains('.')) {
+    if (newText.contains('.')) {
       var parts = newValue.text.split('.');
       var real = parts[0];
-      var decimal = parts[1];
+      var decimal = parts.length > 1 ? parts[1] : '';
       newFormatted = formatted(real) + '.' + decimal;
     } else {
-      newFormatted = formatted(newValue.text);
+      newFormatted = formatted(newText);
     }
 
       return newValue.copyWith(
