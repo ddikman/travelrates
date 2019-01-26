@@ -19,7 +19,7 @@ class ConvertDialog extends StatelessWidget {
     final textField = new TextField(
       controller: textFieldController,
       autofocus: true,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.numberWithOptions(decimal: true),
       inputFormatters: [
         new CurrencyInputFormatter()
       ],
