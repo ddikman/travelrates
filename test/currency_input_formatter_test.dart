@@ -49,6 +49,13 @@ void main() {
     expect(result.text, '1.');
   });
 
+  test('allows to begin entering decimals using comma', () async {
+    var oldValue = new TextEditingValue(text: '1');
+    var newValue = new TextEditingValue(text: '1,');
+    var result = currencyInputFormatter.formatEditUpdate(oldValue, newValue);
+    expect(result.text, '1.');
+  });
+
   test('can begin entering decimals', () async {
     var oldValue = new TextEditingValue(text: '1', selection: TextSelection(baseOffset: 1, extentOffset: 1));
     var newValue = new TextEditingValue(text: '1.', selection: TextSelection(baseOffset: 2, extentOffset: 2));
