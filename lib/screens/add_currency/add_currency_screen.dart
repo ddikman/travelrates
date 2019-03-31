@@ -59,6 +59,7 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
 
     return Scaffold(
         appBar: AppBar(
+          key: Key("AddCurrencyScreen"),
           title: ScreenTitleText.show(_screenTitle),
           centerTitle: true,
           bottom: new PreferredSize(

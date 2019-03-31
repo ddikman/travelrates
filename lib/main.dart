@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:travelconverter/state_container.dart';
 
 void main() {
-  final appRoot = new AppRoot(stateLoader: new PersistedStateLoader());
-
-  runApp(new StateContainer(child: appRoot));
+  final stateLoader = new PersistedStateLoader();
+  final appRoot = new AppRoot(stateLoader: stateLoader);
+  stateLoader.preLoad().then((x) {
+    runApp(new StateContainer(child: appRoot));
+  });
 }
