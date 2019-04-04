@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<version-history>
+    <release version="1.3">
+        <en-GB>
+            - Fixed input issues
+        </en-GB>
+        <ja-JP>
+            - 登録バッグを直しました
+        </ja-JP>
+    </release>
+    <release version="1.2">
+        <en-GB>
+            - Better reordering of currencies
+            - iOS look for iPhone, Android look for Android
+            - Brighter icon, find it easier
+        </en-GB>
+        <ja-JP>
+            - 通貨の並び順を改善しました
+            - iPhoneとAndroidそれぞれデザインを分けました
+            - アイコンを以前より目立つよう改善しました
+        </ja-JP>
+    </release>
+    <release version="1.1">
+        <en-GB>
+            - Translations for Swedish and Japanese
+            - Faster animations
+        </en-GB>
+
+        <ja-JP>
+            - 日本語バージョン追加
+            - 表示速度改善
+        </ja-JP>
+    </release>
+    <release version="1.0">
+        <en-GB>
+            First app release! With support for 250 countries and 168 currencies.
+        </en-GB>
+
+        <ja-JP>
+            「TravelRates」アプリ リーリス！２５０ヵ国、１６８通貨対応。
+        </ja-JP>
+    </release>
+</version-history>

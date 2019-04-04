@@ -1,5 +1,5 @@
 import 'package:travelconverter/helpers/sorting.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('sort helper correctly sorts alphabetically', () {
@@ -19,7 +19,7 @@ void main() {
 
   test('sort helper throws on invalid null list entry', () {
     final listWithInvalidEntry = <_TestObject>[ null, _TestObject('alpha') ];
-    expect(() => alphabeticallySorted(listWithInvalidEntry, (o) => o.value), throwsA(new isInstanceOf<ArgumentError>()));
+    expect(() => alphabeticallySorted(listWithInvalidEntry, (o) => o.value), throwsA(isInstanceOf<ArgumentError>()));
   });
 
   test('sort helper throws on invalid null property', (){
@@ -28,13 +28,13 @@ void main() {
       _TestObject('alpha')
     ];
 
-    expect(() => alphabeticallySorted(listWithNullPropertyValue, (o) => o.value), throwsA(new isInstanceOf<ArgumentError>()));
+    expect(() => alphabeticallySorted(listWithNullPropertyValue, (o) => o.value), throwsA(isInstanceOf<ArgumentError>()));
   });
 
   test('sort helper correctly throws on exceptions', () {
-    expect(() => alphabeticallySorted(null, null), throwsA(new isInstanceOf<ArgumentError>()));
-    expect(() => nonNull(null, 'name'), throwsA(new isInstanceOf<ArgumentError>()));
-    expect(() => assertNotNull(null, 'name'), throwsA(new isInstanceOf<ArgumentError>()));
+    expect(() => alphabeticallySorted(null, null), throwsA(isInstanceOf<ArgumentError>()));
+    expect(() => nonNull(null, 'name'), throwsA(isInstanceOf<ArgumentError>()));
+    expect(() => assertNotNull(null, 'name'), throwsA(isInstanceOf<ArgumentError>()));
   });
 }
 

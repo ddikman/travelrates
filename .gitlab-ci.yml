@@ -25,3 +25,15 @@ pages:
       - public
   only:
     - master
+
+pages:
+  image: alpine
+  stage: deploy
+  dependencies:
+    - unit_test
+  script:
+    - mkdir public
+    - mv coverage/ public/coverage-latest/
+  artifacts:
+    paths:
+      - public

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:travelconverter/services/currency_decoder.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 import 'helpers/assets_folder.dart';
 

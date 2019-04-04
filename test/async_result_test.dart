@@ -1,5 +1,5 @@
 import 'package:travelconverter/model/async_result.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('when getting result of failed async operation, throws state error', () {

@@ -53,9 +53,9 @@ class _EditScreenListEntryState extends State<EditScreenListEntry> {
           new Align(alignment: Alignment.centerLeft, child: _deleteIcon),
           Expanded(
               child: new Align(
-            alignment: Alignment.centerLeft,
-            child: Text(name, style: TextStyle(fontSize: 16.0)),
-          )),
+                alignment: Alignment.centerLeft,
+                child: Text(name, style: TextStyle(fontSize: 16.0)),
+              )),
           new Align(
               alignment: Alignment.centerLeft,
               child: Icon(
@@ -66,9 +66,8 @@ class _EditScreenListEntryState extends State<EditScreenListEntry> {
   }
 
   get _deleteIcon {
-
     final color =
-        Platform.isAndroid ? AppTheme.accentColor : AppTheme.deleteColour;
+    Platform.isAndroid ? AppTheme.accentColor : AppTheme.deleteColour;
 
     final decoration = Platform.isAndroid
         ? null
