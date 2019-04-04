@@ -7,7 +7,7 @@ import 'package:travelconverter/state_container.dart';
 void main() {
   final stateLoader = new PersistedStateLoader();
   final appRoot = new AppRoot(stateLoader: stateLoader);
-  stateLoader.preLoad().then((x) {
+  //stateLoader.preLoad().then((x) {
     runApp(new StateContainer(child: appRoot));
-  });
+  //});
 }
