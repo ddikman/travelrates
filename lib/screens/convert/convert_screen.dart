@@ -61,6 +61,7 @@ class _ConvertScreenState extends State<ConvertScreen> {
         child: new Padding(
       padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
       child: new SelectedCurrencyList(),
+          key: Key("ConvertScreen")
     ));
   }
 }
