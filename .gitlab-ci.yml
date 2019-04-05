@@ -8,6 +8,7 @@ unit_test:
   script:
     - flutter test --coverage
     - genhtml coverage/lcov.info --output=coverage
+    - lcov --summary coverage/lcov.info
   artifacts:
     paths:
       - coverage/
