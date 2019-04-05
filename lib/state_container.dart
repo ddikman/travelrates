@@ -13,7 +13,7 @@ class StateContainer extends StatefulWidget {
 
   StateContainer({
     @required this.child,
-    this.state,
+    this.state
   });
 
   static StateContainerState of(BuildContext context) {
