@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -23,10 +22,16 @@ void main() {
   test("returns failure if server does not respond correctly", () async {
     final api = new RatesApi(new MockConfig());
     api.connectivity = new MockConnectivity(ConnectivityResult.wifi);
+    api.client = new MockClient(() => new Response("", 500));
 
-    final mockClient = new MockClient();
-    mockClient.response = new Response("", 500);
-    api.client = mockClient;
+    final result = await api.getCurrentRatesJson();
+    expect(result.successful, false);
+  });
+
+  test("returns failure on exception", () async {
+    final api = new RatesApi(new MockConfig());
+    api.connectivity = new MockConnectivity(ConnectivityResult.wifi);
+    api.client = new MockClient(() => throw new Exception("Mock failure"));
 
     final result = await api.getCurrentRatesJson();
     expect(result.successful, false);
@@ -46,38 +51,44 @@ void main() {
 
 class MockClient implements Client {
 
-  Response response;
+  final Function _response;
+
+  MockClient(Function response) : _response = response;
 
   @override
   void close() { throw new UnimplementedError(); }
 
+  Future<Response> _generateResponse() {
+    return Future.value(_response());
+  }
+
   @override
   Future<Response> delete(url, {Map<String, String> headers}) {
-    return Future.value(response);
+    return _generateResponse();
   }
 
   @override
   Future<Response> get(url, {Map<String, String> headers}) {
-    return Future.value(response);
+    return _generateResponse();
   }
 
   @override
   Future<Response> head(url, {Map<String, String> headers}) {
-    return Future.value(response);
+    return _generateResponse();
   }
   @override
   Future<Response> patch(url, {Map<String, String> headers, body, Encoding encoding})  {
-    return Future.value(response);
+    return _generateResponse();
   }
 
   @override
   Future<Response> post(url, {Map<String, String> headers, body, Encoding encoding})  {
-    return Future.value(response);
+    return _generateResponse();
   }
 
   @override
   Future<Response> put(url, {Map<String, String> headers, body, Encoding encoding})  {
-    return Future.value(response);
+    return _generateResponse();
   }
 
   @override
