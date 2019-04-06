@@ -8,6 +8,7 @@ unit_test:
   script:
     - echo $API_KEY > assets/data/apiConfiguration.json
     - $(dirname $(which flutter))/cache/dart-sdk/bin/pub global activate junitreport
+    - flutter packages get
     - flutter test --machine | $HOME/.pub-cache/bin/tojunit > results.xml
     - flutter test --coverage
     - genhtml coverage/lcov.info --output=coverage
