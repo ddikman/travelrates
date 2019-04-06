@@ -40,6 +40,7 @@ void main() {
   test("can read from actual service", () async  {
     final assets = await AssetsFolder.path;
     final apiConfigJson = await new File('$assets/data/apiConfiguration.json').readAsString();
+    print(apiConfigJson.substring(0, 10));
     final apiConfig = ApiConfiguration.fromJson(json.decode(apiConfigJson));
     final api = new RatesApi(apiConfig);
     api.connectivity = MockConnectivity(ConnectivityResult.wifi);
