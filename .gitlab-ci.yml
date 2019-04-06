@@ -6,8 +6,10 @@ unit_test:
   image: greycastle/flutter_lcov:v1.4.11-pre.22
   stage: test
   script:
+    - echo $API_KEY > assets/data/apiConfiguration.json
     - flutter test --coverage
     - genhtml coverage/lcov.info --output=coverage
+    - rm assets/data/apiConfiguration.json
   artifacts:
     paths:
       - coverage/
