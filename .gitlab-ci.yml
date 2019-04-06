@@ -9,7 +9,7 @@ unit_test:
     - echo $API_KEY > assets/data/apiConfiguration.json
     - $(dirname $(which flutter))/cache/dart-sdk/bin/pub global activate junitreport
     - flutter packages get
-    - flutter test --machine | $HOME/.pub-cache/bin/tojunit > results.xml
+    - flutter test --machine | $HOME/.pub-cache/bin/tojunit &> results.xml
     - flutter test --coverage
     - genhtml coverage/lcov.info --output=coverage
     - rm assets/data/apiConfiguration.json
@@ -32,15 +32,3 @@ pages:
       - public
   only:
     - master
-
-pages:
-  image: alpine
-  stage: deploy
-  dependencies:
-    - unit_test
-  script:
-    - mkdir public
-    - mv coverage/ public/coverage-latest/
-  artifacts:
-    paths:
-      - public
