@@ -1,4 +1,6 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/src/client.dart';
 import 'package:travelconverter/model/async_result.dart';
 import 'package:travelconverter/services/rates_api.dart';
 import 'package:travelconverter/services/rates_loader.dart';
@@ -57,5 +59,11 @@ class MockRatesApi implements RatesApi {
   Future<AsyncResult<String>> getCurrentRatesJson() {
     return Future.value(result);
   }
+
+  @override
+  Client client;
+
+  @override
+  Connectivity connectivity;
 
 }
