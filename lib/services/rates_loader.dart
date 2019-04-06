@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:travelconverter/model/async_result.dart';
 import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/services/api_configuration_loader.dart';
@@ -10,15 +11,18 @@ import 'package:travelconverter/services/rates_api.dart';
 import 'package:flutter/services.dart';
 
 class RatesLoader {
+  static final log = new Logger<RatesLoader>();
+
   final cacheExpirationDate = DateTime.now().add(Duration(days: 1));
 
-  final localStorage = new LocalStorage();
+  final LocalStorage localStorage;
+  final RatesApi ratesApi;
 
   final decoder = new CurrencyDecoder();
 
-  static final log = new Logger<RatesLoader>();
+  RatesLoader({@required this.localStorage, @required this.ratesApi});
 
-  Future<LocalFile> get _cacheFile async {
+  Future<FileOperations> get _cacheFile async {
     return localStorage.getFile('rates.json');
   }
 
@@ -45,8 +49,7 @@ class RatesLoader {
   }
 
   Future<AsyncResult<List<CurrencyRate>>> loadOnlineRates() async {
-    final ratesApi = new RatesApi(await new ApiConfigurationLoader().load());
-    final ratesJson = await ratesApi.getCurrentRatesJson();
+    final ratesJson = await this.ratesApi.getCurrentRatesJson();
     if (!ratesJson.successful) {
       return AsyncResult.failed();
     }

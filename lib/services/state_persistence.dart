@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:travelconverter/app_state.dart';
 import 'package:travelconverter/asset_paths.dart';
 import 'package:travelconverter/helpers/string_compare.dart';
@@ -14,16 +15,17 @@ import 'package:flutter/services.dart';
 
 /// Loads the app state on startup
 class StatePersistence {
-  final localStorage = new LocalStorage();
+
+  final localStorage;
 
   static final log = new Logger<StatePersistence>();
 
-  Future<AppState> load(
-      RatesLoader ratesLoader, AssetBundle defaultAssetBundle) async {
-    final currencyRepository =
-        await _loadRepository(ratesLoader, defaultAssetBundle);
+  StatePersistence({@required this.localStorage});
 
-    final countries = await _loadCountries(defaultAssetBundle);
+  Future<AppState> load(RatesLoader ratesLoader, AssetBundle assets) async {
+    final currencyRepository = await _loadRepository(ratesLoader, assets);
+
+    final countries = await _loadCountries(assets);
     countries.sort((a, b) => compareIgnoreCase(a.name, b.name));
 
     if (await (await _stateFile).exists) {
@@ -38,7 +40,7 @@ class StatePersistence {
     }
   }
 
-  Future<LocalFile> get _stateFile async {
+  Future<FileOperations> get _stateFile async {
     return await localStorage.getFile('state.json');
   }
 

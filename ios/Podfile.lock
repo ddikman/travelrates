@@ -10,7 +10,7 @@ PODS:
 DEPENDENCIES:
   - connectivity (from `/Users/ddikman/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity-0.3.2/ios`)
   - Flutter (from `/Users/ddikman/flutter/bin/cache/artifacts/engine/ios`)
-  - path_provider (from `/Users/ddikman/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-0.4.1/ios`)
+  - path_provider (from `/Users/ddikman/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-0.5.0/ios`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -22,7 +22,7 @@ EXTERNAL SOURCES:
   Flutter:
     :path: "/Users/ddikman/flutter/bin/cache/artifacts/engine/ios"
   path_provider:
-    :path: "/Users/ddikman/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-0.4.1/ios"
+    :path: "/Users/ddikman/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-0.5.0/ios"
 
 SPEC CHECKSUMS:
   connectivity: c72716e202a1225ec4810740d5cb56b8ae3bf4cc

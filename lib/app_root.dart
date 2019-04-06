@@ -7,13 +7,20 @@ import 'package:travelconverter/app_theme.dart';
 import 'package:travelconverter/screens/convert/convert_screen.dart';
 import 'package:travelconverter/l10n/app_localizations_delegate.dart';
 import 'package:travelconverter/screens/edit_screen/edit_screen.dart';
+import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:travelconverter/services/rates_api.dart';
 import 'package:travelconverter/services/rates_loader.dart';
 import 'package:travelconverter/state_container.dart';
 
 class AppRoot extends StatefulWidget {
+
+  final RatesApi ratesApi;
+
+  const AppRoot({Key key, this.ratesApi}) : super(key: key);
+
   @override
   _AppRootState createState() {
     return new _AppRootState();
@@ -28,11 +35,11 @@ class _AppRootState extends State<AppRoot> {
   void initState() {
     super.initState();
 
-    new RatesLoader().loadOnlineRates()
-      .then(handleLoadedRates)
-      .catchError((error) => {
-        log.error("Failed to load online rates: $error")
-      });
+    new RatesLoader(localStorage: new LocalStorage(), ratesApi: widget.ratesApi).loadOnlineRates()
+        .then(handleLoadedRates)
+        .catchError((error) => {
+      log.error("Failed to load online rates: $error")
+    });
   }
 
   @override
