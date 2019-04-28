@@ -24,7 +24,7 @@ class StatePersistence {
   StatePersistence({@required this.localStorage});
 
   Future<AppState> load(RatesLoader ratesLoader, AssetBundle assets) async {
-    final currencyRepository = await _loadRepository(ratesLoader, assets);
+    final currencyRepository = _loadRepository();
 
     final countries = await _loadCountries(assets);
     countries.sort((a, b) => compareIgnoreCase(a.name, b.name));
@@ -61,13 +61,7 @@ class StatePersistence {
     return countriesList.map((country) => Country.fromJson(country)).toList();
   }
 
-  Future<CurrencyRepository> _loadRepository(
-      RatesLoader ratesLoader, AssetBundle assets) async {
-//    final currencies = await assets.loadString(AssetPaths.currenciesJson);
-//    final rates = await ratesLoader.load(assets);
-//    final decoder = new CurrencyDecoder();
-//    return await decoder.decode(currencies, rates);
-
+  CurrencyRepository _loadRepository() {
     return new CurrencyRepository(
       currencies: CurrencyData.currencies,
       baseRate: CurrencyData.baseCurrency
