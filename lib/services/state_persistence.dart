@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:travelconverter/app_state.dart';
 import 'package:travelconverter/asset_paths.dart';
+import 'package:travelconverter/data/currency_data.dart';
 import 'package:travelconverter/helpers/string_compare.dart';
 import 'package:travelconverter/model/country.dart';
 import 'package:travelconverter/services/currency_decoder.dart';
@@ -62,10 +63,15 @@ class StatePersistence {
 
   Future<CurrencyRepository> _loadRepository(
       RatesLoader ratesLoader, AssetBundle assets) async {
-    final currencies = await assets.loadString(AssetPaths.currenciesJson);
-    final rates = await ratesLoader.load(assets);
-    final decoder = new CurrencyDecoder();
-    return await decoder.decode(currencies, rates);
+//    final currencies = await assets.loadString(AssetPaths.currenciesJson);
+//    final rates = await ratesLoader.load(assets);
+//    final decoder = new CurrencyDecoder();
+//    return await decoder.decode(currencies, rates);
+
+    return new CurrencyRepository(
+      currencies: CurrencyData.currencies,
+      baseRate: CurrencyData.baseCurrency
+    );
   }
 
   Future<Null> store(AppState appState) async {

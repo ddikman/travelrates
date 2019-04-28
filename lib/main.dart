@@ -18,7 +18,7 @@ void main() {
       final ratesLoader = new RatesLoader(localStorage: localStorage, ratesApi: ratesApi);
       final statePersistence = new StatePersistence(localStorage: localStorage);
       statePersistence.load(ratesLoader, rootBundle).then((state) {
-        final appRoot = new AppRoot();
+        final appRoot = new AppRoot(ratesApi: ratesApi);
         runApp(new StateContainer(child: appRoot, state: state, statePersistence: statePersistence));
       });
   });
