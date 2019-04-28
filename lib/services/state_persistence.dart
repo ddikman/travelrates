@@ -26,6 +26,7 @@ class StatePersistence {
   Future<AppState> load(RatesLoader ratesLoader, AssetBundle assets) async {
     final currencyRepository = _loadRepository();
 
+    // TODO: Continue next up here by removing the country list and replacing it with a class
     final countries = await _loadCountries(assets);
     countries.sort((a, b) => compareIgnoreCase(a.name, b.name));
 
