@@ -11,6 +11,10 @@ class CurrencyRepository {
 
   final String _baseRate;
 
+  static final List<Currency> currencies = [
+    Currency(symbol: "symbol", code: "code", name: 'name', icon: 'icon', rate: 1.0),
+  ];
+
   CurrencyRepository({List<Currency> currencies, String baseRate})
   : _currencies = currencies,
     _baseRate = baseRate {

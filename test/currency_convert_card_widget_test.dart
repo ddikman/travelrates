@@ -1,20 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:travelconverter/app_state.dart';
-import 'package:travelconverter/l10n/app_localizations.dart';
-import 'package:travelconverter/l10n/app_localizations_delegate.dart';
-import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
-import 'package:travelconverter/model/conversion_model.dart';
-import 'package:travelconverter/model/currency.dart';
-import 'package:travelconverter/screens/convert/convert_dialog.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:travelconverter/screens/convert/currency_convert_card.dart';
-import 'package:travelconverter/state_container.dart';
 
 import 'mocks/mock_app_container_builder.dart';
-import 'mocks/mock_country.dart';
 import 'mocks/mock_currency.dart';
-import 'mocks/mock_currency_repository.dart';
 
 void main() {
   Future whenCurrentValueIs(

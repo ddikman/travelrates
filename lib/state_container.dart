@@ -10,10 +10,12 @@ import 'package:flutter/material.dart';
 class StateContainer extends StatefulWidget {
   final Widget child;
   final AppState state;
+  final StatePersistence statePersistence;
 
   StateContainer({
     @required this.child,
     this.state,
+    this.statePersistence
   });
 
   static StateContainerState of(BuildContext context) {
@@ -27,7 +29,6 @@ class StateContainer extends StatefulWidget {
 }
 
 class StateContainerState extends State<StateContainer> {
-  final _statePersistence = new StatePersistence();
 
   static final log = new Logger<StateContainerState>();
 
@@ -62,7 +63,7 @@ class StateContainerState extends State<StateContainer> {
       appState = state;
     });
 
-    _statePersistence.store(appState);
+    widget.statePersistence.store(appState);
   }
 
   void removeCurrency(String currencyCode) {
