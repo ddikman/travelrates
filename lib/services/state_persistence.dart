@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:travelconverter/app_state.dart';
 import 'package:travelconverter/asset_paths.dart';
+import 'package:travelconverter/data/countries_data.dart';
 import 'package:travelconverter/data/currency_data.dart';
 import 'package:travelconverter/helpers/string_compare.dart';
 import 'package:travelconverter/model/country.dart';
@@ -23,11 +24,10 @@ class StatePersistence {
 
   StatePersistence({@required this.localStorage});
 
-  Future<AppState> load(RatesLoader ratesLoader, AssetBundle assets) async {
+  Future<AppState> load(AssetBundle assets) async {
     final currencyRepository = _loadRepository();
 
-    // TODO: Continue next up here by removing the country list and replacing it with a class
-    final countries = await _loadCountries(assets);
+    final countries = new List<Country>.from(CountryData.countries);
     countries.sort((a, b) => compareIgnoreCase(a.name, b.name));
 
     if (await (await _stateFile).exists) {
@@ -53,13 +53,6 @@ class StatePersistence {
     final stateFile = await localStorage.getFile('state.json');
     final stateJson = json.decode(await stateFile.contents);
     return AppState.fromJson(stateJson, currencyRepository, countries);
-  }
-
-  Future<List<Country>> _loadCountries(AssetBundle assets) async {
-    final countriesJson = await assets.loadString(AssetPaths.countriesJson);
-
-    final List countriesList = JsonDecoder().convert(countriesJson);
-    return countriesList.map((country) => Country.fromJson(country)).toList();
   }
 
   CurrencyRepository _loadRepository() {

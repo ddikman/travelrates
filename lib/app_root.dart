@@ -93,12 +93,7 @@ class _AppRootState extends State<AppRoot> {
     );
   }
 
-  void handleLoadedRates(AsyncResult<List<CurrencyRate>> rates) {
-    if (!rates.successful) {
-      return;
-    }
-
-    StateContainer.of(context).setRates(rates.result);
-    log.event("Online rates loaded");
+  void handleLoadedRates(List<CurrencyRate> rates) {
+    StateContainer.of(context).setRates(rates);
   }
 }

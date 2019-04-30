@@ -5,49 +5,62 @@ import 'package:travelconverter/model/async_result.dart';
 import 'package:travelconverter/services/rates_api.dart';
 import 'package:travelconverter/services/rates_loader.dart';
 
-import 'mocks/mock_bundle.dart';
 import 'mocks/mock_local_storage.dart';
 
 void main() {
   final localStorage = new MockLocalStorage();
-  final ratesJson = "ratesjson";
-  localStorage.setFile("rates.json", ratesJson);
 
   final ratesApi = new MockRatesApi();
 
-  final assets = new TestAssetBundle();
-
   final ratesLoader = new RatesLoader(localStorage: localStorage, ratesApi: ratesApi);
 
-  test('uses cached rates if existing', () async {
-    final rates = await ratesLoader.load(assets);
-    expect(rates, ratesJson);
+  test('uses cached rates if online rates cannot be retrieved', () async {
+    // given
+    ratesApi.result = new AsyncResult.failed();
+    localStorage.setFile("rates.json", '{"rates": {"SEK": 3.3}}');
+    
+    final rates = await ratesLoader.loadOnlineRates();
+    expect(rates.length, 1);
+    expect(rates[0].currencyCode, 'SEK');
+    expect(rates[0].rate, 3.3);
   });
 
-  test('returns false result when api fails', () async {
+  test('returns empty list if cache is corrupt', () async {
+    localStorage.setFile("rates.json", 'not a json');
     ratesApi.result = new AsyncResult.failed();
 
     final rates = await ratesLoader.loadOnlineRates();
-    expect(rates.successful, false);
-    expect(() => rates.result, throwsA(isInstanceOf<StateError>()));
+    expect(rates.length, 0);
+  });
+
+  test('returns cache if online rates are corrupt', () async {
+    localStorage.setFile("rates.json", '{"rates": {"GBP": 2.8}}');
+    ratesApi.result = new AsyncResult.withValue('invalid json');
+
+    final rates = await ratesLoader.loadOnlineRates();
+    expect(rates.length, 1);
+    expect(rates[0].currencyCode, 'GBP');
+    expect(rates[0].rate, 2.8);
   });
 
   test('decodes api json', () async {
-    final apiJson = '{"rates":{"EUR":1}}';
+    final apiJson = '{"rates":{"USD":2.1}}';
     ratesApi.result = new AsyncResult.withValue(apiJson);
 
     final rates = await ratesLoader.loadOnlineRates();
-    expect(rates.successful, true);
-    expect(rates.result.length, 1);
-
-    final currency = rates.result.first;
-    expect(currency.currencyCode, 'EUR');
-    expect(currency.rate, 1.0);
+    expect(rates.length, 1);
+    expect(rates[0].currencyCode, 'USD');
+    expect(rates[0].rate, 2.1);
   });
 
-  test('returns failure on invalid api call', () async {
-    ratesApi.result = new AsyncResult.withValue("invalid json");
-    await expectLater(() => ratesLoader.loadOnlineRates(), throwsA(isInstanceOf<FormatException>()));
+  test('caches rates on success', () async {
+    final apiJson = '{"rates":{"USD":2.1}}';
+    ratesApi.result = new AsyncResult.withValue(apiJson);
+
+    await ratesLoader.loadOnlineRates();
+    final cacheFile = await localStorage.getFile("rates.json");
+    final cachedContents = await cacheFile.contents;
+    expect(cachedContents, apiJson);
   });
 }
 

@@ -1,6 +1,7 @@
 const fs = require('fs')
 const exec = require('child_process').execSync
 const currencyDataFileTemplate = require('./currency_data_file_template.js')
+const countriesDataFileTemplate = require('./countries_data_file_template.js')
 
 function writeDartFile (path, contents) {
   console.log('writing and formatting dart file..')
@@ -29,4 +30,11 @@ function generateCurrencies () {
   writeDartFile('./lib/data/currency_data.dart', contents)
 }
 
+function generateCountries () {
+  let countries = JSON.parse(fs.readFileSync('./assets/data/countries.json'))
+  var contents = countriesDataFileTemplate(countries)
+  writeDartFile('./lib/data/countries_data.dart', contents)
+}
+
 generateCurrencies()
+generateCountries();

@@ -1,19 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:travelconverter/model/async_result.dart';
 import 'package:travelconverter/model/currency_rate.dart';
-import 'package:travelconverter/services/api_configuration_loader.dart';
 import 'package:travelconverter/services/currency_decoder.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/services/rates_api.dart';
-import 'package:flutter/services.dart';
 
 class RatesLoader {
   static final log = new Logger<RatesLoader>();
-
-  final cacheExpirationDate = DateTime.now().add(Duration(days: 1));
 
   final LocalStorage localStorage;
   final RatesApi ratesApi;
@@ -31,36 +26,38 @@ class RatesLoader {
     return await file.exists;
   }
 
-  Future<String> load(AssetBundle assets) async {
-    bool hasCache = await _cacheExists();
-    if (hasCache) {
-      log.debug('using fresh cached rates');
-      return _readCache();
-    }
-
-    log.debug(
-        'neither cached rates or online rates are available, using installed rates.');
-    return await assets.loadString('assets/data/rates.json');
-  }
-
   Future<String> _readCache() async {
     final file = await _cacheFile;
     return file.contents;
   }
 
-  Future<AsyncResult<List<CurrencyRate>>> loadOnlineRates() async {
+  Future<List<CurrencyRate>> _cachedRates() async {
+    String json;
+    if (await _cacheExists()) {
+      try {
+        json = await _readCache();
+        return decoder.decodeRates(json);
+      } on Exception catch (e) {
+        log.error('Failed to parse cached local rates: ${e.toString()}\n\r$json');
+      }
+    }
+
+    return new List<CurrencyRate>();
+  }
+
+  Future<List<CurrencyRate>> loadOnlineRates() async {
     final ratesJson = await this.ratesApi.getCurrentRatesJson();
     if (!ratesJson.successful) {
-      return AsyncResult.failed();
+      return await _cachedRates();
     }
 
     try {
       final rates = decoder.decodeRates(ratesJson.result);
       _cacheRates(ratesJson.result);
-      return AsyncResult.withValue(rates);
+      return rates;
     } on Exception catch (e) {
-      log.error('Online rates invalid json: ${ratesJson.result}');
-      throw new FormatException("Online json rates contain invalid json.", e);
+      log.error('Online rates invalid json: ${e.toString()}\r\n${ratesJson.result}');
+      return await _cachedRates();
     }
   }
 
