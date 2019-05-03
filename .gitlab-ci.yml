@@ -3,7 +3,7 @@ stages:
   - deploy
 
 unit_test:
-  image: greycastle/flutter_lcov:v1.4.11-pre.22
+  image: greycastle/flutter_lcov:v1.5.9-pre.138
   stage: test
   script:
     - echo $API_KEY > assets/data/apiConfiguration.json
