@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <version-history>
+    <release version="1.4">
+        <en-GB>
+            - Improved startup speed
+        </en-GB>
+        <ja-JP>
+            - 起動の早さを改善しました
+        </ja-JP>
+    </release>
     <release version="1.3">
         <en-GB>
             - Fixed input issues

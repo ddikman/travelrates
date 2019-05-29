@@ -3,12 +3,13 @@ stages:
   - deploy
 
 unit_test:
-  image: greycastle/flutter_lcov:v0.9.2
+  image: greycastle/flutter_lcov:v1.5.9-pre.138
   stage: test
   script:
-    - flutter channel master
+    - echo $API_KEY > assets/data/apiConfiguration.json
     - flutter test --coverage
     - genhtml coverage/lcov.info --output=coverage
+    - rm assets/data/apiConfiguration.json
   artifacts:
     paths:
       - coverage/
@@ -26,15 +27,3 @@ pages:
       - public
   only:
     - master
-
-pages:
-  image: alpine
-  stage: deploy
-  dependencies:
-    - unit_test
-  script:
-    - mkdir public
-    - mv coverage/ public/coverage-latest/
-  artifacts:
-    paths:
-      - public

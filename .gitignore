@@ -18,3 +18,5 @@ coverage/
 
 # we don't want to check in secrets so keep this from being checked in
 assets/data/apiConfiguration.json
+
+screenshots/

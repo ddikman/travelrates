@@ -1,12 +1,9 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/screens/convert/open_add_currency_screen_button.dart';
 import 'package:travelconverter/screens/convert/selected_currency_list.dart';
 import 'package:travelconverter/screens/convert/goto_configure_button.dart';
 import 'package:travelconverter/services/logger.dart';
-import 'package:travelconverter/services/state_loader.dart';
 import 'package:travelconverter/widgets/background_container.dart';
 
 import 'package:flutter/material.dart';
@@ -19,10 +16,6 @@ class ConvertScreen extends StatefulWidget {
       name: "ConvertScreen_screenTitle",
       desc: "Convert screen main title"
   );
-
-  final StateLoader stateLoader;
-
-  const ConvertScreen({Key key, this.stateLoader}) : super(key: key);
 
   @override
   _ConvertScreenState createState() {

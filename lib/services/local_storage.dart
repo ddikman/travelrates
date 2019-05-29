@@ -8,13 +8,13 @@ class LocalStorage {
     return directory.path;
   }
 
-  Future<LocalFile> getFile(String filename) async {
+  Future<FileOperations> getFile(String filename) async {
     final directory = await _localDirectory;
     return new LocalFile('$directory/$filename');
   }
 }
 
-class LocalFile {
+class LocalFile implements FileOperations {
   final String path;
 
   LocalFile(this.path);
@@ -37,4 +37,13 @@ class LocalFile {
     final file = await _localFile;
     await file.writeAsString(contents);
   }
+}
+
+abstract class FileOperations {
+
+  Future<Null> writeContents(String contents);
+
+  Future<String> get contents;
+
+  Future<bool> get exists;
 }

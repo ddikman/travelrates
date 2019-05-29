@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:travelconverter/app_state.dart';
 import 'package:travelconverter/asset_paths.dart';
+import 'package:travelconverter/data/countries_data.dart';
+import 'package:travelconverter/data/currency_data.dart';
 import 'package:travelconverter/helpers/string_compare.dart';
 import 'package:travelconverter/model/country.dart';
 import 'package:travelconverter/services/currency_decoder.dart';
@@ -15,16 +17,17 @@ import 'package:flutter/services.dart';
 
 /// Loads the app state on startup
 class StatePersistence {
-  final localStorage = new LocalStorage();
+
+  final localStorage;
 
   static final log = new Logger<StatePersistence>();
 
-  Future<AppState> load(
-      RatesLoader ratesLoader, AssetBundle defaultAssetBundle) async {
-    final currencyRepository =
-        await _loadRepository(ratesLoader, defaultAssetBundle);
+  StatePersistence({@required this.localStorage});
 
-    final countries = await _loadCountries(defaultAssetBundle);
+  Future<AppState> load(AssetBundle assets) async {
+    final currencyRepository = _loadRepository();
+
+    final countries = new List<Country>.from(CountryData.countries);
     countries.sort((a, b) => compareIgnoreCase(a.name, b.name));
 
     if (await (await _stateFile).exists) {
@@ -39,7 +42,7 @@ class StatePersistence {
     }
   }
 
-  Future<LocalFile> get _stateFile async {
+  Future<FileOperations> get _stateFile async {
     return await localStorage.getFile('state.json');
   }
 
@@ -52,19 +55,11 @@ class StatePersistence {
     return AppState.fromJson(stateJson, currencyRepository, countries);
   }
 
-  Future<List<Country>> _loadCountries(AssetBundle assets) async {
-    final countriesJson = await assets.loadString(AssetPaths.countriesJson);
-
-    final List countriesList = JsonDecoder().convert(countriesJson);
-    return countriesList.map((country) => Country.fromJson(country)).toList();
-  }
-
-  Future<CurrencyRepository> _loadRepository(
-      RatesLoader ratesLoader, AssetBundle assets) async {
-    final currencies = await assets.loadString(AssetPaths.currenciesJson);
-    final rates = await ratesLoader.load(assets);
-    final decoder = new CurrencyDecoder();
-    return await decoder.decode(currencies, rates);
+  CurrencyRepository _loadRepository() {
+    return new CurrencyRepository(
+      currencies: CurrencyData.currencies,
+      baseRate: CurrencyData.baseCurrency
+    );
   }
 
   Future<Null> store(AppState appState) async {

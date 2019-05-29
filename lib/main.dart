@@ -1,13 +1,23 @@
+import 'package:flutter/services.dart';
 import 'package:travelconverter/app_root.dart';
-import 'package:travelconverter/services/persisted_state_loader.dart';
 import 'package:flutter/material.dart';
+import 'package:travelconverter/services/api_configuration_loader.dart';
+import 'package:travelconverter/services/local_storage.dart';
+import 'package:travelconverter/services/rates_api.dart';
+import 'package:travelconverter/services/state_persistence.dart';
 
 import 'package:travelconverter/state_container.dart';
 
 void main() {
-  final stateLoader = new PersistedStateLoader();
-  final appRoot = new AppRoot(stateLoader: stateLoader);
-  //stateLoader.preLoad().then((x) {
-    runApp(new StateContainer(child: appRoot));
-  //});
+  var localStorage = new LocalStorage();
+  final ratesApiConfigLoader = new ApiConfigurationLoader();
+  ratesApiConfigLoader.load()
+    .then((ratesApiConfig) {
+      final ratesApi = new RatesApi(ratesApiConfig);
+      final statePersistence = new StatePersistence(localStorage: localStorage);
+      statePersistence.load(rootBundle).then((state) {
+        final appRoot = new AppRoot(ratesApi: ratesApi);
+        runApp(new StateContainer(child: appRoot, state: state, statePersistence: statePersistence));
+      });
+  });
 }
