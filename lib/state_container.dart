@@ -80,7 +80,13 @@ class StateContainerState extends State<StateContainer> {
       throw new DuplicateCurrencyError("Currency '$currencyCode' has already been added");
     }
     currencies.add(currencyCode);
-    _updateConversion(appState.conversion.withCurrencies(currencies));
+
+    var conversion = appState.conversion.withCurrencies(currencies);
+    if (conversion.currencies.length == 1) {
+      final currency = appState.availableCurrencies.getByCode(currencyCode);
+      conversion = conversion.withAmount(amount: 1.0, currency: currency);
+    }
+    _updateConversion(conversion);
   }
 
   void _updateConversion(ConversionModel conversion) {

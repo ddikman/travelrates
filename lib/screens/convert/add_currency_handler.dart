@@ -27,19 +27,10 @@ class AddCurrencyHandler {
     Scaffold.of(context).showSnackBar(snackBar);
   }
 
-  int _currentNumberOfCurrencies(StateContainerState stateContainer) {
-    return stateContainer.appState.conversion.currencies.length;
-  }
-
   addCurrency(BuildContext context) {
     try {
       final state = StateContainer.of(context);
       state.addCurrency(currency.code);
-
-      // if it is the first currency we add, it should be the refence 1
-      if (_currentNumberOfCurrencies(state) == 1) {
-        state.setAmount(1.0, currency);
-      }
 
       // return to previous screen
       Navigator.of(context).pop();
