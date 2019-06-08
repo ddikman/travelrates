@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <version-history>
+    <release version="1.5">
+        <en-GB>
+            - Made buttons to add currency easier to press
+        </en-GB>
+        <ja-JP>
+            - 通貨ボタン押すのが易しくしました
+        </ja-JP>
+    </release>
     <release version="1.4">
         <en-GB>
             - Improved startup speed
