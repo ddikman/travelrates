@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travelconverter/screens/add_currency/add_currency_button.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:travelconverter/screens/convert/add_currency_handler.dart';
 import 'package:travelconverter/state_container.dart';
 
 import 'helpers/mock_widget_frame.dart';
@@ -13,8 +14,15 @@ void main() {
       (WidgetTester tester) async {
 
         final dollar = MockCurrency.dollar;
+
         final widgetFrame = new MockWidgetFrame(
-            child: new AddCurrencyButton(currency: dollar)
+            child: new Builder(builder: (BuildContext context) {
+              final addHandler = new AddCurrencyHandler(dollar);
+              return new AddCurrencyButton(
+                currency: dollar,
+                onTap: () => addHandler.addCurrency(context),
+              );
+            })
         );
 
         await tester.pumpWidget(widgetFrame);
@@ -40,7 +48,13 @@ void main() {
         final widgetFrame = new MockWidgetFrame(
             appState: appState,
             child: new Scaffold(
-              body: new AddCurrencyButton(currency: dollar),
+              body: new Builder(builder: (BuildContext context) {
+                final addHandler = new AddCurrencyHandler(dollar);
+                return new AddCurrencyButton(
+                    currency: dollar,
+                    onTap: () => addHandler.addCurrency(context),
+                );
+        })
             )
         );
 
