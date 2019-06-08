@@ -32,26 +32,20 @@ class AddCurrencyHandler {
   }
 
   addCurrency(BuildContext context) {
-    final alreadyAdded = StateContainer.of(context).appState
-        .conversion.currencies.contains(currency.code);
+    try {
+      final state = StateContainer.of(context);
+      state.addCurrency(currency.code);
 
-    if (alreadyAdded)
+      // if it is the first currency we add, it should be the refence 1
+      if (_currentNumberOfCurrencies(state) == 1) {
+        state.setAmount(1.0, currency);
+      }
+
+      // return to previous screen
+      Navigator.of(context).pop();
+    } catch(DuplicateCurrencyError) {
       _displayNotice(context);
-    else
-      _addNewCurrency(context);
-  }
-
-  _addNewCurrency(BuildContext context) {
-    final state = StateContainer.of(context);
-    state.addCurrency(currency.code);
-
-    // if it is the first currency we add, it should be the refence 1
-    if (_currentNumberOfCurrencies(state) == 1) {
-      state.setAmount(1.0, currency);
     }
-
-    // return to previous screen
-    Navigator.of(context).pop();
   }
 
   String _alreadySelectedWarning(String currencyName) {

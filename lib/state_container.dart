@@ -7,6 +7,8 @@ import 'package:travelconverter/services/state_persistence.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:flutter/material.dart';
 
+import 'duplicate_currency_error.dart';
+
 class StateContainer extends StatefulWidget {
   final Widget child;
   final AppState state;
@@ -74,6 +76,9 @@ class StateContainerState extends State<StateContainer> {
 
   void addCurrency(String currencyCode) {
     final currencies = List<String>.from(appState.conversion.currencies);
+    if (currencies.contains(currencyCode)) {
+      throw new DuplicateCurrencyError("Currency '$currencyCode' has already been added");
+    }
     currencies.add(currencyCode);
     _updateConversion(appState.conversion.withCurrencies(currencies));
   }
