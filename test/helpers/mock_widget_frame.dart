@@ -39,7 +39,9 @@ class _MockWidgetFrameState extends State<MockWidgetFrame> {
               const FallbackMaterialLocalisationsDelegate()
             ],
             supportedLocales: AppLocalizationsDelegate.supportedLocales,
-            home: widget._child
+            home: new Builder(builder: (BuildContext context) {
+              return widget._child;
+            })
         )
     );
   }

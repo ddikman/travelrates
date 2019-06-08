@@ -3,6 +3,7 @@ import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/model/country.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/screens/add_currency/add_currency_button.dart';
+import 'package:travelconverter/screens/convert/add_currency_handler.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
 
@@ -38,17 +39,27 @@ class AvailableCurrencyCard extends StatelessWidget {
       );
     }
 
-    final currencyCard = Card(
-      color: AppTheme.primaryColor,
-      child: new Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: <Widget>[
-            new Expanded(child: textWidget),
-            new AddCurrencyButton(currency: currency)
-          ],
-        ),
-      ),
+    final addHandler = new AddCurrencyHandler(this.currency);
+
+    final currencyCard = Container(
+      padding: EdgeInsets.only(bottom: 2),
+      child: Card(
+          color: AppTheme.primaryColor,
+          child: new GestureDetector(
+            child: new Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: <Widget>[
+                  new Expanded(child: textWidget),
+                  new AddCurrencyButton(
+                      currency: currency
+                  )
+                ],
+              ),
+            ),
+            onTap: () => addHandler.addCurrency(context),
+          )
+      )
     );
 
     return currencyCard;
