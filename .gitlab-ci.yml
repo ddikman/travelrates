@@ -21,7 +21,7 @@ pages:
     - unit_test
   script:
     - mkdir public
-    - mv coverage/ public/
+    - mv coverage/ public
   artifacts:
     paths:
       - public
