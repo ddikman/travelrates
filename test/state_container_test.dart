@@ -1,6 +1,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:travelconverter/app_root.dart';
+import 'package:travelconverter/duplicate_currency_error.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/services/state_persistence.dart';
@@ -20,6 +21,32 @@ void main() {
       currentCurrency: MockCurrency.dollar
   ));
   final stateContainerWidget = StateContainer(child: appRoot, state: state, statePersistence: statePersistence);
+
+  testWidgets("sets first currency to one", (WidgetTester tester) async {
+
+      final widget = new StateContainer(child: appRoot, state: mockAppState(), statePersistence: statePersistence);
+      await tester.pumpWidget(widget);
+      var stateContainer = tester.state<StateContainerState>(find.byType(StateContainer));
+
+      expect(stateContainer.appState.conversion.currencies.length, 0);
+
+      stateContainer.addCurrency("GBP");
+
+      final conversion = stateContainer.appState.conversion;
+      expect(conversion.currentCurrency.code, "GBP");
+      expect(conversion.currentAmount, 1.0);
+      expect(conversion.currencies.length, 1);
+  });
+
+  testWidgets("throws exception if trying to add a currency twice", (WidgetTester tester) async {
+    await tester.pumpWidget(stateContainerWidget);
+
+    var stateContainer = tester.state<StateContainerState>(find.byType(StateContainer));
+
+    expect(() {
+      stateContainer.addCurrency("USD");
+    }, throwsA(isInstanceOf<DuplicateCurrencyError>()));
+  });
 
   testWidgets("updates currencies with new reorder", (WidgetTester tester) async {
     await tester.pumpWidget(stateContainerWidget);
