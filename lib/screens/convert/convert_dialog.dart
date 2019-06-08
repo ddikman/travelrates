@@ -17,6 +17,7 @@ class ConvertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textField = new TextField(
+      key: Key('convertTextField'),
       controller: textFieldController,
       autofocus: true,
       keyboardType: TextInputType.numberWithOptions(decimal: true),

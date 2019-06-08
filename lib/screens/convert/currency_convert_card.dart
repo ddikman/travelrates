@@ -71,6 +71,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
         ]);
 
     final card = new Container(
+      key: Key("currencyCard_${widget.currency.code}"),
       padding: EdgeInsets.only(bottom: 4.0),
       height: CurrencyConvertCard.height,
       child: new Material(

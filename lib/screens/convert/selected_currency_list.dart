@@ -27,7 +27,6 @@ class SelectedCurrencyList extends StatelessWidget {
     var currency = state.availableCurrencies.getByCode(currencyCode);
 
     return CurrencyConvertCard(
-        key: Key("currencyCard_${currency.code}"),
         currency: currency,
         animationDelay: animationDelay);
   }

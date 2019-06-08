@@ -34,7 +34,6 @@ Future runTests(String platform, FlutterDriver driver) async {
   await driver.waitFor(find.byValueKey('searchCurrencyInput'),
       timeout: Duration(seconds: 45));
 
-  print('grabbing first screenshot.');
   await saveScreen(driver, "${platform}_screen1.png");
   await driver.enterText('British');
   await saveScreen(driver, '${platform}_screen2.png');
@@ -53,6 +52,7 @@ Future runTests(String platform, FlutterDriver driver) async {
   await saveScreen(driver, "${platform}_screen3.png");
   await driver.tap(find.byValueKey('currencyCard_EUR'));
 
+  await driver.tap(find.byValueKey("convertTextField"));
   await driver.enterText('300');
   await saveScreen(driver, "${platform}_screen4.png");
 
@@ -60,7 +60,19 @@ Future runTests(String platform, FlutterDriver driver) async {
   await saveScreen(driver, "${platform}_screen5.png");
 }
 
+Future directoryExists(String name) async {
+  return await new Directory("screenshots").exists();
+}
+
 Future saveScreen(FlutterDriver driver, String name) async {
-  var file = new File(name);
-  await file.writeAsBytes(await driver.screenshot());
+  print("saving screenshot $name");
+  driver.waitUntilNoTransientCallbacks(timeout: new Duration(seconds: 5));
+  final screenshot = await driver.screenshot();
+  final directory = new Directory("screenshots");
+  if (!(await directory.exists())) {
+    await directory.create();
+  }
+  var file = new File("screenshots/$name");
+  await file.writeAsBytes(screenshot);
+  print("screenshot $name saved");
 }
