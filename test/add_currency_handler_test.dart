@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/screens/convert/add_currency_handler.dart';
 import 'package:travelconverter/state_container.dart';
 
