@@ -7,11 +7,13 @@ import 'package:travelconverter/l10n/app_localizations_delegate.dart';
 import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/model/currency.dart';
+import 'package:travelconverter/services/state_persistence.dart';
 import 'package:travelconverter/state_container.dart';
 
 import 'mock_country.dart';
 import 'mock_currency.dart';
 import 'mock_currency_repository.dart';
+import 'mock_local_storage.dart';
 
 class MockAppContainerBuilder {
 
@@ -41,7 +43,8 @@ class MockAppContainerBuilder {
         currentCurrency: _currentCurrency,
         currencies: ['GBP', 'USD', 'EUR']));
 
-    final stateContainer = StateContainer(child: _child, state: appState);
+    final persistance = new StatePersistence(localStorage: new MockLocalStorage());
+    final stateContainer = StateContainer(child: _child, state: appState, statePersistence: persistance);
     return new MaterialApp(home: stateContainer, localizationsDelegates: [
       const AppLocalizationsDelegate(),
       GlobalMaterialLocalizations.delegate,

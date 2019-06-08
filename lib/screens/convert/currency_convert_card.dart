@@ -15,9 +15,13 @@ class CurrencyConvertCard extends StatefulWidget {
 
   final Duration animationDelay;
 
-  CurrencyConvertCard(
-      {@required this.currency,
-      @required this.animationDelay});
+  final VoidCallback onConverted;
+
+  CurrencyConvertCard({
+    @required this.currency,
+    @required this.animationDelay,
+    this.onConverted
+  });
 
   @override
   _CurrencyConvertCardState createState() {
@@ -143,6 +147,10 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
     log.event("converting $value ${widget.currency.code}");
     final stateContainer = StateContainer.of(context);
     stateContainer.setAmount(value, widget.currency);
+
+    if (widget.onConverted != null) {
+      widget.onConverted();
+    }
   }
 
   void _showConvertDialog() {

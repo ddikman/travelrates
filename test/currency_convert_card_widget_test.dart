@@ -46,4 +46,28 @@ void main() {
       thenDisplayedValueIs('4.33', tester);
     }, tester);
   });
+
+  testWidgets("Raises event after conversion", (WidgetTester tester) async {
+    bool eventCalled = false;
+    final currencyCard = new CurrencyConvertCard(
+        currency: MockCurrency.dollar,
+        animationDelay: Duration(milliseconds: 0),
+        onConverted: () => eventCalled = true
+    );
+
+    final appRoot = new MockAppContainerBuilder(currencyCard)
+        .withCurrentCurrency(MockCurrency.dollar)
+        .withCurrentValue(1.0);
+
+    await appRoot.run(tester, () async {
+      await tester.tap(find.byType(CurrencyConvertCard));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(TextField));
+      await tester.enterText(find.byType(TextField), "200");
+      await tester.tap(find.byType(FlatButton));
+      await tester.pumpAndSettle();
+
+      expect(eventCalled, true);
+    });
+  });
 }

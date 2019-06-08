@@ -3,8 +3,9 @@ description: Handy multi-currency converter specifically for backpackers.
 
 dependencies:
   path_provider: 0.5.0
-  http: ^0.11.3+16
+  http: ^0.12.0+2
   connectivity: ^0.3.1
+  app_review: ^1.0.0
   flutter:
     sdk: flutter
   flutter_localizations:
