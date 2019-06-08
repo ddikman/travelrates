@@ -20,10 +20,7 @@ pages:
   dependencies:
     - unit_test
   script:
-    - mkdir public
-    - mv coverage/ public/coverage/
+    - mv coverage/ public/
   artifacts:
     paths:
       - public
-  only:
-    - master
