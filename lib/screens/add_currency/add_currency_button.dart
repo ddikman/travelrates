@@ -10,9 +10,7 @@ class AddCurrencyButton extends StatelessWidget {
 
   final Currency currency;
 
-  final GestureTapCallback onTap;
-
-  const AddCurrencyButton({Key key, this.currency, this.onTap}) : super(key: key);
+  const AddCurrencyButton({Key key, this.currency}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +19,10 @@ class AddCurrencyButton extends StatelessWidget {
         .conversion.currencies.contains(currency.code);
     final disabledTransparency = alreadyAdded ? 0.5 : 1.0;
 
-    return new GestureDetector(
-      child: Icon(
-        Icons.add_circle,
-        size: 32.0,
-        color: Color.fromRGBO(255, 255, 255, disabledTransparency),
-      ),
-      onTap: onTap,
+    return new Icon(
+      Icons.add_circle,
+      size: 32.0,
+      color: Color.fromRGBO(255, 255, 255, disabledTransparency),
     );
   }
 }
