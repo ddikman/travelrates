@@ -9,23 +9,13 @@ class InternetConnectivityImpl implements InternetConnectivity {
 
   bool _isAvailable = false;
 
-  static Future<InternetConnectivityImpl> withConnectivity(Connectivity connectivity) async {
-    var result = await connectivity.checkConnectivity();
-    var available = _isResultAvailable(result);
-    return new InternetConnectivityImpl._create(connectivity, available);
-  }
-
-  static bool _isResultAvailable(ConnectivityResult result) {
-    return result != ConnectivityResult.none;
-  }
-
-  InternetConnectivityImpl._create(Connectivity connectivity, bool isAvailable) : _connectivity = connectivity {
-    _isAvailable = isAvailable;
-    _connectivity.onConnectivityChanged.listen(_updateConnectivity);
+  InternetConnectivityImpl(Connectivity connectivity) : _connectivity = connectivity {
+    _connectivity.checkConnectivity().then(_updateConnectivity);
+    connectivity.onConnectivityChanged.listen(_updateConnectivity);
   }
 
   _updateConnectivity(ConnectivityResult connectivity) {
-    _isAvailable = _isResultAvailable(connectivity);
+    _isAvailable = connectivity != ConnectivityResult.none;
   }
 
   @override
