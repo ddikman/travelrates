@@ -35,7 +35,6 @@ class SelectedCurrencyList extends StatelessWidget {
 
     return CurrencyConvertCard(
         currency: currency,
-        animationDelay: animationDelay,
-    );
+        animationDelay: animationDelay);
   }
 }
