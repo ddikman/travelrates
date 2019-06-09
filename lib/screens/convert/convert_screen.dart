@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:travelconverter/screens/convert/open_add_currency_screen_button.dart';
 import 'package:travelconverter/screens/convert/selected_currency_list.dart';
 import 'package:travelconverter/screens/convert/goto_configure_button.dart';
+import 'package:travelconverter/screens/review_feature/review_widget.dart';
+import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/widgets/background_container.dart';
 
@@ -49,12 +51,17 @@ class _ConvertScreenState extends State<ConvertScreen> {
     const _floatingButtonSpacing = 60.0;
 
     return new BackgroundContainer(
+        key: Key("ConvertScreen"),
         // padding the body bottom stops the floating space button from
         // hiding the lowermost content
         child: new Padding(
-      padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
-      child: new SelectedCurrencyList(),
-          key: Key("ConvertScreen")
+        padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
+        child: new Builder(builder: (BuildContext context) {
+          return new ReviewWidget(
+            child: new SelectedCurrencyList(),
+            localStorage: new LocalStorage(),
+          );
+        }),
     ));
   }
 }
