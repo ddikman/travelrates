@@ -18,7 +18,7 @@ import 'package:flutter/services.dart';
 /// Loads the app state on startup
 class StatePersistence {
 
-  final LocalStorage localStorage;
+  final localStorage;
 
   static final log = new Logger<StatePersistence>();
 
