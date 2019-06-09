@@ -36,7 +36,7 @@ class StateContainerState extends State<StateContainer> {
 
   static final log = new Logger<StateContainerState>();
 
-  StreamController<ConversionModel> _conversionUpdated = new StreamController<ConversionModel>();
+  StreamController<ConversionModel> _conversionUpdated = StreamController<ConversionModel>.broadcast();
 
   AppState appState;
 
