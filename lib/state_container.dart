@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:travelconverter/app_state.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/model/currency_rate.dart';
@@ -34,7 +36,11 @@ class StateContainerState extends State<StateContainer> {
 
   static final log = new Logger<StateContainerState>();
 
+  StreamController<ConversionModel> _conversionUpdated = new StreamController<ConversionModel>();
+
   AppState appState;
+
+  Stream<ConversionModel> get conversionUpdated => _conversionUpdated.stream;
 
   @override
   void initState() {
@@ -44,6 +50,12 @@ class StateContainerState extends State<StateContainer> {
     }
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _conversionUpdated.close();
+    super.dispose();
   }
 
   @override
@@ -94,8 +106,9 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void setAmount(double amount, Currency currency) {
-    _updateConversion(
-        appState.conversion.withAmount(amount: amount, currency: currency));
+    var conversion = appState.conversion.withAmount(amount: amount, currency: currency);
+    _updateConversion(conversion);
+    _conversionUpdated.add(conversion);
   }
 
   void setRates(List<CurrencyRate> rates) {
