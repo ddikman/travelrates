@@ -3,16 +3,13 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:travelconverter/app_state.dart';
-import 'package:travelconverter/asset_paths.dart';
 import 'package:travelconverter/data/countries_data.dart';
 import 'package:travelconverter/data/currency_data.dart';
 import 'package:travelconverter/helpers/string_compare.dart';
 import 'package:travelconverter/model/country.dart';
-import 'package:travelconverter/services/currency_decoder.dart';
 import 'package:travelconverter/services/currency_repository.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
-import 'package:travelconverter/services/rates_loader.dart';
 import 'package:flutter/services.dart';
 
 /// Loads the app state on startup

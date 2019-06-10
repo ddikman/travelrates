@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:connectivity/connectivity.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:travelconverter/internet_connectivity.dart';
 import 'package:travelconverter/model/conversion_model.dart';
+import 'package:travelconverter/screens/review_feature/review_rule.dart';
+import 'package:travelconverter/screens/review_feature/review_storage.dart';
 import 'package:travelconverter/services/local_storage.dart';
-import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:app_review/app_review.dart';
 
@@ -70,83 +69,27 @@ class ReviewWidgetState extends State<ReviewWidget> {
     }
   }
 
+  Future<void> _reviewAccepted() async {
+    _reviewRule.reviewAccepted();
+    await _reviewStorage.save(_reviewRule);
+  }
+
   void _doReview() async {
+    _reviewRule.reviewRequested();
     _reviewStorage.save(_reviewRule);
-    AppReview.requestReview;
-  }
-}
+    Future.delayed(Duration(seconds: 1))
+    .then((_) {
+      final snackBar = new SnackBar(
+        content: Text("Is this app helping you? Could you spare a minute to do a review? It really helps."),
+        action: SnackBarAction(label: "Sure!", onPressed: () async {
+          await _reviewAccepted();
+          AppReview.requestReview;
+        }),
+        duration: Duration(seconds: 10),
+        behavior: SnackBarBehavior.floating,
+      );
 
-class ReviewStorage {
-
-  static final Logger _log = new Logger<ReviewStorage>();
-
-  final LocalStorage _localStorage;
-
-  ReviewStorage(this._localStorage);
-
-  ReviewRule _parse(String json) {
-    Map data = new JsonDecoder().convert(json);
-    return new ReviewRule(
-      internet: new InternetConnectivityImpl(new Connectivity()),
-      conversionsRequired: data['conversionsRequired'],
-      conversionsDone: data['conversionsDone'],
-      submitted: data['submitted'],
-    );
-  }
-
-  Future<ReviewRule> read() async {
-    var reviewsFile = await _localStorage.getFile("reviews.json");
-    if (await reviewsFile.exists) {
-      var json = await reviewsFile.contents;
-      var review = _parse(json);
-      _log.debug("Loaded review data from file");
-      return review;
-    }
-
-    _log.debug("Created new review data");
-    return new ReviewRule(
-        internet: new InternetConnectivityImpl(new Connectivity()),
-        conversionsRequired: 5,
-        conversionsDone: 0,
-        submitted: false
-    );
-  }
-
-  String _encode(ReviewRule rule) {
-    var json = new Map<String, dynamic>();
-    json['conversionsRequired'] = rule.conversionsRequired;
-    json['conversionsDone'] = rule.conversionsDone;
-    json['submitted'] = rule.submitted;
-    return new JsonEncoder().convert(json);
-  }
-
-  Future<void> save(ReviewRule reviewRule) async {
-    var reviewsFile = await _localStorage.getFile("reviews.json");
-    await reviewsFile.writeContents(_encode(reviewRule));
-  }
-}
-
-class ReviewRule {
-  final InternetConnectivity _internet;
-
-  int _conversionsDone;
-  int _conversionsRequired;
-  bool _submitted;
-
-  ReviewRule({InternetConnectivity internet, int conversionsDone, int conversionsRequired, bool submitted}):
-        this._internet = internet,
-        this._conversionsDone = conversionsDone,
-        this._conversionsRequired = conversionsRequired,
-        this._submitted = submitted;
-
-  int get conversionsDone => _conversionsDone;
-  int get conversionsRequired => _conversionsRequired;
-  bool get submitted => _submitted;
-  
-  bool get shouldReview => !_submitted && _internet.isAvailable && _conversionsDone >= _conversionsRequired;
-
-  void conversionDone() {
-    _conversionsDone++;
-    print("conversions done = $_conversionsDone");
+      Scaffold.of(context).showSnackBar(snackBar);
+    });
   }
 }
