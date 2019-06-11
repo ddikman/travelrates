@@ -10,7 +10,7 @@ class ReviewRule {
   int _conversionsRequired;
   bool _submitted = false;
 
-  ReviewRule({InternetConnectivity internet, int conversionsDone, int conversionsRequired, bool submitted}):
+  ReviewRule({InternetConnectivity internet, int conversionsDone = 0, int conversionsRequired = 0, bool submitted = false}):
         this._internet = internet,
         this._conversionsDone = conversionsDone,
         this._conversionsRequired = conversionsRequired,

@@ -1,4 +1,3 @@
-import 'package:connectivity/connectivity.dart';
 import 'package:travelconverter/internet_connectivity.dart';
 import 'package:travelconverter/screens/review_feature/review_rule.dart';
 import 'package:travelconverter/screens/review_feature/review_storage_model.dart';
@@ -12,8 +11,9 @@ class ReviewStorage {
   static const String _resourceName = "reviews.json";
 
   final LocalStorage _localStorage;
+  final InternetConnectivity _connectivity;
 
-  ReviewStorage(this._localStorage);
+  ReviewStorage(this._connectivity, this._localStorage);
   
   ReviewRule _createDefaultReviewRule(InternetConnectivity internet) {
     _log.debug("Creating new review data");
@@ -26,18 +26,17 @@ class ReviewStorage {
   }
 
   ReviewRule _parse(String json) {
-    var internet = new InternetConnectivityImpl(new Connectivity());
     try {
       var reviews = ReviewStorageModel.fromJson(json);
       return new ReviewRule(
-        internet: internet,
+        internet: _connectivity,
         conversionsRequired: reviews.conversionsRequired,
         conversionsDone: reviews.conversionsDone,
         submitted: reviews.submitted,
       );
     } on Exception catch (ex) {
       _log.error("Error when trying to parse review json, will reset: " + ex.toString());
-      return _createDefaultReviewRule(internet);
+      return _createDefaultReviewRule(_connectivity);
     }
     
   }
@@ -52,7 +51,7 @@ class ReviewStorage {
       return review;
     }
     
-    return _createDefaultReviewRule(new InternetConnectivityImpl(new Connectivity()));
+    return _createDefaultReviewRule(_connectivity);
   }
 
   String _encode(ReviewRule rule) {

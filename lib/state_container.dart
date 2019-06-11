@@ -109,6 +109,7 @@ class StateContainerState extends State<StateContainer> {
     var conversion = appState.conversion.withAmount(amount: amount, currency: currency);
     _updateConversion(conversion);
     _conversionUpdated.add(conversion);
+    print("raised event");
   }
 
   void setRates(List<CurrencyRate> rates) {

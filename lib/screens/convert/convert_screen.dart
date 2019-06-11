@@ -1,8 +1,10 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/screens/convert/open_add_currency_screen_button.dart';
 import 'package:travelconverter/screens/convert/selected_currency_list.dart';
 import 'package:travelconverter/screens/convert/goto_configure_button.dart';
+import 'package:travelconverter/screens/review_feature/review_storage.dart';
 import 'package:travelconverter/screens/review_feature/review_widget.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
@@ -10,6 +12,8 @@ import 'package:travelconverter/widgets/background_container.dart';
 
 import 'package:flutter/material.dart';
 import 'package:travelconverter/widgets/screen_title_text.dart';
+
+import '../../internet_connectivity.dart';
 
 class ConvertScreen extends StatefulWidget {
 
@@ -59,7 +63,7 @@ class _ConvertScreenState extends State<ConvertScreen> {
         child: new Builder(builder: (BuildContext context) {
           return new ReviewWidget(
             child: new SelectedCurrencyList(),
-            localStorage: new LocalStorage(),
+            reviewStorage: new ReviewStorage(new InternetConnectivityImpl(new Connectivity()), new LocalStorage()),
           );
         }),
     ));
