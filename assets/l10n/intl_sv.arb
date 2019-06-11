@@ -51,5 +51,17 @@
         "description": "Title for screen editing currency list",
         "type": "text",
         "placeholders": {}
-      }
+      },
+    "ReviewWidgetState_toastMessage": "Is this app helping you? Could you spare a minute to do a review? It really helps.",
+    "@ReviewWidgetState_toastMessage": {
+      "description": "Message shown in review request toast",
+      "type": "text",
+      "placeholders": {}
+    },
+    "ReviewWidgetState_acceptReviewButtonText": "Sure!",
+    "@ReviewWidgetState_acceptReviewButtonText": {
+      "description": "Short text to accept to a review",
+      "type": "text",
+      "placeholders": {}
+    }
 }

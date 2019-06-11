@@ -17,8 +17,9 @@ https://greycastle.gitlab.io/travel-rates/coverage/
 
 Run the Intl commands to scrape code for existing messages that need localizations and then generate code files for these.
 ```bash
-$ flutter pub pub run intl_translation:extract_to_arb --output-dir=assets/l10n lib/**/**/*.dart --output-file=intl_en.arb
-$ flutter pub pub run intl_translation:generate_from_arb --no-use-deferred-loading --output-dir=lib/l10n lib/**/**/*.dart assets/l10n/intl*.arb
+$ flutter pub pub run intl_translation:extract_to_arb --output-dir=assets/l10n lib/**/**.dart --output-file=intl_en.arb
+$ flutter pub run intl_translation:generate_from_arb --no-use-deferred-loading --output-dir=lib/l10n lib/**/**.dart assets/l10n/intl_*.arb
+
 ```
 
 To generate new localizations for country names and currencies, with NodeJs v10.9+ run (from project root folder):
