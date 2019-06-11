@@ -23,13 +23,14 @@ class ReviewRule {
   bool get shouldReview => !submitted && _internet.isAvailable && _conversionsDone >= _conversionsRequired;
 
   void conversionDone() {
+    if (_submitted) return;
     _conversionsDone++;
     _log.debug("review will be done after $_conversionsRequired, conversions done now $_conversionsDone");
   }
 
   void reviewRequested() {
     _conversionsRequired = _conversionsRequired * 2;
-    _log.debug("review requested, next review will be requested after $_conversionsRequired conversions}");
+    _log.debug("review requested, next review will be requested after $_conversionsRequired conversions");
   }
 
   void reviewAccepted() {

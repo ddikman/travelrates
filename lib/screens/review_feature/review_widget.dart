@@ -64,7 +64,7 @@ class ReviewWidgetState extends State<ReviewWidget> {
     _reviewRule.conversionDone();
     if (_reviewRule.shouldReview) {
       _doReview();
-    } else {
+    } else if (!_reviewRule.submitted) {
       _reviewStorage.save(_reviewRule);
     }
   }

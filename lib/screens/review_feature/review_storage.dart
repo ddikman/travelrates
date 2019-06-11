@@ -1,18 +1,9 @@
-import 'dart:convert';
-
 import 'package:connectivity/connectivity.dart';
 import 'package:travelconverter/internet_connectivity.dart';
 import 'package:travelconverter/screens/review_feature/review_rule.dart';
+import 'package:travelconverter/screens/review_feature/review_storage_model.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
-
-class ReviewStorageModel {
-  int conversionsDone;
-  int conversionsRequired;
-  bool submitted;
-
-  ReviewStorageModel({this.conversionsDone, this.conversionsRequired, this.submitted});
-}
 
 class ReviewStorage {
 
@@ -23,15 +14,32 @@ class ReviewStorage {
   final LocalStorage _localStorage;
 
   ReviewStorage(this._localStorage);
+  
+  ReviewRule _createDefaultReviewRule(InternetConnectivity internet) {
+    _log.debug("Creating new review data");
+    return new ReviewRule(
+      internet: internet,
+      conversionsDone: 0,
+      conversionsRequired: 5,
+      submitted: false
+    );
+  }
 
   ReviewRule _parse(String json) {
-    ReviewStorageModel reviews = new JsonDecoder().convert(json);
-    return new ReviewRule(
-      internet: new InternetConnectivityImpl(new Connectivity()),
-      conversionsRequired: reviews.conversionsRequired,
-      conversionsDone: reviews.conversionsDone,
-      submitted: reviews.submitted,
-    );
+    var internet = new InternetConnectivityImpl(new Connectivity());
+    try {
+      var reviews = ReviewStorageModel.fromJson(json);
+      return new ReviewRule(
+        internet: internet,
+        conversionsRequired: reviews.conversionsRequired,
+        conversionsDone: reviews.conversionsDone,
+        submitted: reviews.submitted,
+      );
+    } on Exception catch (ex) {
+      _log.error("Error when trying to parse review json, will reset: " + ex.toString());
+      return _createDefaultReviewRule(internet);
+    }
+    
   }
 
   Future<ReviewRule> read() async {
@@ -40,16 +48,11 @@ class ReviewStorage {
       var json = await reviewsFile.contents;
       var review = _parse(json);
       _log.debug("Loaded review data from file");
+      _log.debug("Review submitted = ${review.submitted}, ${review.conversionsDone} conversions done");
       return review;
     }
-
-    _log.debug("Created new review data");
-    return new ReviewRule(
-        internet: new InternetConnectivityImpl(new Connectivity()),
-        conversionsRequired: 5,
-        conversionsDone: 0,
-        submitted: false
-    );
+    
+    return _createDefaultReviewRule(new InternetConnectivityImpl(new Connectivity()));
   }
 
   String _encode(ReviewRule rule) {
@@ -58,7 +61,7 @@ class ReviewStorage {
       conversionsRequired: rule.conversionsRequired,
       submitted: rule.submitted
     );
-    return new JsonEncoder().convert(model);
+    return model.toJson();
   }
 
   Future<void> save(ReviewRule reviewRule) async {
