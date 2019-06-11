@@ -45,7 +45,6 @@ class StateContainerState extends State<StateContainer> {
   @override
   void initState() {
     if (widget.state != null) {
-      print("Loaded app with defined state.");
       appState = widget.state;
     }
 
@@ -109,7 +108,6 @@ class StateContainerState extends State<StateContainer> {
     var conversion = appState.conversion.withAmount(amount: amount, currency: currency);
     _updateConversion(conversion);
     _conversionUpdated.add(conversion);
-    print("raised event");
   }
 
   void setRates(List<CurrencyRate> rates) {

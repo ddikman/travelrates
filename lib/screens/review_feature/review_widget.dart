@@ -41,7 +41,6 @@ class ReviewWidgetState extends State<ReviewWidget> {
       _eventSubscription.cancel();
     }
     _eventSubscription = StateContainer.of(context).conversionUpdated.listen(_conversionUpdated);
-    print("subscribed");
     super.didChangeDependencies();
   }
 
@@ -59,7 +58,6 @@ class ReviewWidgetState extends State<ReviewWidget> {
   }
 
   void _conversionUpdated(ConversionModel conversion) {
-    print('conversion updated called!');
     _reviewRule.conversionDone();
     if (_reviewRule.shouldReview) {
       _doReview();
@@ -76,7 +74,6 @@ class ReviewWidgetState extends State<ReviewWidget> {
   void _doReview() async {
     _reviewRule.reviewRequested();
     this.widget.reviewStorage.save(_reviewRule);
-    print("will do review");
     Future.delayed(widget.toastDelay ?? Duration(seconds: 1))
     .then((_) {
       final snackBar = new SnackBar(
