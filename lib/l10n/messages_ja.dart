@@ -18,9 +18,9 @@ typedef MessageIfAbsent(String message_str, List args);
 class MessageLookup extends MessageLookupByLibrary {
   get localeName => 'ja';
 
-  static m0(currencyName) => "${currencyName}すでに選択されています!";
+  static m0(currencyName) => "$currencyNameすでに選択されています!";
 
-  static m1(currencyCode) => "${currencyCode}入力";
+  static m1(currencyCode) => "$currencyCode入力";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
