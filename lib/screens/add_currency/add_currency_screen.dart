@@ -72,7 +72,8 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
 
   String get _screenTitle => Intl.message(
     "Add Currency",
-    desc: "Add currency screen title."
+    desc: "Add currency screen title.",
+    name: "_AddCurrencyScreenState__screenTitle"
   );
 
   _filterCurrencies(String filterText) {
