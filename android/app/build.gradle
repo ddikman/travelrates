@@ -14,8 +14,7 @@ if (flutterRoot == null) {
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
-def keystorePath = System.getenv("KEYSTORE_PATH") ?: "key.properties"
-def keystorePropertiesFile = rootProject.file(keystorePath)
+def keystorePropertiesFile = rootProject.file("key.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
