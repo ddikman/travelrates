@@ -1,0 +1,33 @@
+stages:
+  - analyze
+  - test
+  - publish
+
+analyze:
+  image: greycastle/flutter_lcov:v1.5.9-pre.138
+  stage: analyze
+  script:
+    - flutter analyze
+
+unit_test:
+  image: greycastle/flutter_lcov:v1.5.9-pre.138
+  stage: test
+  script:
+    - echo $API_KEY > assets/data/apiConfiguration.json
+    - flutter test --coverage
+    - genhtml coverage/lcov.info --output=coverage
+    - rm assets/data/apiConfiguration.json
+  artifacts:
+    paths:
+      - coverage/
+
+pages:
+  image: alpine
+  stage: publish
+  dependencies:
+    - unit_test
+  script:
+    - mv coverage/ public/
+  artifacts:
+    paths:
+      - public
