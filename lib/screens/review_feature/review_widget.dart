@@ -1,11 +1,14 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/screens/review_feature/review_rule.dart';
 import 'package:travelconverter/screens/review_feature/review_storage.dart';
+import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:app_review/app_review.dart';
 
@@ -23,6 +26,8 @@ class ReviewWidget extends StatefulWidget {
 }
 
 class ReviewWidgetState extends State<ReviewWidget> {
+
+  static final _logger = new Logger<ReviewWidgetState>();
 
   StreamSubscription<ConversionModel> _eventSubscription;
 
@@ -81,7 +86,13 @@ class ReviewWidgetState extends State<ReviewWidget> {
         content: Text(toastMessage),
         action: SnackBarAction(label: acceptReviewButtonText, onPressed: () async {
           await _reviewAccepted();
-          AppReview.requestReview;
+          if (await _canPromptReview()) {
+            final result = await AppReview.requestReview;
+            _logger.debug(result);
+          } else {
+            final result = await AppReview.storeListing;
+            _logger.debug(result);
+          }
         }),
         duration: Duration(seconds: 10),
         behavior: SnackBarBehavior.floating,
@@ -89,6 +100,23 @@ class ReviewWidgetState extends State<ReviewWidget> {
 
       Scaffold.of(context).showSnackBar(snackBar);
     });
+  }
+
+  /// Actually need to check if the platform supports the reviews.
+  /// This isn't handled properly in the app_review package.
+  Future<bool> _canPromptReview() async {
+    if (!Platform.isIOS) {
+      return true;
+    }
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+    final iosVersion = iosInfo.systemVersion;
+    _logger.debug("Running on ios version $iosVersion");
+
+    final versionParts = iosVersion.split('.');
+    final major = int.parse(versionParts[0]);
+    final minor = int.parse(versionParts[1]);
+    return major > 10 || (major == 10 && minor > 3);
   }
 
   static String get toastMessage => Intl.message(
