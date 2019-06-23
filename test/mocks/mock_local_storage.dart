@@ -15,14 +15,16 @@ class MockLocalStorage extends LocalStorage {
       return Future<FileOperations>.value(_files[filename]);
     }
 
-    return Future<FileOperations>.value(new MockLocalFile(filename, false, null));
+    var localFile = new MockLocalFile(filename, false, null);
+    _files[filename] = localFile;
+    return Future<FileOperations>.value(localFile);
   }
 }
 
 class MockLocalFile implements FileOperations {
   String currentContents;
 
-  final bool fileExists;
+  bool fileExists;
 
   MockLocalFile(String path, bool exists, String contents) :
         this.currentContents = contents,
@@ -36,6 +38,7 @@ class MockLocalFile implements FileOperations {
   @override
   Future<Null> writeContents(String contents) {
     this.currentContents = contents;
+    this.fileExists = true;
     return Future.value(null);
   }
 

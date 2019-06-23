@@ -8,8 +8,8 @@
       "currencyName": {}
     }
   },
-  "ADD CURRENCY": "レート追加",
-  "@ADD CURRENCY": {
+  "_AddCurrencyScreenState__screenTitle": "レート追加",
+  "@_AddCurrencyScreenState__screenTitle": {
     "description": "Add currency screen title.",
     "type": "text",
     "placeholders": {}
@@ -51,5 +51,17 @@
       "description": "Title for screen editing currency list",
       "type": "text",
       "placeholders": {}
-    }
+    },
+  "ReviewWidgetState_toastMessage": "このアプリはお役に立ちましたか？もしよろしければ、ご意見をお寄せいただけますか？",
+  "@ReviewWidgetState_toastMessage": {
+    "description": "Message shown in review request toast",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReviewWidgetState_acceptReviewButtonText": "もちろん！",
+  "@ReviewWidgetState_acceptReviewButtonText": {
+    "description": "Short text to accept to a review",
+    "type": "text",
+    "placeholders": {}
+  }
 }

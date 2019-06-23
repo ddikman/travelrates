@@ -8,8 +8,9 @@
         "currencyName": {}
       }
     },
-    "ADD CURRENCY": "Välj Valuta",
-      "@ADD CURRENCY": {
+
+    "_AddCurrencyScreenState__screenTitle": "Välj Valuta",
+      "@_AddCurrencyScreenState__screenTitle": {
         "description": "Add currency screen title.",
         "type": "text",
         "placeholders": {}
@@ -51,5 +52,17 @@
         "description": "Title for screen editing currency list",
         "type": "text",
         "placeholders": {}
-      }
+      },
+    "ReviewWidgetState_toastMessage": "Hjälper appen? Har du tid för en recension? Det hjälper jättemycket!.",
+    "@ReviewWidgetState_toastMessage": {
+      "description": "Message shown in review request toast",
+      "type": "text",
+      "placeholders": {}
+    },
+    "ReviewWidgetState_acceptReviewButtonText": "Ok!",
+    "@ReviewWidgetState_acceptReviewButtonText": {
+      "description": "Short text to accept to a review",
+      "type": "text",
+      "placeholders": {}
+    }
 }

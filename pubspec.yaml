@@ -2,8 +2,10 @@ name: travelconverter
 description: Handy multi-currency converter specifically for backpackers.
 
 dependencies:
+  json_annotation: ^2.4.0
   path_provider: 0.5.0
   http: ^0.12.0+2
+  device_info: ^0.4.0+2
   connectivity: ^0.3.1
   app_review: ^1.0.0
   flutter:
@@ -25,6 +27,8 @@ dev_dependencies:
     sdk: flutter
   intl_translation:
   mockito: ^4.1.0
+  build_runner: ^1.0.0
+  json_serializable: ^3.0.0
 
 
 # For information on the generic Dart part of this file, see the

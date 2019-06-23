@@ -1,4 +1,4 @@
-import 'package:travelconverter/screens/convert/internet_connectivity.dart';
+import 'package:travelconverter/internet_connectivity.dart';
 
 class MockInternetConnectivity implements InternetConnectivity {
   bool _isAvailable = true;

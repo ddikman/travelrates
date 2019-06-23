@@ -84,4 +84,41 @@ void main() {
 
     expect(stateContainer.appState.conversion.currencies, [ "EUR" ]);
   });
+
+  testWidgets("raises event on conversion", (WidgetTester tester) async {
+    await tester.pumpWidget(stateContainerWidget);
+
+    var stateContainer = tester.state<StateContainerState>(find.byType(StateContainer));
+
+    expect(stateContainer.conversionUpdated, emits(ConversionMatcher.forCurrency("USD")));
+    stateContainer.setAmount(1.0, MockCurrency.dollar);
+
+    await tester.pumpAndSettle();
+  });
+}
+
+class ConversionMatcher extends Matcher {
+  final String _currencyCode;
+
+  @override
+  Description describe(Description description) {
+    return new StringDescription("Matches an instance of a conversion model");
+  }
+
+  @override
+  bool matches(item, Map matchState) {
+    var conversion = item as ConversionModel;
+    if (conversion == null) {
+      throw new Exception("Item is not a conversion model: " + item);
+    }
+
+    return conversion.currentCurrency.code == _currencyCode;
+  }
+
+  ConversionMatcher._internal(this._currencyCode);
+
+
+  factory ConversionMatcher.forCurrency(String currencyCode) {
+    return new ConversionMatcher._internal(currencyCode);
+  }
 }

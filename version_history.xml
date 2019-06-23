@@ -5,8 +5,11 @@
             - Made buttons to add currency easier to press
         </en-GB>
         <ja-JP>
-            - 通貨ボタン押すのが易しくしました
+            - 新しくボタンを作り通貨の追加が簡単になりました
         </ja-JP>
+        <sv-SE>
+            - Bättre knappar för att lägga till valutor med
+        </sv-SE>
     </release>
     <release version="1.4">
         <en-GB>
