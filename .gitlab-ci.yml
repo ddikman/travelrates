@@ -9,7 +9,7 @@ cache:
 unit_test:
   except:
     - master
-  image: flutter_lcov_docker
+  image: cirrusci/flutter
   stage: test
   script:
     - flutter channel master
