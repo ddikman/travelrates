@@ -3,7 +3,8 @@ stages:
   - deploy
 
 unit_test:
-  except: master
+  except:
+    - master
   image: greycastle/flutter_lcov:v1.5.9-pre.138
   stage: test
   script:
@@ -17,7 +18,8 @@ unit_test:
 
 pages:
   image: alpine
-  except: master
+  except:
+    - master
   stage: deploy
   dependencies:
     - unit_test
