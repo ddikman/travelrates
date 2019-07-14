@@ -2,12 +2,18 @@ stages:
   - test
   - deploy
 
+cache:
+  paths:
+    - /flutter/bin/cache/dart-sdk
+
 unit_test:
   except:
     - master
-  image: greycastle/flutter_lcov:v1.8.2-pre.33
+  image: flutter_lcov_docker
   stage: test
   script:
+    - flutter channel master
+    - flutter upgrade
     - echo $API_KEY > assets/data/apiConfiguration.json
     - flutter test --coverage
     - genhtml coverage/lcov.info --output=coverage
