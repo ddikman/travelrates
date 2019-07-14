@@ -5,7 +5,7 @@ stages:
 unit_test:
   except:
     - master
-  image: greycastle/flutter_lcov:v1.5.9-pre.138
+  image: greycastle/flutter_lcov:v1.8.2-pre.33
   stage: test
   script:
     - echo $API_KEY > assets/data/apiConfiguration.json
