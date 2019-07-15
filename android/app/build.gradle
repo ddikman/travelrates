@@ -42,7 +42,7 @@ android {
         applicationId "se.greycastle.travelconverter"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode buildNumber != null ? buildNumber.toInteger() : flutterVersionCode
+        versionCode buildNumber != null ? buildNumber.toInteger() : flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
