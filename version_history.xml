@@ -3,6 +3,7 @@
     <release version="1.5.1">
         <en-GB>
             - Fixed issue with conversion in certain currencies.
+            - Reduced app size
         </en-GB>
         <ja-JP>
             -　ある種な通貨の換算問題を直しました
