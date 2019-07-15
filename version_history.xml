@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <version-history>
+    <release version="1.5.1">
+        <en-GB>
+            - Fixed issue with conversion in certain currencies.
+        </en-GB>
+        <ja-JP>
+            -　ある種な通貨の換算問題を直しました
+        </ja-JP>
+        <sv-SE>
+            - Fixat problem med konvertering av mer än 1000 kronor.
+        </sv-SE>
+    </release>
     <release version="1.5">
         <en-GB>
             - Made buttons to add currency easier to press
