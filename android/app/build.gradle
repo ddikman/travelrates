@@ -16,6 +16,12 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
@@ -36,7 +42,7 @@ android {
         applicationId "se.greycastle.travelconverter"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode buildNumber != null ? buildNumber.toInteger() : 1
+        versionCode buildNumber != null ? buildNumber.toInteger() : flutterVersionCode
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
