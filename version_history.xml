@@ -3,12 +3,15 @@
     <release version="1.5.1">
         <en-GB>
             - Fixed issue with conversion in certain currencies.
+            - Reduced app size
         </en-GB>
         <ja-JP>
-            -　ある種な通貨の換算問題を直しました
+            ー　ある種な通貨の換算問題を直しました
+            ー　アプリのサイズを減らしました
         </ja-JP>
         <sv-SE>
             - Fixat problem med konvertering av mer än 1000 kronor.
+            - Reducerat appens storlek
         </sv-SE>
     </release>
     <release version="1.5">
