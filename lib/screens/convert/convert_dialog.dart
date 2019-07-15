@@ -73,7 +73,7 @@ class ConvertDialog extends StatelessWidget {
 
   _submit(BuildContext context) {
     Navigator.of(context).pop();
-    final value = double.tryParse(textFieldController.text.replaceAll(',', ''));
+    final value = double.tryParse(textFieldController.text.replaceAll(',', '').replaceAll(' ', ''));
     if (value != null)
       onSubmitted(value);
   }
