@@ -106,4 +106,10 @@ void main() {
     expect(result.selection.baseOffset, 3);
     expect(result.selection.extentOffset, 4);
   });
+
+  test('can convert dififerent formats back to double', () async {
+    expect(CurrencyInputFormatter.toDouble('1,000'), 1000);
+    expect(CurrencyInputFormatter.toDouble('1 000 000'), 1000000);
+    expect(CurrencyInputFormatter.toDouble('1,000,000'), 1000000);
+  });
 }

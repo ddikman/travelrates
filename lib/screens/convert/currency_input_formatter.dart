@@ -8,6 +8,8 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
   final WhitelistingTextInputFormatter whiteListingFormatter = new WhitelistingTextInputFormatter(new RegExp(r'[\d\.,]+'));
 
+  static final RegExp _convertRegex = new RegExp(r'[^\d]');
+
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
 
@@ -52,5 +54,9 @@ class CurrencyInputFormatter extends TextInputFormatter {
     final locale = Intl.getCurrentLocale();
     NumberFormat format = NumberFormat('###,###.##', locale);
     return format.format(value);
+  }
+
+  static double toDouble(String value) {
+    return double.tryParse(value.replaceAll(_convertRegex, ''));
   }
 }

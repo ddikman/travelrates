@@ -3,11 +3,16 @@ import 'package:travelconverter/app_theme.dart';
 import 'package:travelconverter/screens/convert/currency_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:travelconverter/services/logger.dart';
 
 class ConvertDialog extends StatelessWidget {
+  final logger = new Logger<ConvertDialog>();
+
   final ValueChanged<double> onSubmitted;
 
   final String currencyCode;
+
+  final CurrencyInputFormatter _currencyInputFormatter = new CurrencyInputFormatter();
 
   final textFieldController = new TextEditingController();
 
@@ -21,7 +26,7 @@ class ConvertDialog extends StatelessWidget {
       autofocus: true,
       keyboardType: TextInputType.numberWithOptions(decimal: true),
       inputFormatters: [
-        new CurrencyInputFormatter()
+        _currencyInputFormatter
       ],
       onSubmitted: (value) => _submit(context),
       decoration: InputDecoration(
@@ -73,8 +78,12 @@ class ConvertDialog extends StatelessWidget {
 
   _submit(BuildContext context) {
     Navigator.of(context).pop();
-    final value = double.tryParse(textFieldController.text.replaceAll(',', '').replaceAll(' ', ''));
-    if (value != null)
+    final stringValue = textFieldController.text;
+    final value = CurrencyInputFormatter.toDouble(stringValue);
+    if (value != null) {
       onSubmitted(value);
+    } else {
+      logger.event("Failed to parse $stringValue to integer");
+    }
   }
 }
