@@ -8,7 +8,7 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
   final WhitelistingTextInputFormatter whiteListingFormatter = new WhitelistingTextInputFormatter(new RegExp(r'[\d\.,]+'));
 
-  static final RegExp _convertRegex = new RegExp(r'[^\d]');
+  static final RegExp _convertRegex = new RegExp(r'[^.\d]');
 
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {

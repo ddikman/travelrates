@@ -111,5 +111,6 @@ void main() {
     expect(CurrencyInputFormatter.toDouble('1,000'), 1000);
     expect(CurrencyInputFormatter.toDouble('1 000 000'), 1000000);
     expect(CurrencyInputFormatter.toDouble('1,000,000'), 1000000);
+    expect(CurrencyInputFormatter.toDouble('100.150'), 100.15);
   });
 }
