@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:travelconverter/l10n/app_localizations_delegate.dart';
-import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:travelconverter/screens/convert/convert_dialog.dart';
 import 'package:flutter_test/flutter_test.dart';
 

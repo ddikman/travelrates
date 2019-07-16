@@ -15,6 +15,7 @@ unit_test:
     - flutter channel master
     - flutter upgrade
     - echo $API_KEY > assets/data/apiConfiguration.json
+    - flutter analyze
     - flutter test --coverage
     - genhtml coverage/lcov.info --output=coverage
     - rm assets/data/apiConfiguration.json
