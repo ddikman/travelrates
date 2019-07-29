@@ -1,6 +1,5 @@
 stages:
   - test
-  - deploy
 
 cache:
   paths:
@@ -19,18 +18,6 @@ unit_test:
     - flutter test --coverage
     - genhtml coverage/lcov.info --output=coverage
     - rm assets/data/apiConfiguration.json
-  artifacts:
-    paths:
-      - coverage/
-
-pages:
-  image: alpine
-  except:
-    - master
-  stage: deploy
-  dependencies:
-    - unit_test
-  script:
     - mv coverage/ public/
   artifacts:
     paths:
