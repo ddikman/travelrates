@@ -1,5 +1,4 @@
 import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
-import 'package:travelconverter/model/async_result.dart';
 import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/screens/add_currency/add_currency_screen.dart';
 import 'package:travelconverter/app_routes.dart';

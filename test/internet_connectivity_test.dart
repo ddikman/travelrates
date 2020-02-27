@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:travelconverter/screens/convert/internet_connectivity.dart';
+import 'package:travelconverter/internet_connectivity.dart';
 
 
 class MockConnectivity extends Mock implements Connectivity {}

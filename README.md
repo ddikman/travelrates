@@ -17,8 +17,9 @@ https://greycastle.gitlab.io/travel-rates/coverage/
 
 Run the Intl commands to scrape code for existing messages that need localizations and then generate code files for these.
 ```bash
-$ flutter pub pub run intl_translation:extract_to_arb --output-dir=assets/l10n lib/**/**/*.dart --output-file=intl_en.arb
-$ flutter pub pub run intl_translation:generate_from_arb --no-use-deferred-loading --output-dir=lib/l10n lib/**/**/*.dart assets/l10n/intl*.arb
+$ flutter pub pub run intl_translation:extract_to_arb --output-dir=assets/l10n lib/**/**.dart --output-file=intl_en.arb
+$ flutter pub run intl_translation:generate_from_arb --no-use-deferred-loading --output-dir=lib/l10n lib/**/**.dart assets/l10n/intl_*.arb
+
 ```
 
 To generate new localizations for country names and currencies, with NodeJs v10.9+ run (from project root folder):
@@ -39,9 +40,8 @@ The hidden api tokens and api url should be stored in json format alike this bel
 ```
 
 ### Android
-Before building, review the build configuration in `android/app/build.gradle` to make sure the version number has been incremented.
 
-To build the android release apk you simply run `flutter build apk`. However, before that you'll need to create a local keystore of course.
+To build the android release apk you simply run `flutter build apk --target-platform android-arm,android-arm64 --split-per-abi --release`. However, before that you'll need to create a local keystore of course.
 Make sure you store this some good place (outside of source control) and then reference it in the a `key.properties` file placed in the `android` folder.
 This is referenced by the `android/app/build.gradle` signing settings.
 
@@ -59,8 +59,6 @@ adb pull /sdcard/screen.png
 ```
 
 ### iOS
-First up open xcode and in the `Runner > General` section ensure the version number is updated.
-
 From the command line, build an ios package using `flutter build ios --release`.
 
 Then run `Product > Archive` and when that's done click `Validate...`.

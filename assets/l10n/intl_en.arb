@@ -1,15 +1,7 @@
 {
-  "@@last_modified": "2018-09-23T17:54:57.089919",
-  "_alreadySelectedWarning": "{currencyName} is already selected!",
-  "@_alreadySelectedWarning": {
-    "description": "Text displayed when trying to add a currency that is already added.",
-    "type": "text",
-    "placeholders": {
-      "currencyName": {}
-    }
-  },
-  "Add Currency": "Add Currency",
-  "@Add Currency": {
+  "@@last_modified": "2019-06-16T11:29:17.576758",
+  "_AddCurrencyScreenState__screenTitle": "Add Currency",
+  "@_AddCurrencyScreenState__screenTitle": {
     "description": "Add currency screen title.",
     "type": "text",
     "placeholders": {}
@@ -19,6 +11,14 @@
     "description": "Help text above currency search field.",
     "type": "text",
     "placeholders": {}
+  },
+  "_alreadySelectedWarning": "{currencyName} is already selected!",
+  "@_alreadySelectedWarning": {
+    "description": "Text displayed when trying to add a currency that is already added.",
+    "type": "text",
+    "placeholders": {
+      "currencyName": {}
+    }
   },
   "_submitLabel": "CONVERT",
   "@_submitLabel": {
@@ -49,6 +49,18 @@
   "Edit": "Edit",
   "@Edit": {
     "description": "Title for screen editing currency list",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReviewWidgetState_toastMessage": "Is this app helping you? Could you spare a minute to do a review? It really helps.",
+  "@ReviewWidgetState_toastMessage": {
+    "description": "Message shown in review request toast",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ReviewWidgetState_acceptReviewButtonText": "Sure!",
+  "@ReviewWidgetState_acceptReviewButtonText": {
+    "description": "Short text to accept to a review",
     "type": "text",
     "placeholders": {}
   }
