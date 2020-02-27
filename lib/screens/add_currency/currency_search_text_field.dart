@@ -33,7 +33,7 @@ class CurrencySearchTextFieldState extends State<CurrencySearchTextField> {
           contentPadding: EdgeInsets.all(4.0),
           hintText: _hint,
           labelText: _hint,
-          labelStyle: Theme.of(context).textTheme.display1
+          labelStyle: Theme.of(context).textTheme.headline4
               .copyWith(
               fontSize: 14.0,
               color: AppTheme.primaryColor

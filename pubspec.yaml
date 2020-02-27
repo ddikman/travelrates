@@ -3,33 +3,30 @@ description: Handy multi-currency converter specifically for backpackers.
 version: 1.5.2+80
 
 dependencies:
-  json_annotation: ^2.4.0
-  path_provider: 0.5.0
-  http: ^0.12.0+2
-  device_info: ^0.4.0+2
-  connectivity: ^0.3.1
-  app_review: ^1.0.0
+  json_annotation:
+  path_provider:
+  http:
+  device_info:
+  connectivity:
+  app_review:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
   intl:
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+  cupertino_icons:
 
 
 dev_dependencies:
-  test: 1.6.2
   flutter_driver:
     sdk: flutter
   flutter_test:
     sdk: flutter
   intl_translation:
-  mockito: ^4.1.0
-  build_runner: ^1.0.0
-  json_serializable: ^3.0.0
+  mockito:
+  build_runner:
+  json_serializable:
 
 
 # For information on the generic Dart part of this file, see the

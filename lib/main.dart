@@ -9,6 +9,7 @@ import 'package:travelconverter/services/state_persistence.dart';
 import 'package:travelconverter/state_container.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   var localStorage = new LocalStorage();
   final ratesApiConfigLoader = new ApiConfigurationLoader();
   ratesApiConfigLoader.load()

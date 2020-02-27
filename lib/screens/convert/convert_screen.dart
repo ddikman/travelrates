@@ -7,7 +7,6 @@ import 'package:travelconverter/screens/convert/goto_configure_button.dart';
 import 'package:travelconverter/screens/review_feature/review_storage.dart';
 import 'package:travelconverter/screens/review_feature/review_widget.dart';
 import 'package:travelconverter/services/local_storage.dart';
-import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/widgets/background_container.dart';
 
 import 'package:flutter/material.dart';
@@ -32,8 +31,6 @@ class ConvertScreen extends StatefulWidget {
 class _ConvertScreenState extends State<ConvertScreen> {
   // Keep a key for scaffold to use when showing snackbar
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
-
-  static final log = new Logger<_ConvertScreenState>();
 
   @override
   Widget build(BuildContext context) {

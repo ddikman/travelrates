@@ -122,6 +122,27 @@ class MockConnectivity implements Connectivity {
 
   @override
   Stream<ConnectivityResult> get onConnectivityChanged => null;
+
+  @override
+  Future<LocationAuthorizationStatus> getLocationServiceAuthorization() {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String> getWifiBSSID() {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String> getWifiIP() {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<LocationAuthorizationStatus> requestLocationServiceAuthorization({bool requestAlwaysLocationUsage = false}) {
+    // TODO: implement requestLocationServiceAuthorization
+    throw UnimplementedError();
+  }
 }
 
 class MockConfig implements ApiConfiguration {
