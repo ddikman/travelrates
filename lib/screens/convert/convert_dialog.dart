@@ -40,7 +40,7 @@ class ConvertDialog extends StatelessWidget {
           onPressed: () => _submit(context),
           child: new Text(
             _submitLabel,
-            style: Theme.of(context).textTheme.display1.copyWith(
+            style: Theme.of(context).textTheme.headline4.copyWith(
               fontSize: 16.0
             ),
           ),

@@ -1,11 +1,9 @@
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/src/client.dart';
 import 'package:travelconverter/model/async_result.dart';
-import 'package:travelconverter/services/rates_api.dart';
 import 'package:travelconverter/services/rates_loader.dart';
 
 import 'mocks/mock_local_storage.dart';
+import 'mocks/mock_rates_api.dart';
 
 void main() {
   final localStorage = new MockLocalStorage();
@@ -62,21 +60,4 @@ void main() {
     final cachedContents = await cacheFile.contents;
     expect(cachedContents, apiJson);
   });
-}
-
-class MockRatesApi implements RatesApi {
-
-  AsyncResult<String> result;
-
-  @override
-  Future<AsyncResult<String>> getCurrentRatesJson() {
-    return Future.value(result);
-  }
-
-  @override
-  Client client;
-
-  @override
-  Connectivity connectivity;
-
 }

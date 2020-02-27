@@ -45,7 +45,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             softWrap: false,
-            style: Theme.of(context).textTheme.body1.copyWith(fontSize: 16.0)),
+            style: Theme.of(context).textTheme.bodyText2.copyWith(fontSize: 16.0)),
       ),
     );
 
@@ -101,7 +101,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
           style: Theme
               .of(context)
               .textTheme
-              .body1
+              .bodyText2
               .copyWith(fontSize: currencyAmountFontSize),
         ),
         new Padding(
@@ -110,7 +110,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
               style: Theme
                   .of(context)
                   .textTheme
-                  .body1
+                  .bodyText2
                   .copyWith(fontSize: currencyAmountFontSize / 2)),
         )
       ],

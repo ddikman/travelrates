@@ -77,8 +77,8 @@ class _AppRootState extends State<AppRoot> {
         TextStyle(color: AppTheme.accentColor, fontFamily: baseFont);
 
     final textTheme = baseTheme.textTheme.copyWith(
-      display1: baseTextStyle.copyWith(),
-      body1: baseTextStyle.copyWith(),
+      headline4: baseTextStyle.copyWith(),
+      bodyText2: baseTextStyle.copyWith(),
     );
 
     final iconTheme =
