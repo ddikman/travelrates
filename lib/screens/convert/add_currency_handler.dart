@@ -15,7 +15,7 @@ class AddCurrencyHandler {
   AddCurrencyHandler(this.currency);
 
   _displayNotice(BuildContext context) {
-    log.event("${currency.name} already added, showing snack instead");
+    log.event('currencyAlreadyAdded', "${currency.name} already added, showing snack instead", parameters: { 'currency': currency.name });
 
     final localizations = AppLocalizations.of(context);
     var currencyLocalizedName = localizations.currencies.getLocalized(currency.code);

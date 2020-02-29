@@ -1,6 +1,6 @@
 name: travelconverter
 description: Handy multi-currency converter specifically for backpackers.
-version: 1.5.2+80
+version: 1.5.3+81
 
 dependencies:
   json_annotation:
@@ -16,6 +16,10 @@ dependencies:
   intl:
 
   cupertino_icons:
+
+  # analytics and crashes
+  firebase_core: 0.4.4
+  firebase_analytics: ^5.0.11
 
 
 dev_dependencies:

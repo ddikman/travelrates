@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <version-history>
+    <release version="1.5.3">
+        <en-GB>
+            - Library updates.
+        </en-GB>
+        <ja-JP>
+            ー　ライブラリーのアップデート。
+        </ja-JP>
+        <sv-SE>
+            - Paketuppdatering.
+        </sv-SE>
+    </release>
     <release version="1.5.2">
         <en-GB>
             - Fixed issue with conversion in certain currencies.

@@ -83,7 +83,7 @@ class ConvertDialog extends StatelessWidget {
     if (value != null) {
       onSubmitted(value);
     } else {
-      logger.event("Failed to parse $stringValue to integer");
+      logger.event('parseFailure', "Failed to parse $stringValue to integer", parameters: { 'failedValue': stringValue });
     }
   }
 }

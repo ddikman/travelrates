@@ -35,6 +35,6 @@ class ReviewRule {
 
   void reviewAccepted() {
     this._submitted = true;
-    _log.event("review request was accepted");
+    _log.event("review", "review request was accepted", parameters: { 'state': 'requested' });
   }
 }
