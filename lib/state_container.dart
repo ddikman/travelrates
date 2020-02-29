@@ -82,6 +82,7 @@ class StateContainerState extends State<StateContainer> {
   void removeCurrency(String currencyCode) {
     final currencies = List<String>.from(appState.conversion.currencies);
     currencies.remove(currencyCode);
+    log.event("removeCurrency", "Currency removed: $currencyCode", parameters: { "currency": currencyCode });
     _updateConversion(appState.conversion.withCurrencies(currencies));
   }
 
@@ -90,6 +91,7 @@ class StateContainerState extends State<StateContainer> {
     if (currencies.contains(currencyCode)) {
       throw new DuplicateCurrencyError("Currency '$currencyCode' has already been added");
     }
+    log.event("addCurrency", "Currency added: $currencyCode", parameters: { "currency": currencyCode });
     currencies.add(currencyCode);
 
     var conversion = appState.conversion.withCurrencies(currencies);
@@ -116,9 +118,9 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
-  /// Reorder a currency in the list, newPosition beign the new index, zero-based.
+  /// Reorder a currency in the list, newPosition begin the new index, zero-based.
   void reorderCurrency({String item, int newIndex}) {
-    log.event("reordering $item to be at index $newIndex..");
+    log.event("reorder", "reordering $item to be at index $newIndex..");
     final currencies = List<String>.from(appState.conversion.currencies);
     currencies.remove(item);
 

@@ -140,7 +140,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
   }
 
   void _newValueReceived(double value) {
-    log.event("converting $value ${widget.currency.code}");
+    log.event("convert", "converting $value ${widget.currency.code}", parameters: { 'currency': widget.currency.code, 'amount': value });
     final stateContainer = StateContainer.of(context);
     stateContainer.setAmount(value, widget.currency);
   }

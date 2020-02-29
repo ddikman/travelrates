@@ -1,3 +1,5 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/screens/add_currency/add_currency_screen.dart';
@@ -30,9 +32,13 @@ class _AppRootState extends State<AppRoot> {
 
   static final log = new Logger<_AppRootState>();
 
+  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
+
   @override
   void initState() {
     super.initState();
+
+    _firebaseAnalytics.logAppOpen();
 
     new RatesLoader(localStorage: new LocalStorage(), ratesApi: widget.ratesApi).loadOnlineRates()
         .then(handleLoadedRates)
@@ -61,6 +67,7 @@ class _AppRootState extends State<AppRoot> {
       supportedLocales: AppLocalizationsDelegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       initialRoute: initialRoute,
+      navigatorObservers: [ FirebaseAnalyticsObserver(analytics: _firebaseAnalytics) ],
       routes: <String, WidgetBuilder>{
         AppRoutes.convert: (context) => new ConvertScreen(),
         AppRoutes.addCurrency: (context) => new AddCurrencyScreen(),

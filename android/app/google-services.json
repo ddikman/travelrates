@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "992988355666",
+    "firebase_url": "https://travelrates-7c968.firebaseio.com",
+    "project_id": "travelrates-7c968",
+    "storage_bucket": "travelrates-7c968.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992988355666:android:c5d1284a7f20443cb9138b",
+        "android_client_info": {
+          "package_name": "se.greycastle.travelconverter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992988355666-u464orbv3jtv5psbg0j6t4inumnc2tms.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZN591egSeF2_aTV1HHzQSbxbRrZb7NhI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992988355666-u464orbv3jtv5psbg0j6t4inumnc2tms.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "992988355666-82bu0hiob3e6uos47urqu3gdr8f9qjar.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "se.greycastle.travelconverter",
+                "app_store_id": "1424198492"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
