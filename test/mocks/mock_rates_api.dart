@@ -1,5 +1,5 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:travelconverter/model/async_result.dart';
 import 'package:travelconverter/services/rates_api.dart';
 
@@ -13,7 +13,7 @@ class MockRatesApi implements RatesApi {
   }
 
   @override
-  Client client;
+  http.Client client;
 
   @override
   Connectivity connectivity;

@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 // https://stackoverflow.com/questions/50395032/flutter-textfield-with-currency-format
 class CurrencyInputFormatter extends TextInputFormatter {
 
-  final WhitelistingTextInputFormatter whiteListingFormatter = new WhitelistingTextInputFormatter(new RegExp(r'[\d\.,]+'));
+  final FilteringTextInputFormatter whiteListingFormatter = new FilteringTextInputFormatter(new RegExp(r'[\d\.,]+'), allow: true);
 
   static final RegExp _convertRegex = new RegExp(r'[^.\d]');
 
