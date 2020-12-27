@@ -4,11 +4,11 @@ version: 1.5.3+81
 
 dependencies:
   json_annotation:
-  path_provider:
-  http:
+  path_provider: ^1.6.24
+  http: ^0.12.0+4
   device_info:
-  connectivity:
-  app_review:
+  connectivity: ^2.0.2
+  app_review: ^2.0.1
   flutter:
     sdk: flutter
   flutter_localizations:

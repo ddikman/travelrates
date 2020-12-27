@@ -1,16 +1,17 @@
 stages:
   - test
 
+default:
+  image: greycastle/flutter:1.22.3
+
 cache:
   paths:
     - /flutter/bin/cache/dart-sdk
 
-pages:
-  image: cirrusci/flutter
+build:
   stage: test
   script:
-    - flutter channel master
-    - flutter upgrade
+    - apt-get update && apt-get install -y xdg-user-dirs
     - echo $API_KEY > assets/data/apiConfiguration.json
     - flutter analyze
     - flutter test --coverage

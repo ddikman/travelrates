@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:travelconverter/model/api_configuration.dart';
 import 'package:travelconverter/model/async_result.dart';
 import 'package:travelconverter/services/logger.dart';
@@ -10,7 +10,7 @@ class RatesApi {
   final ApiConfiguration _config;
   Connectivity connectivity = new Connectivity();
 
-  Client client = new Client();
+  http.Client client = new http.Client();
 
   static final log = new Logger<RatesApi>();
 
