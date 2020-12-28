@@ -37,6 +37,8 @@ abstract class AppTheme {
     }
   );
 
+  static final backgroundColor = Color(0xFFF0F0F0);
+
   static final accentColorLight = new Color(0xFFFFFFFF);
 
   static final deleteColour = new Color(0xFFdc002f);

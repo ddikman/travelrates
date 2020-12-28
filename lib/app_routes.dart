@@ -7,4 +7,6 @@ abstract class AppRoutes {
 
   static const String edit = '/edit';
 
+  static const String settings = '/settings';
+
 }

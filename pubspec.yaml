@@ -5,6 +5,7 @@ version: 1.5.3+81
 dependencies:
   json_annotation:
   path_provider: ^1.6.24
+  package_info: ^0.4.3+2
   http: ^0.12.0+4
   device_info:
   connectivity: ^2.0.2

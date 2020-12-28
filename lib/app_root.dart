@@ -8,6 +8,7 @@ import 'package:travelconverter/app_theme.dart';
 import 'package:travelconverter/screens/convert/convert_screen.dart';
 import 'package:travelconverter/l10n/app_localizations_delegate.dart';
 import 'package:travelconverter/screens/edit_screen/edit_screen.dart';
+import 'package:travelconverter/screens/settings/settings_screen.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,8 @@ class _AppRootState extends State<AppRoot> {
       routes: <String, WidgetBuilder>{
         AppRoutes.convert: (context) => new ConvertScreen(),
         AppRoutes.addCurrency: (context) => new AddCurrencyScreen(),
-        AppRoutes.edit: (context) => new EditScreen()
+        AppRoutes.edit: (context) => new EditScreen(),
+        AppRoutes.settings: (context) => new SettingsScreen()
       },
     );
   }
@@ -88,6 +90,22 @@ class _AppRootState extends State<AppRoot> {
       bodyText2: baseTextStyle.copyWith(),
     );
 
+    final textButtonTheme = TextButtonThemeData(
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(2.0))
+        )),
+        backgroundColor: MaterialStateProperty.all(AppTheme.primaryColor.withOpacity(1.0)),
+        foregroundColor: MaterialStateProperty.resolveWith((states) {
+          return AppTheme.accentColor.withOpacity(1.0);
+        }),
+        overlayColor: MaterialStateProperty.all(AppTheme.backgroundColor.withOpacity(0.4)),
+        textStyle: MaterialStateProperty.all(TextStyle(
+          fontSize: 15.0
+        ))
+      )
+    );
+
     final iconTheme =
         baseTheme.primaryIconTheme.copyWith(color: AppTheme.accentColor);
 
@@ -96,6 +114,7 @@ class _AppRootState extends State<AppRoot> {
       iconTheme: iconTheme,
       hintColor: AppTheme.accentColor, // borders of textfield hints
       textTheme: textTheme,
+      textButtonTheme: textButtonTheme
     );
   }
 

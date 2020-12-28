@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:travelconverter/screens/convert/open_add_currency_screen_button.dart';
 import 'package:travelconverter/screens/convert/selected_currency_list.dart';
 import 'package:travelconverter/screens/convert/goto_configure_button.dart';
+import 'package:travelconverter/screens/convert/settings_button.dart';
 import 'package:travelconverter/screens/review_feature/review_storage.dart';
 import 'package:travelconverter/screens/review_feature/review_widget.dart';
 import 'package:travelconverter/services/local_storage.dart';
@@ -38,6 +39,7 @@ class _ConvertScreenState extends State<ConvertScreen> {
       title: ScreenTitleText.show(ConvertScreen.screenTitle),
       centerTitle: true,
       actions: [ new GotoConfigureButton() ],
+      leading: SettingsButton(),
     );
 
     return Scaffold(
