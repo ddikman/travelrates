@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/widgets/background_container.dart';
 import 'package:travelconverter/widgets/bottom_right_anchor.dart';
-import 'package:travelconverter/widgets/button.dart';
 import 'package:travelconverter/widgets/screen_title_text.dart';
 import 'package:travelconverter/widgets/separated_column.dart';
 
-import 'package:mailto/mailto.dart';
-import 'package:url_launcher/url_launcher.dart';
-
+import 'contact_button.dart';
 import 'greycastle_copyright.dart';
 
 Color foreground = const Color(0xFF4796B2);
@@ -50,7 +47,7 @@ class SettingsPageContent extends StatelessWidget {
         children: [
           _title,
           _text,
-          _contactButton
+          ContactButton()
         ],
       ),
     );
@@ -70,15 +67,4 @@ So thank you very much for using the app! That’s why I built it.
 
 If you care to make a contribution, suggeestion or interested in having someting built, ddon’t hesitate to get in touch.""", style: TextStyle(color: foreground));
 
-  Widget get _contactButton => Padding(padding: EdgeInsets.symmetric(vertical: 8.0),child: Align(child:  Button(onTap: () => sendEmail(), text: 'Contact me'), alignment: Alignment.bottomRight));
-
-  sendEmail() async {
-    final mailtoLink = Mailto(
-      to: ['david@greycastle.se'],
-      subject: 'About TravelRates',
-      body: 'Hi!\nI am emailing about TravelRates.',
-    );
-
-    await launch('$mailtoLink');
-  }
 }
