@@ -8,6 +8,7 @@ dependencies:
   package_info: ^0.4.3+2
   http: ^0.12.0+4
   device_info:
+  mailto: ^1.1.0
   connectivity: ^2.0.2
   app_review: ^2.0.1
   flutter:
