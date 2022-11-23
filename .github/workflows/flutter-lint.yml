@@ -30,13 +30,13 @@ jobs:
       - name: Run linting
         run: flutter analyze
 
-      # - name: Run tests
-      #   run: |
-      #     flutter pub global activate junitreport
-      #     flutter test --coverage --machine | tojunit > testreport.xml
-      #     genhtml coverage/lcov.info --output=coverage
-      # - name: Publish coverage report
-      #   uses: nohmad/lcov-report-action@v1
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     lcov-path: coverage/lcov.info
+      - name: Run tests
+        run: |
+          flutter pub global activate junitreport
+          flutter test --coverage --machine | tojunit > testreport.xml
+          genhtml coverage/lcov.info --output=coverage
+      - name: Publish coverage report
+        uses: nohmad/lcov-report-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          lcov-path: coverage/lcov.info
