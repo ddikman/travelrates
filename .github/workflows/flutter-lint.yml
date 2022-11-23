@@ -1,0 +1,35 @@
+name: Flutter lint and test
+
+# just don't run it
+on: []
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.0.1'
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: |
+          flutter pub get
+          sudo apt update
+          sudo apt install lcov
+      - name: Run linting
+        run: flutter analyze
+
+      - name: Run tests
+        run: |
+          dart pub global activate junitreport
+          flutter test --coverage --machine | tojunit > testreport.xml
+          genhtml coverage/lcov.info --output=coverage
+      - name: Publish coverage report
+        uses: nohmad/lcov-report-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          lcov-path: coverage/lcov.info
