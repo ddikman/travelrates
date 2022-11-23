@@ -9,7 +9,9 @@ class ConversionModel {
   final List<String> _currencies;
 
   ConversionModel(
-      {this.currentAmount, this.currentCurrency, List<String> currencies})
+      {required this.currentAmount,
+      required this.currentCurrency,
+      required List<String> currencies})
       : this._currencies = currencies;
 
   List<String> get currencies {
@@ -40,7 +42,8 @@ class ConversionModel {
         currentCurrency: this.currentCurrency);
   }
 
-  ConversionModel withAmount({double amount, Currency currency}) {
+  ConversionModel withAmount(
+      {required double amount, required Currency currency}) {
     return new ConversionModel(
         currentAmount: amount,
         currentCurrency: currency,

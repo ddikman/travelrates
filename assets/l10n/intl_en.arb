@@ -1,21 +1,26 @@
 {
-  "@@last_modified": "2019-06-16T11:29:17.576758",
+  "@@last_modified": "2022-11-23T13:02:24.488493",
   "_AddCurrencyScreenState__screenTitle": "Add Currency",
   "@_AddCurrencyScreenState__screenTitle": {
     "description": "Add currency screen title.",
     "type": "text",
+    "placeholders_order": [],
     "placeholders": {}
   },
   "Search country or currency code": "Search country or currency code",
   "@Search country or currency code": {
     "description": "Help text above currency search field.",
     "type": "text",
+    "placeholders_order": [],
     "placeholders": {}
   },
   "_alreadySelectedWarning": "{currencyName} is already selected!",
   "@_alreadySelectedWarning": {
     "description": "Text displayed when trying to add a currency that is already added.",
     "type": "text",
+    "placeholders_order": [
+      "currencyName"
+    ],
     "placeholders": {
       "currencyName": {}
     }
@@ -24,12 +29,16 @@
   "@_submitLabel": {
     "description": "Convert dialog button text",
     "type": "text",
+    "placeholders_order": [],
     "placeholders": {}
   },
   "_convertTitle": "{currencyCode} to convert",
   "@_convertTitle": {
     "description": "Text displayed at the top of the convert dialog.",
     "type": "text",
+    "placeholders_order": [
+      "currencyCode"
+    ],
     "placeholders": {
       "currencyCode": {}
     }
@@ -38,30 +47,35 @@
   "@ConvertScreen_screenTitle": {
     "description": "Convert screen main title",
     "type": "text",
+    "placeholders_order": [],
     "placeholders": {}
   },
   "_editButtonLabel": "Edit",
   "@_editButtonLabel": {
     "description": "Text for edit button on currency convert screen",
     "type": "text",
+    "placeholders_order": [],
     "placeholders": {}
   },
   "Edit": "Edit",
   "@Edit": {
     "description": "Title for screen editing currency list",
     "type": "text",
+    "placeholders_order": [],
     "placeholders": {}
   },
   "ReviewWidgetState_toastMessage": "Is this app helping you? Could you spare a minute to do a review? It really helps.",
   "@ReviewWidgetState_toastMessage": {
     "description": "Message shown in review request toast",
     "type": "text",
+    "placeholders_order": [],
     "placeholders": {}
   },
   "ReviewWidgetState_acceptReviewButtonText": "Sure!",
   "@ReviewWidgetState_acceptReviewButtonText": {
     "description": "Short text to accept to a review",
     "type": "text",
+    "placeholders_order": [],
     "placeholders": {}
   }
 }

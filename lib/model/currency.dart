@@ -1,4 +1,3 @@
-
 class Currency {
   final String symbol;
 
@@ -10,13 +9,12 @@ class Currency {
 
   double rate;
 
-  Currency({this.symbol, this.name, this.code, this.icon, this.rate}) {
-    if (symbol == null) ArgumentError.notNull('symbol');
-    if (name == null) ArgumentError.notNull('name');
-    if (code == null) ArgumentError.notNull('code');
-    if (icon == null) ArgumentError.notNull('icon');
-    if (rate == null) ArgumentError.notNull('rate');
-  }
+  Currency(
+      {required this.symbol,
+      required this.name,
+      required this.code,
+      required this.icon,
+      required this.rate});
 
   @override
   String toString() {
@@ -26,13 +24,13 @@ class Currency {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is Currency &&
-              runtimeType == other.runtimeType &&
-              symbol == other.symbol &&
-              icon == other.icon &&
-              name == other.name &&
-              code == other.code &&
-              rate == other.rate;
+      other is Currency &&
+          runtimeType == other.runtimeType &&
+          symbol == other.symbol &&
+          icon == other.icon &&
+          name == other.name &&
+          code == other.code &&
+          rate == other.rate;
 
   @override
   int get hashCode =>
@@ -41,5 +39,4 @@ class Currency {
       name.hashCode ^
       code.hashCode ^
       rate.hashCode;
-
 }

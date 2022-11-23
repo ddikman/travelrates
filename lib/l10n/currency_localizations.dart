@@ -373,14 +373,14 @@ class CurrencyLocalizations {
 
   factory CurrencyLocalizations(String locale) {
     assert(_locales.containsKey(locale));
-    return new CurrencyLocalizations._internal(locale, _locales[locale]);
+    return new CurrencyLocalizations._internal(locale, _locales[locale]!);
   }
 
   String getLocalized(String currencyCode) {
-    if (!_currencies.containsKey(currencyCode)) {
+    final currency = _currencies[currencyCode];
+    if (currency == null) {
       throw StateError("Missing name for currency '$currencyCode'.");
     }
-
-    return _currencies[currencyCode];
+    return currency;
   }
 }

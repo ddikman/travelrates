@@ -2,13 +2,16 @@ name: travelconverter
 description: Handy multi-currency converter specifically for backpackers.
 version: 1.5.3+81
 
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
 dependencies:
   json_annotation:
-  path_provider: ^1.6.24
-  http: ^0.12.0+4
+  path_provider: ^2.0.11
+  http: ^0.13.5
   device_info:
-  connectivity: ^2.0.2
-  app_review: ^2.0.1
+  connectivity: ^3.0.6
+  app_review: ^2.1.2+1
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -18,8 +21,8 @@ dependencies:
   cupertino_icons:
 
   # analytics and crashes
-  firebase_core: 0.4.4
-  firebase_analytics: ^5.0.11
+  firebase_core: 2.3.0
+  firebase_analytics: ^10.0.6
 
 
 dev_dependencies:
@@ -27,7 +30,7 @@ dev_dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  intl_translation:
+  intl_generator:
   mockito:
   build_runner:
   json_serializable:

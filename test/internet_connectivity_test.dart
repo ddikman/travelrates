@@ -5,14 +5,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:travelconverter/internet_connectivity.dart';
 
-
 class MockConnectivity extends Mock implements Connectivity {}
 
 void main() {
-
-  MockConnectivity mockConnectivity;
-  StreamController<ConnectivityResult> connectivityStream;
-  Future<ConnectivityResult> connectivityResult;
+  late MockConnectivity mockConnectivity;
+  Future<ConnectivityResult>? connectivityResult;
+  StreamController<ConnectivityResult>? connectivityStream;
 
   setUp(() {
     connectivityStream = new StreamController<ConnectivityResult>(sync: true);
@@ -20,17 +18,16 @@ void main() {
   });
 
   tearDown(() {
-    if (connectivityStream != null) {
-      connectivityStream.close();
-    }
+    connectivityStream?.close();
   });
 
-  InternetConnectivity getWithCurrentConnectivity(ConnectivityResult connectivity) {
+  InternetConnectivity getWithCurrentConnectivity(
+      ConnectivityResult connectivity) {
     connectivityResult = Future.value(connectivity);
     when(mockConnectivity.onConnectivityChanged)
-      .thenAnswer((_) => connectivityStream.stream);
+        .thenAnswer((_) => connectivityStream!.stream);
     when(mockConnectivity.checkConnectivity())
-        .thenAnswer((_) => connectivityResult);
+        .thenAnswer((_) => connectivityResult!);
 
     return new InternetConnectivityImpl(mockConnectivity);
   }
@@ -58,7 +55,7 @@ void main() {
     await connectivityResult;
     expect(internet.isAvailable, false);
 
-    connectivityStream.add(ConnectivityResult.mobile);
+    connectivityStream?.add(ConnectivityResult.mobile);
     expect(internet.isAvailable, true);
   });
 }

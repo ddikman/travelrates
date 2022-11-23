@@ -7,8 +7,7 @@ class AnimateIn extends StatefulWidget {
 
   final Duration delay;
 
-  const AnimateIn(
-      {Key key, this.child, this.delay = Duration.zero})
+  const AnimateIn({Key? key, required this.child, this.delay = Duration.zero})
       : super(key: key);
 
   @override
@@ -18,24 +17,24 @@ class AnimateIn extends StatefulWidget {
 }
 
 class AnimateInState extends State<AnimateIn> with TickerProviderStateMixin {
-
   static final _defaultDuration = Duration(milliseconds: 400);
 
-  Animation<Offset> _animatedPosition;
+  late Animation<Offset> _animatedPosition;
 
-  Animation<double> _animatedOpacity;
+  late Animation<double> _animatedOpacity;
 
-  AnimationController _controller;
+  AnimationController? _controller;
 
   @override
   void initState() {
-    _controller = new AnimationController(vsync: this, duration: _defaultDuration);
+    _controller =
+        new AnimationController(vsync: this, duration: _defaultDuration);
 
     _animatedPosition = new Tween<Offset>(
       begin: const Offset(0.0, 0.5),
       end: Offset.zero,
     ).animate(new CurvedAnimation(
-      parent: _controller,
+      parent: _controller!,
       curve: Interval(0.0, 1.0, curve: Curves.fastOutSlowIn),
     ));
 
@@ -43,7 +42,7 @@ class AnimateInState extends State<AnimateIn> with TickerProviderStateMixin {
       begin: 0.0,
       end: 1.0,
     ).animate(
-      new CurvedAnimation(parent: _controller, curve: Curves.ease),
+      new CurvedAnimation(parent: _controller!, curve: Curves.ease),
     );
 
     new Future.delayed(widget.delay, startAnimation);
@@ -52,16 +51,12 @@ class AnimateInState extends State<AnimateIn> with TickerProviderStateMixin {
   }
 
   void startAnimation() {
-    // ensure we haven't disposed within the delay
-    if (_controller == null) {
-      return;
-    }
-    _controller.forward();
+    _controller?.forward();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     _controller = null;
     super.dispose();
   }
@@ -69,10 +64,7 @@ class AnimateInState extends State<AnimateIn> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return SlideTransition(
-      child: FadeTransition(
-          child: widget.child,
-          opacity: _animatedOpacity
-      ),
+      child: FadeTransition(child: widget.child, opacity: _animatedOpacity),
       position: _animatedPosition,
     );
   }

@@ -1,8 +1,6 @@
-
 import 'package:travelconverter/services/local_storage.dart';
 
 class MockLocalStorage extends LocalStorage {
-
   final _files = new Map<String, MockLocalFile>();
 
   setFile(String filename, String contents) {
@@ -22,12 +20,12 @@ class MockLocalStorage extends LocalStorage {
 }
 
 class MockLocalFile implements FileOperations {
-  String currentContents;
+  String? currentContents;
 
   bool fileExists;
 
-  MockLocalFile(String path, bool exists, String contents) :
-        this.currentContents = contents,
+  MockLocalFile(String path, bool exists, String? contents)
+      : this.currentContents = contents,
         this.fileExists = exists;
 
   @override
@@ -46,5 +44,4 @@ class MockLocalFile implements FileOperations {
   Future<String> get contents {
     return Future.value(this.currentContents);
   }
-
 }

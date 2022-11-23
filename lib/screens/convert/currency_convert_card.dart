@@ -15,9 +15,7 @@ class CurrencyConvertCard extends StatefulWidget {
 
   final Duration animationDelay;
 
-  CurrencyConvertCard(
-      {@required this.currency,
-      @required this.animationDelay});
+  CurrencyConvertCard({required this.currency, required this.animationDelay});
 
   @override
   _CurrencyConvertCardState createState() {
@@ -27,7 +25,6 @@ class CurrencyConvertCard extends StatefulWidget {
 
 class _CurrencyConvertCardState extends State<CurrencyConvertCard>
     with TickerProviderStateMixin {
-
   static final log = new Logger<_CurrencyConvertCardState>();
 
   @override
@@ -45,7 +42,10 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             softWrap: false,
-            style: Theme.of(context).textTheme.bodyText2.copyWith(fontSize: 16.0)),
+            style: Theme.of(context)
+                .textTheme
+                .bodyText2!
+                .copyWith(fontSize: 16.0)),
       ),
     );
 
@@ -96,21 +96,20 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
-        Text(_formatValue(amount),
+        Text(
+          _formatValue(amount),
           key: Key('ValueDisplay'),
-          style: Theme
-              .of(context)
+          style: Theme.of(context)
               .textTheme
-              .bodyText2
+              .bodyText2!
               .copyWith(fontSize: currencyAmountFontSize),
         ),
         new Padding(
           padding: const EdgeInsets.only(bottom: 4.0, left: 4.0),
           child: Text(widget.currency.code,
-              style: Theme
-                  .of(context)
+              style: Theme.of(context)
                   .textTheme
-                  .bodyText2
+                  .bodyText2!
                   .copyWith(fontSize: currencyAmountFontSize / 2)),
         )
       ],
@@ -140,7 +139,8 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
   }
 
   void _newValueReceived(double value) {
-    log.event("convert", "converting $value ${widget.currency.code}", parameters: { 'currency': widget.currency.code, 'amount': value });
+    log.event("convert", "converting $value ${widget.currency.code}",
+        parameters: {'currency': widget.currency.code, 'amount': value});
     final stateContainer = StateContainer.of(context);
     stateContainer.setAmount(value, widget.currency);
   }
@@ -149,8 +149,8 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
     showDialog(
         context: context,
         builder: (context) => new ConvertDialog(
-          currencyCode: widget.currency.code,
-          onSubmitted: _newValueReceived,
-        ));
+              currencyCode: widget.currency.code,
+              onSubmitted: _newValueReceived,
+            ));
   }
 }

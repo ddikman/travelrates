@@ -5,14 +5,13 @@ import 'package:intl/intl.dart';
 // credits to Mr Jorge Viera @ stack overflow:
 // https://stackoverflow.com/questions/50395032/flutter-textfield-with-currency-format
 class CurrencyInputFormatter extends TextInputFormatter {
-
-  final FilteringTextInputFormatter whiteListingFormatter = new FilteringTextInputFormatter(new RegExp(r'[\d\.,]+'), allow: true);
+  final FilteringTextInputFormatter whiteListingFormatter =
+      new FilteringTextInputFormatter(new RegExp(r'[\d\.,]+'), allow: true);
 
   static final RegExp _convertRegex = new RegExp(r'[^.\d]');
 
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-
     if (oldValue.text == newValue.text) {
       return newValue;
     }
@@ -34,15 +33,16 @@ class CurrencyInputFormatter extends TextInputFormatter {
       newFormatted = formatted(newText);
     }
 
-      return newValue.copyWith(
+    return newValue.copyWith(
         text: newFormatted,
-          selection: TextSelection(baseOffset: newFormatted.length, extentOffset: newFormatted.length)
-      );
+        selection: TextSelection(
+            baseOffset: newFormatted.length,
+            extentOffset: newFormatted.length));
   }
 
   String formatted(String input) {
     // If we can't determine it's value we can't format it either
-    double value = double.tryParse(input.replaceAll(',', ''));
+    final value = double.tryParse(input.replaceAll(',', ''));
     if (value == null) {
       return input;
     }
@@ -56,7 +56,7 @@ class CurrencyInputFormatter extends TextInputFormatter {
     return format.format(value);
   }
 
-  static double toDouble(String value) {
+  static double? toDouble(String value) {
     return double.tryParse(value.replaceAll(_convertRegex, ''));
   }
 }

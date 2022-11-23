@@ -24,8 +24,8 @@ class RatesApi {
     }
 
     try {
-      final response =
-          await client.get("${_config.apiUrl}?token=${_config.apiKey}");
+      final response = await client
+          .get(Uri.parse("${_config.apiUrl}?token=${_config.apiKey}"));
 
       if (response.statusCode != 200) {
         log.error(

@@ -12,9 +12,9 @@ import '../mocks/mock_local_storage.dart';
 class MockWidgetFrame extends StatefulWidget {
   final Widget _child;
 
-  final AppState appState;
+  final AppState? appState;
 
-  MockWidgetFrame({Widget child, this.appState}) : this._child = child;
+  MockWidgetFrame({required Widget child, this.appState}) : this._child = child;
 
   @override
   _MockWidgetFrameState createState() {
@@ -23,8 +23,8 @@ class MockWidgetFrame extends StatefulWidget {
 }
 
 class _MockWidgetFrameState extends State<MockWidgetFrame> {
-
-  final statePersistence = new StatePersistence(localStorage: new MockLocalStorage());
+  final statePersistence =
+      new StatePersistence(localStorage: new MockLocalStorage());
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +41,6 @@ class _MockWidgetFrameState extends State<MockWidgetFrame> {
             supportedLocales: AppLocalizationsDelegate.supportedLocales,
             home: new Builder(builder: (BuildContext context) {
               return widget._child;
-            })
-        )
-    );
+            })));
   }
 }

@@ -11,7 +11,7 @@ import 'package:travelconverter/state_container.dart';
 class EditScreenListEntry extends StatefulWidget {
   final Currency currency;
 
-  const EditScreenListEntry({Key key, Currency currency})
+  const EditScreenListEntry({Key? key, required Currency currency})
       : this.currency = currency,
         super(key: key);
 
@@ -53,9 +53,9 @@ class _EditScreenListEntryState extends State<EditScreenListEntry> {
           new Align(alignment: Alignment.centerLeft, child: _deleteIcon),
           Expanded(
               child: new Align(
-                alignment: Alignment.centerLeft,
-                child: Text(name, style: TextStyle(fontSize: 16.0)),
-              )),
+            alignment: Alignment.centerLeft,
+            child: Text(name, style: TextStyle(fontSize: 16.0)),
+          )),
           new Align(
               alignment: Alignment.centerLeft,
               child: Icon(
@@ -67,7 +67,7 @@ class _EditScreenListEntryState extends State<EditScreenListEntry> {
 
   get _deleteIcon {
     final color =
-    Platform.isAndroid ? AppTheme.accentColor : AppTheme.deleteColour;
+        Platform.isAndroid ? AppTheme.accentColor : AppTheme.deleteColour;
 
     final decoration = Platform.isAndroid
         ? null
@@ -85,20 +85,10 @@ class _EditScreenListEntryState extends State<EditScreenListEntry> {
   }
 
   IconData get _moveHandleIcon =>
-      Platform.isAndroid ? Icons.drag_handle : _cupertinoDragHandle;
+      Platform.isAndroid ? Icons.drag_handle : CupertinoIcons.line_horizontal_3;
 
   IconData get _removeIcon =>
-      Platform.isAndroid ? Icons.delete : _cupertinoDeleteCircle;
-
-  // For some reason there aren't mapped in the CupertinoIcons class
-  // See https://raw.githubusercontent.com/flutter/cupertino_icons/master/map.png
-  IconData get _cupertinoDragHandle => IconData(0xf394,
-      fontFamily: CupertinoIcons.iconFont,
-      fontPackage: CupertinoIcons.iconFontPackage);
-
-  IconData get _cupertinoDeleteCircle => IconData(0xf464,
-      fontFamily: CupertinoIcons.iconFont,
-      fontPackage: CupertinoIcons.iconFontPackage);
+      Platform.isAndroid ? Icons.delete : CupertinoIcons.clear_circled;
 
   String get currencyCode => widget.currency.code;
 }

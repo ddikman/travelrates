@@ -1,13 +1,13 @@
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 
 class ScreenTitleText extends StatelessWidget {
-
   final String _title;
 
-  const ScreenTitleText({Key key, String title}) : this._title = title, super(key: key);
+  const ScreenTitleText({Key? key, required String title})
+      : this._title = title,
+        super(key: key);
 
   factory ScreenTitleText.show(String title) {
     return new ScreenTitleText(title: _forPlatform(title));
@@ -20,13 +20,7 @@ class ScreenTitleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Text(
-        _title,
-        style: TextStyle(
-            fontWeight: FontWeight.bold,
-          fontSize: 22.0
-        )
-    );
+    return new Text(_title,
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0));
   }
-
 }

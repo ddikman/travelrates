@@ -6,16 +6,20 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'mocks/mock_app_state.dart';
 import 'mocks/mock_rates_api.dart';
+import 'mocks/mock_state_persistence.dart';
 
 void main() {
-  testWidgets('When application starts, the add currency screen is displayed if no currencies are selected',
+  testWidgets(
+      'When application starts, the add currency screen is displayed if no currencies are selected',
       (WidgetTester tester) async {
-
-    final appRoot = new AppRoot();
+    final appRoot = AppRoot(ratesApi: MockRatesApi());
     final state = mockAppState();
     state.conversion.currencies.clear();
 
-    await tester.pumpWidget(new StateContainer(child: appRoot, state: state));
+    await tester.pumpWidget(new StateContainer(
+        child: appRoot,
+        state: state,
+        statePersistence: MockStatePersistence()));
 
     // allow the application to settle before we complete
     // if we don't do this we'll get an exception complaining that timers
@@ -26,16 +30,18 @@ void main() {
   });
 
   testWidgets('When application starts, the conversion screen is displayed',
-          (WidgetTester tester) async {
+      (WidgetTester tester) async {
+    final ratesApi = MockRatesApi();
+    ratesApi.result = AsyncResult.failed();
+    final appRoot = new AppRoot(ratesApi: ratesApi);
+    final state = mockAppState();
 
-      final ratesApi = MockRatesApi();
-      ratesApi.result = AsyncResult.failed();
-      final appRoot = new AppRoot(ratesApi: ratesApi);
-      final state = mockAppState();
+    await tester.pumpWidget(new StateContainer(
+        child: appRoot,
+        state: state,
+        statePersistence: MockStatePersistence()));
+    await tester.pumpAndSettle();
 
-      await tester.pumpWidget(new StateContainer(child: appRoot, state: state));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(AddCurrencyScreen), findsOneWidget);
-    });
+    expect(find.byType(AddCurrencyScreen), findsOneWidget);
+  });
 }

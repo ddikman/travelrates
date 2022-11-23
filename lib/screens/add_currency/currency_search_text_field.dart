@@ -6,12 +6,11 @@ import 'package:flutter/material.dart';
 typedef void CurrenciesChanged(List<Currency> currencies);
 
 class CurrencySearchTextField extends StatefulWidget {
-
   final ValueChanged<String> filterChanged;
 
   const CurrencySearchTextField({
-    Key key,
-    @required this.filterChanged,
+    Key? key,
+    required this.filterChanged,
   }) : super(key: key);
 
   @override
@@ -21,10 +20,8 @@ class CurrencySearchTextField extends StatefulWidget {
 }
 
 class CurrencySearchTextFieldState extends State<CurrencySearchTextField> {
-
   @override
   Widget build(BuildContext context) {
-
     final textField = TextField(
       autofocus: true,
       onChanged: widget.filterChanged,
@@ -33,11 +30,10 @@ class CurrencySearchTextFieldState extends State<CurrencySearchTextField> {
           contentPadding: EdgeInsets.all(4.0),
           hintText: _hint,
           labelText: _hint,
-          labelStyle: Theme.of(context).textTheme.headline4
-              .copyWith(
-              fontSize: 14.0,
-              color: AppTheme.primaryColor
-          ),
+          labelStyle: Theme.of(context)
+              .textTheme
+              .headline4!
+              .copyWith(fontSize: 14.0, color: AppTheme.primaryColor),
           border: InputBorder.none),
     );
 
@@ -54,8 +50,6 @@ class CurrencySearchTextFieldState extends State<CurrencySearchTextField> {
     );
   }
 
-  String get _hint => Intl.message(
-      "Search country or currency code",
-      desc: "Help text above currency search field."
-  );
+  String get _hint => Intl.message("Search country or currency code",
+      desc: "Help text above currency search field.");
 }

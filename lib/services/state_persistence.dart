@@ -14,12 +14,11 @@ import 'package:flutter/services.dart';
 
 /// Loads the app state on startup
 class StatePersistence {
-
   final localStorage;
 
   static final log = new Logger<StatePersistence>();
 
-  StatePersistence({@required this.localStorage});
+  StatePersistence({required this.localStorage});
 
   Future<AppState> load(AssetBundle assets) async {
     final currencyRepository = _loadRepository();
@@ -45,7 +44,6 @@ class StatePersistence {
 
   Future<AppState> _loadState(
       CurrencyRepository currencyRepository, List<Country> countries) async {
-
     // TODO: In case this fail, I need to recover by resetting the settings.
     final stateFile = await localStorage.getFile('state.json');
     final stateJson = json.decode(await stateFile.contents);
@@ -54,9 +52,8 @@ class StatePersistence {
 
   CurrencyRepository _loadRepository() {
     return new CurrencyRepository(
-      currencies: CurrencyData.currencies,
-      baseRate: CurrencyData.baseCurrency
-    );
+        currencies: CurrencyData.currencies,
+        baseRate: CurrencyData.baseCurrency);
   }
 
   Future<Null> store(AppState appState) async {

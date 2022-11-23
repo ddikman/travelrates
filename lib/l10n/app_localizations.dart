@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:ui';
 
@@ -9,7 +8,6 @@ import 'package:travelconverter/l10n/currency_localizations.dart';
 import 'package:travelconverter/l10n/messages_all.dart';
 
 class AppLocalizations {
-
   final CountryLocalizations _countries;
 
   final CurrencyLocalizations _currencies;
@@ -17,7 +15,8 @@ class AppLocalizations {
   AppLocalizations(this._countries, this._currencies);
 
   static Future<AppLocalizations> load(Locale locale) {
-    final String name = locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
+    final String name =
+        locale.countryCode!.isEmpty ? locale.languageCode : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
 
     print("Initializing localisations for '$localeName'.");
@@ -32,7 +31,7 @@ class AppLocalizations {
   }
 
   static AppLocalizations of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
   CountryLocalizations get countries => _countries;

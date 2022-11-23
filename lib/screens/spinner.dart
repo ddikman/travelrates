@@ -8,7 +8,7 @@ class Spinner extends StatefulWidget {
   /// Time until which to not show the spinner
   final Duration delay;
 
-  Spinner({Key key, @required this.delay}) : super(key: key) {
+  Spinner({Key? key, required this.delay}) : super(key: key) {
     assert(this.delay != null);
   }
 
@@ -21,13 +21,13 @@ class Spinner extends StatefulWidget {
 class SpinnerState extends State<Spinner> with TickerProviderStateMixin {
   final loaderColor = AlwaysStoppedAnimation<Color>(AppTheme.primaryColor);
 
-  AnimationController _animationController;
+  AnimationController? _animationController;
 
-  Animation<double> _opacity;
+  late Animation<double> _opacity;
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController?.dispose();
     _animationController = null;
     super.dispose();
   }
@@ -40,18 +40,13 @@ class SpinnerState extends State<Spinner> with TickerProviderStateMixin {
         vsync: this, duration: Duration(milliseconds: 600));
 
     _opacity = Tween<double>(begin: 0.0, end: 1.0).animate(new CurvedAnimation(
-        parent: _animationController, curve: Curves.easeInOut));
+        parent: _animationController!, curve: Curves.easeInOut));
 
     Future.delayed(widget.delay, _fadeIn);
   }
 
   _fadeIn() {
-    // only start if we're not disposed already
-    if (_animationController == null) {
-      return;
-    }
-
-    _animationController.forward();
+    _animationController?.forward();
   }
 
   @override
@@ -75,17 +70,15 @@ class SpinnerState extends State<Spinner> with TickerProviderStateMixin {
   /// gracefully wait until the spinner has stopped it's animation
   Future<Null> stopLoading() async {
     // simply return if we've not started animation
-    if (_animationController == null || _animationController.isDismissed) {
+    if (_animationController == null || _animationController!.isDismissed) {
       return;
     }
 
-    await _animationController.reverse();
+    await _animationController?.reverse();
   }
 
   _calculateSize(BuildContext context) {
-    final screenSize = MediaQuery
-        .of(context)
-        .size;
+    final screenSize = MediaQuery.of(context).size;
 
     final limitingSide = min(screenSize.width, screenSize.height);
     final fillFactor = 0.6;

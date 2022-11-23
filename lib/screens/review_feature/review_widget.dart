@@ -17,7 +17,10 @@ class ReviewWidget extends StatefulWidget {
   final ReviewStorage reviewStorage;
   final Duration toastDelay;
 
-  ReviewWidget({@required this.child, @required this.reviewStorage, this.toastDelay});
+  ReviewWidget(
+      {required this.child,
+      required this.reviewStorage,
+      this.toastDelay = const Duration(seconds: 1)});
 
   @override
   State<StatefulWidget> createState() {
@@ -26,12 +29,11 @@ class ReviewWidget extends StatefulWidget {
 }
 
 class ReviewWidgetState extends State<ReviewWidget> {
-
   static final _logger = new Logger<ReviewWidgetState>();
 
-  StreamSubscription<ConversionModel> _eventSubscription;
+  StreamSubscription<ConversionModel>? _eventSubscription;
 
-  ReviewRule _reviewRule;
+  late ReviewRule _reviewRule;
 
   @override
   void initState() {
@@ -43,18 +45,15 @@ class ReviewWidgetState extends State<ReviewWidget> {
 
   @override
   void didChangeDependencies() {
-    if (_eventSubscription != null) {
-      _eventSubscription.cancel();
-    }
-    _eventSubscription = StateContainer.of(context).conversionUpdated.listen(_conversionUpdated);
+    _eventSubscription?.cancel();
+    _eventSubscription =
+        StateContainer.of(context).conversionUpdated.listen(_conversionUpdated);
     super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    if (_eventSubscription != null) {
-      _eventSubscription.cancel();
-    }
+    _eventSubscription?.cancel();
     super.dispose();
   }
 
@@ -80,20 +79,21 @@ class ReviewWidgetState extends State<ReviewWidget> {
   void _doReview() async {
     _reviewRule.reviewRequested();
     this.widget.reviewStorage.save(_reviewRule);
-    Future.delayed(widget.toastDelay ?? Duration(seconds: 1))
-    .then((_) {
+    Future.delayed(widget.toastDelay).then((_) {
       final snackBar = new SnackBar(
         content: Text(toastMessage),
-        action: SnackBarAction(label: acceptReviewButtonText, onPressed: () async {
-          await _reviewAccepted();
-          if (await _canPromptReview()) {
-            final result = await AppReview.requestReview;
-            _logger.debug(result);
-          } else {
-            final result = await AppReview.storeListing;
-            _logger.debug(result);
-          }
-        }),
+        action: SnackBarAction(
+            label: acceptReviewButtonText,
+            onPressed: () async {
+              await _reviewAccepted();
+              if (await _canPromptReview()) {
+                final result = await AppReview.requestReview;
+                _logger.debug(result?.toString() ?? 'No review result');
+              } else {
+                final result = await AppReview.storeListing;
+                _logger.debug(result?.toString() ?? 'No review result');
+              }
+            }),
         duration: Duration(seconds: 10),
         behavior: SnackBarBehavior.floating,
       );
@@ -122,12 +122,9 @@ class ReviewWidgetState extends State<ReviewWidget> {
   static String get toastMessage => Intl.message(
       "Is this app helping you? Could you spare a minute to do a review? It really helps.",
       name: "ReviewWidgetState_toastMessage",
-      desc: "Message shown in review request toast"
-  );
+      desc: "Message shown in review request toast");
 
-  static String get acceptReviewButtonText => Intl.message(
-      "Sure!",
+  static String get acceptReviewButtonText => Intl.message("Sure!",
       name: "ReviewWidgetState_acceptReviewButtonText",
-      desc: "Short text to accept to a review"
-  );
+      desc: "Short text to accept to a review");
 }

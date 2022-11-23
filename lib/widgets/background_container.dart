@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:travelconverter/app_theme.dart';
 
 class BackgroundContainer extends StatelessWidget {
-
   final child;
 
-  const BackgroundContainer({Key key, this.child}) : super(key: key);
-
+  const BackgroundContainer({Key? key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,5 +13,4 @@ class BackgroundContainer extends StatelessWidget {
       child: child,
     );
   }
-
 }

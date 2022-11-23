@@ -1,7 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 
 abstract class InternetConnectivity {
-  bool get isAvailable => null;
+  bool get isAvailable => false;
 }
 
 class InternetConnectivityImpl implements InternetConnectivity {
@@ -9,7 +9,8 @@ class InternetConnectivityImpl implements InternetConnectivity {
 
   bool _isAvailable = false;
 
-  InternetConnectivityImpl(Connectivity connectivity) : _connectivity = connectivity {
+  InternetConnectivityImpl(Connectivity connectivity)
+      : _connectivity = connectivity {
     _connectivity.checkConnectivity().then(_updateConnectivity);
     connectivity.onConnectivityChanged.listen(_updateConnectivity);
   }
