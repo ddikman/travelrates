@@ -3,7 +3,7 @@
 /// this class explicitly tells the caller that the error has been handled gracefully and
 /// can be ignored, simply that no result is available at this time.
 class AsyncResult<T> {
-  final T _result;
+  final T? _result;
 
   final bool successful;
 
@@ -15,7 +15,7 @@ class AsyncResult<T> {
       : this._result = result,
         this.successful = true;
 
-  T get result {
+  T? get result {
     if (!successful) {
       throw StateError(
           'Async operation was not successful. Ensure .successful is called before attempting to call this getter.');

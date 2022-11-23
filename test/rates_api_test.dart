@@ -37,7 +37,7 @@ void main() {
     expect(result.successful, false);
   });
 
-  test("can read from actual service", () async  {
+  test("can read from actual service", () async {
     final assets = await AssetsFolder.path;
     final assetPath = '$assets/data/apiConfiguration.json';
     print("reading configuration from $assetPath}");
@@ -52,57 +52,67 @@ void main() {
 }
 
 class MockClient implements Client {
-
   final Function _response;
 
   MockClient(Function response) : _response = response;
 
   @override
-  void close() { throw new UnimplementedError(); }
+  void close() {
+    throw new UnimplementedError();
+  }
 
   Future<Response> _generateResponse() {
     return Future.value(_response());
   }
 
   @override
-  Future<Response> delete(url, {Map<String, String> headers}) {
+  Future<Response> get(url, {Map<String, String>? headers}) {
     return _generateResponse();
   }
 
   @override
-  Future<Response> get(url, {Map<String, String> headers}) {
+  Future<Response> head(url, {Map<String, String>? headers}) {
     return _generateResponse();
   }
 
   @override
-  Future<Response> head(url, {Map<String, String> headers}) {
-    return _generateResponse();
-  }
-  @override
-  Future<Response> patch(url, {Map<String, String> headers, body, Encoding encoding})  {
+  Future<Response> patch(url,
+      {Map<String, String>? headers, body, Encoding? encoding}) {
     return _generateResponse();
   }
 
   @override
-  Future<Response> post(url, {Map<String, String> headers, body, Encoding encoding})  {
+  Future<Response> post(url,
+      {Map<String, String>? headers, body, Encoding? encoding}) {
     return _generateResponse();
   }
 
   @override
-  Future<Response> put(url, {Map<String, String> headers, body, Encoding encoding})  {
+  Future<Response> put(url,
+      {Map<String, String>? headers, body, Encoding? encoding}) {
     return _generateResponse();
   }
 
   @override
-  Future<String> read(url, {Map<String, String> headers}) {
+  Future<String> read(url, {Map<String, String>? headers}) {
     throw new UnimplementedError();
   }
 
   @override
-  Future<Uint8List> readBytes(url, {Map<String, String> headers})  { throw new UnimplementedError(); }
+  Future<Uint8List> readBytes(url, {Map<String, String>? headers}) {
+    throw new UnimplementedError();
+  }
 
   @override
-  Future<StreamedResponse> send(BaseRequest request)  { throw new UnimplementedError(); }
+  Future<StreamedResponse> send(BaseRequest request) {
+    throw new UnimplementedError();
+  }
+
+  @override
+  Future<Response> delete(Uri url,
+      {Map<String, String>? headers, Object? body, Encoding? encoding}) {
+    return _generateResponse();
+  }
 }
 
 class MockConnectivity implements Connectivity {
@@ -116,7 +126,8 @@ class MockConnectivity implements Connectivity {
   }
 
   @override
-  Stream<ConnectivityResult> get onConnectivityChanged => null;
+  Stream<ConnectivityResult> get onConnectivityChanged =>
+      Stream<ConnectivityResult>.empty();
 }
 
 class MockConfig implements ApiConfiguration {

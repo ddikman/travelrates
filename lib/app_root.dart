@@ -1,5 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/screens/add_currency/add_currency_screen.dart';
@@ -17,10 +18,9 @@ import 'package:travelconverter/services/rates_loader.dart';
 import 'package:travelconverter/state_container.dart';
 
 class AppRoot extends StatefulWidget {
-
   final RatesApi ratesApi;
 
-  const AppRoot({Key key, this.ratesApi}) : super(key: key);
+  const AppRoot({Key? key, required this.ratesApi}) : super(key: key);
 
   @override
   _AppRootState createState() {
@@ -29,21 +29,25 @@ class AppRoot extends StatefulWidget {
 }
 
 class _AppRootState extends State<AppRoot> {
-
   static final log = new Logger<_AppRootState>();
 
-  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
+  late FirebaseAnalytics _firebaseAnalytics;
 
   @override
   void initState() {
     super.initState();
 
-    _firebaseAnalytics.logAppOpen();
+    Firebase.initializeApp().then((app) {
+      _firebaseAnalytics = FirebaseAnalytics.instanceFor(app: app);
+      _firebaseAnalytics.logAppOpen();
+      Logger.analytics = _firebaseAnalytics;
 
-    new RatesLoader(localStorage: new LocalStorage(), ratesApi: widget.ratesApi).loadOnlineRates()
-        .then(handleLoadedRates)
-        .catchError((error) => {
-      log.error("Failed to load online rates: $error")
+      new RatesLoader(
+              localStorage: new LocalStorage(), ratesApi: widget.ratesApi)
+          .loadOnlineRates()
+          .then(handleLoadedRates)
+          .catchError(
+              (error) => {log.error("Failed to load online rates: $error")});
     });
   }
 
@@ -67,7 +71,9 @@ class _AppRootState extends State<AppRoot> {
       supportedLocales: AppLocalizationsDelegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       initialRoute: initialRoute,
-      navigatorObservers: [ FirebaseAnalyticsObserver(analytics: _firebaseAnalytics) ],
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: _firebaseAnalytics)
+      ],
       routes: <String, WidgetBuilder>{
         AppRoutes.convert: (context) => new ConvertScreen(),
         AppRoutes.addCurrency: (context) => new AddCurrencyScreen(),

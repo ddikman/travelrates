@@ -12,11 +12,13 @@ class ConvertDialog extends StatelessWidget {
 
   final String currencyCode;
 
-  final CurrencyInputFormatter _currencyInputFormatter = new CurrencyInputFormatter();
+  final CurrencyInputFormatter _currencyInputFormatter =
+      new CurrencyInputFormatter();
 
   final textFieldController = new TextEditingController();
 
-  ConvertDialog({Key key, this.onSubmitted, this.currencyCode})
+  ConvertDialog(
+      {Key? key, required this.onSubmitted, required this.currencyCode})
       : super(key: key);
 
   @override
@@ -25,9 +27,7 @@ class ConvertDialog extends StatelessWidget {
       controller: textFieldController,
       autofocus: true,
       keyboardType: TextInputType.numberWithOptions(decimal: true),
-      inputFormatters: [
-        _currencyInputFormatter
-      ],
+      inputFormatters: [_currencyInputFormatter],
       onSubmitted: (value) => _submit(context),
       decoration: InputDecoration(
           border: OutlineInputBorder(), labelText: _convertTitle(currencyCode)),
@@ -40,9 +40,8 @@ class ConvertDialog extends StatelessWidget {
           onPressed: () => _submit(context),
           child: new Text(
             _submitLabel,
-            style: Theme.of(context).textTheme.headline4.copyWith(
-              fontSize: 16.0
-            ),
+            style:
+                Theme.of(context).textTheme.headline4!.copyWith(fontSize: 16.0),
           ),
           color: AppTheme.primaryColor,
         ),
@@ -61,19 +60,14 @@ class ConvertDialog extends StatelessWidget {
     );
   }
 
-  String get _submitLabel => Intl.message(
-      "CONVERT",
-      name: '_submitLabel',
-      desc: "Convert dialog button text"
-  );
+  String get _submitLabel => Intl.message("CONVERT",
+      name: '_submitLabel', desc: "Convert dialog button text");
 
   String _convertTitle(String currencyCode) {
-    return Intl.message(
-        '$currencyCode to convert',
+    return Intl.message('$currencyCode to convert',
         name: "_convertTitle",
         desc: "Text displayed at the top of the convert dialog.",
-        args: [currencyCode]
-    );
+        args: [currencyCode]);
   }
 
   _submit(BuildContext context) {
@@ -83,7 +77,8 @@ class ConvertDialog extends StatelessWidget {
     if (value != null) {
       onSubmitted(value);
     } else {
-      logger.event('parseFailure', "Failed to parse $stringValue to integer", parameters: { 'failedValue': stringValue });
+      logger.event('parseFailure', "Failed to parse $stringValue to integer",
+          parameters: {'failedValue': stringValue});
     }
   }
 }

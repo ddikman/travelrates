@@ -4,8 +4,7 @@ import 'package:travelconverter/model/async_result.dart';
 import 'package:travelconverter/services/rates_api.dart';
 
 class MockRatesApi implements RatesApi {
-
-  AsyncResult<String> result;
+  AsyncResult<String>? result;
 
   @override
   Future<AsyncResult<String>> getCurrentRatesJson() {
@@ -13,8 +12,8 @@ class MockRatesApi implements RatesApi {
   }
 
   @override
-  http.Client client;
+  late http.Client client;
 
   @override
-  Connectivity connectivity;
+  late Connectivity connectivity;
 }

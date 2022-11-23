@@ -18,8 +18,8 @@ class AddCurrencyScreen extends StatefulWidget {
 }
 
 class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
-  List<Currency> currencies;
-  CurrencyFilter currencyFilter;
+  List<Currency> currencies = [];
+  CurrencyFilter? currencyFilter;
 
   @override
   void didChangeDependencies() {
@@ -27,27 +27,20 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
 
     // load initial state once
     if (this.currencyFilter == null) {
-      final state = StateContainer
-          .of(context)
-          .appState;
+      final state = StateContainer.of(context).appState;
 
       final appLocalization = AppLocalizations.of(context);
-      currencyFilter = new CurrencyFilter(
-          state.countries,
-          appLocalization
-      );
+      currencyFilter = new CurrencyFilter(state.countries, appLocalization);
       _filterCurrencies('');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
     final currencyWidgets = this
         .currencies
         .map((currency) => new AvailableCurrencyCard(currency))
         .toList();
-
 
     final searchField = new CurrencySearchTextField(
       filterChanged: _filterCurrencies,
@@ -70,18 +63,17 @@ class _AddCurrencyScreenState extends State<AddCurrencyScreen> {
         body: BackgroundContainer(child: body));
   }
 
-  String get _screenTitle => Intl.message(
-    "Add Currency",
-    desc: "Add currency screen title.",
-    name: "_AddCurrencyScreenState__screenTitle"
-  );
+  String get _screenTitle => Intl.message("Add Currency",
+      desc: "Add currency screen title.",
+      name: "_AddCurrencyScreenState__screenTitle");
 
   _filterCurrencies(String filterText) {
     final state = StateContainer.of(context).appState;
     final allCurrencies = state.availableCurrencies.getList();
-    final filteredCurrencies = currencyFilter.getFiltered(allCurrencies, filterText);
+    final filteredCurrencies =
+        currencyFilter?.getFiltered(allCurrencies, filterText) ?? [];
 
-    setState((){
+    setState(() {
       this.currencies = _sorted(filteredCurrencies);
     });
   }

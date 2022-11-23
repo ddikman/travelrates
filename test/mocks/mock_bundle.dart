@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'package:flutter/services.dart';
 
 class TestAssetBundle extends CachingAssetBundle {
-
   final _data = new Map<String, String>();
 
   void set(String key, String data) {
@@ -17,6 +16,7 @@ class TestAssetBundle extends CachingAssetBundle {
       throw new Exception("Missing any mocked asset with path '$key'");
     }
 
-    return Future<ByteData>.value(ByteData.view(Uint8List.fromList(utf8.encode(_data[key])).buffer));
+    return Future<ByteData>.value(
+        ByteData.view(Uint8List.fromList(utf8.encode(_data[key]!)).buffer));
   }
 }

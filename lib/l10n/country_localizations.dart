@@ -521,9 +521,9 @@ class CountryLocalizations {
   factory CountryLocalizations(String locale) {
     assert(_allLocales.containsKey(locale) || locale == 'en');
     if (locale == 'en') {
-      return new CountryLocalizations._internal(locale, null);
+      return new CountryLocalizations._internal(locale, new Map());
     } else {
-      return new CountryLocalizations._internal(locale, _allLocales[locale]);
+      return new CountryLocalizations._internal(locale, _allLocales[locale]!);
     }
   }
 
@@ -531,11 +531,12 @@ class CountryLocalizations {
     // Skip localization if it's already in the default locale
     if (locale == 'en') return countryName;
 
-    if (!_translations.containsKey(countryName)) {
-      print("Missing localization for country '$countryName'.");
-      return countryName;
+    final translations = _translations[countryName];
+    if (translations != null) {
+      return translations;
     }
 
-    return _translations[countryName];
+    print("Missing localization for country '$countryName'.");
+    return countryName;
   }
 }

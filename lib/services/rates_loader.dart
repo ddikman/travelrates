@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/services/currency_decoder.dart';
 import 'package:travelconverter/services/local_storage.dart';
@@ -15,7 +14,7 @@ class RatesLoader {
 
   final decoder = new CurrencyDecoder();
 
-  RatesLoader({@required this.localStorage, @required this.ratesApi});
+  RatesLoader({required this.localStorage, required this.ratesApi});
 
   Future<FileOperations> get _cacheFile async {
     return localStorage.getFile('rates.json');
@@ -32,31 +31,33 @@ class RatesLoader {
   }
 
   Future<List<CurrencyRate>> _cachedRates() async {
-    String json;
+    String json = '';
     if (await _cacheExists()) {
       try {
         json = await _readCache();
         return decoder.decodeRates(json);
       } on Exception catch (e) {
-        log.error('Failed to parse cached local rates: ${e.toString()}\n\r$json');
+        log.error(
+            'Failed to parse cached local rates: ${e.toString()}\n\r$json');
       }
     }
 
-    return new List<CurrencyRate>();
+    return <CurrencyRate>[];
   }
 
   Future<List<CurrencyRate>> loadOnlineRates() async {
     final ratesJson = await this.ratesApi.getCurrentRatesJson();
-    if (!ratesJson.successful) {
+    if (!ratesJson.successful || ratesJson.result == null) {
       return await _cachedRates();
     }
 
     try {
-      final rates = decoder.decodeRates(ratesJson.result);
-      _cacheRates(ratesJson.result);
+      final rates = decoder.decodeRates(ratesJson.result!);
+      _cacheRates(ratesJson.result!);
       return rates;
     } on Exception catch (e) {
-      log.error('Online rates invalid json: ${e.toString()}\r\n${ratesJson.result}');
+      log.error(
+          'Online rates invalid json: ${e.toString()}\r\n${ratesJson.result}');
       return await _cachedRates();
     }
   }

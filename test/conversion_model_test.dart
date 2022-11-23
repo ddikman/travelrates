@@ -6,9 +6,7 @@ import 'mocks/mock_currency.dart';
 void main() {
   test('throws if getting currencies before loaded', () {
     final uninitiatedModel = new ConversionModel(
-        currentAmount: 1.0,
-        currentCurrency: MockCurrency.euro,
-        currencies: null);
+        currentAmount: 1.0, currentCurrency: MockCurrency.euro, currencies: []);
 
     expect(
         () => uninitiatedModel.currencies, throwsA(isInstanceOf<StateError>()));
@@ -24,9 +22,9 @@ void main() {
     expect(model.getAmountInCurrency(MockCurrency.euro), currentAmount);
   });
 
-  test('convertion is done based on the difference between current and exchanged currency rates',
+  test(
+      'convertion is done based on the difference between current and exchanged currency rates',
       () {
-
     final model = new ConversionModel(
         currentAmount: 1.0,
         currentCurrency: MockCurrency.dollar,
