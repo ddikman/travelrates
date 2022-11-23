@@ -2,6 +2,8 @@ import 'package:connectivity/connectivity.dart';
 
 abstract class InternetConnectivity {
   bool get isAvailable => false;
+
+  Future<void> pollConnectivity();
 }
 
 class InternetConnectivityImpl implements InternetConnectivity {
@@ -21,4 +23,9 @@ class InternetConnectivityImpl implements InternetConnectivity {
 
   @override
   bool get isAvailable => _isAvailable;
+
+  @override
+  Future<void> pollConnectivity() async {
+    await _connectivity.checkConnectivity().then(_updateConnectivity);
+  }
 }

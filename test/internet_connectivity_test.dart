@@ -33,24 +33,29 @@ void main() {
 
   test("is available after startup if connectivity is mobile", () async {
     var internet = getWithCurrentConnectivity(ConnectivityResult.mobile);
+    await internet.pollConnectivity();
     expect(internet.isAvailable, true);
   });
 
   test("is available after startup if connectivity is wifi", () async {
     var internet = getWithCurrentConnectivity(ConnectivityResult.wifi);
+    await internet.pollConnectivity();
     expect(internet.isAvailable, true);
   });
 
   test("is unavailable after startup if connectivity is none", () async {
     var internet = getWithCurrentConnectivity(ConnectivityResult.none);
+    await internet.pollConnectivity();
     expect(internet.isAvailable, false);
   });
 
   test("becomes available when connectivity changes", () async {
     var internet = getWithCurrentConnectivity(ConnectivityResult.none);
+    await internet.pollConnectivity();
     expect(internet.isAvailable, false);
 
     connectivityStream?.add(ConnectivityResult.mobile);
+    await internet.pollConnectivity();
     expect(internet.isAvailable, true);
   });
 }

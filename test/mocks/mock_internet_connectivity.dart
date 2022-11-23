@@ -9,4 +9,9 @@ class MockInternetConnectivity implements InternetConnectivity {
 
   @override
   bool get isAvailable => _isAvailable;
+
+  @override
+  Future<void> pollConnectivity() {
+    return Future.value(null);
+  }
 }
