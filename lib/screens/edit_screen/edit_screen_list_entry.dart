@@ -88,7 +88,7 @@ class _EditScreenListEntryState extends State<EditScreenListEntry> {
       Platform.isAndroid ? Icons.drag_handle : CupertinoIcons.line_horizontal_3;
 
   IconData get _removeIcon =>
-      Platform.isAndroid ? Icons.delete : CupertinoIcons.clear_circled;
+      Platform.isAndroid ? Icons.delete : CupertinoIcons.clear_circled_solid;
 
   String get currencyCode => widget.currency.code;
 }
