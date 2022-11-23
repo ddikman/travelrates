@@ -13,7 +13,7 @@ void main() {
 
     await tester.pumpWidget(appContainer);
     final inputFinder = find.byType(TextField);
-    final convertButtonFinder = find.byType(FlatButton);
+    final convertButtonFinder = find.byType(TextButton);
     expect(inputFinder, findsOneWidget);
     expect(convertButtonFinder, findsOneWidget);
 
@@ -37,7 +37,7 @@ void main() {
 
     await tester.pumpWidget(appContainer);
     final inputFinder = find.byType(TextField);
-    final convertButtonFinder = find.byType(FlatButton);
+    final convertButtonFinder = find.byType(TextButton);
     expect(inputFinder, findsOneWidget);
     expect(convertButtonFinder, findsOneWidget);
 
@@ -63,7 +63,7 @@ void main() {
     final appContainer = new MaterialApp(home: convertDialog);
 
     await tester.pumpWidget(appContainer);
-    final convertButtonFinder = find.byType(FlatButton);
+    final convertButtonFinder = find.byType(TextButton);
     await tester.tap(convertButtonFinder);
     await tester.pumpAndSettle();
 

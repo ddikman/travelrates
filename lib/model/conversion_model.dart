@@ -14,14 +14,7 @@ class ConversionModel {
       required List<String> currencies})
       : this._currencies = currencies;
 
-  List<String> get currencies {
-    if (_currencies == null) {
-      throw new StateError(
-          "Cannot call .currencies before app state has been loaded");
-    }
-
-    return _currencies;
-  }
+  List<String> get currencies => _currencies;
 
   double getAmountInCurrency(Currency currency) {
     if (currency.code == currentCurrency.code) {

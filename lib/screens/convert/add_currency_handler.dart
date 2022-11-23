@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/model/currency.dart';
@@ -7,7 +6,6 @@ import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/state_container.dart';
 
 class AddCurrencyHandler {
-
   static final log = new Logger<AddCurrencyHandler>();
 
   final Currency currency;
@@ -15,16 +13,18 @@ class AddCurrencyHandler {
   AddCurrencyHandler(this.currency);
 
   _displayNotice(BuildContext context) {
-    log.event('currencyAlreadyAdded', "${currency.name} already added, showing snack instead", parameters: { 'currency': currency.name });
+    log.event('currencyAlreadyAdded',
+        "${currency.name} already added, showing snack instead",
+        parameters: {'currency': currency.name});
 
     final localizations = AppLocalizations.of(context);
-    var currencyLocalizedName = localizations.currencies.getLocalized(currency.code);
+    var currencyLocalizedName =
+        localizations.currencies.getLocalized(currency.code);
 
     final snackBar = new SnackBar(
-        content: Text(_alreadySelectedWarning(currencyLocalizedName))
-    );
+        content: Text(_alreadySelectedWarning(currencyLocalizedName)));
 
-    Scaffold.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   addCurrency(BuildContext context) {
@@ -34,17 +34,17 @@ class AddCurrencyHandler {
 
       // return to previous screen
       Navigator.of(context).pop();
-    } catch(DuplicateCurrencyError) {
+      // ignore: non_constant_identifier_names
+    } catch (DuplicateCurrencyError) {
       _displayNotice(context);
     }
   }
 
   String _alreadySelectedWarning(String currencyName) {
-    return Intl.message(
-        "$currencyName is already selected!",
+    return Intl.message("$currencyName is already selected!",
         name: "_alreadySelectedWarning",
-        desc: "Text displayed when trying to add a currency that is already added.",
-        args: [currencyName]
-    );
+        desc:
+            "Text displayed when trying to add a currency that is already added.",
+        args: [currencyName]);
   }
 }

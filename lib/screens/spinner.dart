@@ -8,9 +8,7 @@ class Spinner extends StatefulWidget {
   /// Time until which to not show the spinner
   final Duration delay;
 
-  Spinner({Key? key, required this.delay}) : super(key: key) {
-    assert(this.delay != null);
-  }
+  Spinner({Key? key, required this.delay}) : super(key: key);
 
   @override
   SpinnerState createState() {

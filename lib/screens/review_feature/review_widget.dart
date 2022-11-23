@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/screens/review_feature/review_rule.dart';
@@ -98,7 +97,7 @@ class ReviewWidgetState extends State<ReviewWidget> {
         behavior: SnackBarBehavior.floating,
       );
 
-      Scaffold.of(context).showSnackBar(snackBar);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     });
   }
 
