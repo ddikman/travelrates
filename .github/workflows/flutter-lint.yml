@@ -1,7 +1,6 @@
 name: Flutter lint and test
 
-# just don't run it
-on: []
+on: pull_request
 
 jobs:
   build:
@@ -9,6 +8,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      # To ensure we can get the flutter versions, fixing a version unknown issue
+      # https://github.com/subosito/flutter-action/issues/188
+      - name: Test connection
+        run: curl "https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json"
+
+      - name: Fix flutter SDK folder permission
+        run: git config --global --add safe.directory /tmp/flutter/--
 
       - uses: subosito/flutter-action@v2
         with:
@@ -18,18 +25,18 @@ jobs:
       - name: Install dependencies
         run: |
           flutter pub get
-          sudo apt update
-          sudo apt install lcov
+          sudo apt update -y
+          sudo apt install lcov -y
       - name: Run linting
         run: flutter analyze
 
-      - name: Run tests
-        run: |
-          dart pub global activate junitreport
-          flutter test --coverage --machine | tojunit > testreport.xml
-          genhtml coverage/lcov.info --output=coverage
-      - name: Publish coverage report
-        uses: nohmad/lcov-report-action@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          lcov-path: coverage/lcov.info
+      # - name: Run tests
+      #   run: |
+      #     flutter pub global activate junitreport
+      #     flutter test --coverage --machine | tojunit > testreport.xml
+      #     genhtml coverage/lcov.info --output=coverage
+      # - name: Publish coverage report
+      #   uses: nohmad/lcov-report-action@v1
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     lcov-path: coverage/lcov.info
