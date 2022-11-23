@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:travelconverter/app_state.dart';
 import 'package:travelconverter/data/countries_data.dart';
 import 'package:travelconverter/data/currency_data.dart';
@@ -44,7 +43,7 @@ class StatePersistence {
 
   Future<AppState> _loadState(
       CurrencyRepository currencyRepository, List<Country> countries) async {
-    // TODO: In case this fail, I need to recover by resetting the settings.
+    // In case this fail, I need to recover by resetting the settings.
     final stateFile = await localStorage.getFile('state.json');
     final stateJson = json.decode(await stateFile.contents);
     return AppState.fromJson(stateJson, currencyRepository, countries);

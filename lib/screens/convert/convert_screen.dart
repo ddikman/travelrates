@@ -1,5 +1,4 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/screens/convert/open_add_currency_screen_button.dart';
 import 'package:travelconverter/screens/convert/selected_currency_list.dart';
@@ -15,12 +14,8 @@ import 'package:travelconverter/widgets/screen_title_text.dart';
 import '../../internet_connectivity.dart';
 
 class ConvertScreen extends StatefulWidget {
-
-  static String get screenTitle => Intl.message(
-      "Convert",
-      name: "ConvertScreen_screenTitle",
-      desc: "Convert screen main title"
-  );
+  static String get screenTitle => Intl.message("Convert",
+      name: "ConvertScreen_screenTitle", desc: "Convert screen main title");
 
   @override
   _ConvertScreenState createState() {
@@ -37,7 +32,7 @@ class _ConvertScreenState extends State<ConvertScreen> {
     final appBar = new AppBar(
       title: ScreenTitleText.show(ConvertScreen.screenTitle),
       centerTitle: true,
-      actions: [ new GotoConfigureButton() ],
+      actions: [new GotoConfigureButton()],
     );
 
     return Scaffold(
@@ -56,13 +51,15 @@ class _ConvertScreenState extends State<ConvertScreen> {
         // padding the body bottom stops the floating space button from
         // hiding the lowermost content
         child: new Padding(
-        padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
-        child: new Builder(builder: (BuildContext context) {
-          return new ReviewWidget(
-            child: new SelectedCurrencyList(),
-            reviewStorage: new ReviewStorage(new InternetConnectivityImpl(new Connectivity()), new LocalStorage()),
-          );
-        }),
-    ));
+          padding: const EdgeInsets.only(bottom: _floatingButtonSpacing),
+          child: new Builder(builder: (BuildContext context) {
+            return new ReviewWidget(
+              child: new SelectedCurrencyList(),
+              reviewStorage: new ReviewStorage(
+                  new InternetConnectivityImpl(new Connectivity()),
+                  new LocalStorage()),
+            );
+          }),
+        ));
   }
 }

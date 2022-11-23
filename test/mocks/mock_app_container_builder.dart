@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:travelconverter/app_state.dart';
@@ -16,7 +15,6 @@ import 'mock_currency_repository.dart';
 import 'mock_local_storage.dart';
 
 class MockAppContainerBuilder {
-
   Currency _currentCurrency = MockCurrency.dollar;
   double _currentValue = 1.0;
   final Widget _child;
@@ -36,15 +34,17 @@ class MockAppContainerBuilder {
   /// Builds the app root widget with material app, localization and state
   Future<Widget> build() async {
     final appState = AppState.initial(
-        availableCurrencies: mockCurrencyRepository(),
-        countries: MockCountry.all)
+            availableCurrencies: mockCurrencyRepository(),
+            countries: MockCountry.all)
         .withConversion(new ConversionModel(
-        currentAmount: _currentValue,
-        currentCurrency: _currentCurrency,
-        currencies: ['GBP', 'USD', 'EUR']));
+            currentAmount: _currentValue,
+            currentCurrency: _currentCurrency,
+            currencies: ['GBP', 'USD', 'EUR']));
 
-    final persistance = new StatePersistence(localStorage: new MockLocalStorage());
-    final stateContainer = StateContainer(child: _child, state: appState, statePersistence: persistance);
+    final persistance =
+        new StatePersistence(localStorage: new MockLocalStorage());
+    final stateContainer = StateContainer(
+        child: _child, state: appState, statePersistence: persistance);
     return new MaterialApp(home: stateContainer, localizationsDelegates: [
       const AppLocalizationsDelegate(),
       GlobalMaterialLocalizations.delegate,
@@ -55,7 +55,6 @@ class MockAppContainerBuilder {
 
   /// Can be used to wrap entire test setup instead of just build()
   Future run(WidgetTester tester, Function testCode) async {
-
     await tester.pumpWidget(await this.build());
     await tester.pumpAndSettle();
     await testCode();

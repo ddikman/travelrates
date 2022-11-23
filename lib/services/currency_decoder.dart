@@ -11,9 +11,6 @@ class CurrencyDecoder {
 
   Future<CurrencyRepository> decode(
       String currenciesJson, String ratesJson) async {
-    assert(currenciesJson != null);
-    assert(ratesJson != null);
-
     final rates = decodeRates(ratesJson);
     final currencies = _decodeCurrencies(currenciesJson, rates);
 
@@ -34,7 +31,7 @@ class CurrencyDecoder {
   }
 
   List<CurrencyRate> decodeRates(String json) {
-    assert(json != null && json.isNotEmpty);
+    assert(json.isNotEmpty);
     final Map ratesDecoded = new JsonDecoder().convert(json);
     if (!ratesDecoded.containsKey('rates')) {
       throw new ArgumentError(
@@ -47,19 +44,22 @@ class CurrencyDecoder {
 
   CurrencyRate _mapRate(String code, dynamic rate) {
     // the json will contain a base rate with an integer 1 instead of a double
-      if (rate is int) {
-        return new CurrencyRate(code, 1.0);
-      } else if (rate is double) {
-        return new CurrencyRate(code, rate);
-      } else {
-        throw new Exception("Unexpected rate type for code '$code': ${rate.runtimeType}");
-      }
+    if (rate is int) {
+      return new CurrencyRate(code, 1.0);
+    } else if (rate is double) {
+      return new CurrencyRate(code, rate);
+    } else {
+      throw new Exception(
+          "Unexpected rate type for code '$code': ${rate.runtimeType}");
+    }
   }
 
   Currency _decodeCurrency(Map currency, List<CurrencyRate> rates) {
     final code = currency['code'];
-    final rate = rates.singleWhere((rate) => isEqualIgnoreCase(rate.currencyCode, code),
-        orElse: () => throw new Exception("Missing rate for currency $code amongt ${rates.length} rates"));
+    final rate = rates.singleWhere(
+        (rate) => isEqualIgnoreCase(rate.currencyCode, code),
+        orElse: () => throw new Exception(
+            "Missing rate for currency $code amongt ${rates.length} rates"));
 
     return Currency(
         symbol: currency['symbol_native'],

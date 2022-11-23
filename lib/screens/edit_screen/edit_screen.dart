@@ -1,7 +1,4 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/screens/edit_screen/edit_screen_list_entry.dart';
 import 'package:travelconverter/state_container.dart';
@@ -49,10 +46,9 @@ class EditScreenState extends State<EditScreen> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: new ReorderableListView(
-        padding: EdgeInsets.only(bottom: 4.0),
-        children: currencies,
-        onReorder: _reorderListEntry
-      ),
+          padding: EdgeInsets.only(bottom: 4.0),
+          children: currencies,
+          onReorder: _reorderListEntry),
     );
   }
 
@@ -60,8 +56,7 @@ class EditScreenState extends State<EditScreen> {
     final stateContainer = StateContainer.of(context);
     final state = stateContainer.appState;
 
-      var moveCurrency = state.conversion.currencies.elementAt(oldIndex);
-      stateContainer.reorderCurrency(
-          item: moveCurrency, newIndex: newIndex);
-    }
+    var moveCurrency = state.conversion.currencies.elementAt(oldIndex);
+    stateContainer.reorderCurrency(item: moveCurrency, newIndex: newIndex);
+  }
 }

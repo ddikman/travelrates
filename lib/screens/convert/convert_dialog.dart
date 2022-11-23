@@ -2,7 +2,6 @@ import 'package:intl/intl.dart';
 import 'package:travelconverter/app_theme.dart';
 import 'package:travelconverter/screens/convert/currency_input_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:travelconverter/services/logger.dart';
 
 class ConvertDialog extends StatelessWidget {
@@ -36,15 +35,18 @@ class ConvertDialog extends StatelessWidget {
     final submitButton = new Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: new Center(
-        child: new FlatButton(
-          onPressed: () => _submit(context),
-          child: new Text(
-            _submitLabel,
-            style:
-                Theme.of(context).textTheme.headline4!.copyWith(fontSize: 16.0),
-          ),
-          color: AppTheme.primaryColor,
-        ),
+        child: new TextButton(
+            onPressed: () => _submit(context),
+            child: new Text(
+              _submitLabel,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4!
+                  .copyWith(fontSize: 16.0),
+            ),
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(AppTheme.primaryColor))),
       ),
     );
 

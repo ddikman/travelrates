@@ -1,5 +1,4 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:travelconverter/model/currency_rate.dart';

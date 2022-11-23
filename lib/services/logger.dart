@@ -4,7 +4,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 class Logger<T> {
   static FirebaseAnalytics? analytics;
 
-  /// TODO: This doesn't actually work so I might as well change it to a string.
+  /// This doesn't actually work so I might as well change it to a string.
   final String name = T.runtimeType.toString();
 
   void _log(String eventType, String message) {
