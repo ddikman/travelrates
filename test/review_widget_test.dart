@@ -16,13 +16,13 @@ void main() {
       'Displays review snackbar a second after the nth review has been shown',
       (WidgetTester tester) async {
     final localStorage = MockLocalStorage();
-    final reviewStorage = new ReviewStorage(
-        new MockInternetConnectivity(), localStorage);
+    final reviewStorage =
+        new ReviewStorage(new MockInternetConnectivity(), localStorage);
     final reviews = new ReviewRule(
+        internet: MockInternetConnectivity(),
         conversionsRequired: 5,
         conversionsDone: 4,
-        submitted: false
-    );
+        submitted: false);
     reviewStorage.save(reviews);
     final state = mockAppState();
     final widgetFrame = MockWidgetFrame(
@@ -40,8 +40,8 @@ void main() {
 
     await tester.runAsync(() async {
       // do a conversion
-      var stateContainer = tester.state<StateContainerState>(
-          find.byType(StateContainer));
+      var stateContainer =
+          tester.state<StateContainerState>(find.byType(StateContainer));
       stateContainer.setAmount(1.0, MockCurrency.dollar);
     });
 
