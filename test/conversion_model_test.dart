@@ -4,14 +4,6 @@ import 'package:travelconverter/model/conversion_model.dart';
 import 'mocks/mock_currency.dart';
 
 void main() {
-  test('throws if getting currencies before loaded', () {
-    final uninitiatedModel = new ConversionModel(
-        currentAmount: 1.0, currentCurrency: MockCurrency.euro, currencies: []);
-
-    expect(
-        () => uninitiatedModel.currencies, throwsA(isInstanceOf<StateError>()));
-  });
-
   test('when getting conversion of current currency returns same value', () {
     const currentAmount = 1.0;
     final model = new ConversionModel(

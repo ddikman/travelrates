@@ -30,7 +30,7 @@ class AppRoot extends StatefulWidget {
 class _AppRootState extends State<AppRoot> {
   static final log = new Logger<_AppRootState>();
 
-  late FirebaseAnalytics _firebaseAnalytics;
+  FirebaseAnalytics? _firebaseAnalytics;
 
   @override
   void initState() {
@@ -38,7 +38,7 @@ class _AppRootState extends State<AppRoot> {
 
     Firebase.initializeApp().then((app) {
       _firebaseAnalytics = FirebaseAnalytics.instanceFor(app: app);
-      _firebaseAnalytics.logAppOpen();
+      _firebaseAnalytics?.logAppOpen();
       Logger.analytics = _firebaseAnalytics;
 
       new RatesLoader(
@@ -70,9 +70,9 @@ class _AppRootState extends State<AppRoot> {
       supportedLocales: AppLocalizationsDelegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       initialRoute: initialRoute,
-      navigatorObservers: [
-        FirebaseAnalyticsObserver(analytics: _firebaseAnalytics)
-      ],
+      navigatorObservers: _firebaseAnalytics != null
+          ? [FirebaseAnalyticsObserver(analytics: _firebaseAnalytics!)]
+          : [],
       routes: <String, WidgetBuilder>{
         AppRoutes.convert: (context) => new ConvertScreen(),
         AppRoutes.addCurrency: (context) => new AddCurrencyScreen(),
