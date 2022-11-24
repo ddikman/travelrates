@@ -12,6 +12,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install the Apple certificate and provisioning profile
+        env:
+          FASTLANE_DISTRIBUTION_KEY: ${{ secrets.FASTLANE_DISTRIBUTION_KEY }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          CERTIFICATE_PATH=$RUNNER_TEMP/distribution_certificate.cer
+          echo -n "$FASTLANE_DISTRIBUTION_KEY" | base64 --decode --output $CERTIFICATE_PATH
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security import $CERTIFICATE_PATH -k $KEYCHAIN_PATH -t cert -A -P ''
+
       # To ensure we can get the flutter versions, fixing a version unknown issue
       # https://github.com/subosito/flutter-action/issues/188
       - name: Fix flutter SDK folder permission
@@ -21,16 +34,6 @@ jobs:
         with:
           flutter-version: '3.0.1'
           channel: 'stable'
-
-      - name: Install the Apple certificate and provisioning profile
-        env:
-          FASTLANE_DISTRIBUTION_KEY: ${{ secrets.FASTLANE_DISTRIBUTION_KEY }}
-        run: |
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-          CERTIFICATE_PATH=$RUNNER_TEMP/distribution_certificate.cer
-          echo -n "$FASTLANE_DISTRIBUTION_KEY" | base64 --decode --output $CERTIFICATE_PATH
-          security import $CERTIFICATE_PATH -k $KEYCHAIN_PATH -t cert -A -P ''
-
 
       - name: Distribute iOS version
         run: |
