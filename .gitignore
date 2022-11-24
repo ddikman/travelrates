@@ -101,3 +101,11 @@ testreport.xml
 
 # we don't want to check in secrets so keep this from being checked in
 assets/data/apiConfiguration.json
+
+# local environment variables
+.env
+
+# ios temporary build files
+ios/Runner.app.*
+ios/Runner.ipa
+ios/fastlane/report.xml

@@ -1,0 +1,25 @@
+name: Distribute application
+
+on: tag
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # To ensure we can get the flutter versions, fixing a version unknown issue
+      # https://github.com/subosito/flutter-action/issues/188
+      - name: Fix flutter SDK folder permission
+        run: git config --global --add safe.directory /tmp/flutter/--
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.0.1'
+          channel: 'stable'
+
+      - name: Distribute iOS version
+        run: |
+          cd ios/fastlane
+          bundle exec fastlane ios beta
