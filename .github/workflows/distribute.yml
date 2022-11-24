@@ -26,7 +26,9 @@ jobs:
           security import $CERTIFICATE_PATH -k $KEYCHAIN_PATH -t cert -A -P ''
 
       - name: Install Cocoapods
-        run: gem install cocoapods
+        run: |
+          sudo gem uninstall cocoapods
+          sudo gem install cocoapods
 
       # To ensure we can get the flutter versions, fixing a version unknown issue
       # https://github.com/subosito/flutter-action/issues/188
