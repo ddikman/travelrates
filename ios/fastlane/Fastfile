@@ -29,4 +29,8 @@ platform :ios do
     )
     upload_to_testflight
   end
+
+  lane :testflight_only do
+    upload_to_testflight
+  end
 end

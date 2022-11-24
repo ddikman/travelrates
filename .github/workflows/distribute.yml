@@ -19,7 +19,18 @@ jobs:
           flutter-version: '3.0.1'
           channel: 'stable'
 
+      - name: Install the Apple certificate and provisioning profile
+        env:
+          FASTLANE_DISTRIBUTION_KEY: ${{ secrets.FASTLANE_DISTRIBUTION_KEY }}
+        run: |
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          CERTIFICATE_PATH=$RUNNER_TEMP/distribution_certificate.cer
+          echo -n "$FASTLANE_DISTRIBUTION_KEY" | base64 --decode --output $CERTIFICATE_PATH
+          security import $CERTIFICATE_PATH -k $KEYCHAIN_PATH -t cert -A -P ''
+
+
       - name: Distribute iOS version
         run: |
+          
           cd ios/fastlane
           bundle exec fastlane ios beta
