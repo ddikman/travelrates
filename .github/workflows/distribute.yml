@@ -27,8 +27,8 @@ jobs:
 
       - name: Install Cocoapods
         run: |
-          sudo gem uninstall cocoapods
-          sudo gem install cocoapods
+          gem uninstall cocoapods
+          gem install cocoapods
 
       # To ensure we can get the flutter versions, fixing a version unknown issue
       # https://github.com/subosito/flutter-action/issues/188
