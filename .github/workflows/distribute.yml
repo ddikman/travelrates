@@ -31,6 +31,5 @@ jobs:
 
       - name: Distribute iOS version
         run: |
-          
           cd ios/fastlane
           bundle exec fastlane ios beta

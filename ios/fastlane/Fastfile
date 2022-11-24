@@ -21,7 +21,7 @@ platform :ios do
     Dir.chdir "../.." do
       sh("flutter", "packages", "get")
       sh("flutter", "clean")
-      sh("flutter", "build", "ipa")
+      sh("flutter", "build", "ios", "--release", "--no-codesign")
     end
     build_app(
       skip_build_archive: true,
