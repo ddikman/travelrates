@@ -56,6 +56,7 @@ jobs:
 
       - name: Distribute iOS version
         run: |
+          # we have to do build outside of fastlane, otherwise cocopods won't work
           flutter packages get
           flutter clean
           flutter build ios --release --no-codesign

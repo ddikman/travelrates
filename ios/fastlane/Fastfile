@@ -20,7 +20,7 @@ platform :ios do
   lane :beta do
     build_app(
       skip_build_archive: true,
-      archive_path: "../build/ios/archive/Runner.xcarchive",
+      archive_path: "../../build/ios/archive/Runner.xcarchive",
     )
     upload_to_testflight
   end
