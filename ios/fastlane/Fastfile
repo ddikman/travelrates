@@ -18,11 +18,6 @@ default_platform(:ios)
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    Dir.chdir "../.." do
-      sh("flutter", "packages", "get")
-      sh("flutter", "clean")
-      sh("flutter", "build", "ios", "--release", "--no-codesign")
-    end
     build_app(
       skip_build_archive: true,
       archive_path: "../build/ios/archive/Runner.xcarchive",
