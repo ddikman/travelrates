@@ -35,6 +35,9 @@ jobs:
           flutter-version: '3.0.1'
           channel: 'stable'
 
+      - name: Write API keys
+        run: echo $API_KEYS_JSON > assets/data/apiConfiguration.json
+
       - name: Distribute iOS version
         run: |
           flutter packages get
