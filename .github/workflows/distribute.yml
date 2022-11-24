@@ -25,6 +25,9 @@ jobs:
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security import $CERTIFICATE_PATH -k $KEYCHAIN_PATH -t cert -A -P ''
 
+      - name: Install Cocoapods
+        run: gem install cocoapods
+
       # To ensure we can get the flutter versions, fixing a version unknown issue
       # https://github.com/subosito/flutter-action/issues/188
       - name: Fix flutter SDK folder permission
