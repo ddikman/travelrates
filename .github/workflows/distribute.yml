@@ -69,4 +69,4 @@ jobs:
           flutter clean
           flutter build ios --release --no-codesign
           cd ios
-          bundle exec fastlane ios beta
+          bundle exec fastlane ios beta --verbose
