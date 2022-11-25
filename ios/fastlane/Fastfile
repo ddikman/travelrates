@@ -26,7 +26,10 @@ platform :ios do
         }
       }
     )
-    upload_to_testflight
+    upload_to_testflight(
+      # required for the app specific password towork
+      skip_waiting_for_build_processing: true
+    )
   end
 
   lane :testflight_only do
