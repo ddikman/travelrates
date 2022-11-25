@@ -19,8 +19,11 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     build_app(
-      skip_build_archive: true,
-      archive_path: "../../build/ios/archive/Runner.xcarchive",
+      export_options: {
+        provisioningProfiles: {
+          "se.greycastle.travelconverter" => ENV["FASTLANE_PROVISIONING_PROFILE"],
+        }
+      }
     )
     upload_to_testflight
   end
