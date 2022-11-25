@@ -19,7 +19,6 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     build_app(
-      scheme: "Release",
       export_method: "app-store",
       export_options: {
         provisioningProfiles: {
