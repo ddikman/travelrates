@@ -19,7 +19,7 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     build_app(
-      export_method: "ad-hoc",
+      export_method: "app-store",
       export_options: {
         provisioningProfiles: {
           "se.greycastle.travelconverter" => ENV["FASTLANE_PROVISIONING_PROFILE"],
