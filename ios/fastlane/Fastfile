@@ -5,7 +5,9 @@ platform :ios do
   lane :beta do
     build_app(
       export_method: "app-store",
+      codesigning_identity: ENV["FASTLANE_CODE_SIGNING_IDENTITY"],
       export_options: {
+        'signingStyle' => 'manual',
         provisioningProfiles: {
           "se.greycastle.travelconverter" => ENV["FASTLANE_PROVISIONING_PROFILE"],
         }

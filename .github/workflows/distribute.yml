@@ -64,12 +64,13 @@ jobs:
           FASTLANE_TEAM_ID: ${{secrets.FASTLANE_TEAM_ID}}
           FASTLANE_USER: ${{secrets.FASTLANE_USER}}
           APPSTORE_CONNECT_API_KEY: ${{secrets.APPSTORE_CONNECT_API_KEY}}
+          FASTLANE_CODE_SIGNING_IDENTITY: ${{secrets.FASTLANE_CODE_SIGNING_IDENTITY}}
         run: |
           # we have to do build outside of fastlane, otherwise cocopods won't work
           flutter packages get
           flutter clean
           flutter build ios --release --no-codesign
           export FASTLANE_API_KEY_PATH=$RUNNER_TEMP/key.json
-          echo -n "$APPSTORE_CONNECT_API_KEY" > $FASTLANE_API_KEY_PATH
+          echo -n "$APPSTORE_CONNECT_API_KEY" | base64 --decode --output $FASTLANE_API_KEY_PATH
           cd ios
           bundle exec fastlane ios beta --verbose
