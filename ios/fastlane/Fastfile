@@ -27,6 +27,7 @@ platform :ios do
       }
     )
     upload_to_testflight(
+      api_key_path: ENV['FASTLANE_API_KEY_PATH'],
       # required for the app specific password towork
       skip_waiting_for_build_processing: true
     )
