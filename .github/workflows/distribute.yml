@@ -63,7 +63,7 @@ jobs:
           FASTLANE_PROVISIONING_PROFILE: ${{secrets.FASTLANE_PROVISIONING_PROFILE}}
           FASTLANE_TEAM_ID: ${{secrets.FASTLANE_TEAM_ID}}
           FASTLANE_USER: ${{secrets.FASTLANE_USER}}
-          APPSTORE_CONNECT_API_KEY: ${{APPSTORE_CONNECT_API_KEY}}
+          APPSTORE_CONNECT_API_KEY: ${{secrets.APPSTORE_CONNECT_API_KEY}}
         run: |
           # we have to do build outside of fastlane, otherwise cocopods won't work
           flutter packages get
