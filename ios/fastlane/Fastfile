@@ -34,6 +34,8 @@ platform :ios do
   end
 
   lane :testflight_only do
-    upload_to_testflight
+    upload_to_testflight(
+      api_key_path: ENV['FASTLANE_API_KEY_PATH'],
+    )
   end
 end

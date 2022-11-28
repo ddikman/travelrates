@@ -69,7 +69,7 @@ jobs:
           flutter packages get
           flutter clean
           flutter build ios --release --no-codesign
-          FASTLANE_API_KEY_PATH=$RUNNER_TEMP/key.json
+          export FASTLANE_API_KEY_PATH=$RUNNER_TEMP/key.json
           echo -n "$APPSTORE_CONNECT_API_KEY" > $FASTLANE_API_KEY_PATH
           cd ios
           bundle exec fastlane ios beta --verbose
