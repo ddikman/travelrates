@@ -59,4 +59,5 @@ jobs:
           echo -n "$PLAY_STORE_DISTRIBUTION_JSON_BASE64" | base64 -d > service_key.json
 
           echo "Running fastlane"
+          bundle install
           bundle exec fastlane android upload_release
