@@ -11,8 +11,8 @@ platform :android do
     upload_to_play_store(
       json_key: "service_key.json",
       package_name: "se.greycastle.travelconverter",
-      aab: "build/app/outputs/bundle/release/app-release.aab",
-      mapping: "build/app/outputs/mapping/release/mapping.txt",
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      mapping: "../build/app/outputs/mapping/release/mapping.txt",
       changes_not_sent_for_review: true,
       release_status: "draft"
     )
