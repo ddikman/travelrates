@@ -1,0 +1,44 @@
+name: Upload to Google Play
+
+on:
+  push:
+    tags:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # To ensure we can get the flutter versions, fixing a version unknown issue
+      # https://github.com/subosito/flutter-action/issues/188
+      - name: Fix flutter SDK folder permission
+        run: git config --global --add safe.directory /tmp/flutter/--
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.0.1'
+          channel: 'stable'
+
+      - name: Write API keys
+        env:
+          API_KEY_JSON: ${{secrets.API_KEY_JSON}}
+        run: echo $API_KEY_JSON > assets/data/apiConfiguration.json
+
+      - name: Build and upload
+        env:
+          FASTLANE_CODE_SIGNING_IDENTITY: ${{secrets.FASTLANE_CODE_SIGNING_IDENTITY}}
+        run: |
+          flutter packages get
+          flutter clean
+          flutter build appbundle
+          echo "Flutter build successful."
+          
+          cd android
+          echo "Save distribution service account api key"
+          echo -n "$PLAY_STORE_DISTRIBUTION_JSON_BASE64" | base64 --decode --output service_key.json
+
+          echo "Running fastlane"
+          bundle exec fastlane android upload_release
