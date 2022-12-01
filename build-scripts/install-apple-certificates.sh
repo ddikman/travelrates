@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 if [ -z "$RUNNER_TEMP" ]
 then
@@ -14,11 +15,15 @@ KEYCHAIN_PASSWORD=$RANDOM
 CERTIFICATE_PATH=credentials/ios/certificate.p12
 PP_PATH=credentials/ios/profile.mobileprovision
 KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+P12_PASSWORD=$(cat credentials/ios/passphrase)
 
 # create temporary keychain
 security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
 security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+# get the p12 password
+
 
 # import certificate to keychain
 security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
