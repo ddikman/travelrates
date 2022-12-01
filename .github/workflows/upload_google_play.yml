@@ -36,7 +36,7 @@ jobs:
           echo "Writing build secrets"
           KEY_PATH=$RUNNER_TEMP/upload-keystore.jks
           echo -n "$ANDROID_KEY_PROPERTIES" > android/key.properties
-          echo -n "storeFile=$KEY_PATH" >> android/key.properties # add the dynamic path
+          echo -n "\nstoreFile=$KEY_PATH" >> android/key.properties # add the dynamic path
           echo -n "$ANDROID_KEY_STORE_BASE_64" | base64 -d > $KEY_PATH
 
           echo "Building app"
