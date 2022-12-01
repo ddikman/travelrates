@@ -27,6 +27,12 @@ jobs:
           API_KEY_JSON: ${{secrets.API_KEY_JSON}}
         run: echo $API_KEY_JSON > assets/data/apiConfiguration.json
 
+      - name: Set up ruby env
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+          bundler-cache: true
+
       - name: Build and upload
         env:
           PLAY_STORE_DISTRIBUTION_JSON_BASE64: ${{secrets.PLAY_STORE_DISTRIBUTION_JSON_BASE64}}
