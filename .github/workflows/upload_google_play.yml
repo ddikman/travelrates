@@ -35,13 +35,12 @@ jobs:
         run: |
           echo "Writing build secrets"
           KEY_PATH=$RUNNER_TEMP/upload-keystore.jks
-          echo -n "$ANDROID_KEY_PROPERTIES" > android/key.properties
-          echo -n "\nstoreFile=$KEY_PATH" >> android/key.properties # add the dynamic path
+          echo "$ANDROID_KEY_PROPERTIES" > android/key.properties
+          echo -n "storeFile=$KEY_PATH" >> android/key.properties # add the dynamic path
           echo "Contents of key.properties:"
           cat android/key.properties
           
           echo -n "$ANDROID_KEY_STORE_BASE_64" | base64 -d > $KEY_PATH
-          eho
 
           echo "Building app"
           flutter packages get
