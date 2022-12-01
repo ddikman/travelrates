@@ -31,6 +31,13 @@ jobs:
         env:
           PLAY_STORE_DISTRIBUTION_JSON_BASE64: ${{secrets.PLAY_STORE_DISTRIBUTION_JSON_BASE64}}
         run: |
+          echo "Writing build secrets"
+          KEY_PATH=$RUNNER_TEMP/upload-keystore.jks
+          echo -n "$ANDROID_KEY_PROPERTIES" > android/key.properties
+          echo -n "$KEY_PATH" >> android/key.properties # add the dynamic path
+          echo -n "$ANDROID_KEY_STORE_BASE_64" | base64 --decode --output $KEY_PATH
+
+          echo "Building app"
           flutter packages get
           flutter clean
           flutter build appbundle
