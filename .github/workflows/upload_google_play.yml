@@ -35,7 +35,7 @@ jobs:
           KEY_PATH=$RUNNER_TEMP/upload-keystore.jks
           echo -n "$ANDROID_KEY_PROPERTIES" > android/key.properties
           echo -n "$KEY_PATH" >> android/key.properties # add the dynamic path
-          echo -n "$ANDROID_KEY_STORE_BASE_64" | base64 --decode -o $KEY_PATH
+          echo -n "$ANDROID_KEY_STORE_BASE_64" | base64 -d > $KEY_PATH
 
           echo "Building app"
           flutter packages get
@@ -45,7 +45,7 @@ jobs:
           
           cd android
           echo "Save distribution service account api key"
-          echo -n "$PLAY_STORE_DISTRIBUTION_JSON_BASE64" | base64 --decode -o service_key.json
+          echo -n "$PLAY_STORE_DISTRIBUTION_JSON_BASE64" | base64 -d > service_key.json
 
           echo "Running fastlane"
           bundle exec fastlane android upload_release
