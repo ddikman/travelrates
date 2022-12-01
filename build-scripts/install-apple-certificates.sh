@@ -1,6 +1,18 @@
 #!/bin/bash
 set -e
 
+# Install Apple certificates
+# -------------------------------------------------------------------------------------------------------
+# This script depends on a credential repository having been checked out to a folder called `credentails` 
+# under the current working directory. From there files will be referenced and imported.
+# The expected folder structure is:
+# credentials/
+#  ios/
+#   certificate.p12 # the certificate file
+#   profile.mobileprovision # mobile provision file, for the app and certificate to sign with
+#   passphrase # file containing the passphrase for the p12 certificate
+# -------------------------------------------------------------------------------------------------------
+
 if [ -z "$RUNNER_TEMP" ]
 then
     echo "RUNNER_TEMP is not set"
