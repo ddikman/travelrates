@@ -59,11 +59,17 @@ adb pull /sdcard/screen.png
 ```
 
 ### iOS
-From the command line, build an ios package using `flutter build ios --release`.
 
-Then run `Product > Archive` and when that's done click `Validate...`.
+For iOS distribution you can use fastlane.
 
-When this is done you can do `Upload to App Store...`.
+```
+cd ios/fastlane
+bundle exec fastlane ios beta
+```
+
+And that's it. You will need to set the required parameters to authenticate, either you can set the enviroment variables used in `ios/fastlane/Appfile` or simply delete the file and fastlane will prompt you for them as it runs.
+
+To build the application for distribution, same way locally as in Github, you will have to have the distribution certificate installed locally.
 
 ## Description
 
