@@ -30,6 +30,8 @@ jobs:
       - name: Build and upload
         env:
           PLAY_STORE_DISTRIBUTION_JSON_BASE64: ${{secrets.PLAY_STORE_DISTRIBUTION_JSON_BASE64}}
+          ANDROID_KEY_STORE_BASE_64: ${{secrets.ANDROID_KEY_STORE_BASE_64}}
+          ANDROID_KEY_PROPERTIES: ${{secrets.ANDROID_KEY_PROPERTIES}}
         run: |
           echo "Writing build secrets"
           KEY_PATH=$RUNNER_TEMP/upload-keystore.jks
