@@ -1,9 +1,10 @@
-name: Distribute application
+name: Upload to Testflight
 
-on:
-  push:
-    tags:
-      - '**'
+# Disable for now
+# on:
+#   push:
+#     tags:
+#       - '**'
 
 jobs:
   build:

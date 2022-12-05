@@ -1,0 +1,63 @@
+name: Upload to Google Play
+
+on:
+  push:
+    tags:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # To ensure we can get the flutter versions, fixing a version unknown issue
+      # https://github.com/subosito/flutter-action/issues/188
+      - name: Fix flutter SDK folder permission
+        run: git config --global --add safe.directory /tmp/flutter/--
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.0.1'
+          channel: 'stable'
+
+      - name: Write API keys
+        env:
+          API_KEY_JSON: ${{secrets.API_KEY_JSON}}
+        run: echo $API_KEY_JSON > assets/data/apiConfiguration.json
+
+      - name: Set up ruby env
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+          bundler-cache: true
+
+      - name: Build and upload
+        env:
+          PLAY_STORE_DISTRIBUTION_JSON_BASE64: ${{secrets.PLAY_STORE_DISTRIBUTION_JSON_BASE64}}
+          ANDROID_KEY_STORE_BASE_64: ${{secrets.ANDROID_KEY_STORE_BASE_64}}
+          ANDROID_KEY_PROPERTIES: ${{secrets.ANDROID_KEY_PROPERTIES}}
+        run: |
+          echo "Writing build secrets"
+          KEY_PATH=$RUNNER_TEMP/upload-keystore.jks
+          echo "$ANDROID_KEY_PROPERTIES" > android/key.properties
+          echo -n "storeFile=$KEY_PATH" >> android/key.properties # add the dynamic path
+          echo "Contents of key.properties:"
+          cat android/key.properties
+          
+          echo -n "$ANDROID_KEY_STORE_BASE_64" | base64 -d > $KEY_PATH
+
+          echo "Building app"
+          flutter packages get
+          flutter clean
+          flutter build appbundle
+          echo "Flutter build successful."
+          
+          cd android
+          echo "Save distribution service account api key"
+          echo -n "$PLAY_STORE_DISTRIBUTION_JSON_BASE64" | base64 -d > service_key.json
+
+          echo "Running fastlane"
+          bundle install
+          bundle exec fastlane android upload_release

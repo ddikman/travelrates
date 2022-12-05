@@ -1,0 +1,20 @@
+default_platform(:android)
+
+platform :android do
+  version = flutter_version(pubspec_location: "../pubspec.yaml")
+  version_name = version["version_name"]
+  version_code = version["version_code"]
+  puts "Running for build version #{version_name}+#{version_code}"
+
+  desc "Upload a built version to the Google Play for release"
+  lane :upload_release do
+    upload_to_play_store(
+      json_key: "service_key.json",
+      package_name: "se.greycastle.travelconverter",
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      mapping: "../build/app/outputs/mapping/release/mapping.txt",
+      changes_not_sent_for_review: true,
+      release_status: "draft"
+    )
+  end
+end

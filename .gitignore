@@ -108,4 +108,6 @@ assets/data/apiConfiguration.json
 # ios temporary build files
 ios/Runner.app.*
 ios/Runner.ipa
-ios/fastlane/report.xml
+
+# fastlane files
+**/fastlane/report.xml
