@@ -5,9 +5,9 @@ import 'package:travelconverter/l10n/fallback_material_localisations_delegate.da
 import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/screens/add_currency/add_currency_screen.dart';
 import 'package:travelconverter/app_routes.dart';
-import 'package:travelconverter/screens/convert/convert_screen.dart';
+import 'package:travelconverter/use_cases/view_rates/ui/convert_screen.dart';
 import 'package:travelconverter/l10n/app_localizations_delegate.dart';
-import 'package:travelconverter/screens/edit_screen/edit_screen.dart';
+import 'package:travelconverter/use_cases/edit_currencies/ui/edit_currencies_screen.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +76,7 @@ class _AppRootState extends State<AppRoot> {
       routes: <String, WidgetBuilder>{
         AppRoutes.convert: (context) => new ConvertScreen(),
         AppRoutes.addCurrency: (context) => new AddCurrencyScreen(),
-        AppRoutes.edit: (context) => new EditScreen()
+        AppRoutes.edit: (context) => new EditCurrenciesScreen()
       },
     );
   }

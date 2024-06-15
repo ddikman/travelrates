@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/model/currency.dart';
-import 'package:travelconverter/screens/convert/currency_convert_card.dart';
+import 'package:travelconverter/use_cases/view_rates/ui/compare_currency_card.dart';
 import 'package:travelconverter/state_container.dart';
 
 class EditScreenListEntry extends StatefulWidget {
@@ -25,7 +25,7 @@ class _EditScreenListEntryState extends State<EditScreenListEntry> {
   @override
   Widget build(BuildContext context) {
     final card = new Container(
-      height: CurrencyConvertCard.height,
+      height: CompareCurrencyCard.height,
       child: new Material(
         color: Colors.transparent,
         child: Card(
