@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:travelconverter/app_theme.dart';
+import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/screens/convert/currency_convert_card.dart';
@@ -29,9 +29,9 @@ class _EditScreenListEntryState extends State<EditScreenListEntry> {
       child: new Material(
         color: Colors.transparent,
         child: Card(
-            color: AppTheme.primaryColor,
+            color: lightTheme.backgroundSecondary,
             child: new InkWell(
-              splashColor: AppTheme.accentColor,
+              splashColor: lightTheme.background,
               child: new Padding(
                   padding: const EdgeInsets.only(
                       top: 4.0, bottom: 4.0, left: 2.0, right: 10.0),
@@ -66,9 +66,6 @@ class _EditScreenListEntryState extends State<EditScreenListEntry> {
   }
 
   get _deleteIcon {
-    final color =
-        Platform.isAndroid ? AppTheme.accentColor : AppTheme.deleteColour;
-
     final decoration = Platform.isAndroid
         ? null
         : BoxDecoration(shape: BoxShape.circle, color: Colors.white);
@@ -77,7 +74,8 @@ class _EditScreenListEntryState extends State<EditScreenListEntry> {
       padding: EdgeInsets.all(0.0),
       iconSize: 32.0,
       icon: Container(
-          decoration: decoration, child: Icon(_removeIcon, color: color)),
+          decoration: decoration,
+          child: Icon(_removeIcon, color: lightTheme.red)),
       onPressed: () {
         StateContainer.of(context).removeCurrency(widget.currency.code);
       },

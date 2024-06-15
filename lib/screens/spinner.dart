@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:travelconverter/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:travelconverter/app_core/theme/colors.dart';
 
 class Spinner extends StatefulWidget {
   /// Time until which to not show the spinner
@@ -17,7 +17,7 @@ class Spinner extends StatefulWidget {
 }
 
 class SpinnerState extends State<Spinner> with TickerProviderStateMixin {
-  final loaderColor = AlwaysStoppedAnimation<Color>(AppTheme.primaryColor);
+  final loaderColor = AlwaysStoppedAnimation<Color>(lightTheme.accent);
 
   AnimationController? _animationController;
 
