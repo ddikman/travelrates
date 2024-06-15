@@ -1,10 +1,9 @@
 name: Upload to Testflight
 
-# Disable for now
-# on:
-#   push:
-#     tags:
-#       - '**'
+on:
+  push:
+    tags:
+      - 'none' #  Disable for now
 
 jobs:
   build:

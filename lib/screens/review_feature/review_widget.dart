@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:device_info/device_info.dart';
+import 'package:app_review_plus/app_review_plus.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/model/conversion_model.dart';
@@ -9,7 +10,6 @@ import 'package:travelconverter/screens/review_feature/review_rule.dart';
 import 'package:travelconverter/screens/review_feature/review_storage.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/state_container.dart';
-import 'package:app_review/app_review.dart';
 
 class ReviewWidget extends StatefulWidget {
   final Widget child;

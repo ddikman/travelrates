@@ -11,10 +11,10 @@ class Logger<T> {
     print("$name:$eventType: $message");
   }
 
-  void event(String name, String message, {Map<String, dynamic>? parameters}) {
+  void event(String name, String message, {Map<String, Object>? parameters}) {
     _log('Event', message);
 
-    parameters = parameters ?? Map<String, dynamic>();
+    parameters = parameters ?? Map<String, Object>();
     parameters['message'] = message;
     analytics?.logEvent(name: name, parameters: parameters);
   }

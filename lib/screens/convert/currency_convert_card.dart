@@ -1,8 +1,8 @@
 import 'package:intl/intl.dart';
+import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/widgets/animate_in.dart';
-import 'package:travelconverter/app_theme.dart';
 import 'package:travelconverter/screens/convert/convert_dialog.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/state_container.dart';
@@ -44,7 +44,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
             softWrap: false,
             style: Theme.of(context)
                 .textTheme
-                .bodyText2!
+                .bodyMedium!
                 .copyWith(fontSize: 16.0)),
       ),
     );
@@ -75,9 +75,9 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
       child: new Material(
         color: Colors.transparent,
         child: Card(
-            color: AppTheme.primaryColor,
+            color: lightTheme.backgroundSecondary,
             child: new InkWell(
-              splashColor: AppTheme.accentColor,
+              splashColor: lightTheme.backgroundSecondary,
               onTap: _showConvertDialog,
               child: new Padding(
                   padding: const EdgeInsets.symmetric(
@@ -101,7 +101,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
           key: Key('ValueDisplay'),
           style: Theme.of(context)
               .textTheme
-              .bodyText2!
+              .bodyMedium!
               .copyWith(fontSize: currencyAmountFontSize),
         ),
         new Padding(
@@ -109,7 +109,7 @@ class _CurrencyConvertCardState extends State<CurrencyConvertCard>
           child: Text(widget.currency.code,
               style: Theme.of(context)
                   .textTheme
-                  .bodyText2!
+                  .bodyMedium!
                   .copyWith(fontSize: currencyAmountFontSize / 2)),
         )
       ],

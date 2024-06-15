@@ -18,6 +18,7 @@ class InternetConnectivityImpl implements InternetConnectivity {
   }
 
   _updateConnectivity(ConnectivityResult connectivity) {
+    print('Connectivity changed to $connectivity');
     _isAvailable = connectivity != ConnectivityResult.none;
   }
 
