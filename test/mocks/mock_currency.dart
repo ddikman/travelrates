@@ -5,7 +5,7 @@ abstract class MockCurrency {
       symbol: "\$",
       name: "United States Dollar",
       code: "USD",
-      icon: "USD",
+      icon: "US",
       rate: 1.169);
 
   static Currency get euro => new Currency(
@@ -14,7 +14,7 @@ abstract class MockCurrency {
   static Currency get pound => new Currency(
       name: "British Pound Sterling",
       code: "GBP",
-      icon: "GBP",
+      icon: "GB",
       symbol: "£",
       rate: 0.88);
 }
