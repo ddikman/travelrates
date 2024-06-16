@@ -70,7 +70,7 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TitleText('Search currencies'),
+        TitleText('Add currency'),
         Text(
             'Search for currencies to add by name, country of use or currency code',
             style: ThemeTypography.small),
