@@ -1,6 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:travelconverter/app_core/theme/colors.dart';
+import 'package:travelconverter/app_core/theme/typography.dart';
 import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/screens/add_currency/add_currency_screen.dart';
@@ -84,9 +85,8 @@ class _AppRootState extends State<AppRoot> {
   _constructTheme() {
     final baseTheme = Theme.of(context);
 
-    const baseFont = 'Tahoma';
-    final baseTextStyle =
-        TextStyle(color: lightTheme.text, fontFamily: baseFont);
+    final baseTextStyle = TextStyle(
+        color: lightTheme.text, fontFamily: ThemeTypography.fontFamily);
 
     final textTheme = baseTheme.textTheme.copyWith(
       headlineMedium: baseTextStyle.copyWith(),
