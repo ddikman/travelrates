@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:travelconverter/app_core/theme/typography.dart';
-import 'package:travelconverter/app_core/widgets/common_card.dart';
+import 'package:travelconverter/app_core/widgets/currency_card.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/services/logger.dart';
@@ -36,27 +36,15 @@ class _CompareCurrencyCardState extends State<CompareCurrencyCard>
 
     var currentValue = state.conversion.getAmountInCurrency(widget.currency);
 
-    final icon = widget.currency.icon;
-    const flagSize = 32.0;
-    final image = Align(
-      alignment: Alignment.centerLeft,
-      child: new Image(
-          image: new AssetImage("assets/images/flags/$icon.png"),
-          width: flagSize,
-          height: flagSize),
-    );
-
     final contents = new Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          image,
-          Gap.medium,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(localization.currencies.getLocalized(widget.currency.code),
-                  style: ThemeTypography.smallBold),
-              Text(widget.currency.code, style: ThemeTypography.verySmallBold)
+                  style: ThemeTypography.small.bold),
+              Text(widget.currency.code, style: ThemeTypography.verySmall.bold)
             ],
           ),
           Gap.medium,
@@ -69,7 +57,10 @@ class _CompareCurrencyCardState extends State<CompareCurrencyCard>
           )
         ]);
 
-    final card = CommonCard(child: contents, onTap: _showConvertDialog);
+    final card = CurrencyCard(
+        content: contents,
+        onTap: _showConvertDialog,
+        currencyIconName: widget.currency.icon);
 
     return _animated(card);
   }
