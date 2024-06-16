@@ -50,6 +50,7 @@ class _CompareCurrencyCardState extends State<CompareCurrencyCard>
           Gap.medium,
           Expanded(
             child: Text(
+              key: Key('ValueDisplay'),
               _formatValue(currentValue),
               textAlign: TextAlign.right,
               style: ThemeTypography.large,
