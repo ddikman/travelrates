@@ -79,7 +79,7 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
           onChange: (value) => setState(() => searchQuery = value),
         ),
         Gap.list,
-        if (searchQuery.isNotEmpty)
+        if (searchQuery.isNotEmpty || currencies.length < 3)
           ...filter.getFiltered(allCurrencies, searchQuery).map((currency) {
             final isSelected =
                 state.conversion.currencies.contains(currency.code);

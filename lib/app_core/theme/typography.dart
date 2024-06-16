@@ -11,10 +11,10 @@ abstract class ThemeTypography {
       fontFamily: fontFamily);
 
   static final small =
-      TextStyle(color: lightTheme.text, fontSize: 10, fontFamily: fontFamily);
+      TextStyle(color: lightTheme.text, fontSize: 12, fontFamily: fontFamily);
 
   static final verySmall =
-      TextStyle(color: lightTheme.text, fontSize: 8, fontFamily: fontFamily);
+      TextStyle(color: lightTheme.text, fontSize: 10, fontFamily: fontFamily);
 
   static final large =
       TextStyle(color: lightTheme.text, fontSize: 26, fontFamily: fontFamily);
