@@ -1,13 +1,11 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:travelconverter/app_core/theme/colors.dart';
+import 'package:travelconverter/app_core/theme/typography.dart';
 import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:travelconverter/model/currency_rate.dart';
-import 'package:travelconverter/screens/add_currency/add_currency_screen.dart';
-import 'package:travelconverter/app_routes.dart';
-import 'package:travelconverter/use_cases/view_rates/ui/convert_screen.dart';
+import 'package:travelconverter/routing/router.dart';
 import 'package:travelconverter/l10n/app_localizations_delegate.dart';
-import 'package:travelconverter/use_cases/edit_currencies/ui/edit_currencies_screen.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:flutter/material.dart';
@@ -52,13 +50,8 @@ class _AppRootState extends State<AppRoot> {
 
   @override
   Widget build(BuildContext context) {
-    var state = StateContainer.of(context).appState;
-    var initialRoute = "/";
-    if (state.conversion.currencies.isEmpty) {
-      initialRoute = AppRoutes.addCurrency;
-    }
-
-    return new MaterialApp(
+    return new MaterialApp.router(
+      routerConfig: router,
       title: 'TravelRates',
       theme: _constructTheme(),
       localizationsDelegates: [
@@ -69,24 +62,14 @@ class _AppRootState extends State<AppRoot> {
       ],
       supportedLocales: AppLocalizationsDelegate.supportedLocales,
       debugShowCheckedModeBanner: false,
-      initialRoute: initialRoute,
-      navigatorObservers: _firebaseAnalytics != null
-          ? [FirebaseAnalyticsObserver(analytics: _firebaseAnalytics!)]
-          : [],
-      routes: <String, WidgetBuilder>{
-        AppRoutes.convert: (context) => new ConvertScreen(),
-        AppRoutes.addCurrency: (context) => new AddCurrencyScreen(),
-        AppRoutes.edit: (context) => new EditCurrenciesScreen()
-      },
     );
   }
 
   _constructTheme() {
     final baseTheme = Theme.of(context);
 
-    const baseFont = 'Tahoma';
-    final baseTextStyle =
-        TextStyle(color: lightTheme.text, fontFamily: baseFont);
+    final baseTextStyle = TextStyle(
+        color: lightTheme.text, fontFamily: ThemeTypography.fontFamily);
 
     final textTheme = baseTheme.textTheme.copyWith(
       headlineMedium: baseTextStyle.copyWith(),
