@@ -70,7 +70,7 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TitleText('Search currencies'),
+        TitleText('Add currency'),
         Text(
             'Search for currencies to add by name, country of use or currency code',
             style: ThemeTypography.small),
@@ -79,7 +79,7 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
           onChange: (value) => setState(() => searchQuery = value),
         ),
         Gap.list,
-        if (searchQuery.isNotEmpty)
+        if (searchQuery.isNotEmpty || currencies.length < 3)
           ...filter.getFiltered(allCurrencies, searchQuery).map((currency) {
             final isSelected =
                 state.conversion.currencies.contains(currency.code);
@@ -91,16 +91,18 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
                 }).pad(bottom: Paddings.listGap);
             return isSelected ? Opacity(opacity: 0.5, child: card) : card;
           }),
-        Gap.list,
-        TitleText('Selected currencies'),
-        Text('Long press and drag to reorder', style: ThemeTypography.small),
-        Gap.list,
-        ReorderableListView(
-            proxyDecorator: (child, index, animation) => child,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            children: currencies,
-            onReorder: _reorderListEntry),
+        if (currencies.isNotEmpty) ...[
+          Gap.list,
+          TitleText('Selected currencies'),
+          Text('Long press and drag to reorder', style: ThemeTypography.small),
+          Gap.list,
+          ReorderableListView(
+              proxyDecorator: (child, index, animation) => child,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              children: currencies,
+              onReorder: _reorderListEntry),
+        ]
       ],
     );
   }
