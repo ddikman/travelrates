@@ -5,16 +5,16 @@ abstract class MockCurrency {
       symbol: "\$",
       name: "United States Dollar",
       code: "USD",
-      icon: "USD",
+      icon: "US",
       rate: 1.169);
 
   static Currency get euro => new Currency(
-      name: "Euro", code: "EUR", icon: "EUR", symbol: '€', rate: 1.0);
+      name: "Euro", code: "EUR", icon: "EU", symbol: '€', rate: 1.0);
 
   static Currency get pound => new Currency(
       name: "British Pound Sterling",
       code: "GBP",
-      icon: "GBP",
+      icon: "GB",
       symbol: "£",
       rate: 0.88);
 }

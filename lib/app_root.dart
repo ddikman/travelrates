@@ -1,13 +1,13 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/screens/add_currency/add_currency_screen.dart';
 import 'package:travelconverter/app_routes.dart';
-import 'package:travelconverter/app_theme.dart';
-import 'package:travelconverter/screens/convert/convert_screen.dart';
+import 'package:travelconverter/use_cases/view_rates/ui/convert_screen.dart';
 import 'package:travelconverter/l10n/app_localizations_delegate.dart';
-import 'package:travelconverter/screens/edit_screen/edit_screen.dart';
+import 'package:travelconverter/use_cases/edit_currencies/ui/edit_currencies_screen.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +76,7 @@ class _AppRootState extends State<AppRoot> {
       routes: <String, WidgetBuilder>{
         AppRoutes.convert: (context) => new ConvertScreen(),
         AppRoutes.addCurrency: (context) => new AddCurrencyScreen(),
-        AppRoutes.edit: (context) => new EditScreen()
+        AppRoutes.edit: (context) => new EditCurrenciesScreen()
       },
     );
   }
@@ -86,22 +86,23 @@ class _AppRootState extends State<AppRoot> {
 
     const baseFont = 'Tahoma';
     final baseTextStyle =
-        TextStyle(color: AppTheme.accentColor, fontFamily: baseFont);
+        TextStyle(color: lightTheme.text, fontFamily: baseFont);
 
     final textTheme = baseTheme.textTheme.copyWith(
-      headline4: baseTextStyle.copyWith(),
-      bodyText2: baseTextStyle.copyWith(),
+      headlineMedium: baseTextStyle.copyWith(),
+      bodyMedium: baseTextStyle.copyWith(),
     );
 
     final iconTheme =
-        baseTheme.primaryIconTheme.copyWith(color: AppTheme.accentColor);
+        baseTheme.primaryIconTheme.copyWith(color: lightTheme.text);
 
     return new ThemeData(
-      primarySwatch: AppTheme.primaryColor,
-      iconTheme: iconTheme,
-      hintColor: AppTheme.accentColor, // borders of textfield hints
-      textTheme: textTheme,
-    );
+        iconTheme: iconTheme,
+        textTheme: textTheme,
+        scaffoldBackgroundColor: lightTheme.background,
+        appBarTheme: baseTheme.appBarTheme.copyWith(
+            backgroundColor: lightTheme.background,
+            foregroundColor: lightTheme.text));
   }
 
   void handleLoadedRates(List<CurrencyRate> rates) {

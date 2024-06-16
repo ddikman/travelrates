@@ -55,7 +55,6 @@ void main() {
     expect(internet.isAvailable, false);
 
     connectivityStream?.add(ConnectivityResult.mobile);
-    await internet.pollConnectivity();
     expect(internet.isAvailable, true);
   });
 }

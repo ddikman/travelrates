@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelconverter/app_theme.dart';
+import 'package:travelconverter/app_core/theme/colors.dart';
 
 class BackgroundContainer extends StatelessWidget {
   final child;
@@ -9,7 +9,7 @@ class BackgroundContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppTheme.accentColor,
+      color: lightTheme.background,
       child: child,
     );
   }

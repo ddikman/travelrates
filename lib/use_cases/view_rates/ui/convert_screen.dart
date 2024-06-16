@@ -1,45 +1,23 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:intl/intl.dart';
-import 'package:travelconverter/screens/convert/open_add_currency_screen_button.dart';
+import 'package:travelconverter/app_core/widgets/app_bar_icon.dart';
+import 'package:travelconverter/app_core/widgets/page_scaffold.dart';
+import 'package:travelconverter/app_routes.dart';
 import 'package:travelconverter/screens/convert/selected_currency_list.dart';
-import 'package:travelconverter/screens/convert/goto_configure_button.dart';
 import 'package:travelconverter/screens/review_feature/review_storage.dart';
 import 'package:travelconverter/screens/review_feature/review_widget.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/widgets/background_container.dart';
-
 import 'package:flutter/material.dart';
-import 'package:travelconverter/widgets/screen_title_text.dart';
+import '../../../internet_connectivity.dart';
 
-import '../../internet_connectivity.dart';
-
-class ConvertScreen extends StatefulWidget {
-  static String get screenTitle => Intl.message("Convert",
-      name: "ConvertScreen_screenTitle", desc: "Convert screen main title");
-
-  @override
-  _ConvertScreenState createState() {
-    return new _ConvertScreenState();
-  }
-}
-
-class _ConvertScreenState extends State<ConvertScreen> {
-  // Keep a key for scaffold to use when showing snackbar
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
-
+class ConvertScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appBar = new AppBar(
-      title: ScreenTitleText.show(ConvertScreen.screenTitle),
-      centerTitle: true,
-      actions: [new GotoConfigureButton()],
-    );
-
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: appBar,
+    return PageScaffold(
+      appBarLeftAction: AppBarIcon(
+          icon: Icon(Icons.format_list_bulleted_add),
+          onTap: () => Navigator.of(context).pushNamed(AppRoutes.edit)),
       body: _buildCurrencyList(),
-      floatingActionButton: new OpenAddCurrencyScreenButton(),
     );
   }
 

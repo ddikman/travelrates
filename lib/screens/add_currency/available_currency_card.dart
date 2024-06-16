@@ -1,4 +1,4 @@
-import 'package:travelconverter/app_theme.dart';
+import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/model/country.dart';
 import 'package:travelconverter/model/currency.dart';
@@ -29,7 +29,8 @@ class AvailableCurrencyCard extends StatelessWidget {
         .toList();
 
     if (relatedCountries.length > 1) {
-      final countryNames = _groupLocalizedNames(relatedCountries, localizations);
+      final countryNames =
+          _groupLocalizedNames(relatedCountries, localizations);
       textWidget = Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -42,30 +43,27 @@ class AvailableCurrencyCard extends StatelessWidget {
     final addHandler = new AddCurrencyHandler(this.currency);
 
     final currencyCard = Container(
-      padding: EdgeInsets.only(bottom: 2),
-      child: Card(
-          color: AppTheme.primaryColor,
-          child: new GestureDetector(
-            child: new Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: <Widget>[
-                  new Expanded(child: textWidget),
-                  new AddCurrencyButton(
-                      currency: currency
-                  )
-                ],
+        padding: EdgeInsets.only(bottom: 2),
+        child: Card(
+            color: lightTheme.backgroundSecondary,
+            child: new GestureDetector(
+              child: new Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: <Widget>[
+                    new Expanded(child: textWidget),
+                    new AddCurrencyButton(currency: currency)
+                  ],
+                ),
               ),
-            ),
-            onTap: () => addHandler.addCurrency(context),
-          )
-      )
-    );
+              onTap: () => addHandler.addCurrency(context),
+            )));
 
     return currencyCard;
   }
 
-  _groupLocalizedNames(List<Country> relatedCountries, AppLocalizations localizations) {
+  _groupLocalizedNames(
+      List<Country> relatedCountries, AppLocalizations localizations) {
     return relatedCountries.map((country) {
       return localizations.countries.getLocalized(country.name);
     }).join(", ");
