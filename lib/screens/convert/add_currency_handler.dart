@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/model/currency.dart';
@@ -33,7 +34,7 @@ class AddCurrencyHandler {
       state.addCurrency(currency.code);
 
       // return to previous screen
-      Navigator.of(context).pop();
+      context.pop();
       // ignore: non_constant_identifier_names
     } catch (DuplicateCurrencyError) {
       _displayNotice(context);

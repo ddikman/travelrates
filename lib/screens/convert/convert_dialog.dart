@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/screens/convert/currency_input_formatter.dart';
@@ -72,7 +73,7 @@ class ConvertDialog extends StatelessWidget {
   }
 
   _submit(BuildContext context) {
-    Navigator.of(context).pop();
+    context.pop();
     final stringValue = textFieldController.text;
     final value = CurrencyInputFormatter.toDouble(stringValue);
     if (value != null) {

@@ -1,4 +1,5 @@
 import 'package:connectivity/connectivity.dart';
+import 'package:go_router/go_router.dart';
 import 'package:travelconverter/app_core/widgets/app_bar_icon.dart';
 import 'package:travelconverter/app_core/widgets/page_scaffold.dart';
 import 'package:travelconverter/app_routes.dart';
@@ -16,7 +17,7 @@ class ConvertScreen extends StatelessWidget {
     return PageScaffold(
       appBarLeftAction: AppBarIcon(
           icon: Icon(Icons.format_list_bulleted_add),
-          onTap: () => Navigator.of(context).pushNamed(AppRoutes.edit)),
+          onTap: () => context.push(AppRoutes.edit)),
       body: _buildCurrencyList(),
     );
   }
