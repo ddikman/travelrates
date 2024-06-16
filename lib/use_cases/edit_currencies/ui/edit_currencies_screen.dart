@@ -64,12 +64,17 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
       children: [
         TitleText('Search currencies'),
         Gap.list,
-        ...allCurrencies.map((currency) => SelectCurrencyCard(
-            currency: currency,
-            icon: Icons.add_circle_outline,
-            onTap: () {
-              AddCurrencyHandler(currency).addCurrency(context);
-            }).pad(bottom: Paddings.listGap)),
+        ...allCurrencies.map((currency) {
+          final isSelected =
+              state.conversion.currencies.contains(currency.code);
+          final card = SelectCurrencyCard(
+              currency: currency,
+              icon: isSelected ? Icons.check : Icons.add_circle_outline,
+              onTap: () {
+                AddCurrencyHandler(currency).addCurrency(context);
+              }).pad(bottom: Paddings.listGap);
+          return isSelected ? Opacity(opacity: 0.5, child: card) : card;
+        }),
         TitleText('Selected currencies'),
         Text('Long press and drag to reorder', style: ThemeTypography.small),
         Gap.list,
