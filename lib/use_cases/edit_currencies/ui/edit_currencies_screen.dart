@@ -91,16 +91,18 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
                 }).pad(bottom: Paddings.listGap);
             return isSelected ? Opacity(opacity: 0.5, child: card) : card;
           }),
-        Gap.list,
-        TitleText('Selected currencies'),
-        Text('Long press and drag to reorder', style: ThemeTypography.small),
-        Gap.list,
-        ReorderableListView(
-            proxyDecorator: (child, index, animation) => child,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            children: currencies,
-            onReorder: _reorderListEntry),
+        if (currencies.isNotEmpty) ...[
+          Gap.list,
+          TitleText('Selected currencies'),
+          Text('Long press and drag to reorder', style: ThemeTypography.small),
+          Gap.list,
+          ReorderableListView(
+              proxyDecorator: (child, index, animation) => child,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              children: currencies,
+              onReorder: _reorderListEntry),
+        ]
       ],
     );
   }
