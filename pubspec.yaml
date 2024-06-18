@@ -29,6 +29,7 @@ dependencies:
   # analytics and crashes
   firebase_core: 3.1.0
   firebase_analytics: ^11.0.1
+  rive: ^0.13.8
 
 dev_dependencies:
   flutter_driver:
@@ -57,3 +58,6 @@ flutter:
     # Android studio will warn that these doesn't exist but they do and it works just fine
     - assets/images/flags/
     - assets/images/flags/2x/
+
+    # animations
+    - assets/animations/
