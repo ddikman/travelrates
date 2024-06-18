@@ -25,7 +25,7 @@ class ThemeColors {
 
 const ThemeColors lightTheme = ThemeColors(
     background: Color(0xfffdfdfd),
-    backgroundSecondary: Color(0xfff2f2fb),
+    backgroundSecondary: Color(0xffF3F3F3),
     text: Color(0xff181818),
     text30: Color(0x4d181818),
     text60: Color(0x99181818),

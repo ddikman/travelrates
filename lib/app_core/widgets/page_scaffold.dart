@@ -6,17 +6,20 @@ class PageScaffold extends StatelessWidget {
   final Widget? appBarLeftAction;
   final Widget? appBarRightAction;
   final Key? scaffoldKey;
+  final bool transparent;
 
   PageScaffold(
       {required this.body,
       this.appBarLeftAction,
       this.appBarRightAction,
-      this.scaffoldKey});
+      this.scaffoldKey,
+      this.transparent = false});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: transparent ? Colors.transparent : null,
       appBar: AppBar(
         elevation: 0,
         leading: appBarLeftAction,
@@ -28,7 +31,7 @@ class PageScaffold extends StatelessWidget {
             left: Paddings.scaffold,
             right: Paddings.scaffold,
             top: 0.0,
-            bottom: Paddings.scaffold),
+            bottom: 0.0),
         child: body,
       )),
     );

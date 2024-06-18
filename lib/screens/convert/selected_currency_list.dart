@@ -19,9 +19,12 @@ class SelectedCurrencyList extends StatelessWidget {
         .map((currency) => _buildCurrencyEntry(context, index++, currency))
         .toList();
 
-    return new ListView(
-        padding: EdgeInsets.all(8.0),
-        children: [TitleText('Currency comparisons'), Gap.list, ...currencies]);
+    return new ListView(padding: EdgeInsets.all(8.0), children: [
+      TitleText('Currency comparisons'),
+      Gap.list,
+      ...currencies,
+      SizedBox(height: 260.0) // Make space for top-page animation
+    ]);
   }
 
   Widget _buildCurrencyEntry(
