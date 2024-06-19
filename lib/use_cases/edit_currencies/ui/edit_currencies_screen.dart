@@ -56,11 +56,17 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
         .map((currency) => Container(
               key: Key(currency.code),
               color: Colors.transparent,
-              child: SelectCurrencyCard(
-                currency: currency,
-                onTap: () {},
-                icon: Icons.low_priority,
-              ).pad(bottom: Paddings.listGap),
+              child: Dismissible(
+                key: Key(currency.code),
+                onDismissed: (direction) {
+                  stateContainer.removeCurrency(currency.code);
+                },
+                child: SelectCurrencyCard(
+                  currency: currency,
+                  onTap: () {},
+                  icon: Icons.low_priority,
+                ).pad(bottom: Paddings.listGap),
+              ),
             ))
         .toList();
 
