@@ -79,9 +79,15 @@ class _AppRootState extends State<AppRoot> {
     final iconTheme =
         baseTheme.primaryIconTheme.copyWith(color: lightTheme.text);
 
+    final bottomSheetTheme = baseTheme.bottomSheetTheme.copyWith(
+        backgroundColor: lightTheme.background,
+        elevation: 16,
+        shadowColor: Colors.black);
+
     return new ThemeData(
         iconTheme: iconTheme,
         textTheme: textTheme,
+        bottomSheetTheme: bottomSheetTheme,
         scaffoldBackgroundColor: lightTheme.background,
         appBarTheme: baseTheme.appBarTheme.copyWith(
             backgroundColor: lightTheme.background,

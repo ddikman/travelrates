@@ -4,8 +4,8 @@ import 'package:travelconverter/app_core/widgets/currency_card.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/services/logger.dart';
+import 'package:travelconverter/use_cases/view_rates/ui/compare_keyboard_sheet.dart';
 import 'package:travelconverter/widgets/animate_in.dart';
-import 'package:travelconverter/screens/convert/convert_dialog.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +60,7 @@ class _CompareCurrencyCardState extends State<CompareCurrencyCard>
 
     final card = CurrencyCard(
         content: contents,
-        onTap: _showConvertDialog,
+        onTap: () => _showConvertDialog(currentValue),
         currencyIconName: widget.currency.icon);
 
     return _animated(card);
@@ -95,12 +95,15 @@ class _CompareCurrencyCardState extends State<CompareCurrencyCard>
     stateContainer.setAmount(value, widget.currency);
   }
 
-  void _showConvertDialog() {
-    showDialog(
+  void _showConvertDialog(double currentValue) async {
+    double? value = await showModalBottomSheet(
         context: context,
-        builder: (context) => new ConvertDialog(
-              currencyCode: widget.currency.code,
-              onSubmitted: _newValueReceived,
-            ));
+        isScrollControlled: true,
+        builder: (ctx) => CompareKeyboardSheet(
+            currencyCode: widget.currency.code, initialValue: currentValue));
+
+    if (value != null) {
+      _newValueReceived(value);
+    }
   }
 }
