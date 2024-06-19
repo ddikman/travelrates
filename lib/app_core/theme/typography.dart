@@ -18,6 +18,12 @@ abstract class ThemeTypography {
 
   static final large =
       TextStyle(color: lightTheme.text, fontSize: 26, fontFamily: fontFamily);
+
+  static final inputText =
+      TextStyle(color: lightTheme.text, fontSize: 32, fontFamily: fontFamily);
+
+  static final body =
+      TextStyle(color: lightTheme.text, fontSize: 14, fontFamily: fontFamily);
 }
 
 extension TextStyleExtension on TextStyle {

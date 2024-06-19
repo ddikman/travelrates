@@ -1,6 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rive/rive.dart';
+import 'package:travelconverter/app_core/config.dart';
 import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/app_core/widgets/app_bar_icon.dart';
 import 'package:travelconverter/app_core/widgets/page_scaffold.dart';
@@ -21,10 +22,11 @@ class ConvertScreen extends StatelessWidget {
         children: [
           Expanded(
             child: Stack(children: [
-              RiveAnimation.asset('assets/animations/tokyo-skyline.riv',
-                  fit: BoxFit.fitWidth,
-                  controllers: [SimpleAnimation('Scroll')],
-                  alignment: Alignment.bottomCenter),
+              if (!isTesting)
+                RiveAnimation.asset('assets/animations/tokyo-skyline.riv',
+                    fit: BoxFit.fitWidth,
+                    controllers: [SimpleAnimation('Scroll')],
+                    alignment: Alignment.bottomCenter),
               PageScaffold(
                 transparent: true,
                 appBarLeftAction: AppBarIcon(

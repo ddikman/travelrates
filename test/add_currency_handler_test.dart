@@ -10,14 +10,15 @@ import 'mocks/mock_currency.dart';
 void main() {
   testWidgets("can add a new currency", (WidgetTester tester) async {
     final dollar = MockCurrency.dollar;
-    final widgetFrame =
-        new MockWidgetFrame(child: new Builder(builder: (BuildContext context) {
-      final addHandler = new AddCurrencyHandler(dollar);
-      return TextButton(
-        child: Text("Button"),
-        onPressed: () => addHandler.addCurrency(context),
-      );
-    }));
+    final widgetFrame = new MockWidgetFrame(child: Scaffold(
+      body: new Builder(builder: (BuildContext context) {
+        final addHandler = new AddCurrencyHandler(dollar);
+        return TextButton(
+          child: Text("Button"),
+          onPressed: () => addHandler.addCurrency(context),
+        );
+      }),
+    ));
 
     await tester.pumpWidget(widgetFrame);
     await tester.pumpAndSettle();
