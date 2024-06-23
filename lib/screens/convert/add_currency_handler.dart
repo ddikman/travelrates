@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:travelconverter/app_core/widgets/app_snack_bar.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/services/logger.dart';
@@ -22,10 +23,8 @@ class AddCurrencyHandler {
     var currencyLocalizedName =
         localizations.currencies.getLocalized(currency.code);
 
-    final snackBar = new SnackBar(
-        content: Text(_alreadySelectedWarning(currencyLocalizedName)));
-
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    AppSnackBar.showError(
+        context, _alreadySelectedWarning(currencyLocalizedName));
   }
 
   addCurrency(BuildContext context) {

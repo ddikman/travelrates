@@ -84,11 +84,19 @@ class _AppRootState extends State<AppRoot> {
         elevation: 16,
         shadowColor: Colors.black);
 
+    final snackbarTheme = baseTheme.snackBarTheme.copyWith(
+      backgroundColor: lightTheme.background,
+      contentTextStyle: baseTextStyle.copyWith(color: lightTheme.text),
+      actionTextColor: lightTheme.text,
+      elevation: 2,
+    );
+
     return new ThemeData(
         iconTheme: iconTheme,
         textTheme: textTheme,
         bottomSheetTheme: bottomSheetTheme,
         scaffoldBackgroundColor: lightTheme.background,
+        snackBarTheme: snackbarTheme,
         appBarTheme: baseTheme.appBarTheme.copyWith(
             backgroundColor: lightTheme.background,
             foregroundColor: lightTheme.text));
