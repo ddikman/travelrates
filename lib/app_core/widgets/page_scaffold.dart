@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/app_core/theme/sizes.dart';
-import 'package:travelconverter/app_core/widgets/page_top_bar.dart';
+import 'package:travelconverter/app_core/widgets/app_bar_icon.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 
 class PageScaffold extends StatelessWidget {
@@ -22,25 +24,26 @@ class PageScaffold extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: transparent ? Colors.transparent : null,
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: body.pad(
-                left: Paddings.scaffold,
-                right: Paddings.scaffold,
-                top: Paddings.scaffoldTop),
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: PageTopBar(
-              leftAction: appBarLeftAction,
-              rightAction: appBarRightAction,
-            ),
-          ),
-        ],
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: lightTheme.background60,
+        surfaceTintColor: lightTheme.background60,
+        foregroundColor: lightTheme.text,
+        automaticallyImplyLeading: false,
+        leading: appBarLeftAction ?? _backButton(context),
+        actions: [appBarRightAction ?? Container()],
+      ),
+      body: SingleChildScrollView(
+        child: body.pad(
+            left: Paddings.scaffold,
+            right: Paddings.scaffold,
+            top: Paddings.scaffoldTop),
       ),
     );
   }
+
+  Widget? _backButton(BuildContext context) => context.canPop()
+      ? AppBarIcon(icon: Icon(Icons.arrow_back_ios), onTap: () => context.pop())
+      : null;
 }
