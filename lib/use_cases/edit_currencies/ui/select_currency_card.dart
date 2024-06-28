@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/app_core/theme/typography.dart';
 import 'package:travelconverter/app_core/widgets/currency_card.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
@@ -12,12 +11,14 @@ class SelectCurrencyCard extends StatelessWidget {
   final Currency currency;
   final Function onTap;
   final IconData icon;
+  final Color iconColor;
 
   const SelectCurrencyCard(
       {super.key,
       required this.currency,
       required this.onTap,
-      required this.icon});
+      required this.icon,
+      required this.iconColor});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class SelectCurrencyCard extends StatelessWidget {
                 ]),
           ),
           Gap.medium,
-          Icon(icon, size: 32.0, color: lightTheme.accent)
+          Icon(icon, color: iconColor, size: 24.0)
         ]));
   }
 

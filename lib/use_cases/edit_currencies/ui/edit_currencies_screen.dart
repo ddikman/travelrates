@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/app_core/theme/sizes.dart';
 import 'package:travelconverter/app_core/theme/typography.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
@@ -57,16 +58,16 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
               key: Key(currency.code),
               color: Colors.transparent,
               child: Dismissible(
-                key: Key(currency.code),
-                onDismissed: (direction) {
-                  stateContainer.removeCurrency(currency.code);
-                },
-                child: SelectCurrencyCard(
-                  currency: currency,
-                  onTap: () {},
-                  icon: Icons.low_priority,
-                ).pad(bottom: Paddings.listGap),
-              ),
+                  key: Key(currency.code),
+                  onDismissed: (direction) {
+                    stateContainer.removeCurrency(currency.code);
+                  },
+                  child: SelectCurrencyCard(
+                    currency: currency,
+                    onTap: () {},
+                    icon: Icons.low_priority,
+                    iconColor: lightTheme.accent,
+                  )).pad(bottom: Paddings.listGap),
             ))
         .toList();
 
@@ -88,15 +89,10 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
         Gap.list,
         if (searchQuery.isNotEmpty || selectedCurrencies.length < 3)
           ...filter.getFiltered(allCurrencies, searchQuery).map((currency) {
-            final isSelected =
-                state.conversion.currencies.contains(currency.code);
-            final card = SelectCurrencyCard(
+            return SearchCurrencyResultEntry(
                 currency: currency,
-                icon: isSelected ? Icons.check : Icons.add_circle_outline,
-                onTap: () {
-                  AddCurrencyHandler(currency).addCurrency(context);
-                }).pad(bottom: Paddings.listGap);
-            return isSelected ? Opacity(opacity: 0.5, child: card) : card;
+                isSelected: state.conversion.currencies.contains(currency.code),
+                onTap: () => AddCurrencyHandler(currency).addCurrency(context));
           }),
         if (selectedCurrencies.isNotEmpty) ...[
           Gap.list,
@@ -120,5 +116,26 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
 
     var moveCurrency = state.conversion.currencies.elementAt(oldIndex);
     stateContainer.reorderCurrency(item: moveCurrency, newIndex: newIndex);
+  }
+}
+
+class SearchCurrencyResultEntry extends StatelessWidget {
+  final Currency currency;
+  final bool isSelected;
+  final Function onTap;
+
+  SearchCurrencyResultEntry(
+      {required this.currency, required this.isSelected, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final card = SelectCurrencyCard(
+        currency: currency,
+        icon: isSelected ? Icons.check : Icons.add_circle_outline,
+        iconColor: isSelected ? lightTheme.green : lightTheme.accent,
+        onTap: () {
+          AddCurrencyHandler(currency).addCurrency(context);
+        }).pad(bottom: Paddings.listGap);
+    return isSelected ? Opacity(opacity: 0.5, child: card) : card;
   }
 }
