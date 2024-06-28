@@ -21,19 +21,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m0(currencyName) => "${currencyName} är redan tillagd!";
 
-  static m1(currencyCode) => "${currencyCode} att konvertera";
-
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function> {
-    "ConvertScreen_screenTitle" : MessageLookupByLibrary.simpleMessage("Konvertera"),
-    "Edit" : MessageLookupByLibrary.simpleMessage("Ändra"),
     "ReviewWidgetState_acceptReviewButtonText" : MessageLookupByLibrary.simpleMessage("Ok!"),
-    "ReviewWidgetState_toastMessage" : MessageLookupByLibrary.simpleMessage("Hjälper appen? Har du tid för en recension? Det hjälper jättemycket!."),
-    "Search country or currency code" : MessageLookupByLibrary.simpleMessage("Sök land eller valuta"),
-    "_AddCurrencyScreenState__screenTitle" : MessageLookupByLibrary.simpleMessage("Välj Valuta"),
-    "_alreadySelectedWarning" : m0,
-    "_convertTitle" : m1,
-    "_editButtonLabel" : MessageLookupByLibrary.simpleMessage("Ändra"),
-    "_submitLabel" : MessageLookupByLibrary.simpleMessage("KONVERTERA")
+    "ReviewWidgetState_toastMessage" : MessageLookupByLibrary.simpleMessage("Fungerar TravelRates bra för dig?\nOm du kan lämna en recension hjälper det verkligen."),
+    "_alreadySelectedWarning" : m0
   };
 }

@@ -52,7 +52,7 @@
       "type": "text",
       "placeholders": {}
     },
-  "ReviewWidgetState_toastMessage": "このアプリはお役に立ちましたか？もしよろしければ、ご意見をお寄せいただけますか？",
+  "ReviewWidgetState_toastMessage": "TravelRatesはあなたのためにうまく機能していますか？\nレビューを残していただけると本当に助かります。",
   "@ReviewWidgetState_toastMessage": {
     "description": "Message shown in review request toast",
     "type": "text",

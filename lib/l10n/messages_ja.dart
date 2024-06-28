@@ -21,19 +21,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m0(currencyName) => "${currencyName}すでに選択されています!";
 
-  static m1(currencyCode) => "${currencyCode}入力";
-
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function> {
-    "ConvertScreen_screenTitle" : MessageLookupByLibrary.simpleMessage("換算"),
-    "Edit" : MessageLookupByLibrary.simpleMessage("編集"),
     "ReviewWidgetState_acceptReviewButtonText" : MessageLookupByLibrary.simpleMessage("もちろん！"),
-    "ReviewWidgetState_toastMessage" : MessageLookupByLibrary.simpleMessage("このアプリはお役に立ちましたか？もしよろしければ、ご意見をお寄せいただけますか？"),
-    "Search country or currency code" : MessageLookupByLibrary.simpleMessage("名または国別コードを検索"),
-    "_AddCurrencyScreenState__screenTitle" : MessageLookupByLibrary.simpleMessage("レート追加"),
-    "_alreadySelectedWarning" : m0,
-    "_convertTitle" : m1,
-    "_editButtonLabel" : MessageLookupByLibrary.simpleMessage("編集"),
-    "_submitLabel" : MessageLookupByLibrary.simpleMessage("換算")
+    "ReviewWidgetState_toastMessage" : MessageLookupByLibrary.simpleMessage("TravelRatesはあなたのためにうまく機能していますか？\nレビューを残していただけると本当に助かります。"),
+    "_alreadySelectedWarning" : m0
   };
 }

@@ -5,6 +5,8 @@ import 'package:app_review_plus/app_review_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:travelconverter/app_core/theme/colors.dart';
+import 'package:travelconverter/app_core/widgets/app_snack_bar.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/screens/review_feature/review_rule.dart';
 import 'package:travelconverter/screens/review_feature/review_storage.dart';
@@ -78,26 +80,26 @@ class ReviewWidgetState extends State<ReviewWidget> {
   void _doReview() async {
     _reviewRule.reviewRequested();
     this.widget.reviewStorage.save(_reviewRule);
-    Future.delayed(widget.toastDelay).then((_) {
-      final snackBar = new SnackBar(
-        content: Text(toastMessage),
-        action: SnackBarAction(
-            label: acceptReviewButtonText,
-            onPressed: () async {
-              await _reviewAccepted();
-              if (await _canPromptReview()) {
-                final result = await AppReview.requestReview;
-                _logger.debug(result?.toString() ?? 'No review result');
-              } else {
-                final result = await AppReview.storeListing;
-                _logger.debug(result?.toString() ?? 'No review result');
-              }
-            }),
-        duration: Duration(seconds: 10),
-        behavior: SnackBarBehavior.floating,
-      );
 
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    final action = SnackBarAction(
+        label: acceptReviewButtonText,
+        onPressed: () async {
+          await _reviewAccepted();
+          if (await _canPromptReview()) {
+            final result = await AppReview.requestReview;
+            _logger.debug(result?.toString() ?? 'No review result');
+          } else {
+            final result = await AppReview.storeListing;
+            _logger.debug(result?.toString() ?? 'No review result');
+          }
+        });
+
+    Future.delayed(widget.toastDelay).then((_) {
+      AppSnackBar.show(context,
+          accentColor: lightTheme.accent,
+          duration: Duration(seconds: 10),
+          text: toastMessage,
+          action: action);
     });
   }
 
@@ -119,7 +121,7 @@ class ReviewWidgetState extends State<ReviewWidget> {
   }
 
   static String get toastMessage => Intl.message(
-      "Is this app helping you? Could you spare a minute to do a review? It really helps.",
+      "Is TravelRates working well for you?\nIf you can leave a review, it really helps.",
       name: "ReviewWidgetState_toastMessage",
       desc: "Message shown in review request toast");
 
