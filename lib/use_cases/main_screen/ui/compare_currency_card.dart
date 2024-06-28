@@ -4,7 +4,7 @@ import 'package:travelconverter/app_core/widgets/currency_card.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/services/logger.dart';
-import 'package:travelconverter/use_cases/view_rates/ui/compare_keyboard_sheet.dart';
+import 'package:travelconverter/use_cases/main_screen/ui/compare_keyboard_sheet.dart';
 import 'package:travelconverter/widgets/animate_in.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/state_container.dart';

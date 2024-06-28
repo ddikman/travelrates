@@ -4,8 +4,9 @@ import 'package:travelconverter/app_core/theme/sizes.dart';
 
 class SearchInput extends StatefulWidget {
   final ValueChanged<String> onChange;
+  final bool autoFocus;
 
-  const SearchInput({super.key, required this.onChange});
+  const SearchInput({super.key, required this.onChange, this.autoFocus = true});
 
   @override
   State<SearchInput> createState() => _SearchInputState();
@@ -18,7 +19,7 @@ class _SearchInputState extends State<SearchInput> {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      autofocus: true,
+      autofocus: widget.autoFocus,
       onChanged: (value) => widget.onChange(value),
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(Paddings.small),

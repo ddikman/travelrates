@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/app_core/theme/sizes.dart';
+import 'package:travelconverter/app_core/widgets/app_bar_icon.dart';
+import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 
 class PageScaffold extends StatelessWidget {
   final Widget body;
@@ -20,20 +24,26 @@ class PageScaffold extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: transparent ? Colors.transparent : null,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        elevation: 0,
-        leading: appBarLeftAction,
+        elevation: 0.0,
+        backgroundColor: lightTheme.background60,
+        surfaceTintColor: lightTheme.background60,
+        foregroundColor: lightTheme.text,
+        automaticallyImplyLeading: false,
+        leading: appBarLeftAction ?? _backButton(context),
         actions: [appBarRightAction ?? Container()],
       ),
-      body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.only(
+      body: SingleChildScrollView(
+        child: body.pad(
             left: Paddings.scaffold,
             right: Paddings.scaffold,
-            top: 0.0,
-            bottom: 0.0),
-        child: body,
-      )),
+            top: Paddings.scaffoldTop),
+      ),
     );
   }
+
+  Widget? _backButton(BuildContext context) => context.canPop()
+      ? AppBarIcon(icon: Icon(Icons.arrow_back_ios), onTap: () => context.pop())
+      : null;
 }

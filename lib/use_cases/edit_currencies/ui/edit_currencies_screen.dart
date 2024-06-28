@@ -42,7 +42,7 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-      body: SingleChildScrollView(child: _buildCurrencyList()),
+      body: _buildCurrencyList(),
     );
   }
 
@@ -51,7 +51,7 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
     final state = stateContainer.appState;
 
     final localization = AppLocalizations.of(context);
-    final currencies = state.conversion.currencies
+    final selectedCurrencies = state.conversion.currencies
         .map(state.availableCurrencies.getByCode)
         .map((currency) => Container(
               key: Key(currency.code),
@@ -82,10 +82,11 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
             style: ThemeTypography.small),
         Gap.list,
         SearchInput(
+          autoFocus: selectedCurrencies.length < 2,
           onChange: (value) => setState(() => searchQuery = value),
         ),
         Gap.list,
-        if (searchQuery.isNotEmpty || currencies.length < 3)
+        if (searchQuery.isNotEmpty || selectedCurrencies.length < 3)
           ...filter.getFiltered(allCurrencies, searchQuery).map((currency) {
             final isSelected =
                 state.conversion.currencies.contains(currency.code);
@@ -97,7 +98,7 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
                 }).pad(bottom: Paddings.listGap);
             return isSelected ? Opacity(opacity: 0.5, child: card) : card;
           }),
-        if (currencies.isNotEmpty) ...[
+        if (selectedCurrencies.isNotEmpty) ...[
           Gap.list,
           TitleText('Selected currencies'),
           Text('Long press and drag to reorder', style: ThemeTypography.small),
@@ -106,7 +107,7 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
               proxyDecorator: (child, index, animation) => child,
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              children: currencies,
+              children: selectedCurrencies,
               onReorder: _reorderListEntry),
         ]
       ],

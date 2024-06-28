@@ -2,7 +2,7 @@ import 'package:travelconverter/app_core/theme/sizes.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/app_core/widgets/title_text.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
-import 'package:travelconverter/use_cases/view_rates/ui/compare_currency_card.dart';
+import 'package:travelconverter/use_cases/main_screen/ui/compare_currency_card.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -19,12 +19,11 @@ class SelectedCurrencyList extends StatelessWidget {
         .map((currency) => _buildCurrencyEntry(context, index++, currency))
         .toList();
 
-    return new ListView(padding: EdgeInsets.all(8.0), children: [
-      TitleText('Currency comparisons'),
-      Gap.list,
-      ...currencies,
-      SizedBox(height: 260.0) // Make space for top-page animation
-    ]);
+    return ListView(
+        padding: EdgeInsets.zero,
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        children: [TitleText('Currency comparisons'), Gap.list, ...currencies]);
   }
 
   Widget _buildCurrencyEntry(
