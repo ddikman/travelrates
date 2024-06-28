@@ -7,7 +7,7 @@ import 'package:travelconverter/app_core/widgets/app_bar_icon.dart';
 import 'package:travelconverter/app_core/widgets/page_scaffold.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 import 'package:travelconverter/app_routes.dart';
-import 'package:travelconverter/screens/convert/selected_currency_list.dart';
+import 'package:travelconverter/screens/convert/convertible_currencies_list.dart';
 import 'package:travelconverter/screens/review_feature/review_storage.dart';
 import 'package:travelconverter/screens/review_feature/review_widget.dart';
 import 'package:travelconverter/services/local_storage.dart';
@@ -47,7 +47,7 @@ class MainScreen extends StatelessWidget {
   Widget _buildCurrencyList() {
     return Builder(builder: (BuildContext context) {
       return ReviewWidget(
-        child: SelectedCurrencyList(),
+        child: ConvertibleCurrenciesList(),
         reviewStorage: ReviewStorage(
             InternetConnectivityImpl(Connectivity()), LocalStorage()),
       );

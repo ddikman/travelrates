@@ -7,7 +7,7 @@ import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class SelectedCurrencyList extends StatelessWidget {
+class ConvertibleCurrenciesList extends StatelessWidget {
   static const int _msDelayBetweenItemAppearance = 60;
 
   @override
