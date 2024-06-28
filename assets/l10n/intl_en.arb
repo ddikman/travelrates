@@ -64,14 +64,14 @@
     "placeholders_order": [],
     "placeholders": {}
   },
-  "ReviewWidgetState_toastMessage": "Is this app helping you? Could you spare a minute to do a review? It really helps.",
+  "ReviewWidgetState_toastMessage": "Is TravelRates working well for you?\nIf you can leave a review, it really helps.",
   "@ReviewWidgetState_toastMessage": {
     "description": "Message shown in review request toast",
     "type": "text",
     "placeholders_order": [],
     "placeholders": {}
   },
-  "ReviewWidgetState_acceptReviewButtonText": "Sure!",
+  "ReviewWidgetState_acceptReviewButtonText": "Let's go!",
   "@ReviewWidgetState_acceptReviewButtonText": {
     "description": "Short text to accept to a review",
     "type": "text",

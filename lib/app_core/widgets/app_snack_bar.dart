@@ -1,19 +1,29 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/app_core/theme/sizes.dart';
+import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 
 class AppSnackBar extends StatelessWidget {
   final String message;
   final Color accentColor;
   final IconData? icon;
+  final SnackBarAction? action;
 
-  AppSnackBar({required this.message, required this.accentColor, this.icon});
+  AppSnackBar(
+      {required this.message,
+      required this.accentColor,
+      this.icon,
+      this.action});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
           color: lightTheme.background,
+          boxShadow: [
+            BoxShadow(blurRadius: 4.0, color: Colors.black.withOpacity(0.25))
+          ],
           borderRadius: BorderRadius.circular(Rounding.small),
           border: Border.all(color: accentColor)),
       child: Padding(
@@ -25,16 +35,18 @@ class AppSnackBar extends StatelessWidget {
                 icon,
                 size: 16.0,
                 color: accentColor,
-              ),
+              ).pad(right: Paddings.small),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  message,
-                  style: TextStyle(color: accentColor),
-                ),
+              child: Text(
+                message,
+                style: TextStyle(color: lightTheme.text),
               ),
             ),
+            if (action != null)
+              Text(action!.label,
+                      style: TextStyle(
+                          color: accentColor, fontWeight: FontWeight.bold))
+                  .pad(left: Paddings.small),
           ],
         ),
       ),
@@ -64,25 +76,19 @@ class AppSnackBar extends StatelessWidget {
       SnackBarAction? action,
       IconData? icon}) {
     final snackBar = AppSnackBar(
-      message: text,
-      accentColor: accentColor,
-      icon: icon,
-    );
+        message: text, accentColor: accentColor, icon: icon, action: action);
 
-    // TODO: This animation now only works on fade in not on movement
-    const figmaGentleCurve = Cubic(0.47, 0, 0.23, 1.38);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content: snackBar,
-          action: action,
-          duration: duration,
-          // animation: animation,
-          padding: EdgeInsets.all(0),
-          behavior: SnackBarBehavior.floating),
-      snackBarAnimationStyle: AnimationStyle(
-        curve: figmaGentleCurve,
-        duration: Duration(milliseconds: 800),
-      ),
-    );
+    AnimatedSnackBar(
+            builder: (context) => snackBar,
+            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+            mobilePositionSettings: MobilePositionSettings(
+              bottomOnAppearance: Paddings.large,
+              left: Paddings.scaffold,
+              right: Paddings.scaffold,
+            ),
+            duration: duration,
+            animationCurve: Curves.easeOutBack,
+            animationDuration: Duration(milliseconds: 500))
+        .show(context);
   }
 }

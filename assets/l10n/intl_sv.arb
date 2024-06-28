@@ -53,13 +53,13 @@
         "type": "text",
         "placeholders": {}
       },
-    "ReviewWidgetState_toastMessage": "Hjälper appen? Har du tid för en recension? Det hjälper jättemycket!.",
+    "ReviewWidgetState_toastMessage": "Fungerar TravelRates bra för dig?\nOm du kan lämna en recension hjälper det verkligen.",
     "@ReviewWidgetState_toastMessage": {
       "description": "Message shown in review request toast",
       "type": "text",
       "placeholders": {}
     },
-    "ReviewWidgetState_acceptReviewButtonText": "Ok!",
+    "ReviewWidgetState_acceptReviewButtonText": "Kör på!",
     "@ReviewWidgetState_acceptReviewButtonText": {
       "description": "Short text to accept to a review",
       "type": "text",

@@ -65,12 +65,11 @@ class ReviewWidgetState extends State<ReviewWidget> {
 
   void _conversionUpdated(ConversionModel conversion) {
     _reviewRule.conversionDone();
-    _doReview();
-    // if (_reviewRule.shouldReview) {
-    //   _doReview();
-    // } else if (!_reviewRule.submitted) {
-    //   this.widget.reviewStorage.save(_reviewRule);
-    // }
+    if (_reviewRule.shouldReview) {
+      _doReview();
+    } else if (!_reviewRule.submitted) {
+      this.widget.reviewStorage.save(_reviewRule);
+    }
   }
 
   Future<void> _reviewAccepted() async {
@@ -122,7 +121,7 @@ class ReviewWidgetState extends State<ReviewWidget> {
   }
 
   static String get toastMessage => Intl.message(
-      "Is this app helping you? Could you spare a minute to do a review? It really helps.",
+      "Is TravelRates working well for you?\nIf you can leave a review, it really helps.",
       name: "ReviewWidgetState_toastMessage",
       desc: "Message shown in review request toast");
 

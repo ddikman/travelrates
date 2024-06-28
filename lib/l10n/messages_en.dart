@@ -21,19 +21,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m0(currencyName) => "${currencyName} is already selected!";
 
-  static m1(currencyCode) => "${currencyCode} to convert";
-
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function> {
-    "ConvertScreen_screenTitle" : MessageLookupByLibrary.simpleMessage("Convert"),
-    "Edit" : MessageLookupByLibrary.simpleMessage("Edit"),
     "ReviewWidgetState_acceptReviewButtonText" : MessageLookupByLibrary.simpleMessage("Sure!"),
-    "ReviewWidgetState_toastMessage" : MessageLookupByLibrary.simpleMessage("Is this app helping you? Could you spare a minute to do a review? It really helps."),
-    "Search country or currency code" : MessageLookupByLibrary.simpleMessage("Search country or currency code"),
-    "_AddCurrencyScreenState__screenTitle" : MessageLookupByLibrary.simpleMessage("Add Currency"),
-    "_alreadySelectedWarning" : m0,
-    "_convertTitle" : m1,
-    "_editButtonLabel" : MessageLookupByLibrary.simpleMessage("Edit"),
-    "_submitLabel" : MessageLookupByLibrary.simpleMessage("CONVERT")
+    "ReviewWidgetState_toastMessage" : MessageLookupByLibrary.simpleMessage("Is TravelRates working well for you?\nIf you can leave a review, it really helps."),
+    "_alreadySelectedWarning" : m0
   };
 }
