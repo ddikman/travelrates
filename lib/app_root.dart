@@ -1,5 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/app_core/theme/typography.dart';
 import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
@@ -33,6 +34,8 @@ class _AppRootState extends State<AppRoot> {
   @override
   void initState() {
     super.initState();
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
 
     Firebase.initializeApp().then((app) {
       _firebaseAnalytics = FirebaseAnalytics.instanceFor(app: app);

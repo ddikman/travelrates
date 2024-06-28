@@ -5,6 +5,7 @@ import 'package:travelconverter/app_core/config.dart';
 import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/app_core/widgets/app_bar_icon.dart';
 import 'package:travelconverter/app_core/widgets/page_scaffold.dart';
+import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 import 'package:travelconverter/app_routes.dart';
 import 'package:travelconverter/screens/convert/selected_currency_list.dart';
 import 'package:travelconverter/screens/review_feature/review_storage.dart';
@@ -13,7 +14,7 @@ import 'package:travelconverter/services/local_storage.dart';
 import 'package:flutter/material.dart';
 import '../../../internet_connectivity.dart';
 
-class ConvertScreen extends StatelessWidget {
+class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +33,9 @@ class ConvertScreen extends StatelessWidget {
                 appBarLeftAction: AppBarIcon(
                     icon: Icon(Icons.format_list_bulleted_add),
                     onTap: () => context.push(AppRoutes.edit)),
-                body: _buildCurrencyList(),
+                body: _buildCurrencyList().pad(
+                    bottom:
+                        260.0), // padding to allow scrolling to see bottom animation
               )
             ]),
           ),
@@ -41,7 +44,7 @@ class ConvertScreen extends StatelessWidget {
     );
   }
 
-  _buildCurrencyList() {
+  Widget _buildCurrencyList() {
     return Builder(builder: (BuildContext context) {
       return ReviewWidget(
         child: SelectedCurrencyList(),

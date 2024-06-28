@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travelconverter/app_core/theme/sizes.dart';
+import 'package:travelconverter/app_core/widgets/page_top_bar.dart';
+import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 
 class PageScaffold extends StatelessWidget {
   final Widget body;
@@ -20,20 +22,25 @@ class PageScaffold extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: transparent ? Colors.transparent : null,
-      appBar: AppBar(
-        elevation: 0,
-        leading: appBarLeftAction,
-        actions: [appBarRightAction ?? Container()],
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: body.pad(
+                left: Paddings.scaffold,
+                right: Paddings.scaffold,
+                top: Paddings.scaffoldTop),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: PageTopBar(
+              leftAction: appBarLeftAction,
+              rightAction: appBarRightAction,
+            ),
+          ),
+        ],
       ),
-      body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.only(
-            left: Paddings.scaffold,
-            right: Paddings.scaffold,
-            top: 0.0,
-            bottom: 0.0),
-        child: body,
-      )),
     );
   }
 }

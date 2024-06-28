@@ -6,7 +6,7 @@ class Paddings {
 
   static const listGap = 16.0;
 
-  static const scaffoldTop = 48.0;
+  static const scaffoldTop = 120.0;
   static const scaffold = 24.0;
 }
 
