@@ -3,7 +3,7 @@
     <application
         android:label="TravelRates"
         android:name="${applicationName}"
-        android:icon="@drawable/icon">
+        android:icon="@mipmap/icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
