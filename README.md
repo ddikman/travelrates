@@ -67,7 +67,7 @@ cd ios/fastlane
 bundle exec fastlane ios beta
 ```
 
-And that's it. You will need to set the required parameters to authenticate, either you can set the enviroment variables used in `ios/fastlane/Appfile` or simply delete the file and fastlane will prompt you for them as it runs.
+And that's it. You will need to set the required parameters to authenticate, either you can set the environment variables used in `ios/fastlane/Appfile` or simply delete the file and fastlane will prompt you for them as it runs.
 
 To build the application for distribution, same way locally as in Github, you will have to have the distribution certificate installed locally.
 
@@ -86,10 +86,10 @@ dart run flutter_native_splash:create
 Convert between one or more currencies offline. Anytime, anywhere.
 
 ### Long one
-Martin is a clever backpacker. He doesn't spend more than he has to. He asks people around him what they pay and keeps track of many currencies at once. Martin uses TravelRates for this because keeping track of the difference between dollars, rupies, euros and ringgits is much better left to a phone, it's with him even to the toilet anyway.
+Martin is a clever backpacker. He doesn't spend more than he has to. He asks people around him what they pay and keeps track of many currencies at once. Martin uses TravelRates for this because keeping track of the difference between dollars, rupees, euros and ringgits is much better left to a phone, it's with him even to the toilet anyway.
 
-As a backpacker, Martin is often off the grid, offline on a mountain somwhere. No problem. TravelRates updates the currency rates whenever there's wifi but if not, well, the rates from a few days back is good enough.
+As a backpacker, Martin is often off the grid, offline on a mountain somewhere. No problem. TravelRates updates the currency rates whenever there's wifi but if not, well, the rates from a few days back is good enough.
 
-TravelRates shows him several currencies at the same time, because prices, especially when travelling is sometimes in local currency, sometimes in dollars and he always wants to know what it would cost him 'back home'.
+TravelRates shows him several currencies at the same time, because prices, especially when traveling is sometimes in local currency, sometimes in dollars and he always wants to know what it would cost him 'back home'.
 
 TravelRates helps Martin by skipping those pesky decimals and gives him a clear, easy overview of what's what. Are you like Martin? Maybe TravelRates is for you?

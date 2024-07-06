@@ -55,7 +55,6 @@ class _AppRootState extends State<AppRoot> {
   Widget build(BuildContext context) {
     return new MaterialApp.router(
       routerConfig: router,
-      title: 'TravelRates',
       theme: _constructTheme(),
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
