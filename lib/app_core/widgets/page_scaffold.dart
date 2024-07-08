@@ -32,7 +32,9 @@ class PageScaffold extends StatelessWidget {
         foregroundColor: lightTheme.text,
         automaticallyImplyLeading: false,
         leading: appBarLeftAction ?? _backButton(context),
-        actions: [appBarRightAction ?? Container()],
+        actions: [
+          (appBarRightAction ?? Container()).pad(right: Paddings.scaffold)
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(

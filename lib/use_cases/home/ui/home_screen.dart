@@ -6,7 +6,7 @@ import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/app_core/widgets/app_bar_icon.dart';
 import 'package:travelconverter/app_core/widgets/page_scaffold.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
-import 'package:travelconverter/app_routes.dart';
+import 'package:travelconverter/routing/routes.dart';
 import 'package:travelconverter/screens/convert/convertible_currencies_list.dart';
 import 'package:travelconverter/screens/review_feature/review_storage.dart';
 import 'package:travelconverter/screens/review_feature/review_widget.dart';
@@ -31,8 +31,11 @@ class MainScreen extends StatelessWidget {
               PageScaffold(
                 transparent: true,
                 appBarLeftAction: AppBarIcon(
+                    icon: Icon(Icons.help_outline),
+                    onTap: () => context.push(Routes.about)),
+                appBarRightAction: AppBarIcon(
                     icon: Icon(Icons.format_list_bulleted_add),
-                    onTap: () => context.push(AppRoutes.edit)),
+                    onTap: () => context.push(Routes.edit)),
                 body: _buildCurrencyList().pad(
                     bottom:
                         260.0), // padding to allow scrolling to see bottom animation
