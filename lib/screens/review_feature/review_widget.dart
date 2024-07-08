@@ -1,16 +1,12 @@
 import 'dart:async';
-import 'dart:io';
-
-import 'package:app_review_plus/app_review_plus.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/app_core/widgets/app_snack_bar.dart';
 import 'package:travelconverter/model/conversion_model.dart';
+import 'package:travelconverter/screens/review_feature/app_review_service.dart';
 import 'package:travelconverter/screens/review_feature/review_rule.dart';
 import 'package:travelconverter/screens/review_feature/review_storage.dart';
-import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/state_container.dart';
 
 class ReviewWidget extends StatefulWidget {
@@ -30,8 +26,6 @@ class ReviewWidget extends StatefulWidget {
 }
 
 class ReviewWidgetState extends State<ReviewWidget> {
-  static final _logger = new Logger<ReviewWidgetState>();
-
   StreamSubscription<ConversionModel>? _eventSubscription;
 
   late ReviewRule _reviewRule;
@@ -85,13 +79,7 @@ class ReviewWidgetState extends State<ReviewWidget> {
         label: acceptReviewButtonText,
         onPressed: () async {
           await _reviewAccepted();
-          if (await _canPromptReview()) {
-            final result = await AppReview.requestReview;
-            _logger.debug(result?.toString() ?? 'No review result');
-          } else {
-            final result = await AppReview.storeListing;
-            _logger.debug(result?.toString() ?? 'No review result');
-          }
+          await AppReviewService().request();
         });
 
     Future.delayed(widget.toastDelay).then((_) {
@@ -101,23 +89,6 @@ class ReviewWidgetState extends State<ReviewWidget> {
           text: toastMessage,
           action: action);
     });
-  }
-
-  /// Actually need to check if the platform supports the reviews.
-  /// This isn't handled properly in the app_review package.
-  Future<bool> _canPromptReview() async {
-    if (!Platform.isIOS) {
-      return true;
-    }
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-    final iosVersion = iosInfo.systemVersion;
-    _logger.debug("Running on ios version $iosVersion");
-
-    final versionParts = iosVersion.split('.');
-    final major = int.parse(versionParts[0]);
-    final minor = int.parse(versionParts[1]);
-    return major > 10 || (major == 10 && minor > 3);
   }
 
   static String get toastMessage => Intl.message(

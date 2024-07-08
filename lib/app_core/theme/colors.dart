@@ -34,8 +34,8 @@ const ThemeColors lightTheme = ThemeColors(
     text60: Color(0x99181818),
     red: Color(0xFFE57373),
     green: Color(0xFF81C784),
-    accent: Color(0xFF2196F3),
-    accent30: Color(0x4D2196F3));
+    accent: Color(0xFF8079CF),
+    accent30: Color(0x4D8079CF));
 
 const ThemeColors darkTheme = ThemeColors(
     background: Color(0xff202020),
@@ -46,5 +46,5 @@ const ThemeColors darkTheme = ThemeColors(
     text60: Color(0x99f5f5f5),
     red: Color(0xFFE57373),
     green: Color(0xFF81C784),
-    accent: Color(0xFF2196F3),
-    accent30: Color(0x4D2196F3));
+    accent: Color(0xFF8079CF),
+    accent30: Color(0x4D8079CF));
