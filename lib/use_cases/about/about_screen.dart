@@ -6,6 +6,7 @@ import 'package:travelconverter/app_core/theme/typography.dart';
 import 'package:travelconverter/app_core/widgets/app_button.dart';
 import 'package:travelconverter/app_core/widgets/page_scaffold.dart';
 import 'package:travelconverter/app_core/widgets/separated_extension.dart';
+import 'package:travelconverter/screens/review_feature/app_review_service.dart';
 import 'package:travelconverter/use_cases/about/dark_mode_setting_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,9 +15,9 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageScaffold(
         body: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        Text('About Screen', style: ThemeTypography.title),
+        Text('About TravelRates', style: ThemeTypography.title),
         Text(
             '''I first wrote and released TravelRates in 2019 in Bali whilst being sick with a cold when backpacking south east Asia.
 
@@ -24,7 +25,12 @@ It was built with backpackers in mind, where you have to compare against multipl
 
 Let me know if you enjoy the app, every review motivates me to keep it running (and free)!''',
             style: ThemeTypography.body),
-        AppButton(label: 'Add review', onPressed: () => print('Add review')),
+        AppButton(
+            label: 'Add review',
+            icon: Icons.exit_to_app,
+            onPressed: () {
+              AppReviewService().request();
+            }),
         Markdown(
             shrinkWrap: true,
             padding: const EdgeInsets.all(0),
