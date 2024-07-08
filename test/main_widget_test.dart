@@ -2,7 +2,7 @@ import 'package:travelconverter/app_root.dart';
 import 'package:travelconverter/model/async_result.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:travelconverter/use_cases/main_screen/ui/main_screen.dart';
+import 'package:travelconverter/use_cases/home/ui/home_screen.dart';
 
 import 'mocks/mock_app_state.dart';
 import 'mocks/mock_rates_api.dart';
