@@ -6,20 +6,20 @@ import 'package:travelconverter/app_core/theme/typography.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 import 'package:travelconverter/screens/convert/currency_input_formatter.dart';
 
-class CompareKeyboardSheet extends StatefulWidget {
+class CustomKeyboardSheet extends StatefulWidget {
   final String currencyCode;
   final double initialValue;
 
-  CompareKeyboardSheet({
+  CustomKeyboardSheet({
     required this.currencyCode,
     required this.initialValue,
   });
 
   @override
-  State<CompareKeyboardSheet> createState() => _CompareKeyboardSheetState();
+  State<CustomKeyboardSheet> createState() => _CustomKeyboardSheetState();
 }
 
-class _CompareKeyboardSheetState extends State<CompareKeyboardSheet> {
+class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
   late final TextEditingController _inputController;
 
   final CurrencyInputFormatter _currencyInputFormatter =

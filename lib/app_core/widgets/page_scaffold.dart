@@ -34,11 +34,13 @@ class PageScaffold extends StatelessWidget {
         leading: appBarLeftAction ?? _backButton(context),
         actions: [appBarRightAction ?? Container()],
       ),
-      body: SingleChildScrollView(
-        child: body.pad(
-            left: Paddings.scaffold,
-            right: Paddings.scaffold,
-            top: Paddings.scaffoldTop),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: body.pad(
+              left: Paddings.scaffold,
+              right: Paddings.scaffold,
+              top: Paddings.scaffoldTop),
+        ),
       ),
     );
   }

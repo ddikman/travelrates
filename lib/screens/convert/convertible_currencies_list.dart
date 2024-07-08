@@ -2,7 +2,7 @@ import 'package:travelconverter/app_core/theme/sizes.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/app_core/widgets/title_text.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
-import 'package:travelconverter/use_cases/main_screen/ui/compare_currency_card.dart';
+import 'package:travelconverter/use_cases/home/ui/compare_currency_card.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
