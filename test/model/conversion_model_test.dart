@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 
-import 'mocks/mock_currency.dart';
+import '../mocks/mock_currency.dart';
 
 void main() {
   test('when getting conversion of current currency returns same value', () {
@@ -15,7 +15,7 @@ void main() {
   });
 
   test(
-      'convertion is done based on the difference between current and exchanged currency rates',
+      'conversion is done based on the difference between current and exchanged currency rates',
       () {
     final model = new ConversionModel(
         currentAmount: 1.0,

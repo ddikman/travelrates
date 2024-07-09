@@ -6,7 +6,7 @@ import 'package:travelconverter/app_core/theme/typography.dart';
 import 'package:travelconverter/app_core/widgets/app_button.dart';
 import 'package:travelconverter/app_core/widgets/page_scaffold.dart';
 import 'package:travelconverter/app_core/widgets/separated_extension.dart';
-import 'package:travelconverter/screens/review_feature/app_review_service.dart';
+import 'package:travelconverter/use_cases/review_feature/app_review_service.dart';
 import 'package:travelconverter/use_cases/about/dark_mode_selector_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 

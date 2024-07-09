@@ -8,7 +8,7 @@ import 'package:travelconverter/app_core/widgets/title_text.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/model/currency.dart';
-import 'package:travelconverter/screens/convert/add_currency_handler.dart';
+import 'package:travelconverter/use_cases/home/services/add_currency_handler.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:travelconverter/use_cases/edit_currencies/services/currency_filter.dart';
 import 'package:travelconverter/use_cases/edit_currencies/ui/search_input.dart';

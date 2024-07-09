@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:travelconverter/screens/convert/add_currency_handler.dart';
+import 'package:travelconverter/use_cases/home/services/add_currency_handler.dart';
 import 'package:travelconverter/state_container.dart';
 
-import 'helpers/mock_widget_frame.dart';
-import 'mocks/mock_app_state.dart';
-import 'mocks/mock_currency.dart';
+import '../../../helpers/mock_widget_frame.dart';
+import '../../../mocks/mock_app_state.dart';
+import '../../../mocks/mock_currency.dart';
 
 void main() {
   testWidgets("can add a new currency", (WidgetTester tester) async {
