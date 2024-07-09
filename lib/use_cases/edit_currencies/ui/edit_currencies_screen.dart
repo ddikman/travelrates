@@ -4,7 +4,6 @@ import 'package:travelconverter/app_core/theme/sizes.dart';
 import 'package:travelconverter/app_core/theme/typography.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/app_core/widgets/page_scaffold.dart';
-import 'package:travelconverter/app_core/widgets/title_text.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/model/currency.dart';
@@ -77,7 +76,7 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TitleText('Add currency'),
+        Text('Add currency', style: ThemeTypography.title),
         Text(
             'Search for currencies to add by name, country of use or currency code',
             style: ThemeTypography.small),
@@ -96,7 +95,7 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
           }),
         if (selectedCurrencies.isNotEmpty) ...[
           Gap.list,
-          TitleText('Selected currencies'),
+          Text('Selected currencies', style: ThemeTypography.title),
           Text('Long press and drag to reorder', style: ThemeTypography.small),
           Gap.list,
           ReorderableListView(

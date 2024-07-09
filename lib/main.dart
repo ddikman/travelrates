@@ -11,8 +11,6 @@ import 'package:travelconverter/state_container.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Future.delayed(Duration(seconds: 5));
-
   var localStorage = LocalStorage();
   final ratesApiConfig = await loadApiConfiguration();
   final ratesApi = RatesApi(ratesApiConfig);
