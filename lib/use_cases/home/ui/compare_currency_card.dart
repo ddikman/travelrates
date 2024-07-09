@@ -5,7 +5,6 @@ import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/use_cases/home/ui/custom_keyboard_sheet.dart';
-import 'package:travelconverter/widgets/animate_in.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +14,7 @@ class CompareCurrencyCard extends StatefulWidget {
 
   final Currency currency;
 
-  final Duration animationDelay;
-
-  CompareCurrencyCard({required this.currency, required this.animationDelay});
+  CompareCurrencyCard({required this.currency});
 
   @override
   _CompareCurrencyCardState createState() {
@@ -58,16 +55,10 @@ class _CompareCurrencyCardState extends State<CompareCurrencyCard>
           )
         ]);
 
-    final card = CurrencyCard(
+    return CurrencyCard(
         content: contents,
         onTap: () => _showConvertDialog(currentValue),
         currencyIconName: widget.currency.icon);
-
-    return _animated(card);
-  }
-
-  _animated(Widget child) {
-    return new AnimateIn(child: child, delay: widget.animationDelay);
   }
 
   String _formatValue(double value) {
