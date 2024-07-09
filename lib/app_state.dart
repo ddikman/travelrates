@@ -1,6 +1,10 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/model/country.dart';
 import 'package:travelconverter/services/currency_repository.dart';
+
+final appStateProvider =
+    Provider<AppState>((ref) => throw Exception("Not initialized"));
 
 class AppState {
   final ConversionModel conversion;

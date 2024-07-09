@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/app_core/theme/sizes.dart';
 import 'package:travelconverter/app_core/theme/typography.dart';
@@ -7,6 +8,9 @@ import 'package:travelconverter/app_core/widgets/page_scaffold.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/model/currency.dart';
+import 'package:travelconverter/use_cases/currency_selection/state/selected_currencies_provider.dart';
+import 'package:travelconverter/use_cases/edit_currencies/state/available_currencies_provider.dart';
+import 'package:travelconverter/use_cases/edit_currencies/state/countries_provider.dart';
 import 'package:travelconverter/use_cases/home/services/add_currency_handler.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:travelconverter/use_cases/edit_currencies/services/currency_filter.dart';
@@ -42,17 +46,15 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-      body: _buildCurrencyList(),
-    );
+        body: Consumer(builder: (ctx, ref, _) => _buildCurrencyList(ref)));
   }
 
-  _buildCurrencyList() {
+  _buildCurrencyList(WidgetRef ref) {
     final stateContainer = StateContainer.of(context);
-    final state = stateContainer.appState;
 
     final localization = AppLocalizations.of(context);
-    final selectedCurrencies = state.conversion.currencies
-        .map(state.availableCurrencies.getByCode)
+    final selectedCurrencies = ref
+        .read(selectedCurrenciesProvider)
         .map((currency) => Container(
               key: Key(currency.code),
               color: Colors.transparent,
@@ -70,9 +72,10 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
             ))
         .toList();
 
-    final filter = CurrencyFilter(state.countries, localization);
+    final filter = CurrencyFilter(ref.watch(countriesProvider), localization);
 
     // The ReorderableListView is flutter standard and has a long-press reorder capability
+    final availableCurrencies = ref.watch(availableCurrenciesProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -90,7 +93,7 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
           ...filter.getFiltered(allCurrencies, searchQuery).map((currency) {
             return SearchCurrencyResultEntry(
                 currency: currency,
-                isSelected: state.conversion.currencies.contains(currency.code),
+                isSelected: availableCurrencies.contains(currency.code),
                 onTap: () => AddCurrencyHandler(currency).addCurrency(context));
           }),
         if (selectedCurrencies.isNotEmpty) ...[

@@ -1,6 +1,8 @@
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travelconverter/app_root.dart';
 import 'package:flutter/material.dart';
+import 'package:travelconverter/app_state.dart';
 import 'package:travelconverter/services/load_api_configuration.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/rates_api.dart';
@@ -17,8 +19,12 @@ void main() async {
   final statePersistence = StatePersistence(localStorage: localStorage);
   final state = await statePersistence.load(rootBundle);
 
-  runApp(new StateContainer(
-      child: AppRoot(ratesApi: ratesApi),
+  runApp(StateContainer(
+      child: Builder(
+        builder: (ctx) => ProviderScope(overrides: [
+          appStateProvider.overrideWithValue(StateContainer.of(ctx).appState)
+        ], child: AppRoot(ratesApi: ratesApi)),
+      ),
       state: state,
       statePersistence: statePersistence));
 }

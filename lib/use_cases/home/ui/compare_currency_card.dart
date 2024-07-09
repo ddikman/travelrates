@@ -1,37 +1,29 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:travelconverter/app_core/theme/typography.dart';
 import 'package:travelconverter/app_core/widgets/currency_card.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 import 'package:travelconverter/services/logger.dart';
+import 'package:travelconverter/use_cases/home/state/converted_amount_provider.dart';
 import 'package:travelconverter/use_cases/home/ui/custom_keyboard_sheet.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:flutter/material.dart';
 
-class CompareCurrencyCard extends StatefulWidget {
+class CompareCurrencyCard extends ConsumerWidget {
   static const height = 65.0;
 
   final Currency currency;
 
   CompareCurrencyCard({required this.currency});
 
-  @override
-  _CompareCurrencyCardState createState() {
-    return new _CompareCurrencyCardState();
-  }
-}
-
-class _CompareCurrencyCardState extends State<CompareCurrencyCard>
-    with TickerProviderStateMixin {
-  static final log = new Logger<_CompareCurrencyCardState>();
+  static final log = new Logger<CompareCurrencyCard>();
 
   @override
-  Widget build(BuildContext context) {
-    final state = StateContainer.of(context).appState;
+  Widget build(BuildContext context, WidgetRef ref) {
     final localization = AppLocalizations.of(context);
-
-    var currentValue = state.conversion.getAmountInCurrency(widget.currency);
+    final currentValue = ref.watch(convertedAmountProvider(currency));
 
     final contents = new Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,9 +31,9 @@ class _CompareCurrencyCardState extends State<CompareCurrencyCard>
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(localization.currencies.getLocalized(widget.currency.code),
+              Text(localization.currencies.getLocalized(currency.code),
                   style: ThemeTypography.small.bold),
-              Text(widget.currency.code, style: ThemeTypography.verySmall.bold)
+              Text(currency.code, style: ThemeTypography.verySmall.bold)
             ],
           ),
           Gap.medium,
@@ -57,8 +49,8 @@ class _CompareCurrencyCardState extends State<CompareCurrencyCard>
 
     return CurrencyCard(
         content: contents,
-        onTap: () => _showConvertDialog(currentValue),
-        currencyIconName: widget.currency.icon);
+        onTap: () => _showConvertDialog(context, currentValue),
+        currencyIconName: currency.icon);
   }
 
   String _formatValue(double value) {
@@ -79,22 +71,22 @@ class _CompareCurrencyCardState extends State<CompareCurrencyCard>
     return format.format(value);
   }
 
-  void _newValueReceived(double value) {
-    log.event("convert", "converting $value ${widget.currency.code}",
-        parameters: {'currency': widget.currency.code, 'amount': value});
+  void _newValueReceived(BuildContext context, double value) {
+    log.event("convert", "converting $value ${currency.code}",
+        parameters: {'currency': currency.code, 'amount': value});
     final stateContainer = StateContainer.of(context);
-    stateContainer.setAmount(value, widget.currency);
+    stateContainer.setAmount(value, currency);
   }
 
-  void _showConvertDialog(double currentValue) async {
+  void _showConvertDialog(BuildContext context, double currentValue) async {
     double? value = await showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         builder: (ctx) => CustomKeyboardSheet(
-            currencyCode: widget.currency.code, initialValue: currentValue));
+            currencyCode: currency.code, initialValue: currentValue));
 
     if (value != null) {
-      _newValueReceived(value);
+      _newValueReceived(context, value);
     }
   }
 }
