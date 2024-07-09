@@ -4,7 +4,7 @@ import 'package:travelconverter/app_core/theme/sizes.dart';
 import 'package:travelconverter/app_core/theme/typography.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
-import 'package:travelconverter/use_cases/home/state/selected_currencies_provider.dart';
+import 'package:travelconverter/use_cases/currency_selection/state/selected_currencies_provider.dart';
 import 'package:travelconverter/use_cases/home/ui/compare_currency_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
