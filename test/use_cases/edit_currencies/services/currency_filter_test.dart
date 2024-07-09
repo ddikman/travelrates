@@ -5,7 +5,7 @@ import 'package:travelconverter/model/country.dart';
 import 'package:travelconverter/use_cases/edit_currencies/services/currency_filter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'mocks/mock_currency.dart';
+import '../../../mocks/mock_currency.dart';
 
 void main() {
   final countryLocalizations = new CountryLocalizations('sv');

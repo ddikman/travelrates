@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:travelconverter/screens/review_feature/review_rule.dart';
-import 'package:travelconverter/screens/review_feature/review_storage.dart';
-import 'package:travelconverter/screens/review_feature/review_widget.dart';
+import 'package:travelconverter/use_cases/review_feature/review_rule.dart';
+import 'package:travelconverter/use_cases/review_feature/review_storage.dart';
+import 'package:travelconverter/use_cases/review_feature/review_widget.dart';
 import 'package:travelconverter/state_container.dart';
 
-import 'helpers/mock_widget_frame.dart';
-import 'mocks/mock_app_state.dart';
-import 'mocks/mock_currency.dart';
-import 'mocks/mock_internet_connectivity.dart';
-import 'mocks/mock_local_storage.dart';
+import '../../helpers/mock_widget_frame.dart';
+import '../../mocks/mock_app_state.dart';
+import '../../mocks/mock_currency.dart';
+import '../../mocks/mock_internet_connectivity.dart';
+import '../../mocks/mock_local_storage.dart';
 
 void main() {
   testWidgets(

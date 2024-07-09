@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:travelconverter/use_cases/home/ui/compare_currency_card.dart';
 
-import 'mocks/mock_app_container_builder.dart';
-import 'mocks/mock_currency.dart';
+import '../../../mocks/mock_app_container_builder.dart';
+import '../../../mocks/mock_currency.dart';
 
 void main() {
   Future whenCurrentValueIs(

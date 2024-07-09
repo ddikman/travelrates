@@ -2,21 +2,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:travelconverter/model/async_result.dart';
 import 'package:travelconverter/services/rates_loader.dart';
 
-import 'mocks/mock_local_storage.dart';
-import 'mocks/mock_rates_api.dart';
+import '../mocks/mock_local_storage.dart';
+import '../mocks/mock_rates_api.dart';
 
 void main() {
   final localStorage = new MockLocalStorage();
 
   final ratesApi = new MockRatesApi();
 
-  final ratesLoader = new RatesLoader(localStorage: localStorage, ratesApi: ratesApi);
+  final ratesLoader =
+      new RatesLoader(localStorage: localStorage, ratesApi: ratesApi);
 
   test('uses cached rates if online rates cannot be retrieved', () async {
     // given
     ratesApi.result = new AsyncResult.failed();
     localStorage.setFile("rates.json", '{"rates": {"SEK": 3.3}}');
-    
+
     final rates = await ratesLoader.loadOnlineRates();
     expect(rates.length, 1);
     expect(rates[0].currencyCode, 'SEK');

@@ -4,9 +4,9 @@ import 'package:intl/intl.dart';
 import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/app_core/widgets/app_snack_bar.dart';
 import 'package:travelconverter/model/conversion_model.dart';
-import 'package:travelconverter/screens/review_feature/app_review_service.dart';
-import 'package:travelconverter/screens/review_feature/review_rule.dart';
-import 'package:travelconverter/screens/review_feature/review_storage.dart';
+import 'package:travelconverter/use_cases/review_feature/app_review_service.dart';
+import 'package:travelconverter/use_cases/review_feature/review_rule.dart';
+import 'package:travelconverter/use_cases/review_feature/review_storage.dart';
 import 'package:travelconverter/state_container.dart';
 
 class ReviewWidget extends StatefulWidget {

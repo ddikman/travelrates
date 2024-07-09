@@ -1,10 +1,10 @@
-import 'package:travelconverter/helpers/sorting.dart';
+import 'package:travelconverter/services/sorting.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('sort helper correctly sorts alphabetically', () {
     final objects = <_TestObject>[
-      _TestObject('ceasar'),
+      _TestObject('caesar'),
       _TestObject('Delta'),
       _TestObject('alpha'),
       _TestObject('beta')
@@ -14,7 +14,7 @@ void main() {
         .map((o) => o.value)
         .toList();
 
-    expect(sorted, ['alpha', 'beta', 'ceasar', 'Delta']);
+    expect(sorted, ['alpha', 'beta', 'caesar', 'Delta']);
   });
 
   test('sort helper throws on invalid null list entry', () {

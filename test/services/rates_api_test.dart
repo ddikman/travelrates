@@ -8,7 +8,7 @@ import 'package:http/http.dart';
 import 'package:travelconverter/model/api_configuration.dart';
 import 'package:travelconverter/services/rates_api.dart';
 
-import 'helpers/assets_folder.dart';
+import '../helpers/assets_folder.dart';
 
 void main() {
   test("skips download of rates if offline", () async {
