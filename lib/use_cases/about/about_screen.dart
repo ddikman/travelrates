@@ -7,7 +7,7 @@ import 'package:travelconverter/app_core/widgets/app_button.dart';
 import 'package:travelconverter/app_core/widgets/page_scaffold.dart';
 import 'package:travelconverter/app_core/widgets/separated_extension.dart';
 import 'package:travelconverter/screens/review_feature/app_review_service.dart';
-import 'package:travelconverter/use_cases/about/dark_mode_setting_view.dart';
+import 'package:travelconverter/use_cases/about/dark_mode_selector_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -44,7 +44,7 @@ Let me know if you enjoy the app, every review motivates me to keep it running (
 If you want to get in touch, perhaps learn how this app is built or even hire me, visit [greycastle.se](https://greycastle.se).''',
             styleSheet: markdownStyle),
         const SizedBox(height: Paddings.listGap),
-        const DarkModeSettingView(),
+        const DarkModeSelectorView(),
       ].separatedWith(const SizedBox(height: Paddings.listGap)),
     ));
   }
