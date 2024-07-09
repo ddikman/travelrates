@@ -82,7 +82,7 @@ class ReviewWidgetState extends State<ReviewWidget> {
           await AppReviewService().request();
         });
 
-    Future.delayed(widget.toastDelay).then((_) {
+    await Future.delayed(widget.toastDelay).then((_) {
       AppSnackBar.show(context,
           accentColor: lightTheme.accent,
           duration: Duration(seconds: 10),

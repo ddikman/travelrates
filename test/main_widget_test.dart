@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travelconverter/app_root.dart';
+import 'package:travelconverter/app_state.dart';
 import 'package:travelconverter/model/async_result.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,11 +16,14 @@ void main() {
       (WidgetTester tester) async {
     final ratesApi = MockRatesApi();
     ratesApi.result = AsyncResult.failed();
-    final appRoot = new AppRoot(ratesApi: ratesApi);
     final state = mockAppState();
 
-    await tester.pumpWidget(new StateContainer(
-        child: appRoot,
+    await tester.pumpWidget(StateContainer(
+        child: Builder(
+          builder: (ctx) => ProviderScope(overrides: [
+            appStateProvider.overrideWithValue(StateContainer.of(ctx).appState)
+          ], child: AppRoot(ratesApi: ratesApi)),
+        ),
         state: state,
         statePersistence: MockStatePersistence()));
     await tester.pumpAndSettle();
