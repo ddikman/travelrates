@@ -11,50 +11,26 @@ import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/use_cases/currency_selection/state/selected_currencies_provider.dart';
 import 'package:travelconverter/use_cases/edit_currencies/state/available_currencies_provider.dart';
 import 'package:travelconverter/use_cases/edit_currencies/state/countries_provider.dart';
+import 'package:travelconverter/use_cases/edit_currencies/state/search_filter_provider.dart';
 import 'package:travelconverter/use_cases/home/services/add_currency_handler.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:travelconverter/use_cases/edit_currencies/services/currency_filter.dart';
 import 'package:travelconverter/use_cases/edit_currencies/ui/search_input.dart';
 import 'package:travelconverter/use_cases/edit_currencies/ui/select_currency_card.dart';
 
-class EditCurrenciesScreen extends StatefulWidget {
-  @override
-  EditCurrenciesScreenState createState() {
-    return new EditCurrenciesScreenState();
-  }
-}
-
-class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
-  List<Currency> allCurrencies = [];
-
-  String searchQuery = '';
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    final state = StateContainer.of(context).appState;
-    setState(() {
-      allCurrencies = state.availableCurrencies.getList();
-    });
-    super.didChangeDependencies();
-  }
-
+class EditCurrenciesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
-        body: Consumer(builder: (ctx, ref, _) => _buildCurrencyList(ref)));
+        body: Consumer(builder: (ctx, ref, _) => _buildCurrencyList(ctx, ref)));
   }
 
-  _buildCurrencyList(WidgetRef ref) {
+  _buildCurrencyList(BuildContext context, WidgetRef ref) {
     final stateContainer = StateContainer.of(context);
 
     final localization = AppLocalizations.of(context);
-    final selectedCurrencies = ref
-        .read(selectedCurrenciesProvider)
+    final selectedCurrencies = ref.watch(selectedCurrenciesProvider);
+    final selectedCurrencyWidgets = selectedCurrencies
         .map((currency) => Container(
               key: Key(currency.code),
               color: Colors.transparent,
@@ -75,7 +51,8 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
     final filter = CurrencyFilter(ref.watch(countriesProvider), localization);
 
     // The ReorderableListView is flutter standard and has a long-press reorder capability
-    final availableCurrencies = ref.watch(availableCurrenciesProvider);
+    final searchQuery = ref.watch(searchFilterProvider);
+    final allCurrencies = ref.watch(availableCurrenciesProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -85,18 +62,19 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
             style: ThemeTypography.small),
         Gap.list,
         SearchInput(
-          autoFocus: selectedCurrencies.length < 2,
-          onChange: (value) => setState(() => searchQuery = value),
+          autoFocus: selectedCurrencyWidgets.length < 2,
+          onChange: (value) =>
+              ref.read(searchFilterProvider.notifier).state = value,
         ),
         Gap.list,
-        if (searchQuery.isNotEmpty || selectedCurrencies.length < 3)
+        if (searchQuery.isNotEmpty || selectedCurrencyWidgets.length < 3)
           ...filter.getFiltered(allCurrencies, searchQuery).map((currency) {
             return SearchCurrencyResultEntry(
                 currency: currency,
-                isSelected: availableCurrencies.contains(currency.code),
+                isSelected: selectedCurrencies.contains(currency),
                 onTap: () => AddCurrencyHandler(currency).addCurrency(context));
           }),
-        if (selectedCurrencies.isNotEmpty) ...[
+        if (selectedCurrencyWidgets.isNotEmpty) ...[
           Gap.list,
           Text('Selected currencies', style: ThemeTypography.title),
           Text('Long press and drag to reorder', style: ThemeTypography.small),
@@ -105,17 +83,17 @@ class EditCurrenciesScreenState extends State<EditCurrenciesScreen> {
               proxyDecorator: (child, index, animation) => child,
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              children: selectedCurrencies,
-              onReorder: _reorderListEntry),
+              children: selectedCurrencyWidgets,
+              onReorder: (prev, next) =>
+                  _reorderListEntry(stateContainer, prev, next)),
         ]
       ],
     );
   }
 
-  void _reorderListEntry(int oldIndex, int newIndex) {
-    final stateContainer = StateContainer.of(context);
+  void _reorderListEntry(
+      StateContainerState stateContainer, int oldIndex, int newIndex) {
     final state = stateContainer.appState;
-
     var moveCurrency = state.conversion.currencies.elementAt(oldIndex);
     stateContainer.reorderCurrency(item: moveCurrency, newIndex: newIndex);
   }
