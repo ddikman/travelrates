@@ -63,8 +63,6 @@ class EditCurrenciesScreen extends StatelessWidget {
         Gap.list,
         SearchInput(
           autoFocus: selectedCurrencyWidgets.length < 2,
-          onChange: (value) =>
-              ref.read(searchFilterProvider.notifier).state = value,
         ),
         Gap.list,
         if (searchQuery.isNotEmpty || selectedCurrencyWidgets.length < 3)
