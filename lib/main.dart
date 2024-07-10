@@ -22,7 +22,8 @@ void main() async {
   runApp(StateContainer(
       child: Builder(
         builder: (ctx) => ProviderScope(overrides: [
-          appStateProvider.overrideWithValue(StateContainer.of(ctx).appState)
+          appStateProvider.overrideWithValue(StateContainer.of(ctx).appState),
+          stateContainerProvider.overrideWithValue(StateContainer.of(ctx))
         ], child: AppRoot(ratesApi: ratesApi)),
       ),
       state: state,
