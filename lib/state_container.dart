@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travelconverter/app_state.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/model/currency_rate.dart';
@@ -10,6 +11,9 @@ import 'package:travelconverter/model/currency.dart';
 import 'package:flutter/material.dart';
 
 import 'duplicate_currency_error.dart';
+
+final stateContainerProvider =
+    Provider<StateContainerState>((ref) => throw Exception("Not initialized"));
 
 class StateContainer extends StatefulWidget {
   final Widget child;
@@ -122,13 +126,20 @@ class StateContainerState extends State<StateContainer> {
   void reorderCurrency({required String item, required int newIndex}) {
     log.event("reorder", "reordering $item to be at index $newIndex..");
     final currencies = List<String>.from(appState.conversion.currencies);
+
+    var insertIndex = newIndex;
+    if (insertIndex > currencies.indexOf(item)) {
+      // Since we'll remove it, the index position will shift
+      insertIndex -= 1;
+    }
+
     currencies.remove(item);
 
     if (newIndex > currencies.length) {
       // insert at bottom
       currencies.add(item);
     } else {
-      currencies.insert(newIndex, item);
+      currencies.insert(insertIndex, item);
     }
     _updateConversion(appState.conversion.withCurrencies(currencies));
   }
