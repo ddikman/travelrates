@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travelconverter/app_core/theme/colors.dart';
 import 'package:travelconverter/app_core/theme/sizes.dart';
+import 'package:travelconverter/use_cases/edit_currencies/state/search_filter_provider.dart';
 
-class SearchInput extends StatefulWidget {
-  final ValueChanged<String> onChange;
+class SearchInput extends ConsumerStatefulWidget {
   final bool autoFocus;
 
-  const SearchInput({super.key, required this.onChange, this.autoFocus = true});
+  const SearchInput({super.key, this.autoFocus = true});
 
   @override
-  State<SearchInput> createState() => _SearchInputState();
+  _SearchInputState createState() => _SearchInputState();
 }
 
-class _SearchInputState extends State<SearchInput> {
-  final controller = TextEditingController();
+class _SearchInputState extends ConsumerState<SearchInput> {
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      onChanged: (value) =>
+          ref.read(searchFilterProvider.notifier).state = value,
       autofocus: widget.autoFocus,
-      onChanged: (value) => widget.onChange(value),
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(Paddings.small),
         hintStyle: TextStyle(color: lightTheme.text30),

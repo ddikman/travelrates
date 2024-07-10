@@ -1,3 +1,3 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final searchFilterProvider = StateProvider<String>((ref) => '');
+final searchFilterProvider = StateProvider.autoDispose((ref) => "");
