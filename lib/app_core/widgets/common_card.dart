@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelconverter/app_core/theme/colors.dart';
-import 'package:travelconverter/app_core/theme/sizes.dart';
+import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 
 class CommonCard extends StatelessWidget {
@@ -13,7 +12,7 @@ class CommonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final container = Container(
         decoration: BoxDecoration(
-          color: lightTheme.backgroundSecondary,
+          color: context.themeColors.backgroundSecondary,
           borderRadius: BorderRadius.circular(Rounding.large),
         ),
         child: child.padAll(Paddings.medium));

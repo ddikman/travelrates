@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:travelconverter/app_core/theme/colors.dart';
-import 'package:travelconverter/app_core/theme/sizes.dart';
+import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/app_bar_icon.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 
@@ -27,9 +26,9 @@ class PageScaffold extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: lightTheme.background60,
-        surfaceTintColor: lightTheme.background60,
-        foregroundColor: lightTheme.text,
+        backgroundColor: context.themeColors.background60,
+        surfaceTintColor: context.themeColors.background60,
+        foregroundColor: context.themeColors.text,
         automaticallyImplyLeading: false,
         leading: appBarLeftAction ?? _backButton(context),
         actions: [

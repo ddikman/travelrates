@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelconverter/app_core/theme/typography.dart';
+import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/currency_card.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';

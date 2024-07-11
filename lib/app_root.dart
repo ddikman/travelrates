@@ -1,8 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
-import 'package:travelconverter/app_core/theme/colors.dart';
-import 'package:travelconverter/app_core/theme/typography.dart';
+import 'package:travelconverter/app_core/theme/theme_colors.dart';
 import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/routing/router.dart';
@@ -55,7 +54,9 @@ class _AppRootState extends State<AppRoot> {
   Widget build(BuildContext context) {
     return new MaterialApp.router(
       routerConfig: router,
-      theme: _constructTheme(),
+      theme: _constructTheme(lightTheme),
+      darkTheme: _constructTheme(darkTheme),
+      themeMode: ThemeMode.system,
       localizationsDelegates: [
         const AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -67,41 +68,36 @@ class _AppRootState extends State<AppRoot> {
     );
   }
 
-  _constructTheme() {
+  _constructTheme(ThemeColors colorTheme) {
     final baseTheme = Theme.of(context);
 
-    final baseTextStyle = TextStyle(
-        color: lightTheme.text, fontFamily: ThemeTypography.fontFamily);
-
-    final textTheme = baseTheme.textTheme.copyWith(
-      headlineMedium: baseTextStyle.copyWith(),
-      bodyMedium: baseTextStyle.copyWith(),
+    final textTheme = baseTheme.textTheme.apply(
+      bodyColor: colorTheme.text,
     );
 
     final iconTheme =
-        baseTheme.primaryIconTheme.copyWith(color: lightTheme.text);
+        baseTheme.primaryIconTheme.copyWith(color: colorTheme.text);
 
     final bottomSheetTheme = baseTheme.bottomSheetTheme.copyWith(
-        backgroundColor: lightTheme.background,
+        backgroundColor: colorTheme.background,
         elevation: 16,
         shadowColor: Colors.black);
 
-    final snackbarTheme = baseTheme.snackBarTheme.copyWith(
-      backgroundColor: lightTheme.background,
-      contentTextStyle: baseTextStyle.copyWith(color: lightTheme.text),
-      actionTextColor: lightTheme.text,
-      elevation: 2,
+    final textSelectionTheme = baseTheme.textSelectionTheme.copyWith(
+      cursorColor: colorTheme.accent,
+      selectionColor: colorTheme.accent30,
+      selectionHandleColor: colorTheme.accent,
     );
 
     return new ThemeData(
+        textSelectionTheme: textSelectionTheme,
         iconTheme: iconTheme,
         textTheme: textTheme,
         bottomSheetTheme: bottomSheetTheme,
-        scaffoldBackgroundColor: lightTheme.background,
-        snackBarTheme: snackbarTheme,
+        scaffoldBackgroundColor: colorTheme.background,
         appBarTheme: baseTheme.appBarTheme.copyWith(
-            backgroundColor: lightTheme.background,
-            foregroundColor: lightTheme.text));
+            backgroundColor: colorTheme.background,
+            foregroundColor: colorTheme.text));
   }
 
   void handleLoadedRates(List<CurrencyRate> rates) {

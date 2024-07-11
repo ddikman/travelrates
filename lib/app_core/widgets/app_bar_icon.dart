@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelconverter/app_core/theme/sizes.dart';
+import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 
 class AppBarIcon extends StatelessWidget {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travelconverter/app_core/theme/colors.dart';
-import 'package:travelconverter/app_core/theme/sizes.dart';
 import 'package:travelconverter/app_core/widgets/separated_extension.dart';
+import 'package:travelconverter/app_core/theme/app_theme.dart';
 
 typedef SegmentedSelectorCallback<T> = void Function(T value);
 
@@ -37,7 +36,7 @@ class _SegmentedSelectorState<T> extends State<SegmentedSelector<T>> {
     return Container(
       padding: EdgeInsets.all(4.0),
       decoration: BoxDecoration(
-          color: lightTheme.backgroundSecondary,
+          color: context.themeColors.backgroundSecondary,
           borderRadius: BorderRadius.circular(Rounding.small)),
       child: Row(
           mainAxisSize: MainAxisSize.max,
@@ -70,15 +69,15 @@ class _SegmentButton extends StatelessWidget {
       behavior: HitTestBehavior.translucent,
       child: Container(
         decoration: BoxDecoration(
-            color: isSelected ? lightTheme.accent : Colors.transparent,
+            color: isSelected ? context.themeColors.accent : Colors.transparent,
             borderRadius: BorderRadius.circular(Rounding.small)),
         padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
         child: Text(label,
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: isSelected
-                    ? lightTheme.backgroundSecondary
-                    : lightTheme.text)),
+                    ? context.themeColors.backgroundSecondary
+                    : context.themeColors.text)),
       ),
     );
   }
