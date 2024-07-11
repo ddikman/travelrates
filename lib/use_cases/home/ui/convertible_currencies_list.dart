@@ -1,7 +1,6 @@
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:travelconverter/app_core/theme/sizes.dart';
-import 'package:travelconverter/app_core/theme/typography.dart';
+import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 import 'package:travelconverter/use_cases/currency_selection/state/selected_currencies_notifier.dart';

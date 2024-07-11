@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelconverter/app_core/theme/colors.dart';
-import 'package:travelconverter/app_core/theme/sizes.dart';
+import 'package:travelconverter/app_core/theme/app_theme.dart';
 
 class AppButton extends StatelessWidget {
   final String label;
@@ -14,8 +13,8 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          backgroundColor: lightTheme.accent,
-          foregroundColor: lightTheme.backgroundSecondary,
+          backgroundColor: context.themeColors.accent,
+          foregroundColor: context.themeColors.backgroundSecondary,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(Rounding.small),

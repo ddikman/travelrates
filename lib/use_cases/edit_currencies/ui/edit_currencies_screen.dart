@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:travelconverter/app_core/theme/colors.dart';
-import 'package:travelconverter/app_core/theme/sizes.dart';
-import 'package:travelconverter/app_core/theme/typography.dart';
+import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/app_core/widgets/page_scaffold.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
@@ -42,7 +40,7 @@ class EditCurrenciesScreen extends StatelessWidget {
                     currency: currency,
                     onTap: () {},
                     icon: Icons.low_priority,
-                    iconColor: lightTheme.accent,
+                    iconColor: context.themeColors.accent,
                   )).pad(bottom: Paddings.listGap),
             ))
         .toList();
@@ -102,7 +100,8 @@ class SearchCurrencyResultEntry extends ConsumerWidget {
     final card = SelectCurrencyCard(
         currency: currency,
         icon: isSelected ? Icons.check : Icons.add_circle_outline,
-        iconColor: isSelected ? lightTheme.green : lightTheme.accent,
+        iconColor:
+            isSelected ? context.themeColors.green : context.themeColors.accent,
         onTap: () {
           AddCurrencyHandler(currency,
                   ref.read(selectedCurrenciesNotifierProvider.notifier))

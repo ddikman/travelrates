@@ -1,7 +1,6 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:travelconverter/app_core/theme/colors.dart';
-import 'package:travelconverter/app_core/theme/sizes.dart';
+import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 
 class AppSnackBar extends StatelessWidget {
@@ -20,7 +19,7 @@ class AppSnackBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: lightTheme.background,
+          color: context.themeColors.background,
           boxShadow: [
             BoxShadow(blurRadius: 4.0, color: Colors.black.withOpacity(0.25))
           ],
@@ -39,7 +38,7 @@ class AppSnackBar extends StatelessWidget {
             Expanded(
               child: Text(
                 message,
-                style: TextStyle(color: lightTheme.text),
+                style: TextStyle(color: context.themeColors.text),
               ),
             ),
             if (action != null)

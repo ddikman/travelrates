@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:travelconverter/app_core/theme/colors.dart';
-import 'package:travelconverter/app_core/theme/sizes.dart';
-import 'package:travelconverter/app_core/theme/typography.dart';
+import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 import 'package:travelconverter/use_cases/home/services/currency_input_formatter.dart';
 
@@ -146,13 +144,13 @@ class _KeyboardButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Ink(
       decoration: BoxDecoration(
-        color: lightTheme.backgroundSecondary,
+        color: context.themeColors.backgroundSecondary,
         borderRadius: BorderRadius.circular(100),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(100),
         onTap: () => onPressed(),
-        splashColor: lightTheme.text30,
+        splashColor: context.themeColors.text30,
         child: Center(child: child),
       ),
     );

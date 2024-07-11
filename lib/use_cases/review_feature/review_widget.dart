@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:travelconverter/app_core/theme/colors.dart';
+import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/app_snack_bar.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/use_cases/review_feature/app_review_service.dart';
@@ -84,7 +84,7 @@ class ReviewWidgetState extends State<ReviewWidget> {
 
     await Future.delayed(widget.toastDelay).then((_) {
       AppSnackBar.show(context,
-          accentColor: lightTheme.accent,
+          accentColor: context.themeColors.accent,
           duration: Duration(seconds: 10),
           text: toastMessage,
           action: action);
