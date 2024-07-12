@@ -25,11 +25,15 @@ class _HomeScreenAnimationState extends State<HomeScreenAnimation> {
 
   @override
   Widget build(BuildContext context) {
-    return RiveAnimation.asset('assets/animations/tokyo-skyline.riv',
-        fit: BoxFit.fitWidth,
-        stateMachines: ['Idle'],
-        alignment: Alignment.bottomCenter,
-        onInit: (artboard) => _initAnimation(artboard, context.isDarkMode));
+    // I have to force the size to avoid a white line appearing at the top in dark mode due to anti-aliasing
+    return SizedBox(
+      height: 256,
+      child: RiveAnimation.asset('assets/animations/tokyo-skyline.riv',
+          fit: BoxFit.fitHeight,
+          stateMachines: ['Idle'],
+          alignment: Alignment.bottomCenter,
+          onInit: (artboard) => _initAnimation(artboard, context.isDarkMode)),
+    );
   }
 
   void _initAnimation(Artboard artboard, bool isDarkMode) {
