@@ -23,7 +23,10 @@ class MainScreen extends StatelessWidget {
         children: [
           Expanded(
             child: Stack(children: [
-              if (!isTesting) HomeScreenAnimation(),
+              if (!isTesting)
+                Align(
+                    alignment: Alignment.bottomCenter,
+                    child: HomeScreenAnimation()),
               PageScaffold(
                 transparent: true,
                 appBarLeftAction: AppBarIcon(
