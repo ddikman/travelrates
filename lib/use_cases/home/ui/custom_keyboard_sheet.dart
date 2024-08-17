@@ -1,3 +1,4 @@
+import 'package:expressions/expressions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travelconverter/app_core/theme/app_theme.dart';
@@ -18,7 +19,14 @@ class CustomKeyboardSheet extends StatefulWidget {
 }
 
 class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
+  static const multiplication = '×';
+  static const division = '÷';
+
+  static const _expressionEvaluator = const ExpressionEvaluator();
+
   late final TextEditingController _inputController;
+
+  String _multiplyOrDivide = multiplication;
 
   final CurrencyInputFormatter _currencyInputFormatter =
       CurrencyInputFormatter();
@@ -26,6 +34,13 @@ class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
   @override
   void initState() {
     _inputController = TextEditingController();
+    _inputController.addListener(() {
+      final lastCharacter = _inputController.text.characters.lastOrNull;
+      setState(() {
+        _multiplyOrDivide =
+            lastCharacter == multiplication ? division : multiplication;
+      });
+    });
     super.initState();
   }
 
@@ -68,21 +83,25 @@ class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
                       text: '8', onPressed: () => _addDigit(8)),
                   _KeyboardButton.character(
                       text: '9', onPressed: () => _addDigit(9)),
-                  _KeyboardButton.character(text: '+', onPressed: () {}),
+                  _KeyboardButton.character(
+                      text: '+', onPressed: () => _addOperator('+')),
                   _KeyboardButton.character(
                       text: '4', onPressed: () => _addDigit(4)),
                   _KeyboardButton.character(
                       text: '5', onPressed: () => _addDigit(5)),
                   _KeyboardButton.character(
                       text: '6', onPressed: () => _addDigit(6)),
-                  _KeyboardButton.character(text: '-', onPressed: () {}),
+                  _KeyboardButton.character(
+                      text: '-', onPressed: () => _addOperator('-')),
                   _KeyboardButton.character(
                       text: '1', onPressed: () => _addDigit(1)),
                   _KeyboardButton.character(
                       text: '2', onPressed: () => _addDigit(2)),
                   _KeyboardButton.character(
                       text: '3', onPressed: () => _addDigit(3)),
-                  SizedBox(),
+                  _KeyboardButton.character(
+                      text: _multiplyOrDivide,
+                      onPressed: () => _addOperator(_multiplyOrDivide)),
                   _KeyboardButton.character(
                       text: '0', onPressed: () => _addDigit(0)),
                   _KeyboardButton.character(
@@ -107,8 +126,38 @@ class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
     _inputController.text = newText;
   }
 
+  _addOperator(String operator) {
+    final text = _inputController.text;
+    if (_isOperator(text.characters.last)) {
+      final newText = text.substring(0, text.length - 1) + operator;
+      _inputController.text = newText;
+    } else {
+      _inputController.text = text + operator;
+    }
+  }
+
   _submit(BuildContext context) {
-    context.pop(double.parse(_inputController.text));
+    // If it's just a simple value, return as-is
+    final asValue = double.tryParse(_inputController.text);
+    if (asValue != null) {
+      context.pop(asValue);
+      return;
+    }
+
+    // otherwise, clean the string and evaluate the expression
+    final text = _inputController.text.replaceAll(RegExp(r'\D+$'), '');
+
+    // replace the multiplication and division symbols
+    final cleanedText =
+        text.replaceAll(multiplication, '*').replaceAll(division, '/');
+
+    final expression = Expression.parse(cleanedText);
+    final result = _expressionEvaluator.eval(expression, {});
+    if (result is int) {
+      context.pop(result.toDouble());
+    } else {
+      context.pop(result);
+    }
   }
 
   _addPeriod() {
@@ -125,6 +174,13 @@ class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
       final newText = text.substring(0, text.length - 1);
       _inputController.text = newText;
     }
+  }
+
+  bool _isOperator(String character) {
+    return character == '+' ||
+        character == '-' ||
+        character == multiplication ||
+        character == division;
   }
 }
 
