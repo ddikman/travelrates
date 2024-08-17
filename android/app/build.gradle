@@ -4,6 +4,7 @@ plugins {
     id 'com.google.gms.google-services'
     // END: FlutterFire Configuration
     id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
 
@@ -34,11 +35,16 @@ android {
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId "se.greycastle.travelconverter"
-        minSdkVersion 21
+        minSdkVersion 23
         // targetSdkVersion flutter.targetSdkVersion
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

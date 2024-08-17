@@ -106,5 +106,5 @@ assets/data/apiConfiguration.json
 ios/Runner.app.*
 ios/Runner.ipa
 
-# fastlane files
-**/fastlane/report.xml
+# build files
+dist/
