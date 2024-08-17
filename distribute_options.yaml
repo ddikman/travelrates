@@ -1,0 +1,24 @@
+output: dist/
+
+releases:
+  - name: internal
+    jobs:
+      - name: release-android
+        package:
+          platform: android
+          target: aab
+          build_args:
+            target-platform: android-arm,android-arm64
+        publish:
+          target: playstore
+          args:
+            package-name: se.greycastle.travelconverter
+            track: internal
+      - name: release-ios
+        package:
+          platform: ios
+          target: ipa
+          build_args:
+            export-method: ad-hoc
+        publish:
+          target: appstore
