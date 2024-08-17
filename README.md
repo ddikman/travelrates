@@ -17,13 +17,13 @@ Use [flutter_distribute](https://distributor.leanflutter.dev/).
 
 ```shell
 source .env
-flutter_distributor publish --name internal
+flutter_distributor release --name internal
 ```
 
 Or for individual apps:
 ```shell
-flutter_distributor publish --name internal --jobs release-android
-flutter_distributor publish --name internal --jobs release-ios
+flutter_distributor release --name internal --jobs release-android
+flutter_distributor release --name internal --jobs release-ios
 ```
 
 This will upload to Testflight and/or Google Play internal track.
