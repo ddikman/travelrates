@@ -13,6 +13,21 @@ https://greycastle.gitlab.io/travel-rates/coverage/
 
 ## Building releases
 
+Use [flutter_distribute](https://distributor.leanflutter.dev/).
+
+```shell
+source .env
+flutter_distributor publish --name internal
+```
+
+Or for individual apps:
+```shell
+flutter_distributor publish --name internal --jobs release-android
+flutter_distributor publish --name internal --jobs release-ios
+```
+
+This will upload to Testflight and/or Google Play internal track.
+
 ### Generating localizations
 
 Run the Intl commands to scrape code for existing messages that need localizations and then generate code files for these.
@@ -38,38 +53,6 @@ The hidden api tokens and api url should be stored in json format alike this bel
   "apiUrl": "http://urlpath.com"
 }
 ```
-
-### Android
-
-To build the android release apk you simply run `flutter build apk --target-platform android-arm,android-arm64 --split-per-abi --release`. However, before that you'll need to create a local keystore of course.
-Make sure you store this some good place (outside of source control) and then reference it in the a `key.properties` file placed in the `android` folder.
-This is referenced by the `android/app/build.gradle` signing settings.
-
-Recording video and taking screenshots from the connected device is possible using the android debug bridge:
-```bash
-adb devices
-adb shell screenrecord /sdcard/demo.mp4
-adb pull /sdcard/demo.mp4
-```
-
-For screenshots:
-```bash
-adb shell screencap /sdcard/screen.png
-adb pull /sdcard/screen.png
-```
-
-### iOS
-
-For iOS distribution you can use fastlane.
-
-```
-cd ios/fastlane
-bundle exec fastlane ios beta
-```
-
-And that's it. You will need to set the required parameters to authenticate, either you can set the environment variables used in `ios/fastlane/Appfile` or simply delete the file and fastlane will prompt you for them as it runs.
-
-To build the application for distribution, same way locally as in Github, you will have to have the distribution certificate installed locally.
 
 ### Icons and splash screen
 
