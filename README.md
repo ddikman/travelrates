@@ -2,6 +2,11 @@
 
 Handy multi-currency converter specifically for backpackers.
 
+See most recent designs in [Figma]([https://github.com/ddikman/travelrates](https://www.figma.com/design/3Gx8Pok1mCaFppsBNS9Qgs/TravelRates?node-id=2607-530&t=VRdlcdsC7WmtL4FJ-4)).
+
+![image](https://github.com/user-attachments/assets/882a83b1-cead-44fc-ae50-0475a8daeaac)
+
+
 ## Getting Started
 
 For help getting started with Flutter, view our online
