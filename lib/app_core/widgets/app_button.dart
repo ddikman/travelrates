@@ -23,10 +23,15 @@ class AppButton extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(label),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: context.themeColors.contrastText,
+                ),
+          ),
           if (icon != null) ...[
             const SizedBox(width: Paddings.listGap),
-            Icon(icon, size: 16.0)
+            Icon(icon, size: 16.0, color: context.themeColors.contrastText),
           ],
         ],
       ),
