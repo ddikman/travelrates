@@ -91,7 +91,6 @@ ios/Flutter/flutter_export_environment.sh
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
-
 # test and coverage data is all temporary so ignore it
 coverage/
 testreport.xml
@@ -105,6 +104,10 @@ assets/data/apiConfiguration.json
 # ios temporary build files
 ios/Runner.app.*
 ios/Runner.ipa
+ios/Flutter/Flutter.podspec
 
 # build files
 dist/
+
+# FVM Version Cache
+.fvm/

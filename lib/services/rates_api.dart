@@ -29,7 +29,7 @@ class RatesApi {
 
       if (response.statusCode != 200) {
         log.error(
-            'failed to get currency codes, server responded with status ${response.statusCode}: \r\n${response.body}');
+            'failed to get currency codes, server responded with status ${response.statusCode}:\n${response.body}');
         return AsyncResult.failed();
       }
 
