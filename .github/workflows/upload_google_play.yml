@@ -17,10 +17,15 @@ jobs:
       - name: Fix flutter SDK folder permission
         run: git config --global --add safe.directory /tmp/flutter/--
 
+      - uses: kuhnroyal/flutter-fvm-config-action@v3
+        id: fvm-config-action
+        with:
+          path: '.fvmrc'
+
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.0.1'
-          channel: 'stable'
+          flutter-version:  ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel:  ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
 
       - name: Write API keys
         env:
@@ -45,7 +50,7 @@ jobs:
           echo -n "storeFile=$KEY_PATH" >> android/key.properties # add the dynamic path
           echo "Contents of key.properties:"
           cat android/key.properties
-          
+
           echo -n "$ANDROID_KEY_STORE_BASE_64" | base64 -d > $KEY_PATH
 
           echo "Building app"
@@ -53,7 +58,7 @@ jobs:
           flutter clean
           flutter build appbundle
           echo "Flutter build successful."
-          
+
           cd android
           echo "Save distribution service account api key"
           echo -n "$PLAY_STORE_DISTRIBUTION_JSON_BASE64" | base64 -d > service_key.json

@@ -17,15 +17,15 @@ jobs:
       - name: Fix flutter SDK folder permission
         run: git config --global --add safe.directory /tmp/flutter/--
 
-      - name: Determine Flutter version
-        uses: antifree/json-to-variables@v1.2.0
+      - uses: kuhnroyal/flutter-fvm-config-action@v3
+        id: fvm-config-action
         with:
-          filename: '.fvm/fvm_config.json'
-          prefix: fvm
+          path: '.fvmrc'
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ env.fvm_flutterSdkVersion }}
+          flutter-version:  ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel:  ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
 
       - name: Install dependencies
         run: |
