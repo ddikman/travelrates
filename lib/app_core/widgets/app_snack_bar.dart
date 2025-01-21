@@ -42,10 +42,16 @@ class AppSnackBar extends StatelessWidget {
               ),
             ),
             if (action != null)
-              Text(action!.label,
-                      style: TextStyle(
-                          color: accentColor, fontWeight: FontWeight.bold))
-                  .pad(left: Paddings.small),
+              GestureDetector(
+                onTap: () {
+                  action!.onPressed();
+                },
+                behavior: HitTestBehavior.opaque,
+                child: Text(action!.label,
+                        style: TextStyle(
+                            color: accentColor, fontWeight: FontWeight.bold))
+                    .pad(left: Paddings.small),
+              ),
           ],
         ),
       ),
@@ -75,19 +81,23 @@ class AppSnackBar extends StatelessWidget {
       SnackBarAction? action,
       IconData? icon}) {
     final snackBar = AppSnackBar(
-        message: text, accentColor: accentColor, icon: icon, action: action);
+      message: text,
+      accentColor: accentColor,
+      icon: icon,
+      action: action,
+    );
 
-    AnimatedSnackBar(
-            builder: (context) => snackBar,
-            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
-            mobilePositionSettings: MobilePositionSettings(
-              bottomOnAppearance: Paddings.large,
-              left: Paddings.scaffold,
-              right: Paddings.scaffold,
-            ),
-            duration: duration,
-            animationCurve: Curves.easeOutBack,
-            animationDuration: Duration(milliseconds: 500))
-        .show(context);
+    final animatedSnackBar = AnimatedSnackBar(
+        builder: (context) => snackBar,
+        mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+        mobilePositionSettings: MobilePositionSettings(
+          bottomOnAppearance: Paddings.large,
+          left: Paddings.scaffold,
+          right: Paddings.scaffold,
+        ),
+        duration: duration,
+        animationCurve: Curves.easeOutBack,
+        animationDuration: Duration(milliseconds: 500));
+    animatedSnackBar.show(context);
   }
 }

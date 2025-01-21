@@ -35,12 +35,7 @@ This will upload to Testflight and/or Google Play internal track.
 
 ### Generating localizations
 
-Run the Intl commands to scrape code for existing messages that need localizations and then generate code files for these.
-```bash
-$ flutter pub pub run intl_generator:extract_to_arb --output-dir=assets/l10n lib/**/**.dart --output-file=intl_en.arb
-$ flutter pub run intl_generator:generate_from_arb --no-use-deferred-loading --output-dir=lib/l10n lib/**/**.dart assets/l10n/intl_*.arb
-
-```
+Just run the `pub get` and the localizations should be generated. Access the locale by using `context.l10n.<name>`.
 
 To generate new localizations for country names and currencies, with NodeJs v10.9+ run (from project root folder):
 ```bash

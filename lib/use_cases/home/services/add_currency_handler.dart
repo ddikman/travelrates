@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:travelconverter/app_core/widgets/app_snack_bar.dart';
-import 'package:travelconverter/l10n/app_localizations.dart';
+import 'package:travelconverter/l10n/l10n_extension.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/use_cases/currency_selection/state/selected_currencies_notifier.dart';
@@ -20,12 +19,11 @@ class AddCurrencyHandler {
         "${currency.name} already added, showing snack instead",
         parameters: {'currency': currency.name});
 
-    final localizations = AppLocalizations.of(context);
     var currencyLocalizedName =
-        localizations.currencies.getLocalized(currency.code);
+        context.l10nData.currencies.getLocalized(currency.code);
 
-    AppSnackBar.showError(
-        context, _alreadySelectedWarning(currencyLocalizedName));
+    final message = context.l10n.alreadySelectedWarning(currencyLocalizedName);
+    AppSnackBar.showError(context, message);
   }
 
   addCurrency(BuildContext context) {
@@ -38,13 +36,5 @@ class AddCurrencyHandler {
     } catch (DuplicateCurrencyError) {
       _displayNotice(context);
     }
-  }
-
-  String _alreadySelectedWarning(String currencyName) {
-    return Intl.message("$currencyName is already selected!",
-        name: "_alreadySelectedWarning",
-        desc:
-            "Text displayed when trying to add a currency that is already added.",
-        args: [currencyName]);
   }
 }

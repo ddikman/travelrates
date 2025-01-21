@@ -10,8 +10,11 @@ dependencies:
 
   flutter:
     sdk: flutter
+
+  # localization
   flutter_localizations:
     sdk: flutter
+  intl:
 
   # navigation
   go_router: ^14.2.0
@@ -26,7 +29,7 @@ dependencies:
   http: ^1.2.1
   device_info_plus: ^10.1.0
   connectivity: ^3.0.6
-  intl:
+  device_preview:
 
   # user interface
   app_review_plus: ^2.3.3
@@ -69,6 +72,8 @@ flutter_launcher_icons:
 
 flutter:
   uses-material-design: true
+
+  generate: true
 
   assets:
     - assets/data/currencies.json

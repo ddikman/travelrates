@@ -1,20 +1,21 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travelconverter/app_core/theme/theme_colors.dart';
-import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
+import 'package:travelconverter/l10n/localized_data.dart';
+import 'package:travelconverter/l10n/localized_data_provider.dart';
 import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/routing/router.dart';
-import 'package:travelconverter/l10n/app_localizations_delegate.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelconverter/services/rates_api.dart';
 import 'package:travelconverter/services/rates_loader.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:travelconverter/use_cases/dark_mode/state/theme_brightness_notifier_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppRoot extends StatefulWidget {
   final RatesApi ratesApi;
@@ -61,14 +62,20 @@ class _AppRootState extends State<AppRoot> {
         theme: _constructTheme(lightTheme),
         darkTheme: _constructTheme(darkTheme),
         themeMode: themeBrightnessSetting,
-        localizationsDelegates: [
-          const AppLocalizationsDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          const FallbackMaterialLocalisationsDelegate()
-        ],
-        supportedLocales: AppLocalizationsDelegate.supportedLocales,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,
+        locale: DevicePreview.locale(context),
+        builder: (context, child) {
+          final locale = Localizations.localeOf(context);
+          debugPrint("context: ${locale}");
+          return LocalizedDataProvider(
+            data: LocalizedData.withLocale(
+              locale,
+            ),
+            child: child!,
+          );
+        },
       );
     });
   }
