@@ -18,6 +18,7 @@ dependencies:
 
   # state
   flutter_riverpod: ^2.5.1
+  shared_preferences: ^2.2.2
 
   # utilities
   json_annotation: 4.9.0

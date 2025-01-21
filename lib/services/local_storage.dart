@@ -40,7 +40,6 @@ class LocalFile implements FileOperations {
 }
 
 abstract class FileOperations {
-
   Future<Null> writeContents(String contents);
 
   Future<String> get contents;

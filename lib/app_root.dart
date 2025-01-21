@@ -1,6 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travelconverter/app_core/theme/theme_colors.dart';
 import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:travelconverter/model/currency_rate.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelconverter/services/rates_api.dart';
 import 'package:travelconverter/services/rates_loader.dart';
 import 'package:travelconverter/state_container.dart';
+import 'package:travelconverter/use_cases/dark_mode/state/theme_brightness_notifier_provider.dart';
 
 class AppRoot extends StatefulWidget {
   final RatesApi ratesApi;
@@ -52,20 +54,23 @@ class _AppRootState extends State<AppRoot> {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp.router(
-      routerConfig: router,
-      theme: _constructTheme(lightTheme),
-      darkTheme: _constructTheme(darkTheme),
-      themeMode: ThemeMode.system,
-      localizationsDelegates: [
-        const AppLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        const FallbackMaterialLocalisationsDelegate()
-      ],
-      supportedLocales: AppLocalizationsDelegate.supportedLocales,
-      debugShowCheckedModeBanner: false,
-    );
+    return Consumer(builder: (context, ref, child) {
+      final themeBrightnessSetting = ref.watch(themeBrightnessNotifierProvider);
+      return new MaterialApp.router(
+        routerConfig: router,
+        theme: _constructTheme(lightTheme),
+        darkTheme: _constructTheme(darkTheme),
+        themeMode: themeBrightnessSetting,
+        localizationsDelegates: [
+          const AppLocalizationsDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          const FallbackMaterialLocalisationsDelegate()
+        ],
+        supportedLocales: AppLocalizationsDelegate.supportedLocales,
+        debugShowCheckedModeBanner: false,
+      );
+    });
   }
 
   _constructTheme(ThemeColors colorTheme) {
@@ -90,6 +95,9 @@ class _AppRootState extends State<AppRoot> {
     );
 
     return new ThemeData(
+        brightness: colorTheme.mode == ThemeMode.dark
+            ? Brightness.dark
+            : Brightness.light,
         textSelectionTheme: textSelectionTheme,
         iconTheme: iconTheme,
         textTheme: textTheme,
