@@ -1,6 +1,7 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
 class ThemeColors {
+  final ThemeMode mode;
   final Color background;
   final Color background60;
   final Color backgroundSecondary;
@@ -14,6 +15,7 @@ class ThemeColors {
   final Color contrastText;
 
   const ThemeColors({
+    required this.mode,
     required this.background,
     required this.background60,
     required this.backgroundSecondary,
@@ -29,6 +31,7 @@ class ThemeColors {
 }
 
 const ThemeColors lightTheme = ThemeColors(
+  mode: ThemeMode.light,
   background: Color(0xfffdfdfd),
   background60: Color(0x99fdfdfd),
   backgroundSecondary: Color(0xffF3F3F3),
@@ -43,6 +46,7 @@ const ThemeColors lightTheme = ThemeColors(
 );
 
 const ThemeColors darkTheme = ThemeColors(
+  mode: ThemeMode.dark,
   background: Color(0xff202020),
   background60: Color(0x99202020),
   backgroundSecondary: Color(0xff383838),

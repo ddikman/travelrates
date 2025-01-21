@@ -36,8 +36,9 @@ class _SegmentedSelectorState<T> extends State<SegmentedSelector<T>> {
     return Container(
       padding: EdgeInsets.all(4.0),
       decoration: BoxDecoration(
-          color: context.themeColors.backgroundSecondary,
-          borderRadius: BorderRadius.circular(Rounding.small)),
+        color: context.themeColors.backgroundSecondary,
+        borderRadius: BorderRadius.circular(Rounding.small),
+      ),
       child: Row(
           mainAxisSize: MainAxisSize.max,
           children: List.generate(
@@ -46,8 +47,11 @@ class _SegmentedSelectorState<T> extends State<SegmentedSelector<T>> {
                     child: _SegmentButton(
                       isSelected: _selectedValue == widget.values[index],
                       label: widget.labels[index],
-                      onPressed: () =>
-                          setState(() => _selectedValue = widget.values[index]),
+                      onPressed: () {
+                        final value = widget.values[index];
+                        setState(() => _selectedValue = value);
+                        widget.onSelectionChanged(value);
+                      },
                     ),
                   )).separatedWith(const SizedBox(width: Paddings.medium))),
     );
@@ -76,7 +80,7 @@ class _SegmentButton extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: isSelected
-                    ? context.themeColors.backgroundSecondary
+                    ? context.themeColors.contrastText
                     : context.themeColors.text)),
       ),
     );

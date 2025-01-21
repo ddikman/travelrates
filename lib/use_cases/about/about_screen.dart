@@ -31,6 +31,7 @@ Let me know if you enjoy the app, every review motivates me to keep it running (
               AppReviewService().request();
             }),
         Markdown(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             padding: const EdgeInsets.all(0),
             onTapLink: (text, href, title) {
