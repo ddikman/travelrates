@@ -44,7 +44,7 @@ android {
         applicationId "se.greycastle.travelconverter"
         minSdkVersion 23
         // targetSdkVersion flutter.targetSdkVersion
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
