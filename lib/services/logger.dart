@@ -23,7 +23,7 @@ class Logger<T> {
     _log('Debug', message);
   }
 
-  void error(String message) {
-    _log('Error', message);
+  void error(String message, {StackTrace? stackTrace}) {
+    _log('Error', "$message\n$stackTrace");
   }
 }

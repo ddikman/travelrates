@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:travelconverter/app_state.dart';
-import 'package:travelconverter/l10n/app_localizations_delegate.dart';
-import 'package:travelconverter/l10n/fallback_material_localisations_delegate.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/model/currency.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'mock_country.dart';
 import 'mock_currency.dart';
@@ -40,18 +38,15 @@ class MockAppContainerBuilder {
             currencies: ['GBP', 'USD', 'EUR']));
 
     return new MaterialApp(
-        home: ProviderScope(
-          overrides: [
-            appStateProvider.overrideWithValue(appState),
-          ],
-          child: _child,
-        ),
-        localizationsDelegates: [
-          const AppLocalizationsDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          const FallbackMaterialLocalisationsDelegate()
-        ]);
+      home: ProviderScope(
+        overrides: [
+          appStateProvider.overrideWithValue(appState),
+        ],
+        child: _child,
+      ),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+    );
   }
 
   /// Can be used to wrap entire test setup instead of just build()

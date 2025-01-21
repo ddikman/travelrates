@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/currency_card.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
-import 'package:travelconverter/l10n/app_localizations.dart';
+import 'package:travelconverter/l10n/l10n_extension.dart';
+import 'package:travelconverter/l10n/localized_data.dart';
 import 'package:travelconverter/model/country.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/state_container.dart';
@@ -22,7 +23,7 @@ class SelectCurrencyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context);
+    final localization = context.l10nData;
 
     final state = StateContainer.of(context).appState;
     final relatedCountries = state.countries
@@ -44,7 +45,7 @@ class SelectCurrencyCard extends StatelessWidget {
                   Text(
                       "${localization.currencies.getLocalized(currency.code)}, ${currency.code}",
                       style: ThemeTypography.small.bold),
-                  Text("Used in countries like: ${countryNames}",
+                  Text(context.l10n.addCurrency_usedInCountries(countryNames),
                       style: ThemeTypography.verySmall)
                 ]),
           ),
@@ -53,8 +54,8 @@ class SelectCurrencyCard extends StatelessWidget {
         ]));
   }
 
-  _groupLocalizedNames(
-      List<Country> relatedCountries, AppLocalizations localizations) {
+  String _groupLocalizedNames(
+      List<Country> relatedCountries, LocalizedData localizations) {
     return relatedCountries.map((country) {
       return localizations.countries.getLocalized(country.name);
     }).join(", ");

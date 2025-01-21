@@ -1,11 +1,11 @@
 import 'package:travelconverter/helpers/string_compare.dart';
-import 'package:travelconverter/l10n/app_localizations.dart';
+import 'package:travelconverter/l10n/localized_data.dart';
 import 'package:travelconverter/model/country.dart';
 import 'package:travelconverter/model/currency.dart';
 
 class CurrencyFilter {
   final List<Country> countries;
-  final AppLocalizations _localizations;
+  final LocalizedData _localizations;
 
   CurrencyFilter(this.countries, this._localizations);
 

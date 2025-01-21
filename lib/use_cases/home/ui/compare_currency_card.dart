@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/currency_card.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
-import 'package:travelconverter/l10n/app_localizations.dart';
+import 'package:travelconverter/l10n/l10n_extension.dart';
 import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/use_cases/home/state/converted_amount_provider.dart';
 import 'package:travelconverter/use_cases/home/ui/custom_keyboard_sheet.dart';
@@ -22,7 +22,6 @@ class CompareCurrencyCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localization = AppLocalizations.of(context);
     final currentValue = ref.watch(convertedAmountProvider(currency));
 
     final contents = new Row(
@@ -31,7 +30,7 @@ class CompareCurrencyCard extends ConsumerWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(localization.currencies.getLocalized(currency.code),
+              Text(context.l10nData.currencies.getLocalized(currency.code),
                   style: ThemeTypography.small.bold),
               Text(currency.code, style: ThemeTypography.verySmall.bold)
             ],

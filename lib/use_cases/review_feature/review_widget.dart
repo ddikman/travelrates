@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/app_snack_bar.dart';
+import 'package:travelconverter/l10n/l10n_extension.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/use_cases/review_feature/app_review_service.dart';
 import 'package:travelconverter/use_cases/review_feature/review_rule.dart';
@@ -76,27 +76,20 @@ class ReviewWidgetState extends State<ReviewWidget> {
     this.widget.reviewStorage.save(_reviewRule);
 
     final action = SnackBarAction(
-        label: acceptReviewButtonText,
+        label: context.l10n.review_acceptReviewButtonText,
         onPressed: () async {
           await _reviewAccepted();
           await AppReviewService().request();
         });
 
     await Future.delayed(widget.toastDelay).then((_) {
-      AppSnackBar.show(context,
-          accentColor: context.themeColors.accent,
-          duration: Duration(seconds: 10),
-          text: toastMessage,
-          action: action);
+      AppSnackBar.show(
+        context,
+        accentColor: context.themeColors.accent,
+        duration: Duration(seconds: 10),
+        text: context.l10n.review_toastMessage,
+        action: action,
+      );
     });
   }
-
-  static String get toastMessage => Intl.message(
-      "Is TravelRates working well for you?\nIf you can leave a review, it really helps.",
-      name: "ReviewWidgetState_toastMessage",
-      desc: "Message shown in review request toast");
-
-  static String get acceptReviewButtonText => Intl.message("Sure!",
-      name: "ReviewWidgetState_acceptReviewButtonText",
-      desc: "Short text to accept to a review");
 }

@@ -1,4 +1,6 @@
-import 'package:travelconverter/l10n/app_localizations.dart';
+import 'dart:ui';
+
+import 'package:travelconverter/l10n/localized_data.dart';
 import 'package:travelconverter/l10n/country_localizations.dart';
 import 'package:travelconverter/l10n/currency_localizations.dart';
 import 'package:travelconverter/model/country.dart';
@@ -10,8 +12,11 @@ import '../../../mocks/mock_currency.dart';
 void main() {
   final countryLocalizations = new CountryLocalizations('sv');
   final currencyLocalizations = new CurrencyLocalizations('sv');
-  final localizations =
-      new AppLocalizations(countryLocalizations, currencyLocalizations);
+  final localizations = new LocalizedData(
+    countryLocalizations,
+    currencyLocalizations,
+    Locale('sv'),
+  );
 
   final countries = [
     new Country("United States", "US", "USD"),

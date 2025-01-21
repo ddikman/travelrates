@@ -1,0 +1,29 @@
+{
+  "@@locale": "sv",
+  "appName": "Travel Converter",
+  "currency_comparisons": "Valutor",
+  "review_toastMessage": "Fungerar TravelRates bra för dig?\nOm du kan lämna en recension hjälper det verkligen.",
+  "review_acceptReviewButtonText": "Ja!",
+  "alreadySelectedWarning": "{currencyName} är redan vald!",
+  "about_title": "Om TravelRates",
+  "about_description": "Jag skrev och släppte TravelRates 2019 under en vecka när jag var förkyld i Bali medan jag backpackade i sydostasien.\n\nJag byggde TravelRates med backpackers i åtanke, folk som behöver jämföra flera valutor och där snabbhet, enkelhet och offline-användning är viktigare än att vara exakt rätt.\n\nLämna gärna en recension om du gillar appen, all feedback motiverar mig att fortsätta driva den (och hålla den gratis)!",
+  "about_addReview": "Lägg till recension",
+  "about_callout": "Jag jobbar som frilansande fullstack-utvecklare.\n\nOm du vill komma i kontakt, kanske lära dig hur denna app är byggd eller anlita mig, besök [greycastle.se](https://greycastle.se).",
+  "theme_title": "Mörkt läge",
+  "theme_dark": "Mörkt",
+  "theme_light": "Ljust",
+  "theme_system": "System",
+  "addCurrency_title": "Lägg till valuta",
+  "addCurrency_description": "Sök efter valuta med namn, land eller valutakod",
+  "addCurrency_searchPlaceholder": "Sök",
+  "addCurrency_selectedCurrenciesTitle": "Valda valutor",
+  "addCurrency_selectedCurrenciesSubtitle": "Håll ner och dra för att ändra ordning",
+  "@addCurrency_usedInCountries": {
+    "placeholders": {
+      "countries": {
+        "type": "String"
+      }
+    }
+  },
+  "addCurrency_usedInCountries": "Används i länder som: {countries}"
+}

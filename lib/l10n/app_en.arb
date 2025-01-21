@@ -1,0 +1,36 @@
+{
+  "@@locale": "en",
+  "appName": "Travel Converter",
+  "currency_comparisons": "Currency comparisons",
+  "review_toastMessage": "Is TravelRates working well for you?\nIf you can leave a review, it really helps.",
+  "review_acceptReviewButtonText": "Sure!",
+  "@alreadySelectedWarning": {
+    "placeholders": {
+      "currencyName": {
+        "type": "String"
+      }
+    }
+  },
+  "alreadySelectedWarning": "{currencyName} is already selected!",
+  "about_title": "About TravelRates",
+  "about_description": "I first wrote and released TravelRates in 2019 in Bali whilst being sick with a cold when backpacking south east Asia.\n\nIt was built with backpackers in mind, where you have to compare against multiple currencies and speed, ease and offline use are more important than being exactly right.\n\nLet me know if you enjoy the app, every review motivates me to keep it running (and free)!",
+  "about_addReview": "Add review",
+  "about_callout": "I work as a freelance full stack developer.\n\nIf you want to get in touch, perhaps learn how this app is built or even hire me, visit [greycastle.se](https://greycastle.se).",
+  "theme_title": "Dark mode",
+  "theme_dark": "Dark",
+  "theme_light": "Light",
+  "theme_system": "System",
+  "addCurrency_title": "Add currency",
+  "addCurrency_description": "Search for currencies to add by name, country of use or currency code",
+  "addCurrency_searchPlaceholder": "Search",
+  "addCurrency_selectedCurrenciesTitle": "Selected currencies",
+  "addCurrency_selectedCurrenciesSubtitle": "Long press and drag to reorder",
+  "@addCurrency_usedInCountries": {
+    "placeholders": {
+      "countries": {
+        "type": "String"
+      }
+    }
+  },
+  "addCurrency_usedInCountries": "Used in countries like: {countries}"
+}

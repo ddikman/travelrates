@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
+import 'package:travelconverter/l10n/l10n_extension.dart';
 import 'package:travelconverter/use_cases/currency_selection/state/selected_currencies_notifier.dart';
 import 'package:travelconverter/use_cases/home/ui/compare_currency_card.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class ConvertibleCurrenciesList extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text('Currency comparisons', style: ThemeTypography.title),
+        Text(context.l10n.currency_comparisons, style: ThemeTypography.title),
         Gap.list,
         ...AnimateList(effects: [
           FadeEffect(curve: Curves.ease),

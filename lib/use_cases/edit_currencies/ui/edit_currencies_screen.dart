@@ -4,7 +4,7 @@ import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/app_core/widgets/page_scaffold.dart';
 import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
-import 'package:travelconverter/l10n/app_localizations.dart';
+import 'package:travelconverter/l10n/l10n_extension.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/use_cases/currency_selection/state/selected_currencies_notifier.dart';
 import 'package:travelconverter/use_cases/edit_currencies/state/available_currencies_provider.dart';
@@ -23,7 +23,7 @@ class EditCurrenciesScreen extends StatelessWidget {
   }
 
   _buildCurrencyList(BuildContext context, WidgetRef ref) {
-    final localization = AppLocalizations.of(context);
+    final localization = context.l10nData;
     final selectedCurrencies = ref.watch(selectedCurrenciesNotifierProvider);
     final selectedCurrencyWidgets = selectedCurrencies
         .map((currency) => Container(
@@ -53,9 +53,8 @@ class EditCurrenciesScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Add currency', style: ThemeTypography.title),
-        Text(
-            'Search for currencies to add by name, country of use or currency code',
+        Text(context.l10n.addCurrency_title, style: ThemeTypography.title),
+        Text(context.l10n.addCurrency_description,
             style: ThemeTypography.small),
         Gap.list,
         SearchInput(
@@ -71,8 +70,10 @@ class EditCurrenciesScreen extends StatelessWidget {
           }),
         if (selectedCurrencyWidgets.isNotEmpty) ...[
           Gap.list,
-          Text('Selected currencies', style: ThemeTypography.title),
-          Text('Long press and drag to reorder', style: ThemeTypography.small),
+          Text(context.l10n.addCurrency_selectedCurrenciesTitle,
+              style: ThemeTypography.title),
+          Text(context.l10n.addCurrency_selectedCurrenciesSubtitle,
+              style: ThemeTypography.small),
           Gap.list,
           ReorderableListView(
             proxyDecorator: (child, index, animation) => child,
