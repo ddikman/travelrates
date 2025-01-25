@@ -2,13 +2,13 @@
   "@@locale": "ja",
   "appName": "Travel Converter",
   "currency_comparisons": "通貨比較",
-  "review_toastMessage": "TravelRatesはあなたにとってうまく機能していますか？\nレビューを残してくれると本当に助かります。",
+  "review_toastMessage": "TravelRatesはいかがでしたか？\n皆様のレビューを参考に、さらにアプリを良いものにしていきます。",
   "review_acceptReviewButtonText": "はい！",
   "alreadySelectedWarning": "{currencyName}は既に選択されています！",
   "about_title": "TravelRatesについて",
-  "about_description": "2019年、東南アジアをバックパッカーとして旅行中、バリ島で風邪を引いている時にTravelRatesを作り、リリースしました。\n\n複数の通貨を比較する必要があるバックパッカーのために作られ、正確性よりも速さ、使いやすさ、オフラインでの使用を重視しています。\n\nアプリを気に入っていただけたら嬉しいです。レビューは私がこのアプリを（無料で）維持する動機付けになります！",
+  "about_description": "2019年、東南アジアをバックパッカーとして旅行中、バリ島で風邪を引いている時にTravelRatesを作りリリースしました。\n\n旅人には欠かせないレートアプリ。速さ、使いやすさ、そしてオフラインで使用できるという点が旅人の強い味方。\n\nアプリを使っていただけたら、是非レビューをお願いします。皆様のご意見は、今後も無料でアプリを継続していく励みになります。",
   "about_addReview": "レビューを書く",
-  "about_callout": "私はフリーランスのフルスタック開発者として働いています。\n\n連絡を取りたい方、このアプリがどのように作られているか知りたい方、または仕事の依頼をご検討の方は、[greycastle.se](https://greycastle.se)をご覧ください。",
+  "about_callout": "私はフリーランスのフルスタック開発者として働いています。\n\n連絡を取りたい方、このアプリがどのように作られているか知りたい方、またはお仕事の依頼をご検討の方は、[greycastle.se](https://greycastle.se)をご覧ください。",
   "theme_title": "ダークモード",
   "theme_dark": "ダーク",
   "theme_light": "ライト",
@@ -17,7 +17,7 @@
   "addCurrency_description": "通貨名、使用国、または通貨コードで検索して追加",
   "addCurrency_searchPlaceholder": "検索",
   "addCurrency_selectedCurrenciesTitle": "選択された通貨",
-  "addCurrency_selectedCurrenciesSubtitle": "長押しでドラッグして並び替え",
+  "addCurrency_selectedCurrenciesSubtitle": "長押しで並び替え",
   "@addCurrency_usedInCountries": {
     "placeholders": {
       "countries": {
@@ -25,5 +25,5 @@
       }
     }
   },
-  "addCurrency_usedInCountries": "使用国: {countries}"
+  "addCurrency_usedInCountries": "選択された国: {countries}"
 }

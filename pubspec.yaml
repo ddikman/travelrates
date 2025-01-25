@@ -1,6 +1,6 @@
 name: travelconverter
 description: Handy multi-currency converter specifically for backpackers.
-version: 1.6.3+91
+version: 2.0.0+94
 
 environment:
   sdk: ">=3.2.6 <4.0.0"
