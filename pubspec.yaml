@@ -30,6 +30,7 @@ dependencies:
   device_info_plus: ^10.1.0
   connectivity_plus: ^6.1.2
   device_preview:
+  package_info_plus: ^8.1.2
 
   # user interface
   app_review_plus: ^2.3.3

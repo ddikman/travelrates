@@ -8,6 +8,7 @@ import 'package:travelconverter/app_core/widgets/separated_extension.dart';
 import 'package:travelconverter/l10n/l10n_extension.dart';
 import 'package:travelconverter/use_cases/review_feature/app_review_service.dart';
 import 'package:travelconverter/use_cases/about/dark_mode_selector_view.dart';
+import 'package:travelconverter/use_cases/about/version_display.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -38,6 +39,9 @@ class AboutScreen extends StatelessWidget {
             styleSheet: MarkdownStyle.of(context)),
         const SizedBox(height: Paddings.listGap),
         const DarkModeSelectorView(),
+        Padding(
+            padding: const EdgeInsets.symmetric(vertical: Paddings.large),
+            child: const VersionDisplay()),
       ].separatedWith(const SizedBox(height: Paddings.listGap)),
     ));
   }
