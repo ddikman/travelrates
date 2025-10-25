@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:travelconverter/model/api_configuration.dart';
@@ -13,7 +13,7 @@ import '../helpers/assets_folder.dart';
 void main() {
   test("skips download of rates if offline", () async {
     final api = new RatesApi(new MockConfig());
-    api.connectivity = new MockConnectivity(ConnectivityResult.none);
+    api.connectivity = new MockConnectivity([ConnectivityResult.none]);
 
     final result = await api.getCurrentRatesJson();
     expect(result.successful, false);
@@ -21,7 +21,7 @@ void main() {
 
   test("returns failure if server does not respond correctly", () async {
     final api = new RatesApi(new MockConfig());
-    api.connectivity = new MockConnectivity(ConnectivityResult.wifi);
+    api.connectivity = new MockConnectivity([ConnectivityResult.wifi]);
     api.client = new MockClient(() => new Response("", 500));
 
     final result = await api.getCurrentRatesJson();
@@ -30,7 +30,7 @@ void main() {
 
   test("returns failure on exception", () async {
     final api = new RatesApi(new MockConfig());
-    api.connectivity = new MockConnectivity(ConnectivityResult.wifi);
+    api.connectivity = new MockConnectivity([ConnectivityResult.wifi]);
     api.client = new MockClient(() => throw new Exception("Mock failure"));
 
     final result = await api.getCurrentRatesJson();
@@ -44,7 +44,7 @@ void main() {
     final apiConfigJson = await new File(assetPath).readAsString();
     final apiConfig = ApiConfiguration.fromJson(json.decode(apiConfigJson));
     final api = new RatesApi(apiConfig);
-    api.connectivity = MockConnectivity(ConnectivityResult.wifi);
+    api.connectivity = MockConnectivity([ConnectivityResult.wifi]);
 
     final result = await api.getCurrentRatesJson();
     expect(result.successful, true);
@@ -116,18 +116,18 @@ class MockClient implements Client {
 }
 
 class MockConnectivity implements Connectivity {
-  final ConnectivityResult connectivityResult;
+  final List<ConnectivityResult> connectivityResult;
 
   MockConnectivity(this.connectivityResult);
 
   @override
-  Future<ConnectivityResult> checkConnectivity() {
+  Future<List<ConnectivityResult>> checkConnectivity() {
     return Future.value(connectivityResult);
   }
 
   @override
-  Stream<ConnectivityResult> get onConnectivityChanged =>
-      Stream<ConnectivityResult>.empty();
+  Stream<List<ConnectivityResult>> get onConnectivityChanged =>
+      Stream<List<ConnectivityResult>>.empty();
 }
 
 class MockConfig implements ApiConfiguration {

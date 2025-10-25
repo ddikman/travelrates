@@ -1,9 +1,8 @@
 PODS:
   - app_review_plus (1.0.1):
     - Flutter
-  - connectivity (0.0.1):
+  - connectivity_plus (0.0.1):
     - Flutter
-    - Reachability
   - device_info_plus (0.0.1):
     - Flutter
   - Firebase/Analytics (11.4.0):
@@ -110,7 +109,6 @@ PODS:
     - Flutter
     - FlutterMacOS
   - PromisesObjC (2.4.0)
-  - Reachability (3.7.6)
   - rive_common (0.0.1):
     - Flutter
   - shared_preferences_foundation (0.0.1):
@@ -121,7 +119,7 @@ PODS:
 
 DEPENDENCIES:
   - app_review_plus (from `.symlinks/plugins/app_review_plus/ios`)
-  - connectivity (from `.symlinks/plugins/connectivity/ios`)
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -144,13 +142,12 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
-    - Reachability
 
 EXTERNAL SOURCES:
   app_review_plus:
     :path: ".symlinks/plugins/app_review_plus/ios"
-  connectivity:
-    :path: ".symlinks/plugins/connectivity/ios"
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
   device_info_plus:
     :path: ".symlinks/plugins/device_info_plus/ios"
   firebase_analytics:
@@ -174,7 +171,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   app_review_plus: d1a456dd762c94d75ff5f7e90b828dc2598d78e6
-  connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
+  connectivity_plus: 2a701ffec2c0ae28a48cf7540e279787e77c447d
   device_info_plus: 97af1d7e84681a90d0693e63169a5d50e0839a0d
   Firebase: cf1b19f21410b029b6786a54e9764a0cacad3c99
   firebase_analytics: fa7e5b20c2b58042e3301f5112a473d365bd490c
@@ -183,7 +180,7 @@ SPEC CHECKSUMS:
   FirebaseCore: e0510f1523bc0eb21653cac00792e1e2bd6f1771
   FirebaseCoreInternal: f47dd28ae7782e6a4738aad3106071a8fe0af604
   FirebaseInstallations: 6ef4a1c7eb2a61ee1f74727d7f6ce2e72acf1414
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   flutter_native_splash: e8a1e01082d97a8099d973f919f57904c925008a
   GoogleAppMeasurement: 987769c4ca6b968f2479fbcc9fe3ce34af454b8e
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
@@ -191,11 +188,10 @@ SPEC CHECKSUMS:
   package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
-  Reachability: fd0ecd23705e2599e4cceeb943222ae02296cbc6
   rive_common: 4743dbfd2911c99066547a3c6454681e0fa907df
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
 PODFILE CHECKSUM: cc1f88378b4bfcf93a6ce00d2c587857c6008d3b
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.13.0

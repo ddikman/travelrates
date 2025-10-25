@@ -21,7 +21,7 @@ class AppSnackBar extends StatelessWidget {
       decoration: BoxDecoration(
           color: context.themeColors.background,
           boxShadow: [
-            BoxShadow(blurRadius: 4.0, color: Colors.black.withOpacity(0.25))
+            BoxShadow(blurRadius: 4.0, color: Colors.black.withValues(alpha: 0.25))
           ],
           borderRadius: BorderRadius.circular(Rounding.small),
           border: Border.all(color: accentColor)),

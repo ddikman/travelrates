@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:travelconverter/model/api_configuration.dart';
 import 'package:travelconverter/model/async_result.dart';
 import 'package:travelconverter/services/logger.dart';
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class RatesApi {
   final ApiConfiguration _config;
@@ -41,7 +41,7 @@ class RatesApi {
   }
 
   Future<bool> _isOffline() async {
-    var connectivityResult = await connectivity.checkConnectivity();
-    return connectivityResult == ConnectivityResult.none;
+    var connectivityResults = await connectivity.checkConnectivity();
+    return connectivityResults.contains(ConnectivityResult.none);
   }
 }

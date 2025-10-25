@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travelconverter/app_state.dart';
 import 'package:travelconverter/services/state_persistence.dart';
 import 'package:travelconverter/state_container.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:travelconverter/l10n/app_localizations.dart';
 
 import '../mocks/mock_app_state.dart';
 import '../mocks/mock_local_storage.dart';

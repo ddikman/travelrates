@@ -13,7 +13,7 @@ import 'package:travelconverter/services/shared_preferences.dart';
 import 'package:travelconverter/services/state_persistence.dart';
 
 import 'package:travelconverter/state_container.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:travelconverter/l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

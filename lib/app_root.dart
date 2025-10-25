@@ -15,7 +15,7 @@ import 'package:travelconverter/services/rates_api.dart';
 import 'package:travelconverter/services/rates_loader.dart';
 import 'package:travelconverter/state_container.dart';
 import 'package:travelconverter/use_cases/dark_mode/state/theme_brightness_notifier_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:travelconverter/l10n/app_localizations.dart';
 
 class AppRoot extends StatefulWidget {
   final RatesApi ratesApi;
