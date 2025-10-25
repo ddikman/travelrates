@@ -105,6 +105,7 @@ assets/data/apiConfiguration.json
 ios/Runner.app.*
 ios/Runner.ipa
 ios/Flutter/Flutter.podspec
+ios/Flutter/ephemeral/
 
 # build files
 dist/

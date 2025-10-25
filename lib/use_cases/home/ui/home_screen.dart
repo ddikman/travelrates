@@ -1,4 +1,4 @@
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travelconverter/app_core/config.dart';
 import 'package:travelconverter/app_core/theme/app_theme.dart';

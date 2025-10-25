@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:travelconverter/app_state.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/model/currency.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:travelconverter/l10n/app_localizations.dart';
 
 import 'mock_country.dart';
 import 'mock_currency.dart';

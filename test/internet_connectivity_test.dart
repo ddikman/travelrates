@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -10,10 +10,10 @@ import 'package:travelconverter/internet_connectivity.dart';
 import 'internet_connectivity_test.mocks.dart';
 
 void main() {
-  StreamController<ConnectivityResult>? connectivityStream;
+  StreamController<List<ConnectivityResult>>? connectivityStream;
 
   setUp(() {
-    connectivityStream = new StreamController<ConnectivityResult>(sync: true);
+    connectivityStream = new StreamController<List<ConnectivityResult>>(sync: true);
   });
 
   tearDown(() {
@@ -21,7 +21,7 @@ void main() {
   });
 
   InternetConnectivity getWithCurrentConnectivity(
-      ConnectivityResult connectivity) {
+      List<ConnectivityResult> connectivity) {
     final mockConnectivity = new MockConnectivity();
     when(mockConnectivity.checkConnectivity())
         .thenAnswer((_) async => connectivity);
@@ -32,29 +32,29 @@ void main() {
   }
 
   test("is available after startup if connectivity is mobile", () async {
-    var internet = getWithCurrentConnectivity(ConnectivityResult.mobile);
+    var internet = getWithCurrentConnectivity([ConnectivityResult.mobile]);
     await internet.pollConnectivity();
     expect(internet.isAvailable, true);
   });
 
   test("is available after startup if connectivity is wifi", () async {
-    var internet = getWithCurrentConnectivity(ConnectivityResult.wifi);
+    var internet = getWithCurrentConnectivity([ConnectivityResult.wifi]);
     await internet.pollConnectivity();
     expect(internet.isAvailable, true);
   });
 
   test("is unavailable after startup if connectivity is none", () async {
-    var internet = getWithCurrentConnectivity(ConnectivityResult.none);
+    var internet = getWithCurrentConnectivity([ConnectivityResult.none]);
     await internet.pollConnectivity();
     expect(internet.isAvailable, false);
   });
 
   test("becomes available when connectivity changes", () async {
-    var internet = getWithCurrentConnectivity(ConnectivityResult.none);
+    var internet = getWithCurrentConnectivity([ConnectivityResult.none]);
     await internet.pollConnectivity();
     expect(internet.isAvailable, false);
 
-    connectivityStream?.add(ConnectivityResult.mobile);
+    connectivityStream?.add([ConnectivityResult.mobile]);
     expect(internet.isAvailable, true);
   });
 }

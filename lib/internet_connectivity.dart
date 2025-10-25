@@ -1,4 +1,4 @@
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 abstract class InternetConnectivity {
   bool get isAvailable => false;
@@ -17,9 +17,9 @@ class InternetConnectivityImpl implements InternetConnectivity {
     connectivity.onConnectivityChanged.listen(_updateConnectivity);
   }
 
-  _updateConnectivity(ConnectivityResult connectivity) {
-    print('Connectivity changed to $connectivity');
-    _isAvailable = connectivity != ConnectivityResult.none;
+  _updateConnectivity(List<ConnectivityResult> connectivityList) {
+    print('Connectivity changed to $connectivityList');
+    _isAvailable = !connectivityList.contains(ConnectivityResult.none);
   }
 
   @override
