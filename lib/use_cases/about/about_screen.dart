@@ -14,44 +14,35 @@ import 'package:url_launcher/url_launcher.dart';
 class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final availableHeight = MediaQuery.of(context).size.height -
-        MediaQuery.of(context).padding.top -
-        MediaQuery.of(context).padding.bottom -
-        kToolbarHeight -
-        Paddings.scaffoldTop -
-        Paddings.scaffold * 2;
-
     return PageScaffold(
-        body: SizedBox(
-      height: availableHeight,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Text(context.l10n.about_title, style: ThemeTypography.title),
-          Text(context.l10n.about_description, style: ThemeTypography.body),
-          AppButton(
-              label: context.l10n.about_addReview,
-              icon: Icons.exit_to_app,
-              onPressed: () {
-                AppReviewService().request();
-              }),
-          Markdown(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              padding: const EdgeInsets.all(0),
-              onTapLink: (text, href, title) {
-                if (href != null)
-                  launchUrl(Uri.parse(href),
-                      mode: LaunchMode.externalApplication);
-              },
-              data: context.l10n.about_callout,
-              styleSheet: MarkdownStyle.of(context)),
-          const SizedBox(height: Paddings.listGap),
-          const DarkModeSelectorView(),
-          const Spacer(),
-          const VersionDisplay(),
-        ].separatedWith(const SizedBox(height: Paddings.listGap)),
-      ),
+        body: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Text(context.l10n.about_title, style: ThemeTypography.title),
+        Text(context.l10n.about_description, style: ThemeTypography.body),
+        AppButton(
+            label: context.l10n.about_addReview,
+            icon: Icons.exit_to_app,
+            onPressed: () {
+              AppReviewService().request();
+            }),
+        Markdown(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(0),
+            onTapLink: (text, href, title) {
+              if (href != null)
+                launchUrl(Uri.parse(href),
+                    mode: LaunchMode.externalApplication);
+            },
+            data: context.l10n.about_callout,
+            styleSheet: MarkdownStyle.of(context)),
+        const SizedBox(height: Paddings.listGap),
+        const DarkModeSelectorView(),
+        Padding(
+            padding: const EdgeInsets.symmetric(vertical: Paddings.large),
+            child: const VersionDisplay()),
+      ].separatedWith(const SizedBox(height: Paddings.listGap)),
     ));
   }
 }
