@@ -1,7 +1,7 @@
 /// Helper functions for determining flag asset sources
 class FlagHelper {
   /// Country codes that use local asset files instead of the country_flags package
-  static const Set<String> localAssetFlags = {'XPF', 'XCD', 'BTC'};
+  static const Set<String> localAssetFlags = {'XPF', 'XCD', 'BTC', 'EUR'};
 
   /// Determines if a country code should use a local asset file
   ///

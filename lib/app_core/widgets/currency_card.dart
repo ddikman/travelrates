@@ -24,13 +24,19 @@ class CurrencyCard extends StatelessWidget {
               width: 32.0,
               height: 32.0,
               child: FlagHelper.shouldUseLocalAsset(currencyIconName)
-                  ? Image.asset(
-                      FlagHelper.getLocalAssetPath(currencyIconName),
-                      width: 32.0,
-                      height: 32.0,
+                  ? ClipOval(
+                      child: Image.asset(
+                        FlagHelper.getLocalAssetPath(currencyIconName),
+                        width: 32.0,
+                        height: 32.0,
+                        fit: BoxFit.cover,
+                      ),
                     )
                   : CountryFlag.fromCountryCode(
                       currencyIconName,
+                      theme: const ImageTheme(
+                        shape: Circle(),
+                      ),
                     ),
             ),
             Gap.medium,
