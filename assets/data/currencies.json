@@ -1237,7 +1237,7 @@
     "rounding": 0,
     "code": "BTC",
     "name_plural": "Bitcoin",
-    "icon": null
+    "icon": "BTC"
   },
   "BTN": {
     "symbol": "Nu.",
@@ -1609,26 +1609,6 @@
     "name_plural": "Samoan talas",
     "icon": "WS"
   },
-  "XAG": {
-    "symbol": "oz t",
-    "name": "Silver (Troy Ounce)",
-    "symbol_native": "oz t",
-    "decimal_digits": 3,
-    "rounding": 0,
-    "code": "XAG",
-    "name_plural": "Silver (troy ounces)",
-    "icon": null
-  },
-  "XAU": {
-    "symbol": "oz t",
-    "name": "Gold (Troy Ounce)",
-    "symbol_native": "oz t",
-    "decimal_digits": 3,
-    "rounding": 0,
-    "code": "XAU",
-    "name_plural": "Gold (troy ounces)",
-    "icon": null
-  },
   "XCD": {
     "symbol": "$",
     "name": "East Caribbean Dollar",
@@ -1637,17 +1617,7 @@
     "rounding": 0,
     "code": "XCD",
     "name_plural": "East Caribbean dollars",
-    "icon": null
-  },
-  "XDR": {
-    "symbol": "SDR",
-    "name": "Special Drawing Rights",
-    "symbol_native": "SDR",
-    "decimal_digits": 2,
-    "rounding": 0,
-    "code": "XDR",
-    "name_plural": "Special drawing rights",
-    "icon": null
+    "icon": "XSD"
   },
   "XPF": {
     "symbol": "F",
@@ -1657,7 +1627,7 @@
     "rounding": 0,
     "code": "XPF",
     "name_plural": "CFP francs",
-    "icon": null
+    "icon": "XPF"
   },
   "ZMW": {
     "symbol": "ZK",

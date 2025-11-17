@@ -40,6 +40,7 @@ dependencies:
   flutter_animate: ^4.5.2
   rive: ^0.13.9
   expressions: ^0.2.5
+  country_flags: ^4.1.0
 
   # analytics and crashes
   firebase_core: 3.8.0
@@ -86,9 +87,7 @@ flutter:
     # for using build time environment variables so this is the currently recommended approach.
     - assets/data/apiConfiguration.json
 
-    # Android studio will warn that these doesn't exist but they do and it works just fine
-    - assets/images/flags/
-    - assets/images/flags/2x/
+    - assets/flags/
 
     # animations
     - assets/animations/

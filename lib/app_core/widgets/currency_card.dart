@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:travelconverter/app_core/widgets/common_card.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
+import 'package:travelconverter/helpers/flag_helper.dart';
+import 'package:country_flags/country_flags.dart';
 
 class CurrencyCard extends StatelessWidget {
   final Function? onTap;
@@ -18,10 +20,18 @@ class CurrencyCard extends StatelessWidget {
     return CommonCard(
         child: Row(
           children: <Widget>[
-            Image.asset(
-              'assets/images/flags/$currencyIconName.png',
+            SizedBox(
               width: 32.0,
               height: 32.0,
+              child: FlagHelper.shouldUseLocalAsset(currencyIconName)
+                  ? Image.asset(
+                      FlagHelper.getLocalAssetPath(currencyIconName),
+                      width: 32.0,
+                      height: 32.0,
+                    )
+                  : CountryFlag.fromCountryCode(
+                      currencyIconName,
+                    ),
             ),
             Gap.medium,
             Expanded(child: content),
