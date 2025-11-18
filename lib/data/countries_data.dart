@@ -255,5 +255,13 @@ class CountryData {
     new Country('Ukraine', 'UA', 'UAH'),
     new Country('Qatar', 'QA', 'QAR'),
     new Country('Mozambique', 'MZ', 'MZN'),
+    new Country('Belarus', 'BY', 'BYN'),
+    new Country('Chile', 'CL', 'CLF'),
+    new Country('Cuba', 'CU', 'CUC'),
+    new Country('Guernsey', 'GG', 'GGP'),
+    new Country('Isle of Man', 'IM', 'IMP'),
+    new Country('Jersey', 'JE', 'JEP'),
+    new Country('El Salvador', 'SV', 'SVC'),
+    new Country('Zambia', 'ZM', 'ZMW'),
   ];
 }

@@ -11,7 +11,7 @@ class AppBarIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        behavior: HitTestBehavior.translucent,
+        behavior: HitTestBehavior.opaque,
         child: icon.pad(
           top: Paddings.scaffold,
           left: Paddings.large,

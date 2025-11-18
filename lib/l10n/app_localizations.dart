@@ -213,6 +213,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Used in countries like: {countries}'**
   String addCurrency_usedInCountries(String countries);
+
+  /// No description provided for @addCurrency_digitalCurrency.
+  ///
+  /// In en, this message translates to:
+  /// **'Is a digital currency used worldwide'**
+  String get addCurrency_digitalCurrency;
 }
 
 class _AppLocalizationsDelegate

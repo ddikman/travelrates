@@ -71,4 +71,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String addCurrency_usedInCountries(String countries) {
     return '選択された国: $countries';
   }
+
+  @override
+  String get addCurrency_digitalCurrency => '世界中で使用されているデジタル通貨です';
 }
