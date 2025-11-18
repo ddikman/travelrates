@@ -61,13 +61,12 @@ class EditCurrenciesScreen extends StatelessWidget {
           autoFocus: selectedCurrencyWidgets.length < 2,
         ),
         Gap.list,
-        if (searchQuery.isNotEmpty || selectedCurrencyWidgets.length < 3)
-          ...filter.getFiltered(allCurrencies, searchQuery).map((currency) {
-            return SearchCurrencyResultEntry(
-              currency: currency,
-              isSelected: selectedCurrencies.contains(currency),
-            );
-          }),
+        ...filter.getFiltered(allCurrencies, searchQuery).map((currency) {
+          return SearchCurrencyResultEntry(
+            currency: currency,
+            isSelected: selectedCurrencies.contains(currency),
+          );
+        }),
         if (selectedCurrencyWidgets.isNotEmpty) ...[
           Gap.list,
           Text(context.l10n.addCurrency_selectedCurrenciesTitle,
