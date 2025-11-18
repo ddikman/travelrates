@@ -1248,5 +1248,45 @@
     "name": "Mozambique",
     "code": "MZ",
     "currency": "MZN"
+  },
+  {
+    "name": "Belarus",
+    "code": "BY",
+    "currency": "BYN"
+  },
+  {
+    "name": "Chile",
+    "code": "CL",
+    "currency": "CLF"
+  },
+  {
+    "name": "Cuba",
+    "code": "CU",
+    "currency": "CUC"
+  },
+  {
+    "name": "Guernsey",
+    "code": "GG",
+    "currency": "GGP"
+  },
+  {
+    "name": "Isle of Man",
+    "code": "IM",
+    "currency": "IMP"
+  },
+  {
+    "name": "Jersey",
+    "code": "JE",
+    "currency": "JEP"
+  },
+  {
+    "name": "El Salvador",
+    "code": "SV",
+    "currency": "SVC"
+  },
+  {
+    "name": "Zambia",
+    "code": "ZM",
+    "currency": "ZMW"
   }
 ]

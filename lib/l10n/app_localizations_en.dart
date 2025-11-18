@@ -73,4 +73,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String addCurrency_usedInCountries(String countries) {
     return 'Used in countries like: $countries';
   }
+
+  @override
+  String get addCurrency_digitalCurrency =>
+      'Is a digital currency used worldwide';
 }

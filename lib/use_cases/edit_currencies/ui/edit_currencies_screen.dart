@@ -25,6 +25,8 @@ class EditCurrenciesScreen extends StatelessWidget {
   _buildCurrencyList(BuildContext context, WidgetRef ref) {
     final localization = context.l10nData;
     final selectedCurrencies = ref.watch(selectedCurrenciesNotifierProvider);
+    // Convert to Set for O(1) lookup instead of O(n) List.contains()
+    final selectedCurrenciesSet = selectedCurrencies.toSet();
     final selectedCurrencyWidgets = selectedCurrencies
         .map((currency) => Container(
               key: Key(currency.code),
@@ -50,6 +52,8 @@ class EditCurrenciesScreen extends StatelessWidget {
     // The ReorderableListView is flutter standard and has a long-press reorder capability
     final searchQuery = ref.watch(searchFilterProvider);
     final allCurrencies = ref.watch(availableCurrenciesProvider);
+    final filteredCurrencies = filter.getFiltered(allCurrencies, searchQuery);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -61,12 +65,19 @@ class EditCurrenciesScreen extends StatelessWidget {
           autoFocus: selectedCurrencyWidgets.length < 2,
         ),
         Gap.list,
-        ...filter.getFiltered(allCurrencies, searchQuery).map((currency) {
-          return SearchCurrencyResultEntry(
-            currency: currency,
-            isSelected: selectedCurrencies.contains(currency),
-          );
-        }),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: filteredCurrencies.length,
+          itemBuilder: (context, index) {
+            final currency = filteredCurrencies[index];
+            return SearchCurrencyResultEntry(
+              key: Key(currency.code),
+              currency: currency,
+              isSelected: selectedCurrenciesSet.contains(currency),
+            );
+          },
+        ),
         if (selectedCurrencyWidgets.isNotEmpty) ...[
           Gap.list,
           Text(context.l10n.addCurrency_selectedCurrenciesTitle,
@@ -93,7 +104,9 @@ class SearchCurrencyResultEntry extends ConsumerWidget {
   final Currency currency;
   final bool isSelected;
 
-  SearchCurrencyResultEntry({required this.currency, required this.isSelected});
+  SearchCurrencyResultEntry(
+      {Key? key, required this.currency, required this.isSelected})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

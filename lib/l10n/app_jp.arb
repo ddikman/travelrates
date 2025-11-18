@@ -25,5 +25,6 @@
       }
     }
   },
-  "addCurrency_usedInCountries": "選択された国: {countries}"
+  "addCurrency_usedInCountries": "選択された国: {countries}",
+  "addCurrency_digitalCurrency": "世界中で使用されているデジタル通貨です"
 }

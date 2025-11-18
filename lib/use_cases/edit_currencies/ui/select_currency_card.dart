@@ -30,8 +30,6 @@ class SelectCurrencyCard extends StatelessWidget {
         .where((country) => country.currencyCode == currency.code)
         .toList();
 
-    final countryNames = _groupLocalizedNames(relatedCountries, localization);
-
     return CurrencyCard(
         onTap: onTap,
         iconName: currency.icon,
@@ -45,7 +43,7 @@ class SelectCurrencyCard extends StatelessWidget {
                   Text(
                       "${localization.currencies.getLocalized(currency.code)}, ${currency.code}",
                       style: ThemeTypography.small.bold),
-                  Text(context.l10n.addCurrency_usedInCountries(countryNames),
+                  Text(_getUsageText(context, relatedCountries),
                       style: ThemeTypography.verySmall)
                 ]),
           ),
@@ -59,5 +57,15 @@ class SelectCurrencyCard extends StatelessWidget {
     return relatedCountries.map((country) {
       return localizations.countries.getLocalized(country.name);
     }).join(", ");
+  }
+
+  String _getUsageText(BuildContext context, List<Country> relatedCountries) {
+    if (currency.code.toUpperCase() == 'BTC') {
+      return context.l10n.addCurrency_digitalCurrency;
+    }
+
+    final countryNames =
+        _groupLocalizedNames(relatedCountries, context.l10nData);
+    return context.l10n.addCurrency_usedInCountries(countryNames);
   }
 }

@@ -73,4 +73,8 @@ class AppLocalizationsSv extends AppLocalizations {
   String addCurrency_usedInCountries(String countries) {
     return 'Används i länder som: $countries';
   }
+
+  @override
+  String get addCurrency_digitalCurrency =>
+      'Är en digital valuta som används världen över';
 }

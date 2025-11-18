@@ -25,5 +25,6 @@
       }
     }
   },
-  "addCurrency_usedInCountries": "Används i länder som: {countries}"
+  "addCurrency_usedInCountries": "Används i länder som: {countries}",
+  "addCurrency_digitalCurrency": "Är en digital valuta som används världen över"
 }
