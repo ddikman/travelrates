@@ -55,6 +55,13 @@ class CompareCurrencyCard extends ConsumerWidget {
   String _formatValue(double value) {
     final locale = Intl.getCurrentLocale();
     NumberFormat format;
+
+    // Special handling for BTC: if value is under 1, allow up to 6 decimals
+    if (currency.code == 'BTC' && value < 1) {
+      format = NumberFormat('###,###.######', locale);
+      return format.format(value);
+    }
+
     if (value < 100) {
       format = NumberFormat('###,###.##', locale);
     } else if (value < 10000) {

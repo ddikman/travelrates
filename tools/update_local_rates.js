@@ -1,14 +1,14 @@
 const fs = require('fs')
-const http = require('http');
+const https = require('https');
 
 const apiConfig  = JSON.parse(fs.readFileSync('./assets/data/apiConfiguration.json'))
 
 const url = apiConfig.apiUrl + '?token=' + apiConfig.apiToken;
 
-http.get(url, (res) => {
+https.get(url, (res) => {
   const { statusCode } = res;
   if (statusCode != 200) {
-    throw new Error(`Got response ${statusCode}`);
+    throw new Error(`Got response ${statusCode} for ${url}`);
   }
 
   res.setEncoding('utf8');
