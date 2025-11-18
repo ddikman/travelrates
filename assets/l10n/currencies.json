@@ -34,6 +34,16 @@
         "sv": "Armeniska Drama",
         "ja": "アルメニアドラム"
     },
+    "ANG": {
+        "en": "Netherlands Antillean Guilder",
+        "sv": "Nederländska Antillernas Gulden",
+        "ja": "オランダ領アンティルギルダー"
+    },
+    "AOA": {
+        "en": "Angolan Kwanza",
+        "sv": "Angolanska Kwanza",
+        "ja": "アンゴラクワンザ"
+    },
     "ARS": {
         "en": "Argentine Peso",
         "sv": "Argentinska Peso",
@@ -44,6 +54,11 @@
         "sv": "Australiensiska Dollar",
         "ja": "オーストラリアドル"
     },
+    "AWG": {
+        "en": "Aruban Florin",
+        "sv": "Arubanska Florin",
+        "ja": "アルバフロリン"
+    },
     "AZN": {
         "en": "Azerbaijani Manat",
         "sv": "Azerbajdzjanska Manat",
@@ -53,6 +68,11 @@
         "en": "Bosnia-Herzegovina Convertible Mark",
         "sv": "Bosnien-Hercegovinaska Convertible Mark",
         "ja": "ボスニアヘルツェゴビナコンバーチブルマーク"
+    },
+    "BBD": {
+        "en": "Barbadian Dollar",
+        "sv": "Barbadianska Dollar",
+        "ja": "バルバドスドル"
     },
     "BDT": {
         "en": "Bangladeshi Taka",
@@ -79,10 +99,25 @@
         "sv": "Bruneiska Dollar",
         "ja": "ブルネイドル"
     },
+    "BSD": {
+        "en": "Bahamian Dollar",
+        "sv": "Bahamanska Dollar",
+        "ja": "バハマドル"
+    },
+    "BTC": {
+        "en": "Bitcoin",
+        "sv": "Bitcoin",
+        "ja": "ビットコイン"
+    },
     "BOB": {
         "en": "Bolivian Boliviano",
         "sv": "Bolivianska Boliviano",
         "ja": "ボリビアボリビアーノ"
+    },
+    "BTN": {
+        "en": "Bhutanese Ngultrum",
+        "sv": "Bhutanesiska Ngultrum",
+        "ja": "ブータンヌルタム"
     },
     "BRL": {
         "en": "Brazilian Real",
@@ -95,6 +130,11 @@
         "ja": "ボツワナプラ"
     },
     "BYR": {
+        "en": "Belarusian Ruble",
+        "sv": "Vitryska Rubel",
+        "ja": "ベラルーシルーブル"
+    },
+    "BYN": {
         "en": "Belarusian Ruble",
         "sv": "Vitryska Rubel",
         "ja": "ベラルーシルーブル"
@@ -119,6 +159,11 @@
         "sv": "Chilenska Peso",
         "ja": "チリペソ"
     },
+    "CLF": {
+        "en": "Chilean Unit of Account (UF)",
+        "sv": "Chilenska Räkneenhet (UF)",
+        "ja": "チリ計算単位 (UF)"
+    },
     "CNY": {
         "en": "Chinese Yuan",
         "sv": "Kinesiska Yuan",
@@ -133,6 +178,16 @@
         "en": "Costa Rican Colón",
         "sv": "Costa Rica Colón",
         "ja": "コスタリカコロン"
+    },
+    "CUC": {
+        "en": "Cuban Convertible Peso",
+        "sv": "Kubanska Konvertibla Peso",
+        "ja": "キューバ兌換ペソ"
+    },
+    "CUP": {
+        "en": "Cuban Peso",
+        "sv": "Kubanska Peso",
+        "ja": "キューバペソ"
     },
     "CVE": {
         "en": "Cape Verdean Escudo",
@@ -184,6 +239,16 @@
         "sv": "Etiopiska Birr",
         "ja": "エチオピアビア"
     },
+    "FJD": {
+        "en": "Fijian Dollar",
+        "sv": "Fijianska Dollar",
+        "ja": "フィジードル"
+    },
+    "FKP": {
+        "en": "Falkland Islands Pound",
+        "sv": "Falklandsöarna Pund",
+        "ja": "フォークランド諸島ポンド"
+    },
     "GBP": {
         "en": "British Pound Sterling",
         "sv": "Brittiska Pund",
@@ -203,6 +268,26 @@
         "en": "Guinean Franc",
         "sv": "Guineanska Franc",
         "ja": "ギニアフラン"
+    },
+    "GGP": {
+        "en": "Guernsey Pound",
+        "sv": "Guernsey Pund",
+        "ja": "ガーンジーポンド"
+    },
+    "GIP": {
+        "en": "Gibraltar Pound",
+        "sv": "Gibraltar Pund",
+        "ja": "ジブラルタルポンド"
+    },
+    "GMD": {
+        "en": "Gambian Dalasi",
+        "sv": "Gambianska Dalasi",
+        "ja": "ガンビアダラシ"
+    },
+    "GYD": {
+        "en": "Guyanese Dollar",
+        "sv": "Guyanesiska Dollar",
+        "ja": "ガイアナドル"
     },
     "GTQ": {
         "en": "Guatemalan Quetzal",
@@ -229,6 +314,11 @@
         "sv": "Ungerska Forint",
         "ja": "ハンガリーフォリント"
     },
+    "HTG": {
+        "en": "Haitian Gourde",
+        "sv": "Haitianska Gourde",
+        "ja": "ハイチグールド"
+    },
     "IDR": {
         "en": "Indonesian Rupiah",
         "sv": "Indonesiska Rupiah",
@@ -238,6 +328,11 @@
         "en": "Israeli New Sheqel",
         "sv": "Israeliska Nya Shekel",
         "ja": "イスラエル新シェケル"
+    },
+    "IMP": {
+        "en": "Isle of Man Pound",
+        "sv": "Isle of Man Pund",
+        "ja": "マン島ポンド"
     },
     "INR": {
         "en": "Indian Rupee",
@@ -269,6 +364,11 @@
         "sv": "Jordanska Dinar",
         "ja": "ヨルダンディナール"
     },
+    "JEP": {
+        "en": "Jersey Pound",
+        "sv": "Jersey Pund",
+        "ja": "ジャージーポンド"
+    },
     "JPY": {
         "en": "Japanese Yen",
         "sv": "Japanska Yen",
@@ -283,6 +383,11 @@
         "en": "Cambodian Riel",
         "sv": "Kambodjanska Riel",
         "ja": "カンボジアリエル"
+    },
+    "KGS": {
+        "en": "Kyrgystani Som",
+        "sv": "Kirgizistanska Som",
+        "ja": "キルギスソム"
     },
     "KMF": {
         "en": "Comorian Franc",
@@ -299,6 +404,16 @@
         "sv": "Kuwaiti Dinar",
         "ja": "クウェートディナール"
     },
+    "KYD": {
+        "en": "Cayman Islands Dollar",
+        "sv": "Caymanöarna Dollar",
+        "ja": "ケイマン諸島ドル"
+    },
+    "KPW": {
+        "en": "North Korean Won",
+        "sv": "Nordkoreanska Vann",
+        "ja": "北朝鮮ウォン"
+    },
     "KZT": {
         "en": "Kazakhstani Tenge",
         "sv": "Kazakhstani Tenge",
@@ -309,10 +424,25 @@
         "sv": "Libanesiska Pundet",
         "ja": "レバノンポンド"
     },
+    "LAK": {
+        "en": "Laotian Kip",
+        "sv": "Laotianska Kip",
+        "ja": "ラオスキップ"
+    },
     "LKR": {
         "en": "Sri Lankan Rupee",
         "sv": "Sri Lanka Rupi",
         "ja": "スリランカルピー"
+    },
+    "LRD": {
+        "en": "Liberian Dollar",
+        "sv": "Liberianska Dollar",
+        "ja": "リベリアドル"
+    },
+    "LSL": {
+        "en": "Lesotho Loti",
+        "sv": "Lesothiska Loti",
+        "ja": "レソトロティ"
     },
     "LTL": {
         "en": "Lithuanian Litas",
@@ -354,15 +484,35 @@
         "sv": "Myanmaska Kyat",
         "ja": "ミャンマーチャット"
     },
+    "MNT": {
+        "en": "Mongolian Tugrik",
+        "sv": "Mongoliska Tugrik",
+        "ja": "モンゴルトゥグルグ"
+    },
     "MOP": {
         "en": "Macanese Pataca",
         "sv": "Macaneseiska Pataca",
         "ja": "マカディパタカ"
     },
+    "MRO": {
+        "en": "Mauritanian Ouguiya",
+        "sv": "Mauretanska Ouguiya",
+        "ja": "モーリタニアウギア"
+    },
     "MUR": {
         "en": "Mauritian Rupee",
         "sv": "Mauritianska Rupee",
         "ja": "モーリシャンルピー"
+    },
+    "MVR": {
+        "en": "Maldivian Rufiyaa",
+        "sv": "Maldiviska Rufiyaa",
+        "ja": "モルディブルフィヤ"
+    },
+    "MWK": {
+        "en": "Malawian Kwacha",
+        "sv": "Malawiska Kwacha",
+        "ja": "マラウイクワチャ"
     },
     "MXN": {
         "en": "Mexican Peso",
@@ -424,6 +574,11 @@
         "sv": "Peruvian Nuevo Sol",
         "ja": "ペルーヌエボソル"
     },
+    "PGK": {
+        "en": "Papua New Guinean Kina",
+        "sv": "Papua Nya Guineanska Kina",
+        "ja": "パプアニューギニアキナ"
+    },
     "PHP": {
         "en": "Philippine Peso",
         "sv": "Filippinska Peso",
@@ -474,6 +629,16 @@
         "sv": "Saudiarabiska Riyal",
         "ja": "サウジリヤル"
     },
+    "SBD": {
+        "en": "Solomon Islands Dollar",
+        "sv": "Salomonöarna Dollar",
+        "ja": "ソロモン諸島ドル"
+    },
+    "SCR": {
+        "en": "Seychellois Rupee",
+        "sv": "Seychelliska Rupi",
+        "ja": "セイシェルルピー"
+    },
     "SDG": {
         "en": "Sudanese Pound",
         "sv": "Sudanesiska Pund",
@@ -489,10 +654,40 @@
         "sv": "Singapore Dollar",
         "ja": "シンガポールドル"
     },
+    "SHP": {
+        "en": "Saint Helena Pound",
+        "sv": "Sankt Helena Pund",
+        "ja": "セントヘレナポンド"
+    },
+    "SLL": {
+        "en": "Sierra Leonean Leone",
+        "sv": "Sierra Leonesiska Leone",
+        "ja": "シエラレオネレオン"
+    },
     "SOS": {
         "en": "Somali Shilling",
         "sv": "Somaliska Shilling",
         "ja": "ソマリアシリング"
+    },
+    "SRD": {
+        "en": "Surinamese Dollar",
+        "sv": "Surinamesiska Dollar",
+        "ja": "スリナムドル"
+    },
+    "STD": {
+        "en": "São Tomé and Príncipe Dobra",
+        "sv": "São Tomé och Príncipe Dobra",
+        "ja": "サントメ・プリンシペドブラ"
+    },
+    "SVC": {
+        "en": "Salvadoran Colón",
+        "sv": "Salvadoranska Colón",
+        "ja": "エルサルバドルコロン"
+    },
+    "SZL": {
+        "en": "Swazi Lilangeni",
+        "sv": "Swaziländska Lilangeni",
+        "ja": "スワジランドリランゲニ"
     },
     "SYP": {
         "en": "Syrian Pound",
@@ -503,6 +698,16 @@
         "en": "Thai Baht",
         "sv": "Thailändska Baht",
         "ja": "タイバーツ"
+    },
+    "TJS": {
+        "en": "Tajikistani Somoni",
+        "sv": "Tadzjikistanska Somoni",
+        "ja": "タジキスタンソモニ"
+    },
+    "TMT": {
+        "en": "Turkmenistani Manat",
+        "sv": "Turkmenistanska Manat",
+        "ja": "トルクメニスタンマナト"
     },
     "TND": {
         "en": "Tunisian Dinar",
@@ -564,6 +769,16 @@
         "sv": "Vietnamesiska Dong",
         "ja": "ベトナムドン"
     },
+    "VUV": {
+        "en": "Vanuatu Vatu",
+        "sv": "Vanuatiska Vatu",
+        "ja": "バヌアツバツ"
+    },
+    "WST": {
+        "en": "Samoan Tala",
+        "sv": "Samoanska Tala",
+        "ja": "サモアタラ"
+    },
     "XAF": {
         "en": "CFA Franc BEAC",
         "sv": "CFA Franc BEAC",
@@ -573,6 +788,16 @@
         "en": "CFA Franc BCEAO",
         "sv": "CFA Franc BCEAO",
         "ja": "CFAフラン (BCEAO)"
+    },
+    "XCD": {
+        "en": "East Caribbean Dollar",
+        "sv": "Östkaribiska Dollar",
+        "ja": "東カリブドル"
+    },
+    "XPF": {
+        "en": "CFP Franc",
+        "sv": "CFP Franc",
+        "ja": "CFPフラン"
     },
     "YER": {
         "en": "Yemeni Rial",
@@ -588,5 +813,15 @@
         "en": "Zambian Kwacha",
         "sv": "Zambian Kwacha",
         "ja": "ザンビアクワチャ"
+    },
+    "ZMW": {
+        "en": "Zambian Kwacha",
+        "sv": "Zambian Kwacha",
+        "ja": "ザンビアクワチャ"
+    },
+    "ZWL": {
+        "en": "Zimbabwean Dollar",
+        "sv": "Zimbabwiska Dollar",
+        "ja": "ジンバブエドル"
     }
 }

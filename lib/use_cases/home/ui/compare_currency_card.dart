@@ -49,7 +49,7 @@ class CompareCurrencyCard extends ConsumerWidget {
     return CurrencyCard(
         content: contents,
         onTap: () => _showConvertDialog(context, currentValue),
-        currencyIconName: currency.icon);
+        iconName: currency.icon);
   }
 
   String _formatValue(double value) {
