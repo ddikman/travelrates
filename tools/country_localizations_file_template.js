@@ -19,9 +19,9 @@ ${indent(translations, 6)}
     factory CountryLocalizations(String locale) {
       assert(_allLocales.containsKey(locale) || locale == '${sourceLocale}');
       if (locale == '${sourceLocale}') {
-        return new CountryLocalizations._internal(locale, null);
+        return new CountryLocalizations._internal(locale, {});
       } else {
-        return new CountryLocalizations._internal(locale, _allLocales[locale]);
+        return new CountryLocalizations._internal(locale, _allLocales[locale]!);
       }
     }
 
@@ -29,12 +29,12 @@ ${indent(translations, 6)}
       // Skip localization if it's already in the default locale
       if (locale == '${sourceLocale}') return countryName;
 
-      if (!_translations.containsKey(countryName)) {
-        print("Missing localization for country '$countryName'.");
-        return countryName;
+      final localized = _translations[countryName];
+      if (localized == null) {
+        throw StateError("Missing localization for country '$countryName'.");
       }
 
-      return _translations[countryName];
+      return localized;
     }
 
   }`

@@ -34,7 +34,7 @@ class SelectCurrencyCard extends StatelessWidget {
 
     return CurrencyCard(
         onTap: onTap,
-        currencyIconName: currency.icon,
+        iconName: currency.icon,
         content:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Expanded(

@@ -13,7 +13,7 @@ const supportedLocales = [ 'en', 'ja', 'sv' ]
 function writeDartFile (path, contents) {
   console.log('writing and formatting dart file..')
   fs.writeFileSync(path, contents)
-  exec(`flutter format ${path}`)
+  exec(`fvm dart format ${path}`)
   console.log(`written new localizations to: ${path}`)
 }
 

@@ -6,14 +6,14 @@ const countriesDataFileTemplate = require('./countries_data_file_template.js')
 function writeDartFile (path, contents) {
   console.log('writing and formatting dart file..')
   fs.writeFileSync(path, contents)
-  exec(`flutter format ${path}`)
+  exec(`fvm dart format ${path}`)
   console.log(`written new localizations to: ${path}`)
 }
 
 function generateCurrencies () {
   let currencies = JSON.parse(fs.readFileSync('./assets/data/currencies.json'))
   const rates = JSON.parse(fs.readFileSync('./assets/data/rates.json')).rates
-  
+
   // convert the hash map to a list
   currencies = Object.keys(currencies).map(currencyCode => currencies[currencyCode]);
 

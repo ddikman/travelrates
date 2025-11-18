@@ -18,15 +18,16 @@ ${indent(translations, 6)}
 
     factory CurrencyLocalizations(String locale) {
       assert(_locales.containsKey(locale));
-      return new CurrencyLocalizations._internal(locale, _locales[locale]);
+      return new CurrencyLocalizations._internal(locale, _locales[locale]!);
     }
 
     String getLocalized(String currencyCode) {
-      if (!_currencies.containsKey(currencyCode)) {
+      final localized = _currencies[currencyCode];
+      if (localized == null) {
         throw StateError("Missing name for currency '$currencyCode'.");
       }
 
-      return _currencies[currencyCode];
+      return localized;
     }
 
   }`
