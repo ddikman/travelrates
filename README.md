@@ -22,6 +22,7 @@ Use [flutter_distribute](https://distributor.leanflutter.dev/).
 
 ```shell
 source .env
+node tools/update_local_rates.js
 flutter_distributor release --name internal
 ```
 
