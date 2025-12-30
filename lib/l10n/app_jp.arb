@@ -26,5 +26,30 @@
     }
   },
   "addCurrency_usedInCountries": "選択された国: {countries}",
-  "addCurrency_digitalCurrency": "世界中で使用されているデジタル通貨です"
+  "addCurrency_digitalCurrency": "世界中で使用されているデジタル通貨です",
+  "time_justNow": "たった今",
+  "@time_minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "time_minutesAgo": "{minutes}分前",
+  "@time_hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "time_hoursAgo": "{hours}時間前",
+  "@time_daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "time_daysAgo": "{days}日前"
 }

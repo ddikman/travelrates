@@ -77,4 +77,22 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get addCurrency_digitalCurrency =>
       'Är en digital valuta som används världen över';
+
+  @override
+  String get time_justNow => 'just nu';
+
+  @override
+  String time_minutesAgo(int minutes) {
+    return '$minutes min sedan';
+  }
+
+  @override
+  String time_hoursAgo(int hours) {
+    return '$hours tim sedan';
+  }
+
+  @override
+  String time_daysAgo(int days) {
+    return '$days dag sedan';
+  }
 }

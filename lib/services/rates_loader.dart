@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:travelconverter/model/currency_rate.dart';
+import 'package:travelconverter/model/rates_response.dart';
 import 'package:travelconverter/services/currency_decoder.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
@@ -30,7 +31,7 @@ class RatesLoader {
     return file.contents;
   }
 
-  Future<List<CurrencyRate>> _cachedRates() async {
+  Future<RatesResponse> _cachedRates() async {
     String json = '';
     if (await _cacheExists()) {
       try {
@@ -42,19 +43,19 @@ class RatesLoader {
       }
     }
 
-    return <CurrencyRate>[];
+    return RatesResponse(rates: <CurrencyRate>[]);
   }
 
-  Future<List<CurrencyRate>> loadOnlineRates() async {
+  Future<RatesResponse> loadOnlineRates() async {
     final ratesJson = await this.ratesApi.getCurrentRatesJson();
     if (!ratesJson.successful || ratesJson.result == null) {
       return await _cachedRates();
     }
 
     try {
-      final rates = decoder.decodeRates(ratesJson.result!);
+      final ratesResponse = decoder.decodeRates(ratesJson.result!);
       _cacheRates(ratesJson.result!);
-      return rates;
+      return ratesResponse;
     } on Exception catch (e) {
       log.error(
           'Online rates invalid json: ${e.toString()}\r\n${ratesJson.result}');

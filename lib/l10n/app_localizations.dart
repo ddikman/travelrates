@@ -219,6 +219,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Is a digital currency used worldwide'**
   String get addCurrency_digitalCurrency;
+
+  /// No description provided for @time_justNow.
+  ///
+  /// In en, this message translates to:
+  /// **'just now'**
+  String get time_justNow;
+
+  /// No description provided for @time_minutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes}m ago'**
+  String time_minutesAgo(int minutes);
+
+  /// No description provided for @time_hoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours}h ago'**
+  String time_hoursAgo(int hours);
+
+  /// No description provided for @time_daysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{days}d ago'**
+  String time_daysAgo(int days);
 }
 
 class _AppLocalizationsDelegate

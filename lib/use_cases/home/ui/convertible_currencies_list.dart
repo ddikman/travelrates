@@ -64,7 +64,7 @@ class _ConvertibleCurrenciesListState
         ] else if (ratesLastUpdated != null) ...[
           SizedBox(height: 4),
           Text(
-            'Rates updated ${formatRelativeTime(ratesLastUpdated)}',
+            'Rates updated ${formatRelativeTime(ratesLastUpdated, context.l10n)}',
             style: ThemeTypography.verySmall.copyWith(
               color: context.themeColors.text60,
             ),

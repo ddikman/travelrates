@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travelconverter/app_core/theme/theme_colors.dart';
 import 'package:travelconverter/l10n/localized_data.dart';
 import 'package:travelconverter/l10n/localized_data_provider.dart';
-import 'package:travelconverter/model/currency_rate.dart';
+import 'package:travelconverter/model/rates_response.dart';
 import 'package:travelconverter/routing/router.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
@@ -118,7 +118,7 @@ class _AppRootState extends State<AppRoot> {
             foregroundColor: colorTheme.text));
   }
 
-  void handleLoadedRates(List<CurrencyRate> rates) {
-    StateContainer.of(context).setRates(rates);
+  void handleLoadedRates(RatesResponse ratesResponse) {
+    StateContainer.of(context).setRates(ratesResponse.rates, ratesResponse.timestamp);
   }
 }

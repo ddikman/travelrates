@@ -123,10 +123,10 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
-  void setRates(List<CurrencyRate> rates) {
+  void setRates(List<CurrencyRate> rates, [DateTime? timestamp]) {
     setState(() {
       this.appState.availableCurrencies.updateRates(rates);
-      this.appState = this.appState.withRatesLastUpdated(DateTime.now());
+      this.appState = this.appState.withRatesLastUpdated(timestamp ?? DateTime.now());
       ratesLoading = false;
     });
   }

@@ -33,5 +33,30 @@
     }
   },
   "addCurrency_usedInCountries": "Used in countries like: {countries}",
-  "addCurrency_digitalCurrency": "Is a digital currency used worldwide"
+  "addCurrency_digitalCurrency": "Is a digital currency used worldwide",
+  "time_justNow": "just now",
+  "@time_minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "time_minutesAgo": "{minutes}m ago",
+  "@time_hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "time_hoursAgo": "{hours}h ago",
+  "@time_daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "time_daysAgo": "{days}d ago"
 }

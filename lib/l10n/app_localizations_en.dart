@@ -77,4 +77,22 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get addCurrency_digitalCurrency =>
       'Is a digital currency used worldwide';
+
+  @override
+  String get time_justNow => 'just now';
+
+  @override
+  String time_minutesAgo(int minutes) {
+    return '${minutes}m ago';
+  }
+
+  @override
+  String time_hoursAgo(int hours) {
+    return '${hours}h ago';
+  }
+
+  @override
+  String time_daysAgo(int days) {
+    return '${days}d ago';
+  }
 }
