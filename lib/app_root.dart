@@ -41,12 +41,18 @@ class _AppRootState extends State<AppRoot> {
       _firebaseAnalytics?.logAppOpen();
       Logger.analytics = _firebaseAnalytics;
 
-      new RatesLoader(
-              localStorage: new LocalStorage(), ratesApi: widget.ratesApi)
-          .loadOnlineRates()
-          .then(handleLoadedRates)
-          .catchError(
-              (error) => {log.error("Failed to load online rates: $error")});
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        StateContainer.of(context).startLoadingRates();
+
+        new RatesLoader(
+                localStorage: new LocalStorage(), ratesApi: widget.ratesApi)
+            .loadOnlineRates()
+            .then(handleLoadedRates)
+            .catchError((error) {
+          log.error("Failed to load online rates: $error");
+          StateContainer.of(context).setRates([]);
+        });
+      });
     });
   }
 
