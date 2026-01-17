@@ -2,6 +2,7 @@
 
 - Added display of last update time for currency rates
 - Improved tap area for toolbar buttons
+- Improved load of cached rates in offline mode
 
 ## 2.1.0+98
 
