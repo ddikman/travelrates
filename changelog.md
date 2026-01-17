@@ -1,6 +1,7 @@
 ## 2.2.0+99
 
 - Added display of last update time for currency rates
+- Improved tap area for toolbar buttons
 
 ## 2.1.0+98
 

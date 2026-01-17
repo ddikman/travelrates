@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:travelconverter/app_core/theme/app_theme.dart';
-import 'package:travelconverter/app_core/widgets/utility_extensions.dart';
 
 class AppBarIcon extends StatelessWidget {
+  static const double size = 64.0;
+
   final Widget icon;
   final Function onTap;
 
@@ -10,12 +10,16 @@ class AppBarIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        child: icon.pad(
-          top: Paddings.scaffold,
-          left: Paddings.large,
-        ),
-        onTap: () => onTap());
+    return Container(
+      // color: Colors.red,
+      child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          child: SizedBox(
+            width: size,
+            height: size,
+            child: Center(child: icon),
+          ),
+          onTap: () => onTap()),
+    );
   }
 }
