@@ -43,7 +43,8 @@ class AppState {
   Map<String, dynamic> toJson() => {
         'currentAmount': conversion.currentAmount,
         'currentCurrency': conversion.currentCurrency.code,
-        'currencies': conversion.currencies
+        'currencies': conversion.currencies,
+        'ratesLastUpdated': ratesLastUpdated?.toIso8601String()
       };
 
   AppState.fromJson(Map<String, dynamic> json, CurrencyRepository repository,
@@ -54,7 +55,9 @@ class AppState {
             currentCurrency: repository.getByCode(json['currentCurrency']),
             currencies: List.castFrom(json['currencies'])),
         this.countries = countries,
-        this.ratesLastUpdated = null;
+        this.ratesLastUpdated = json['ratesLastUpdated'] != null
+            ? DateTime.parse(json['ratesLastUpdated'])
+            : null;
 
   AppState.initial(
       {required List<Country> countries,

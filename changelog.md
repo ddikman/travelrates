@@ -1,3 +1,7 @@
+## 2.2.0+99
+
+- Added display of last update time for currency rates
+
 ## 2.1.0+98
 
 - Added around fifty new currencies, including Bitcoin

@@ -139,7 +139,7 @@ abstract class AppLocalizations {
   /// No description provided for @about_description.
   ///
   /// In en, this message translates to:
-  /// **'I first wrote and released TravelRates in 2019 in Bali whilst being sick with a cold when backpacking south east Asia.\n\nIt was built with backpackers in mind, where you have to compare against multiple currencies and speed, ease and offline use are more important than being exactly right.\n\nLet me know if you enjoy the app, every review motivates me to keep it running (and free)!'**
+  /// **'I first wrote and released TravelRates in 2019 in Bali whilst being sick with a cold when backpacking south east Asia.\n\nIt was built with backpackers in mind, where you have to compare against multiple currencies and speed, ease and offline use are more important than being exactly right.\n\nThe the rates are updated from online source whenever you are online, and the online rates are updated once a day.\n\nLet me know if you enjoy the app, every review motivates me to keep it running (and free)!'**
   String get about_description;
 
   /// No description provided for @about_addReview.

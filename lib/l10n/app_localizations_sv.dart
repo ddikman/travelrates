@@ -31,7 +31,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get about_description =>
-      'Jag skrev och släppte TravelRates 2019 under en vecka när jag var förkyld i Bali medan jag backpackade i sydostasien.\n\nJag byggde TravelRates med backpackers i åtanke, folk som behöver jämföra flera valutor och där snabbhet, enkelhet och offline-användning är viktigare än att vara exakt rätt.\n\nLämna gärna en recension om du gillar appen, all feedback motiverar mig att fortsätta driva den (och hålla den gratis)!';
+      'Jag skrev och släppte TravelRates 2019 under en vecka när jag var förkyld i Bali medan jag backpackade i sydostasien.\n\nJag byggde TravelRates med backpackers i åtanke, folk som behöver jämföra flera valutor och där snabbhet, enkelhet och offline-användning är viktigare än att vara exakt rätt.\n\nValutorna uppdateras automatiskt när du är online, men valutorna uppdateras endast en gång per dag.\n\nLämna gärna en recension om du gillar appen, all feedback motiverar mig att fortsätta driva den (och hålla den gratis)!';
 
   @override
   String get about_addReview => 'Lägg till recension';

@@ -126,9 +126,11 @@ class StateContainerState extends State<StateContainer> {
   void setRates(List<CurrencyRate> rates, [DateTime? timestamp]) {
     setState(() {
       this.appState.availableCurrencies.updateRates(rates);
-      this.appState = this.appState.withRatesLastUpdated(timestamp ?? DateTime.now());
+      this.appState =
+          this.appState.withRatesLastUpdated(timestamp ?? DateTime.now());
       ratesLoading = false;
     });
+    unawaited(widget.statePersistence.store(appState));
   }
 
   /// Reorder a currency in the list, newPosition begin the new index, zero-based.

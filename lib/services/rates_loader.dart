@@ -31,7 +31,7 @@ class RatesLoader {
     return file.contents;
   }
 
-  Future<RatesResponse> _cachedRates() async {
+  Future<RatesResponse> loadCachedRates() async {
     String json = '';
     if (await _cacheExists()) {
       try {
@@ -44,6 +44,10 @@ class RatesLoader {
     }
 
     return RatesResponse(rates: <CurrencyRate>[]);
+  }
+
+  Future<RatesResponse> _cachedRates() async {
+    return await loadCachedRates();
   }
 
   Future<RatesResponse> loadOnlineRates() async {

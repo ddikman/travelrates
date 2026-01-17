@@ -9,6 +9,7 @@ import 'package:travelconverter/services/load_api_configuration.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/preferences.dart';
 import 'package:travelconverter/services/rates_api.dart';
+import 'package:travelconverter/services/rates_loader.dart';
 import 'package:travelconverter/services/shared_preferences.dart';
 import 'package:travelconverter/services/state_persistence.dart';
 
@@ -21,8 +22,17 @@ void main() async {
   var localStorage = LocalStorage();
   final ratesApiConfig = await loadApiConfiguration();
   final ratesApi = RatesApi(ratesApiConfig);
+
+  // Load cached rates first using RatesLoader
+  final ratesLoader =
+      RatesLoader(localStorage: localStorage, ratesApi: ratesApi);
+  final cachedRatesResponse = await ratesLoader.loadCachedRates();
+  final cachedRates =
+      cachedRatesResponse.rates.isNotEmpty ? cachedRatesResponse.rates : null;
+
   final statePersistence = StatePersistence(localStorage: localStorage);
-  final state = await statePersistence.load(rootBundle);
+  final state =
+      await statePersistence.load(rootBundle, cachedRates: cachedRates);
   final sharedPreferences = await SharedPreferences.initialize(
     prefix: 'travelrates',
   );

@@ -6,7 +6,7 @@
   "review_acceptReviewButtonText": "Ja!",
   "alreadySelectedWarning": "{currencyName} är redan vald!",
   "about_title": "Om TravelRates",
-  "about_description": "Jag skrev och släppte TravelRates 2019 under en vecka när jag var förkyld i Bali medan jag backpackade i sydostasien.\n\nJag byggde TravelRates med backpackers i åtanke, folk som behöver jämföra flera valutor och där snabbhet, enkelhet och offline-användning är viktigare än att vara exakt rätt.\n\nLämna gärna en recension om du gillar appen, all feedback motiverar mig att fortsätta driva den (och hålla den gratis)!",
+  "about_description": "Jag skrev och släppte TravelRates 2019 under en vecka när jag var förkyld i Bali medan jag backpackade i sydostasien.\n\nJag byggde TravelRates med backpackers i åtanke, folk som behöver jämföra flera valutor och där snabbhet, enkelhet och offline-användning är viktigare än att vara exakt rätt.\n\nValutorna uppdateras automatiskt när du är online, men valutorna uppdateras endast en gång per dag.\n\nLämna gärna en recension om du gillar appen, all feedback motiverar mig att fortsätta driva den (och hålla den gratis)!",
   "about_addReview": "Lägg till recension",
   "about_callout": "Jag jobbar som frilansande fullstack-utvecklare.\n\nOm du vill komma i kontakt, kanske lära dig hur denna app är byggd eller anlita mig, besök [greycastle.se](https://greycastle.se).",
   "theme_title": "Mörkt läge",
