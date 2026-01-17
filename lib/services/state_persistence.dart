@@ -6,6 +6,8 @@ import 'package:travelconverter/data/countries_data.dart';
 import 'package:travelconverter/data/currency_data.dart';
 import 'package:travelconverter/helpers/string_compare.dart';
 import 'package:travelconverter/model/country.dart';
+import 'package:travelconverter/model/currency.dart';
+import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/services/currency_repository.dart';
 import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
@@ -19,8 +21,9 @@ class StatePersistence {
 
   StatePersistence({required this.localStorage});
 
-  Future<AppState> load(AssetBundle assets) async {
-    final currencyRepository = _loadRepository();
+  Future<AppState> load(AssetBundle assets,
+      {List<CurrencyRate>? cachedRates}) async {
+    final currencyRepository = _loadRepository(cachedRates);
 
     final countries = new List<Country>.from(CountryData.countries);
     countries.sort((a, b) => compareIgnoreCase(a.name, b.name));
@@ -49,10 +52,30 @@ class StatePersistence {
     return AppState.fromJson(stateJson, currencyRepository, countries);
   }
 
-  CurrencyRepository _loadRepository() {
-    return new CurrencyRepository(
-        currencies: CurrencyData.currencies,
-        baseRate: CurrencyData.baseCurrency);
+  CurrencyRepository _loadRepository(List<CurrencyRate>? cachedRates) {
+    // Start with hard-coded currencies
+    final currencies = CurrencyData.currencies
+        .map((currency) => Currency(
+              symbol: currency.symbol,
+              code: currency.code,
+              name: currency.name,
+              icon: currency.icon,
+              rate: currency.rate,
+            ))
+        .toList();
+
+    final repository = CurrencyRepository(
+        currencies: currencies, baseRate: CurrencyData.baseCurrency);
+
+    // If we have cached rates, apply them
+    if (cachedRates != null && cachedRates.isNotEmpty) {
+      log.debug('applying ${cachedRates.length} cached rates to repository..');
+      repository.updateRates(cachedRates);
+    } else {
+      log.debug('no cached rates provided, using hard-coded rates..');
+    }
+
+    return repository;
   }
 
   Future<Null> store(AppState appState) async {

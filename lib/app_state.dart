@@ -13,10 +13,13 @@ class AppState {
 
   final List<Country> countries;
 
+  final DateTime? ratesLastUpdated;
+
   const AppState(
       {required ConversionModel conversion,
       required CurrencyRepository availableCurrencies,
-      required List<Country> countries})
+      required List<Country> countries,
+      this.ratesLastUpdated})
       : this.conversion = conversion,
         this.countries = countries,
         this.availableCurrencies = availableCurrencies;
@@ -25,13 +28,23 @@ class AppState {
     return new AppState(
         conversion: conversion,
         availableCurrencies: this.availableCurrencies,
-        countries: this.countries);
+        countries: this.countries,
+        ratesLastUpdated: this.ratesLastUpdated);
+  }
+
+  AppState withRatesLastUpdated(DateTime timestamp) {
+    return new AppState(
+        conversion: this.conversion,
+        availableCurrencies: this.availableCurrencies,
+        countries: this.countries,
+        ratesLastUpdated: timestamp);
   }
 
   Map<String, dynamic> toJson() => {
         'currentAmount': conversion.currentAmount,
         'currentCurrency': conversion.currentCurrency.code,
-        'currencies': conversion.currencies
+        'currencies': conversion.currencies,
+        'ratesLastUpdated': ratesLastUpdated?.toIso8601String()
       };
 
   AppState.fromJson(Map<String, dynamic> json, CurrencyRepository repository,
@@ -41,7 +54,10 @@ class AppState {
             currentAmount: json['currentAmount'],
             currentCurrency: repository.getByCode(json['currentCurrency']),
             currencies: List.castFrom(json['currencies'])),
-        this.countries = countries;
+        this.countries = countries,
+        this.ratesLastUpdated = json['ratesLastUpdated'] != null
+            ? DateTime.parse(json['ratesLastUpdated'])
+            : null;
 
   AppState.initial(
       {required List<Country> countries,
@@ -51,5 +67,6 @@ class AppState {
         this.conversion = new ConversionModel(
             currentAmount: 1.0,
             currentCurrency: availableCurrencies.baseCurrency,
-            currencies: <String>[]);
+            currencies: <String>[]),
+        this.ratesLastUpdated = null;
 }

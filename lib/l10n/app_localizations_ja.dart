@@ -31,7 +31,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get about_description =>
-      '2019年、東南アジアをバックパッカーとして旅行中、バリ島で風邪を引いている時にTravelRatesを作りリリースしました。\n\n旅人には欠かせないレートアプリ。速さ、使いやすさ、そしてオフラインで使用できるという点が旅人の強い味方。\n\nアプリを使っていただけたら、是非レビューをお願いします。皆様のご意見は、今後も無料でアプリを継続していく励みになります。';
+      '2019年、東南アジアをバックパッカーとして旅行中、バリ島で風邪を引いている時にTravelRatesを作りリリースしました。\n\n旅人には欠かせないレートアプリ。速さ、使いやすさ、そしてオフラインで使用できるという点が旅人の強い味方。\n\n通貨のレートはオンラインで更新されますが、オンラインのレートは1日に1回しか更新されません。\n\nアプリを使っていただけたら、是非レビューをお願いします。皆様のご意見は、今後も無料でアプリを継続していく励みになります。';
 
   @override
   String get about_addReview => 'レビューを書く';
@@ -74,4 +74,22 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get addCurrency_digitalCurrency => '世界中で使用されているデジタル通貨です';
+
+  @override
+  String get time_justNow => 'たった今';
+
+  @override
+  String time_minutesAgo(int minutes) {
+    return '$minutes分前';
+  }
+
+  @override
+  String time_hoursAgo(int hours) {
+    return '$hours時間前';
+  }
+
+  @override
+  String time_daysAgo(int days) {
+    return '$days日前';
+  }
 }

@@ -18,38 +18,38 @@ void main() {
     ratesApi.result = new AsyncResult.failed();
     localStorage.setFile("rates.json", '{"rates": {"SEK": 3.3}}');
 
-    final rates = await ratesLoader.loadOnlineRates();
-    expect(rates.length, 1);
-    expect(rates[0].currencyCode, 'SEK');
-    expect(rates[0].rate, 3.3);
+    final ratesResponse = await ratesLoader.loadOnlineRates();
+    expect(ratesResponse.rates.length, 1);
+    expect(ratesResponse.rates[0].currencyCode, 'SEK');
+    expect(ratesResponse.rates[0].rate, 3.3);
   });
 
   test('returns empty list if cache is corrupt', () async {
     localStorage.setFile("rates.json", 'not a json');
     ratesApi.result = new AsyncResult.failed();
 
-    final rates = await ratesLoader.loadOnlineRates();
-    expect(rates.length, 0);
+    final ratesResponse = await ratesLoader.loadOnlineRates();
+    expect(ratesResponse.rates.length, 0);
   });
 
   test('returns cache if online rates are corrupt', () async {
     localStorage.setFile("rates.json", '{"rates": {"GBP": 2.8}}');
     ratesApi.result = new AsyncResult.withValue('invalid json');
 
-    final rates = await ratesLoader.loadOnlineRates();
-    expect(rates.length, 1);
-    expect(rates[0].currencyCode, 'GBP');
-    expect(rates[0].rate, 2.8);
+    final ratesResponse = await ratesLoader.loadOnlineRates();
+    expect(ratesResponse.rates.length, 1);
+    expect(ratesResponse.rates[0].currencyCode, 'GBP');
+    expect(ratesResponse.rates[0].rate, 2.8);
   });
 
   test('decodes api json', () async {
     final apiJson = '{"rates":{"USD":2.1}}';
     ratesApi.result = new AsyncResult.withValue(apiJson);
 
-    final rates = await ratesLoader.loadOnlineRates();
-    expect(rates.length, 1);
-    expect(rates[0].currencyCode, 'USD');
-    expect(rates[0].rate, 2.1);
+    final ratesResponse = await ratesLoader.loadOnlineRates();
+    expect(ratesResponse.rates.length, 1);
+    expect(ratesResponse.rates[0].currencyCode, 'USD');
+    expect(ratesResponse.rates[0].rate, 2.1);
   });
 
   test('caches rates on success', () async {

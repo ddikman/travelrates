@@ -1,3 +1,9 @@
+## 2.2.0+99
+
+- Added display of last update time for currency rates
+- Improved tap area for toolbar buttons
+- Improved load of cached rates in offline mode
+
 ## 2.1.0+98
 
 - Added around fifty new currencies, including Bitcoin

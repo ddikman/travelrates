@@ -42,6 +42,7 @@ class StateContainerState extends State<StateContainer> {
       StreamController<ConversionModel>.broadcast();
 
   late AppState appState;
+  bool ratesLoading = false;
 
   Stream<ConversionModel> get conversionUpdated => _conversionUpdated.stream;
 
@@ -116,10 +117,20 @@ class StateContainerState extends State<StateContainer> {
     _conversionUpdated.add(conversion);
   }
 
-  void setRates(List<CurrencyRate> rates) {
+  void startLoadingRates() {
+    setState(() {
+      ratesLoading = true;
+    });
+  }
+
+  void setRates(List<CurrencyRate> rates, [DateTime? timestamp]) {
     setState(() {
       this.appState.availableCurrencies.updateRates(rates);
+      this.appState =
+          this.appState.withRatesLastUpdated(timestamp ?? DateTime.now());
+      ratesLoading = false;
     });
+    unawaited(widget.statePersistence.store(appState));
   }
 
   /// Reorder a currency in the list, newPosition begin the new index, zero-based.

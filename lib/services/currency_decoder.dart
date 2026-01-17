@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:travelconverter/helpers/string_compare.dart';
 import 'package:travelconverter/model/currency.dart';
 import 'package:travelconverter/model/currency_rate.dart';
+import 'package:travelconverter/model/rates_response.dart';
 import 'package:travelconverter/services/currency_repository.dart';
 
 class CurrencyDecoder {
@@ -11,8 +12,8 @@ class CurrencyDecoder {
 
   Future<CurrencyRepository> decode(
       String currenciesJson, String ratesJson) async {
-    final rates = decodeRates(ratesJson);
-    final currencies = _decodeCurrencies(currenciesJson, rates);
+    final ratesResponse = decodeRates(ratesJson);
+    final currencies = _decodeCurrencies(currenciesJson, ratesResponse.rates);
 
     return CurrencyRepository(
         currencies: currencies, baseRate: _baseRateCurrencyCode);
@@ -30,7 +31,7 @@ class CurrencyDecoder {
     return currency['discontinued'] != true;
   }
 
-  List<CurrencyRate> decodeRates(String json) {
+  RatesResponse decodeRates(String json) {
     assert(json.isNotEmpty);
     final Map ratesDecoded = new JsonDecoder().convert(json);
     if (!ratesDecoded.containsKey('rates')) {
@@ -39,7 +40,18 @@ class CurrencyDecoder {
     }
 
     Map<String, dynamic> ratesMap = ratesDecoded['rates'];
-    return ratesMap.entries.map((e) => _mapRate(e.key, e.value)).toList();
+    final rates = ratesMap.entries.map((e) => _mapRate(e.key, e.value)).toList();
+
+    // Extract timestamp if available (Unix timestamp in seconds)
+    DateTime? timestamp;
+    if (ratesDecoded.containsKey('timestamp')) {
+      final timestampValue = ratesDecoded['timestamp'];
+      if (timestampValue is int) {
+        timestamp = DateTime.fromMillisecondsSinceEpoch(timestampValue * 1000);
+      }
+    }
+
+    return RatesResponse(rates: rates, timestamp: timestamp);
   }
 
   CurrencyRate _mapRate(String code, dynamic rate) {

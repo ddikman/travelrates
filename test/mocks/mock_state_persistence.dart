@@ -1,5 +1,6 @@
 import 'package:travelconverter/app_state.dart';
 import 'package:flutter/src/services/asset_bundle.dart';
+import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/services/state_persistence.dart';
 
 import 'mock_currency_repository.dart';
@@ -10,7 +11,10 @@ class MockStatePersistence implements StatePersistence {
       countries: [], availableCurrencies: mockCurrencyRepository());
 
   @override
-  Future<AppState> load(AssetBundle assets) {
+  Future<AppState> load(AssetBundle assets, {List<CurrencyRate>? cachedRates}) {
+    if (cachedRates != null) {
+      _appState.availableCurrencies.updateRates(cachedRates);
+    }
     return Future.value(_appState);
   }
 
