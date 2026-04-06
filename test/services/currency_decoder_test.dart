@@ -34,13 +34,13 @@ void main() {
     });
 
     test('extracts timestamp when present', () {
-      final json = '{"timestamp":1767052444,"rates":{"USD":1.17,"EUR":1.0}}';
+      final expected = DateTime.utc(2025, 12, 29, 23, 54, 4);
+      final unixSeconds = expected.millisecondsSinceEpoch ~/ 1000;
+      final json = '{"timestamp":$unixSeconds,"rates":{"USD":1.17,"EUR":1.0}}';
       final result = decoder.decodeRates(json);
 
       expect(result.timestamp, isNotNull);
-      expect(result.timestamp!.year, 2025);
-      expect(result.timestamp!.month, 12);
-      expect(result.timestamp!.day, 30);
+      expect(result.timestamp!.toUtc(), expected);
     });
 
     test('handles missing timestamp gracefully', () {
@@ -66,7 +66,8 @@ void main() {
       final result = decoder.decodeRates(json);
 
       expect(result.timestamp, isNotNull);
-      final expectedDate = DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
+      final expectedDate =
+          DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
       expect(result.timestamp, expectedDate);
     });
 
