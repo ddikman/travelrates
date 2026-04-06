@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:travelconverter/app_root.dart';
-import 'package:travelconverter/app_state.dart';
 import 'package:travelconverter/duplicate_currency_error.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/model/currency_rate.dart';
@@ -12,14 +9,9 @@ import 'package:travelconverter/state_container.dart';
 import 'mocks/mock_app_state.dart';
 import 'mocks/mock_currency.dart';
 import 'mocks/mock_local_storage.dart';
-import 'mocks/mock_rates_api.dart';
 
 void main() {
-  var appRoot = Builder(
-    builder: (ctx) => ProviderScope(overrides: [
-      appStateProvider.overrideWithValue(StateContainer.of(ctx).appState)
-    ], child: AppRoot(ratesApi: MockRatesApi())),
-  );
+  var appRoot = MaterialApp(home: Container());
 
   final statePersistence =
       new StatePersistence(localStorage: new MockLocalStorage());

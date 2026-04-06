@@ -494,7 +494,7 @@
         "sv": "Macaneseiska Pataca",
         "ja": "マカディパタカ"
     },
-    "MRO": {
+    "MRU": {
         "en": "Mauritanian Ouguiya",
         "sv": "Mauretanska Ouguiya",
         "ja": "モーリタニアウギア"
@@ -759,10 +759,10 @@
         "sv": "Uzbekistanska Som",
         "ja": "ウズベキスタンサム"
     },
-    "VEF": {
-        "en": "Venezuelan Bolívar",
-        "sv": "Venezuelanska Bolívar",
-        "ja": "ベネズエラボリバル"
+    "VES": {
+        "en": "Venezuelan Bolívar Soberano",
+        "sv": "Venezuelanska Bolívar Soberano",
+        "ja": "ベネズエラボリバル・ソベラノ"
     },
     "VND": {
         "en": "Vietnamese Dong",

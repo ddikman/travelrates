@@ -656,11 +656,11 @@ class CurrencyData {
         icon: 'UZ',
         rate: 9476.921096),
     new Currency(
-        symbol: 'Bs.F.',
-        code: 'VEF',
-        name: 'Venezuelan Bolívar',
+        symbol: 'Bs.S.',
+        code: 'VES',
+        name: 'Venezuelan Bolívar Soberano',
         icon: 'VE',
-        rate: 11.201272),
+        rate: 396.139367),
     new Currency(
         symbol: '₫',
         code: 'VND',
@@ -857,10 +857,10 @@ class CurrencyData {
         rate: 2962.89114),
     new Currency(
         symbol: 'UM',
-        code: 'MRO',
+        code: 'MRU',
         name: 'Mauritanian Ouguiya',
         icon: 'MR',
-        rate: 400.385973),
+        rate: 46.198757),
     new Currency(
         symbol: 'Rf',
         code: 'MVR',
