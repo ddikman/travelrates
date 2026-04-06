@@ -41,7 +41,7 @@ void main() {
     test("can read from actual service", () async {
       final assets = await AssetsFolder.path;
       final assetPath = '$assets/data/apiConfiguration.json';
-      print("reading configuration from $assetPath}");
+      print("reading configuration from $assetPath");
       final apiConfigJson = await new File(assetPath).readAsString();
       final apiConfig =
           ApiConfiguration.fromJson(json.decode(apiConfigJson.trim()));

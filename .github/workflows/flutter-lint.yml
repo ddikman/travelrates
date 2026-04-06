@@ -34,7 +34,7 @@ jobs:
           sudo apt install lcov -y
 
       - name: Write API keys
-        run: echo $API_KEYS_JSON > assets/data/apiConfiguration.json
+        run: echo "${API_KEYS_JSON}" > assets/data/apiConfiguration.json
 
       - name: Run linting
         run: flutter analyze
