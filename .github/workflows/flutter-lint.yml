@@ -44,6 +44,14 @@ jobs:
           flutter pub global activate junitreport
           flutter test --coverage --machine | tojunit > testreport.xml
           genhtml coverage/lcov.info --output=coverage
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: (!cancelled())
+        with:
+          files: |
+            testreport.xml
+
       - name: Publish coverage report
         uses: nohmad/lcov-report-action@v1
         with:
