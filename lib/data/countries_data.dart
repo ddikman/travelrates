@@ -1,5 +1,5 @@
 // THIS IS A GENERATED FILE
-// Please don't edit this file. Instead regenerate it with the tools/generate_initial_content.js tool
+// Please don't edit this file. Instead regenerate it with the tools/generate_initial_content.dart tool
 
 import 'package:travelconverter/model/country.dart';
 

@@ -1,5 +1,5 @@
 // THIS IS A GENERATED FILE
-// Please don't edit this file. Instead regenerate it with the tools/generate_localizations.js tool
+// Please don't edit this file. Instead regenerate it with the tools/generate_localizations.dart tool
 
 class CurrencyLocalizations {
   static final _locales = {
@@ -168,7 +168,7 @@ class CurrencyLocalizations {
       "ZAR": "South African Rand",
       "ZMK": "Zambian Kwacha",
       "ZMW": "Zambian Kwacha",
-      "ZWL": "Zimbabwean Dollar"
+      "ZWL": "Zimbabwean Dollar",
     },
     "ja": {
       "USD": "アメリカドル",
@@ -335,7 +335,7 @@ class CurrencyLocalizations {
       "ZAR": "南アフリカランド",
       "ZMK": "ザンビアクワチャ",
       "ZMW": "ザンビアクワチャ",
-      "ZWL": "ジンバブエドル"
+      "ZWL": "ジンバブエドル",
     },
     "sv": {
       "USD": "Amerikanska Dollar",
@@ -502,8 +502,8 @@ class CurrencyLocalizations {
       "ZAR": "Sydafrikanska Rand",
       "ZMK": "Zambian Kwacha",
       "ZMW": "Zambian Kwacha",
-      "ZWL": "Zimbabwiska Dollar"
-    }
+      "ZWL": "Zimbabwiska Dollar",
+    },
   };
 
   final String locale;

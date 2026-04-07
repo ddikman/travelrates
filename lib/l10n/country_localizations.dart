@@ -1,5 +1,5 @@
 // THIS IS A GENERATED FILE
-// Please don't edit this file. Instead regenerate it with the tools/generate_localizations.js tool
+// Please don't edit this file. Instead regenerate it with the tools/generate_localizations.dart tool
 
 class CountryLocalizations {
   static final _allLocales = {
@@ -253,7 +253,7 @@ class CountryLocalizations {
       "Indonesia": "インドネシア",
       "Ukraine": "ウクライナ",
       "Qatar": "カタール",
-      "Mozambique": "モザンビーク"
+      "Mozambique": "モザンビーク",
     },
     "sv": {
       "Bangladesh": "Bangladesh",
@@ -508,8 +508,8 @@ class CountryLocalizations {
       "Indonesia": "Indonesien",
       "Ukraine": "Ukraina",
       "Qatar": "Qatar",
-      "Mozambique": "Moçambique"
-    }
+      "Mozambique": "Moçambique",
+    },
   };
 
   final String locale;
