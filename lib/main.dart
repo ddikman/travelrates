@@ -1,5 +1,3 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travelconverter/app_root.dart';
@@ -14,8 +12,6 @@ import 'package:travelconverter/services/shared_preferences.dart';
 import 'package:travelconverter/services/state_persistence.dart';
 
 import 'package:travelconverter/state_container.dart';
-import 'package:travelconverter/l10n/app_localizations.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -38,19 +34,15 @@ void main() async {
   );
 
   runApp(
-    DevicePreview(
-      enabled: kDebugMode && false,
-      availableLocales: AppLocalizations.supportedLocales,
-      builder: (context) => StateContainer(
-        state: state,
-        statePersistence: statePersistence,
-        child: Builder(
-          builder: (ctx) => ProviderScope(overrides: [
-            appStateProvider.overrideWithValue(StateContainer.of(ctx).appState),
-            stateContainerProvider.overrideWithValue(StateContainer.of(ctx)),
-            preferencesProvider.overrideWithValue(sharedPreferences)
-          ], child: AppRoot(ratesApi: ratesApi)),
-        ),
+    StateContainer(
+      state: state,
+      statePersistence: statePersistence,
+      child: Builder(
+        builder: (ctx) => ProviderScope(overrides: [
+          appStateProvider.overrideWithValue(StateContainer.of(ctx).appState),
+          stateContainerProvider.overrideWithValue(StateContainer.of(ctx)),
+          preferencesProvider.overrideWithValue(sharedPreferences)
+        ], child: AppRoot(ratesApi: ratesApi)),
       ),
     ),
   );

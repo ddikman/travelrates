@@ -29,7 +29,6 @@ dependencies:
   http: ^1.2.1
   device_info_plus: ^12.4.0
   connectivity_plus: ^7.1.0
-  device_preview:
   package_info_plus: ^8.1.2
 
   # user interface

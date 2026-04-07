@@ -11,6 +11,13 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(":app")
+    if (project.name != "app") {
+        afterEvaluate {
+            if (project.hasProperty('android')) {
+                project.android.compileSdkVersion 36
+            }
+        }
+    }
 }
 
 tasks.register("clean", Delete) {
