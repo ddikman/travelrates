@@ -21,8 +21,11 @@ https://greycastle.gitlab.io/travel-rates/coverage/
 Use [fastforge](https://github.com/fastforgedev/fastforge).
 
 ```shell
-source .env
+## Update rates
 fvm dart run tools/update_local_rates.dart
+
+## Release
+source .env
 fvm dart run fastforge release --name internal
 ```
 
