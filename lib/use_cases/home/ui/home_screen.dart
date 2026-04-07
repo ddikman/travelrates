@@ -15,6 +15,8 @@ import 'package:flutter/material.dart';
 import '../../../internet_connectivity.dart';
 
 class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,9 +51,9 @@ class MainScreen extends StatelessWidget {
   Widget _buildCurrencyList() {
     return Builder(builder: (BuildContext context) {
       return ReviewWidget(
-        child: ConvertibleCurrenciesList(),
         reviewStorage: ReviewStorage(
             InternetConnectivityImpl(Connectivity()), LocalStorage()),
+        child: ConvertibleCurrenciesList(),
       );
     });
   }

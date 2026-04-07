@@ -48,8 +48,7 @@ void main() {
       );
     }
 
-    print(
-      '✓ Verified ${currencies.length} currencies have icons and valid flags',
-    );
+    // ignore: avoid_print
+    print('✓ Verified ${currencies.length} currencies have icons and valid flags');
   });
 }

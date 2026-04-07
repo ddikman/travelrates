@@ -6,16 +6,16 @@ import '../mocks/mock_local_storage.dart';
 import '../mocks/mock_rates_api.dart';
 
 void main() {
-  final localStorage = new MockLocalStorage();
+  final localStorage = MockLocalStorage();
 
-  final ratesApi = new MockRatesApi();
+  final ratesApi = MockRatesApi();
 
   final ratesLoader =
-      new RatesLoader(localStorage: localStorage, ratesApi: ratesApi);
+      RatesLoader(localStorage: localStorage, ratesApi: ratesApi);
 
   test('uses cached rates if online rates cannot be retrieved', () async {
     // given
-    ratesApi.result = new AsyncResult.failed();
+    ratesApi.result = AsyncResult.failed();
     localStorage.setFile("rates.json", '{"rates": {"SEK": 3.3}}');
 
     final ratesResponse = await ratesLoader.loadOnlineRates();
@@ -26,7 +26,7 @@ void main() {
 
   test('returns empty list if cache is corrupt', () async {
     localStorage.setFile("rates.json", 'not a json');
-    ratesApi.result = new AsyncResult.failed();
+    ratesApi.result = AsyncResult.failed();
 
     final ratesResponse = await ratesLoader.loadOnlineRates();
     expect(ratesResponse.rates.length, 0);
@@ -34,7 +34,7 @@ void main() {
 
   test('returns cache if online rates are corrupt', () async {
     localStorage.setFile("rates.json", '{"rates": {"GBP": 2.8}}');
-    ratesApi.result = new AsyncResult.withValue('invalid json');
+    ratesApi.result = AsyncResult.withValue('invalid json');
 
     final ratesResponse = await ratesLoader.loadOnlineRates();
     expect(ratesResponse.rates.length, 1);
@@ -44,7 +44,7 @@ void main() {
 
   test('decodes api json', () async {
     final apiJson = '{"rates":{"USD":2.1}}';
-    ratesApi.result = new AsyncResult.withValue(apiJson);
+    ratesApi.result = AsyncResult.withValue(apiJson);
 
     final ratesResponse = await ratesLoader.loadOnlineRates();
     expect(ratesResponse.rates.length, 1);
@@ -54,7 +54,7 @@ void main() {
 
   test('caches rates on success', () async {
     final apiJson = '{"rates":{"USD":2.1}}';
-    ratesApi.result = new AsyncResult.withValue(apiJson);
+    ratesApi.result = AsyncResult.withValue(apiJson);
 
     await ratesLoader.loadOnlineRates();
     final cacheFile = await localStorage.getFile("rates.json");

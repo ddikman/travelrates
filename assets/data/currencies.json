@@ -1109,14 +1109,14 @@
     "name_plural": "Uzbekistan som",
     "icon": "UZ"
   },
-  "VEF": {
-    "symbol": "Bs.F.",
-    "name": "Venezuelan Bolívar",
-    "symbol_native": "Bs.F.",
+  "VES": {
+    "symbol": "Bs.S.",
+    "name": "Venezuelan Bolívar Soberano",
+    "symbol_native": "Bs.S.",
     "decimal_digits": 2,
     "rounding": 0,
-    "code": "VEF",
-    "name_plural": "Venezuelan bolívars",
+    "code": "VES",
+    "name_plural": "Venezuelan bolívars soberanos",
     "icon": "VE"
   },
   "VND": {
@@ -1449,13 +1449,13 @@
     "name_plural": "Mongolian tugriks",
     "icon": "MN"
   },
-  "MRO": {
+  "MRU": {
     "symbol": "UM",
     "name": "Mauritanian Ouguiya",
     "symbol_native": "UM",
-    "decimal_digits": 0,
+    "decimal_digits": 2,
     "rounding": 0,
-    "code": "MRO",
+    "code": "MRU",
     "name_plural": "Mauritanian ouguiyas",
     "icon": "MR"
   },

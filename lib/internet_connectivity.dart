@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/foundation.dart';
 
 abstract class InternetConnectivity {
   bool get isAvailable => false;
@@ -17,8 +18,8 @@ class InternetConnectivityImpl implements InternetConnectivity {
     connectivity.onConnectivityChanged.listen(_updateConnectivity);
   }
 
-  _updateConnectivity(List<ConnectivityResult> connectivityList) {
-    print('Connectivity changed to $connectivityList');
+  void _updateConnectivity(List<ConnectivityResult> connectivityList) {
+    debugPrint('Connectivity changed to $connectivityList');
     _isAvailable = !connectivityList.contains(ConnectivityResult.none);
   }
 

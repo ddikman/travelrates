@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ConvertibleCurrenciesList extends ConsumerStatefulWidget {
+  const ConvertibleCurrenciesList({super.key});
+
   @override
   ConsumerState<ConvertibleCurrenciesList> createState() =>
       _ConvertibleCurrenciesListState();
@@ -75,7 +77,7 @@ class _ConvertibleCurrenciesListState
           FadeEffect(curve: Curves.ease),
           MoveEffect(begin: Offset(0.0, 75.0), curve: Curves.fastOutSlowIn)
         ], children: currencies, interval: 80.ms)
-            .toList(),
+            ,
       ],
     );
   }

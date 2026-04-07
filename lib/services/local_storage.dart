@@ -10,7 +10,7 @@ class LocalStorage {
 
   Future<FileOperations> getFile(String filename) async {
     final directory = await _localDirectory;
-    return new LocalFile('$directory/$filename');
+    return LocalFile('$directory/$filename');
   }
 }
 
@@ -19,20 +19,23 @@ class LocalFile implements FileOperations {
 
   LocalFile(this.path);
 
+  @override
   Future<bool> get exists async {
     final file = await _localFile;
     return file.exists();
   }
 
+  @override
   Future<String> get contents async {
     final file = await _localFile;
     return file.readAsString();
   }
 
   Future<File> get _localFile async {
-    return new File(path);
+    return File(path);
   }
 
+  @override
   Future<Null> writeContents(String contents) async {
     final file = await _localFile;
     await file.writeAsString(contents);

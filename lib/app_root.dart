@@ -18,16 +18,16 @@ import 'package:travelconverter/l10n/app_localizations.dart';
 class AppRoot extends StatefulWidget {
   final RatesApi ratesApi;
 
-  const AppRoot({Key? key, required this.ratesApi}) : super(key: key);
+  const AppRoot({super.key, required this.ratesApi});
 
   @override
-  _AppRootState createState() {
-    return new _AppRootState();
+  State<AppRoot> createState() {
+    return _AppRootState();
   }
 }
 
 class _AppRootState extends State<AppRoot> {
-  static final log = new Logger<_AppRootState>();
+  static final log = Logger<_AppRootState>();
 
   FirebaseAnalytics? _firebaseAnalytics;
 
@@ -43,13 +43,15 @@ class _AppRootState extends State<AppRoot> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         StateContainer.of(context).startLoadingRates();
 
-        new RatesLoader(
-                localStorage: new LocalStorage(), ratesApi: widget.ratesApi)
+        RatesLoader(
+                localStorage: LocalStorage(), ratesApi: widget.ratesApi)
             .loadOnlineRates()
             .then(handleLoadedRates)
             .catchError((error) {
           log.error("Failed to load online rates: $error");
-          StateContainer.of(context).setRates([]);
+          if (mounted) {
+            StateContainer.of(context).setRates([]);
+          }
         });
       });
     });
@@ -59,7 +61,7 @@ class _AppRootState extends State<AppRoot> {
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
       final themeBrightnessSetting = ref.watch(themeBrightnessNotifierProvider);
-      return new MaterialApp.router(
+      return MaterialApp.router(
         routerConfig: router,
         theme: _constructTheme(lightTheme),
         darkTheme: _constructTheme(darkTheme),
@@ -69,7 +71,7 @@ class _AppRootState extends State<AppRoot> {
         debugShowCheckedModeBanner: false,
         builder: (context, child) {
           final locale = Localizations.localeOf(context);
-          debugPrint("context: ${locale}");
+          debugPrint("context: $locale");
           return LocalizedDataProvider(
             data: LocalizedData.withLocale(
               locale,
@@ -81,7 +83,7 @@ class _AppRootState extends State<AppRoot> {
     });
   }
 
-  _constructTheme(ThemeColors colorTheme) {
+  ThemeData _constructTheme(ThemeColors colorTheme) {
     final baseTheme = Theme.of(context);
 
     final textTheme = baseTheme.textTheme.apply(
@@ -102,7 +104,7 @@ class _AppRootState extends State<AppRoot> {
       selectionHandleColor: colorTheme.accent,
     );
 
-    return new ThemeData(
+    return ThemeData(
         brightness: colorTheme.mode == ThemeMode.dark
             ? Brightness.dark
             : Brightness.light,

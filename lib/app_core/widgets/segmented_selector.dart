@@ -16,7 +16,7 @@ class SegmentedSelector<T> extends StatefulWidget {
       required this.values,
       required this.initialSelection,
       required this.onSelectionChanged})
-      : this.labels = labels ?? values.map((e) => e.toString()).toList();
+      : labels = labels ?? values.map((e) => e.toString()).toList();
 
   @override
   State<SegmentedSelector<T>> createState() => _SegmentedSelectorState<T>();

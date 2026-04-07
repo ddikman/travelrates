@@ -8,11 +8,11 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 
 class RatesApi {
   final ApiConfiguration _config;
-  Connectivity connectivity = new Connectivity();
+  Connectivity connectivity = Connectivity();
 
-  http.Client client = new http.Client();
+  http.Client client = http.Client();
 
-  static final log = new Logger<RatesApi>();
+  static final log = Logger<RatesApi>();
 
   RatesApi(this._config);
 

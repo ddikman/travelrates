@@ -8,12 +8,12 @@ import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/services/rates_api.dart';
 
 class RatesLoader {
-  static final log = new Logger<RatesLoader>();
+  static final log = Logger<RatesLoader>();
 
   final LocalStorage localStorage;
   final RatesApi ratesApi;
 
-  final decoder = new CurrencyDecoder();
+  final decoder = CurrencyDecoder();
 
   RatesLoader({required this.localStorage, required this.ratesApi});
 
@@ -51,7 +51,7 @@ class RatesLoader {
   }
 
   Future<RatesResponse> loadOnlineRates() async {
-    final ratesJson = await this.ratesApi.getCurrentRatesJson();
+    final ratesJson = await ratesApi.getCurrentRatesJson();
     if (!ratesJson.successful || ratesJson.result == null) {
       return await _cachedRates();
     }
@@ -67,7 +67,7 @@ class RatesLoader {
     }
   }
 
-  _cacheRates(String rates) async {
+  Future<void> _cacheRates(String rates) async {
     final file = await _cacheFile;
     await file.writeContents(rates);
   }

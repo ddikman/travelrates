@@ -11,43 +11,52 @@ import 'package:travelconverter/services/rates_api.dart';
 import '../helpers/assets_folder.dart';
 
 void main() {
-  test("skips download of rates if offline", () async {
-    final api = new RatesApi(new MockConfig());
-    api.connectivity = new MockConnectivity([ConnectivityResult.none]);
+  group('RatesApi', () {
+    test("skips download of rates if offline", () async {
+      final api = RatesApi(MockConfig());
+      api.connectivity = MockConnectivity([ConnectivityResult.none]);
 
-    final result = await api.getCurrentRatesJson();
-    expect(result.successful, false);
-  });
+      final result = await api.getCurrentRatesJson();
+      expect(result.successful, false);
+    });
 
-  test("returns failure if server does not respond correctly", () async {
-    final api = new RatesApi(new MockConfig());
-    api.connectivity = new MockConnectivity([ConnectivityResult.wifi]);
-    api.client = new MockClient(() => new Response("", 500));
+    test("returns failure if server does not respond correctly", () async {
+      final api = RatesApi(MockConfig());
+      api.connectivity = MockConnectivity([ConnectivityResult.wifi]);
+      api.client = MockClient(() => Response("", 500));
 
-    final result = await api.getCurrentRatesJson();
-    expect(result.successful, false);
-  });
+      final result = await api.getCurrentRatesJson();
+      expect(result.successful, false);
+    });
 
-  test("returns failure on exception", () async {
-    final api = new RatesApi(new MockConfig());
-    api.connectivity = new MockConnectivity([ConnectivityResult.wifi]);
-    api.client = new MockClient(() => throw new Exception("Mock failure"));
+    test("returns failure on exception", () async {
+      final api = RatesApi(MockConfig());
+      api.connectivity = MockConnectivity([ConnectivityResult.wifi]);
+      api.client = MockClient(() => throw Exception("Mock failure"));
 
-    final result = await api.getCurrentRatesJson();
-    expect(result.successful, false);
-  });
+      final result = await api.getCurrentRatesJson();
+      expect(result.successful, false);
+    });
 
-  test("can read from actual service", () async {
-    final assets = await AssetsFolder.path;
-    final assetPath = '$assets/data/apiConfiguration.json';
-    print("reading configuration from $assetPath}");
-    final apiConfigJson = await new File(assetPath).readAsString();
-    final apiConfig = ApiConfiguration.fromJson(json.decode(apiConfigJson));
-    final api = new RatesApi(apiConfig);
-    api.connectivity = MockConnectivity([ConnectivityResult.wifi]);
+    test("can read from actual service", () async {
+      final assets = await AssetsFolder.path;
+      final assetPath = '$assets/data/apiConfiguration.json';
+      final configFile = File(assetPath);
+      if (!configFile.existsSync() || configFile.readAsStringSync().trim().isEmpty) {
+        markTestSkipped('apiConfiguration.json not available');
+        return;
+      }
+      // ignore: avoid_print
+      print("reading configuration from $assetPath");
+      final apiConfigJson = await configFile.readAsString();
+      final apiConfig =
+          ApiConfiguration.fromJson(json.decode(apiConfigJson.trim()));
+      final api = RatesApi(apiConfig);
+      api.connectivity = MockConnectivity([ConnectivityResult.wifi]);
 
-    final result = await api.getCurrentRatesJson();
-    expect(result.successful, true);
+      final result = await api.getCurrentRatesJson();
+      expect(result.successful, true);
+    });
   });
 }
 
@@ -58,7 +67,7 @@ class MockClient implements Client {
 
   @override
   void close() {
-    throw new UnimplementedError();
+    throw UnimplementedError();
   }
 
   Future<Response> _generateResponse() {
@@ -95,17 +104,17 @@ class MockClient implements Client {
 
   @override
   Future<String> read(url, {Map<String, String>? headers}) {
-    throw new UnimplementedError();
+    throw UnimplementedError();
   }
 
   @override
   Future<Uint8List> readBytes(url, {Map<String, String>? headers}) {
-    throw new UnimplementedError();
+    throw UnimplementedError();
   }
 
   @override
   Future<StreamedResponse> send(BaseRequest request) {
-    throw new UnimplementedError();
+    throw UnimplementedError();
   }
 
   @override

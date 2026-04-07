@@ -16,7 +16,7 @@ class LocalizedData {
         : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
 
-    print("Initializing localisations for '$localeName'.");
+    debugPrint("Initializing localisations for '$localeName'.");
 
     final countries = CountryLocalizations(locale.languageCode);
     final currencies = CurrencyLocalizations(locale.languageCode);

@@ -1,7 +1,7 @@
 /// Returns a copy of the list alphabetically sorted by the property
 /// of each element as given by [property] parameter.
 List<T> alphabeticallySorted<T>(List<T> list, String? Function(T) property) {
-  final validProperty = (item) {
+  String validProperty(item) {
     if (item == null) {
       throw ArgumentError.value(null, 'list', 'Invalid list element');
     }
@@ -12,7 +12,7 @@ List<T> alphabeticallySorted<T>(List<T> list, String? Function(T) property) {
     }
 
     return propertyValue;
-  };
+  }
 
   final listCopy = List<T>.from(list);
   listCopy.sort((first, second) {

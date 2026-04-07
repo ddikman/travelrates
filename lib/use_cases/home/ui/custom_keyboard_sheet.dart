@@ -9,7 +9,7 @@ class CustomKeyboardSheet extends StatefulWidget {
   final String currencyCode;
   final double initialValue;
 
-  CustomKeyboardSheet({
+  const CustomKeyboardSheet({super.key, 
     required this.currencyCode,
     required this.initialValue,
   });
@@ -22,7 +22,7 @@ class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
   static const multiplication = '×';
   static const division = '÷';
 
-  static const _expressionEvaluator = const ExpressionEvaluator();
+  static const _expressionEvaluator = ExpressionEvaluator();
 
   late final TextEditingController _inputController;
 
@@ -120,13 +120,13 @@ class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
     );
   }
 
-  _addDigit(int digit) {
+  void _addDigit(int digit) {
     final text = _inputController.text;
     final newText = text + digit.toString();
     _inputController.text = newText;
   }
 
-  _addOperator(String operator) {
+  void _addOperator(String operator) {
     final text = _inputController.text;
     if (_isOperator(text.characters.last)) {
       final newText = text.substring(0, text.length - 1) + operator;
@@ -136,7 +136,7 @@ class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
     }
   }
 
-  _submit(BuildContext context) {
+  void _submit(BuildContext context) {
     // If it's just a simple value, return as-is
     final asValue = double.tryParse(_inputController.text);
     if (asValue != null) {
@@ -160,15 +160,15 @@ class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
     }
   }
 
-  _addPeriod() {
+  void _addPeriod() {
     final text = _inputController.text;
     if (!text.contains('.')) {
-      final newText = text + '.';
+      final newText = '$text.';
       _inputController.text = newText;
     }
   }
 
-  _backspace() {
+  void _backspace() {
     final text = _inputController.text;
     if (text.isNotEmpty) {
       final newText = text.substring(0, text.length - 1);
@@ -188,13 +188,13 @@ class _KeyboardButton extends StatelessWidget {
   final Widget child;
   final VoidCallback onPressed;
 
-  _KeyboardButton({required this.child, required this.onPressed});
+  const _KeyboardButton({required this.child, required this.onPressed});
 
   static _KeyboardButton character(
           {required String text, required VoidCallback onPressed}) =>
       _KeyboardButton(
-          child: Text(text, style: ThemeTypography.large),
-          onPressed: onPressed);
+          onPressed: onPressed,
+          child: Text(text, style: ThemeTypography.large));
 
   @override
   Widget build(BuildContext context) {

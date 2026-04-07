@@ -8,9 +8,9 @@ import '../../../mocks/mock_currency.dart';
 void main() {
   Future whenCurrentValueIs(
       double currentValue, Function testCode, WidgetTester tester) async {
-    final currencyCard = new CompareCurrencyCard(currency: MockCurrency.dollar);
+    final currencyCard = CompareCurrencyCard(currency: MockCurrency.dollar);
 
-    final appRoot = new MockAppContainerBuilder(currencyCard)
+    final appRoot = MockAppContainerBuilder(currencyCard)
         .withCurrentCurrency(MockCurrency.dollar)
         .withCurrentValue(currentValue);
 

@@ -1,4 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 
 /// Wrapper for logging enabling use of services such as Firebase in the future.
 class Logger<T> {
@@ -8,13 +9,13 @@ class Logger<T> {
   final String name = T.runtimeType.toString();
 
   void _log(String eventType, String message) {
-    print("$name:$eventType: $message");
+    debugPrint("$name:$eventType: $message");
   }
 
   void event(String name, String message, {Map<String, Object>? parameters}) {
     _log('Event', message);
 
-    parameters = parameters ?? Map<String, Object>();
+    parameters = parameters ?? <String, Object>{};
     parameters['message'] = message;
     analytics?.logEvent(name: name, parameters: parameters);
   }

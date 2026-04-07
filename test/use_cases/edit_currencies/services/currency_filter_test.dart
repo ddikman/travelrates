@@ -10,18 +10,18 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../../mocks/mock_currency.dart';
 
 void main() {
-  final countryLocalizations = new CountryLocalizations('sv');
-  final currencyLocalizations = new CurrencyLocalizations('sv');
-  final localizations = new LocalizedData(
+  final countryLocalizations = CountryLocalizations('sv');
+  final currencyLocalizations = CurrencyLocalizations('sv');
+  final localizations = LocalizedData(
     countryLocalizations,
     currencyLocalizations,
     Locale('sv'),
   );
 
   final countries = [
-    new Country("United States", "US", "USD"),
-    new Country("United Kingdom", "GB", "GBP"),
-    new Country("Germany", "DE", "EUR")
+    Country("United States", "US", "USD"),
+    Country("United Kingdom", "GB", "GBP"),
+    Country("Germany", "DE", "EUR")
   ];
 
   var dollar = MockCurrency.dollar;
@@ -31,7 +31,7 @@ void main() {
 
   // The filter shouldn't be localizing things, they should already be localized.
   // The filter should specify the rules, not the data to filter.
-  final filter = new CurrencyFilter(countries, localizations);
+  final filter = CurrencyFilter(countries, localizations);
 
   test(
       "When english country name partially matches returns that country`s currency",

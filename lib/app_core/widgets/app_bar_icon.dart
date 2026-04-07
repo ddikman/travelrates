@@ -10,16 +10,13 @@ class AppBarIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // color: Colors.red,
-      child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          child: SizedBox(
-            width: size,
-            height: size,
-            child: Center(child: icon),
-          ),
-          onTap: () => onTap()),
-    );
+    return GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => onTap(),
+        child: SizedBox(
+          width: size,
+          height: size,
+          child: Center(child: icon),
+        ));
   }
 }

@@ -9,8 +9,8 @@ class AppSnackBar extends StatelessWidget {
   final IconData? icon;
   final SnackBarAction? action;
 
-  AppSnackBar(
-      {required this.message,
+  const AppSnackBar(
+      {super.key, required this.message,
       required this.accentColor,
       this.icon,
       this.action});
@@ -58,7 +58,7 @@ class AppSnackBar extends StatelessWidget {
     );
   }
 
-  static showError(BuildContext context, String message) {
+  static void showError(BuildContext context, String message) {
     show(context,
         accentColor: Colors.red,
         duration: Duration(seconds: 5),
@@ -66,7 +66,7 @@ class AppSnackBar extends StatelessWidget {
         icon: Icons.error_outline);
   }
 
-  static showSuccess(BuildContext context, String message) {
+  static void showSuccess(BuildContext context, String message) {
     show(context,
         accentColor: Colors.green,
         duration: Duration(seconds: 1),
@@ -74,7 +74,7 @@ class AppSnackBar extends StatelessWidget {
         icon: Icons.check_circle);
   }
 
-  static show(BuildContext context,
+  static void show(BuildContext context,
       {required Color accentColor,
       required Duration duration,
       required String text,

@@ -11,8 +11,8 @@ class PageScaffold extends StatelessWidget {
   final Key? scaffoldKey;
   final bool transparent;
 
-  PageScaffold(
-      {required this.body,
+  const PageScaffold(
+      {super.key, required this.body,
       this.appBarLeftAction,
       this.appBarRightAction,
       this.scaffoldKey,
