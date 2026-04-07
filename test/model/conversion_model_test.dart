@@ -6,7 +6,7 @@ import '../mocks/mock_currency.dart';
 void main() {
   test('when getting conversion of current currency returns same value', () {
     const currentAmount = 1.0;
-    final model = new ConversionModel(
+    final model = ConversionModel(
         currentAmount: currentAmount,
         currentCurrency: MockCurrency.euro,
         currencies: <String>[]);
@@ -17,7 +17,7 @@ void main() {
   test(
       'conversion is done based on the difference between current and exchanged currency rates',
       () {
-    final model = new ConversionModel(
+    final model = ConversionModel(
         currentAmount: 1.0,
         currentCurrency: MockCurrency.dollar,
         currencies: <String>[]);
@@ -35,7 +35,7 @@ void main() {
   });
 
   test('can clone model with new currencies and amounts', () {
-    var model = new ConversionModel(
+    var model = ConversionModel(
         currencies: <String>[],
         currentCurrency: MockCurrency.euro,
         currentAmount: 2.0);

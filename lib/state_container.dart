@@ -20,8 +20,8 @@ class StateContainer extends StatefulWidget {
   final AppState state;
   final StatePersistence statePersistence;
 
-  StateContainer(
-      {required this.child,
+  const StateContainer(
+      {super.key, required this.child,
       required this.state,
       required this.statePersistence});
 
@@ -32,13 +32,13 @@ class StateContainer extends StatefulWidget {
   }
 
   @override
-  StateContainerState createState() => new StateContainerState();
+  StateContainerState createState() => StateContainerState();
 }
 
 class StateContainerState extends State<StateContainer> {
-  static final log = new Logger<StateContainerState>();
+  static final log = Logger<StateContainerState>();
 
-  StreamController<ConversionModel> _conversionUpdated =
+  final StreamController<ConversionModel> _conversionUpdated =
       StreamController<ConversionModel>.broadcast();
 
   late AppState appState;
@@ -60,7 +60,7 @@ class StateContainerState extends State<StateContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return new _InheritedStateContainer(
+    return _InheritedStateContainer(
       data: this,
       child: widget.child,
     );
@@ -91,7 +91,7 @@ class StateContainerState extends State<StateContainer> {
   void addCurrency(String currencyCode) {
     final currencies = List<String>.from(appState.conversion.currencies);
     if (currencies.contains(currencyCode)) {
-      throw new DuplicateCurrencyError(
+      throw DuplicateCurrencyError(
           "Currency '$currencyCode' has already been added");
     }
     log.event("addCurrency", "Currency added: $currencyCode",
@@ -125,9 +125,9 @@ class StateContainerState extends State<StateContainer> {
 
   void setRates(List<CurrencyRate> rates, [DateTime? timestamp]) {
     setState(() {
-      this.appState.availableCurrencies.updateRates(rates);
-      this.appState =
-          this.appState.withRatesLastUpdated(timestamp ?? DateTime.now());
+      appState.availableCurrencies.updateRates(rates);
+      appState =
+          appState.withRatesLastUpdated(timestamp ?? DateTime.now());
       ratesLoading = false;
     });
     unawaited(widget.statePersistence.store(appState));
@@ -159,11 +159,10 @@ class StateContainerState extends State<StateContainer> {
 class _InheritedStateContainer extends InheritedWidget {
   final StateContainerState data;
 
-  _InheritedStateContainer({
-    Key? key,
+  const _InheritedStateContainer({
     required this.data,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required super.child,
+  });
 
   @override
   bool updateShouldNotify(_InheritedStateContainer old) => true;

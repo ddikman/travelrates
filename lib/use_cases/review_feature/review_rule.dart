@@ -2,7 +2,7 @@ import 'package:travelconverter/internet_connectivity.dart';
 import 'package:travelconverter/services/logger.dart';
 
 class ReviewRule {
-  static Logger<ReviewRule> _log = new Logger<ReviewRule>();
+  static final Logger<ReviewRule> _log = Logger<ReviewRule>();
 
   final InternetConnectivity _internet;
 
@@ -15,10 +15,10 @@ class ReviewRule {
       int conversionsDone = 0,
       int conversionsRequired = 0,
       bool submitted = false})
-      : this._internet = internet,
-        this._conversionsDone = conversionsDone,
-        this._conversionsRequired = conversionsRequired,
-        this._submitted = submitted;
+      : _internet = internet,
+        _conversionsDone = conversionsDone,
+        _conversionsRequired = conversionsRequired,
+        _submitted = submitted;
 
   int get conversionsDone => _conversionsDone;
   int get conversionsRequired => _conversionsRequired;
@@ -43,7 +43,7 @@ class ReviewRule {
   }
 
   void reviewAccepted() {
-    this._submitted = true;
+    _submitted = true;
     _log.event("review", "review request was accepted",
         parameters: {'state': 'requested'});
   }

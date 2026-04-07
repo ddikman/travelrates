@@ -1,10 +1,10 @@
 import 'package:travelconverter/services/local_storage.dart';
 
 class MockLocalStorage extends LocalStorage {
-  final _files = new Map<String, MockLocalFile>();
+  final _files = <String, MockLocalFile>{};
 
-  setFile(String filename, String contents) {
-    _files[filename] = new MockLocalFile(filename, true, contents);
+  void setFile(String filename, String contents) {
+    _files[filename] = MockLocalFile(filename, true, contents);
   }
 
   @override
@@ -13,7 +13,7 @@ class MockLocalStorage extends LocalStorage {
       return Future<FileOperations>.value(_files[filename]);
     }
 
-    var localFile = new MockLocalFile(filename, false, null);
+    var localFile = MockLocalFile(filename, false, null);
     _files[filename] = localFile;
     return Future<FileOperations>.value(localFile);
   }
@@ -25,23 +25,23 @@ class MockLocalFile implements FileOperations {
   bool fileExists;
 
   MockLocalFile(String path, bool exists, String? contents)
-      : this.currentContents = contents,
-        this.fileExists = exists;
+      : currentContents = contents,
+        fileExists = exists;
 
   @override
   Future<bool> get exists {
-    return Future.value(this.fileExists);
+    return Future.value(fileExists);
   }
 
   @override
   Future<Null> writeContents(String contents) {
-    this.currentContents = contents;
-    this.fileExists = true;
+    currentContents = contents;
+    fileExists = true;
     return Future.value(null);
   }
 
   @override
   Future<String> get contents {
-    return Future.value(this.currentContents);
+    return Future.value(currentContents);
   }
 }

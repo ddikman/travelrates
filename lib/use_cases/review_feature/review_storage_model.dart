@@ -11,14 +11,14 @@ class ReviewStorageModel {
       required this.submitted});
 
   factory ReviewStorageModel.fromJson(String json) {
-    var map = new JsonDecoder().convert(json);
-    return new ReviewStorageModel(
+    var map = JsonDecoder().convert(json);
+    return ReviewStorageModel(
         conversionsRequired: map['conversionRequired'],
         conversionsDone: map['conversionDone'],
         submitted: map['submitted']);
   }
 
-  String toJson() => new JsonEncoder().convert({
+  String toJson() => JsonEncoder().convert({
         'conversionRequired': conversionsRequired,
         'conversionDone': conversionsDone,
         'submitted': submitted

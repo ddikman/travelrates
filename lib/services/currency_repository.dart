@@ -4,7 +4,7 @@ import 'package:travelconverter/model/currency_rate.dart';
 import 'package:travelconverter/services/logger.dart';
 
 class CurrencyRepository {
-  static final log = new Logger<CurrencyRepository>();
+  static final log = Logger<CurrencyRepository>();
 
   final List<Currency> _currencies;
 
@@ -40,7 +40,9 @@ class CurrencyRepository {
   }
 
   void updateRates(List<CurrencyRate> rates) {
-    rates.forEach((rate) => _update(rate.currencyCode, rate.rate));
+    for (var rate in rates) {
+      _update(rate.currencyCode, rate.rate);
+    }
   }
 
   void _update(String currencyCode, double newRate) {

@@ -12,7 +12,7 @@ class ConversionModel {
       {required this.currentAmount,
       required this.currentCurrency,
       required List<String> currencies})
-      : this._currencies = currencies;
+      : _currencies = currencies;
 
   List<String> get currencies => _currencies;
 
@@ -29,17 +29,17 @@ class ConversionModel {
   }
 
   ConversionModel withCurrencies(List<String> currencies) {
-    return new ConversionModel(
+    return ConversionModel(
         currencies: currencies,
-        currentAmount: this.currentAmount,
-        currentCurrency: this.currentCurrency);
+        currentAmount: currentAmount,
+        currentCurrency: currentCurrency);
   }
 
   ConversionModel withAmount(
       {required double amount, required Currency currency}) {
-    return new ConversionModel(
+    return ConversionModel(
         currentAmount: amount,
         currentCurrency: currency,
-        currencies: this.currencies);
+        currencies: currencies);
   }
 }

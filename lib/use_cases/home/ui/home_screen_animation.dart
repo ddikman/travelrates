@@ -3,54 +3,71 @@ import 'package:rive/rive.dart';
 import 'package:travelconverter/app_core/theme/theme_extension.dart';
 
 class HomeScreenAnimation extends StatefulWidget {
+  const HomeScreenAnimation({super.key});
+
   @override
   State<HomeScreenAnimation> createState() => _HomeScreenAnimationState();
 }
 
 class _HomeScreenAnimationState extends State<HomeScreenAnimation> {
-  StateMachineController? _controller;
-  SMIInput<bool>? _darkModeInput;
+  File? _riveFile;
+  RiveWidgetController? _controller;
+  BooleanInput? _darkModeInput;
 
   @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    _loadRiveFile();
+  }
+
+  Future<void> _loadRiveFile() async {
+    final file = await File.asset(
+      'assets/animations/tokyo-skyline.riv',
+      riveFactory: Factory.rive,
+    );
+    final controller = RiveWidgetController(
+      file!,
+      stateMachineSelector: StateMachineNamed('Idle'),
+    );
+
+    _riveFile = file;
+    _controller = controller;
+    // ignore: deprecated_member_use
+    _darkModeInput = controller.stateMachine.boolean('darkMode');
+
+    if (mounted) {
+      _darkModeInput?.value = context.isDarkMode;
+      setState(() {});
+    }
   }
 
   @override
   void didChangeDependencies() {
-    _darkModeInput?.change(context.isDarkMode);
+    _darkModeInput?.value = context.isDarkMode;
     super.didChangeDependencies();
   }
 
   @override
-  Widget build(BuildContext context) {
-    // I have to force the size to avoid a white line appearing at the top in dark mode due to anti-aliasing
-    return SizedBox(
-      height: 256,
-      child: RiveAnimation.asset('assets/animations/tokyo-skyline.riv',
-          fit: BoxFit.fitHeight,
-          stateMachines: ['Idle'],
-          alignment: Alignment.bottomCenter,
-          onInit: (artboard) => _initAnimation(artboard, context.isDarkMode)),
-    );
+  void dispose() {
+    _controller?.dispose();
+    _riveFile?.dispose();
+    super.dispose();
   }
 
-  void _initAnimation(Artboard artboard, bool isDarkMode) {
-    final controller = StateMachineController.fromArtboard(artboard, 'Idle');
+  @override
+  Widget build(BuildContext context) {
+    final controller = _controller;
     if (controller == null) {
-      throw new Exception('Failed to create controller from artboard');
+      return const SizedBox(height: 256);
     }
-    artboard.addController(controller);
 
-    // This is a trick to use a difference layer inside the animation to support inverting color
-    final darkModeInput = controller.findInput<bool>('darkMode');
-    if (darkModeInput == null) {
-      throw new Exception('Input "darkMode" not found in the animation');
-    }
-    darkModeInput.change(isDarkMode);
-
-    _darkModeInput = darkModeInput;
-    _controller = controller;
+    return SizedBox(
+      height: 256,
+      child: RiveWidget(
+        controller: controller,
+        fit: Fit.fitHeight,
+        alignment: Alignment.bottomCenter,
+      ),
+    );
   }
 }

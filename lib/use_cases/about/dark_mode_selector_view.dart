@@ -7,7 +7,7 @@ import 'package:travelconverter/l10n/l10n_extension.dart';
 import 'package:travelconverter/use_cases/dark_mode/state/theme_brightness_notifier_provider.dart';
 
 class DarkModeSelectorView extends ConsumerWidget {
-  const DarkModeSelectorView({Key? key}) : super(key: key);
+  const DarkModeSelectorView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

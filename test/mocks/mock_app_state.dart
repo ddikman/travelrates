@@ -5,9 +5,9 @@ import 'mock_currency_repository.dart';
 
 AppState mockAppState() {
   final countries = <Country>[
-    new Country("England", "EN", "GBP"),
-    new Country("Germany", "DE", "EUR"),
-    new Country("United States", "US", "USD")
+    Country("England", "EN", "GBP"),
+    Country("Germany", "DE", "EUR"),
+    Country("United States", "US", "USD")
   ];
 
   return AppState.initial(countries: countries, availableCurrencies: mockCurrencyRepository());

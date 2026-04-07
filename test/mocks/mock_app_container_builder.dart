@@ -37,7 +37,7 @@ class MockAppContainerBuilder {
     final appState = AppState.initial(
             availableCurrencies: mockCurrencyRepository(),
             countries: MockCountry.all)
-        .withConversion(new ConversionModel(
+        .withConversion(ConversionModel(
             currentAmount: _currentValue,
             currentCurrency: _currentCurrency,
             currencies: ['GBP', 'USD', 'EUR']));
@@ -45,7 +45,7 @@ class MockAppContainerBuilder {
     final statePersistence =
         StatePersistence(localStorage: MockLocalStorage());
 
-    return new MaterialApp(
+    return MaterialApp(
       home: StateContainer(
         state: appState,
         statePersistence: statePersistence,
@@ -68,7 +68,7 @@ class MockAppContainerBuilder {
 
   /// Can be used to wrap entire test setup instead of just build()
   Future run(WidgetTester tester, Function testCode) async {
-    await tester.pumpWidget(await this.build());
+    await tester.pumpWidget(await build());
     await tester.pumpAndSettle();
     await testCode();
     await tester.pumpAndSettle();

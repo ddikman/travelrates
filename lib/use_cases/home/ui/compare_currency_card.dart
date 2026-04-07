@@ -16,15 +16,15 @@ class CompareCurrencyCard extends ConsumerWidget {
 
   final Currency currency;
 
-  CompareCurrencyCard({required this.currency});
+  const CompareCurrencyCard({super.key, required this.currency});
 
-  static final log = new Logger<CompareCurrencyCard>();
+  static final log = Logger<CompareCurrencyCard>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentValue = ref.watch(convertedAmountProvider(currency));
 
-    final contents = new Row(
+    final contents = Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Column(
@@ -91,7 +91,7 @@ class CompareCurrencyCard extends ConsumerWidget {
         builder: (ctx) => CustomKeyboardSheet(
             currencyCode: currency.code, initialValue: currentValue));
 
-    if (value != null) {
+    if (value != null && context.mounted) {
       _newValueReceived(context, value);
     }
   }

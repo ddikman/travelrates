@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 class TestAssetBundle extends CachingAssetBundle {
-  final _data = new Map<String, String>();
+  final _data = <String, String>{};
 
   void set(String key, String data) {
     _data[key] = data;
@@ -12,7 +12,7 @@ class TestAssetBundle extends CachingAssetBundle {
   @override
   Future<ByteData> load(String key) {
     if (!_data.containsKey(key)) {
-      throw new Exception("Missing any mocked asset with path '$key'");
+      throw Exception("Missing any mocked asset with path '$key'");
     }
 
     return Future<ByteData>.value(

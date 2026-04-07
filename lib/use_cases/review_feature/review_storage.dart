@@ -5,7 +5,7 @@ import 'package:travelconverter/services/local_storage.dart';
 import 'package:travelconverter/services/logger.dart';
 
 class ReviewStorage {
-  static final Logger _log = new Logger<ReviewStorage>();
+  static final Logger _log = Logger<ReviewStorage>();
 
   static const String _resourceName = "reviews.json";
 
@@ -16,7 +16,7 @@ class ReviewStorage {
 
   ReviewRule _createDefaultReviewRule(InternetConnectivity internet) {
     _log.debug("Creating new review data");
-    return new ReviewRule(
+    return ReviewRule(
         internet: internet,
         conversionsDone: 0,
         conversionsRequired: 5,
@@ -26,15 +26,14 @@ class ReviewStorage {
   ReviewRule _parse(String json) {
     try {
       var reviews = ReviewStorageModel.fromJson(json);
-      return new ReviewRule(
+      return ReviewRule(
         internet: _connectivity,
         conversionsRequired: reviews.conversionsRequired,
         conversionsDone: reviews.conversionsDone,
         submitted: reviews.submitted,
       );
     } on Exception catch (ex) {
-      _log.error("Error when trying to parse review json, will reset: " +
-          ex.toString());
+      _log.error("Error when trying to parse review json, will reset: $ex");
       return _createDefaultReviewRule(_connectivity);
     }
   }
@@ -54,7 +53,7 @@ class ReviewStorage {
   }
 
   String _encode(ReviewRule rule) {
-    var model = new ReviewStorageModel(
+    var model = ReviewStorageModel(
         conversionsDone: rule.conversionsDone,
         conversionsRequired: rule.conversionsRequired,
         submitted: rule.submitted);

@@ -20,7 +20,7 @@ class CurrencyDecoder {
   }
 
   List<Currency> _decodeCurrencies(String json, List<CurrencyRate> rates) {
-    final Map currencies = new JsonDecoder().convert(json);
+    final Map currencies = JsonDecoder().convert(json);
     return currencies.values
         .where(_notDiscontinued)
         .map((currency) => _decodeCurrency(currency, rates))
@@ -33,9 +33,9 @@ class CurrencyDecoder {
 
   RatesResponse decodeRates(String json) {
     assert(json.isNotEmpty);
-    final Map ratesDecoded = new JsonDecoder().convert(json);
+    final Map ratesDecoded = JsonDecoder().convert(json);
     if (!ratesDecoded.containsKey('rates')) {
-      throw new ArgumentError(
+      throw ArgumentError(
           "Rates json does not contain a child element named 'rates'.");
     }
 
@@ -57,11 +57,11 @@ class CurrencyDecoder {
   CurrencyRate _mapRate(String code, dynamic rate) {
     // the json will contain a base rate with an integer 1 instead of a double
     if (rate is int) {
-      return new CurrencyRate(code, 1.0);
+      return CurrencyRate(code, 1.0);
     } else if (rate is double) {
-      return new CurrencyRate(code, rate);
+      return CurrencyRate(code, rate);
     } else {
-      throw new Exception(
+      throw Exception(
           "Unexpected rate type for code '$code': ${rate.runtimeType}");
     }
   }
@@ -70,7 +70,7 @@ class CurrencyDecoder {
     final code = currency['code'];
     final rate = rates.singleWhere(
         (rate) => isEqualIgnoreCase(rate.currencyCode, code),
-        orElse: () => throw new Exception(
+        orElse: () => throw Exception(
             "Missing rate for currency $code amongt ${rates.length} rates"));
 
     return Currency(

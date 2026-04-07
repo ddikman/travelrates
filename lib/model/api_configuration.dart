@@ -6,6 +6,6 @@ class ApiConfiguration {
   ApiConfiguration(this.apiKey, this.apiUrl);
 
   factory ApiConfiguration.fromJson(Map<String, dynamic> json) {
-    return new ApiConfiguration(json['apiToken'], json['apiUrl']);
+    return ApiConfiguration(json['apiToken'], json['apiUrl']);
   }
 }

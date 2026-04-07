@@ -8,12 +8,12 @@ class AsyncResult<T> {
   final bool successful;
 
   AsyncResult.failed()
-      : this._result = null,
-        this.successful = false;
+      : _result = null,
+        successful = false;
 
   AsyncResult.withValue(T result)
-      : this._result = result,
-        this.successful = true;
+      : _result = result,
+        successful = true;
 
   T? get result {
     if (!successful) {

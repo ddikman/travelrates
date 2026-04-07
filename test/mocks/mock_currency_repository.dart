@@ -11,5 +11,5 @@ CurrencyRepository mockCurrencyRepository() {
     MockCurrency.pound
   ];
 
-  return new CurrencyRepository(currencies: currencies, baseRate: "EUR");
+  return CurrencyRepository(currencies: currencies, baseRate: "EUR");
 }

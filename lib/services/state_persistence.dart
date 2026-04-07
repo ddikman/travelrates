@@ -17,7 +17,7 @@ import 'package:flutter/services.dart';
 class StatePersistence {
   final LocalStorage localStorage;
 
-  static final log = new Logger<StatePersistence>();
+  static final log = Logger<StatePersistence>();
 
   StatePersistence({required this.localStorage});
 
@@ -25,7 +25,7 @@ class StatePersistence {
       {List<CurrencyRate>? cachedRates}) async {
     final currencyRepository = _loadRepository(cachedRates);
 
-    final countries = new List<Country>.from(CountryData.countries);
+    final countries = List<Country>.from(CountryData.countries);
     countries.sort((a, b) => compareIgnoreCase(a.name, b.name));
 
     if (await (await _stateFile).exists) {

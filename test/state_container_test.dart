@@ -14,20 +14,21 @@ void main() {
   var appRoot = MaterialApp(home: Container());
 
   final statePersistence =
-      new StatePersistence(localStorage: new MockLocalStorage());
+      StatePersistence(localStorage: MockLocalStorage());
   var state = mockAppState();
-  state = state.withConversion(new ConversionModel(
+  state = state.withConversion(ConversionModel(
       currencies: ["USD", "EUR"],
       currentAmount: 1.0,
       currentCurrency: MockCurrency.dollar));
   final stateContainerWidget = StateContainer(
-      child: appRoot, state: state, statePersistence: statePersistence);
+      state: state, statePersistence: statePersistence,
+      child: appRoot);
 
   testWidgets("sets first currency to one", (WidgetTester tester) async {
-    final widget = new StateContainer(
-        child: appRoot,
+    final widget = StateContainer(
         state: mockAppState(),
-        statePersistence: statePersistence);
+        statePersistence: statePersistence,
+        child: appRoot);
     await tester.pumpWidget(widget);
     var stateContainer =
         tester.state<StateContainerState>(find.byType(StateContainer));
@@ -77,8 +78,8 @@ void main() {
     var stateContainer =
         tester.state<StateContainerState>(find.byType(StateContainer));
     stateContainer.setRates([
-      new CurrencyRate("USD", 2.0),
-      new CurrencyRate("EUR", 3.0),
+      CurrencyRate("USD", 2.0),
+      CurrencyRate("EUR", 3.0),
     ]);
 
     expect(
@@ -116,15 +117,15 @@ class ConversionMatcher extends Matcher {
 
   @override
   Description describe(Description description) {
-    return new StringDescription("Matches an instance of a conversion model");
+    return StringDescription("Matches an instance of a conversion model");
   }
 
   @override
   bool matches(dynamic item, Map matchState) {
     var conversion = item as ConversionModel?;
     if (conversion == null) {
-      throw new Exception(
-          "Item is not a conversion model: " + item!.toString());
+      throw Exception(
+          "Item is not a conversion model: ${item!}");
     }
 
     return conversion.currentCurrency.code == _currencyCode;
@@ -133,6 +134,6 @@ class ConversionMatcher extends Matcher {
   ConversionMatcher._internal(this._currencyCode);
 
   factory ConversionMatcher.forCurrency(String currencyCode) {
-    return new ConversionMatcher._internal(currencyCode);
+    return ConversionMatcher._internal(currencyCode);
   }
 }

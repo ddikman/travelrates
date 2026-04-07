@@ -9,7 +9,7 @@ class SearchInput extends ConsumerStatefulWidget {
   const SearchInput({super.key, this.autoFocus = true});
 
   @override
-  _SearchInputState createState() => _SearchInputState();
+  ConsumerState<SearchInput> createState() => _SearchInputState();
 }
 
 class _SearchInputState extends ConsumerState<SearchInput> {
