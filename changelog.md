@@ -2,6 +2,7 @@
 
 - Improved app size
 - Fixed sizing of cards for long currency names
+- Package updates
 
 ## 2.2.0+99
 
