@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:travelconverter/app_state.dart';
+import 'package:travelconverter/l10n/localized_data.dart';
+import 'package:travelconverter/l10n/localized_data_provider.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/model/currency.dart';
+import 'package:travelconverter/services/state_persistence.dart';
+import 'package:travelconverter/state_container.dart';
 import 'package:travelconverter/l10n/app_localizations.dart';
 
 import 'mock_country.dart';
 import 'mock_currency.dart';
 import 'mock_currency_repository.dart';
+import 'mock_local_storage.dart';
 
 class MockAppContainerBuilder {
   Currency _currentCurrency = MockCurrency.dollar;
@@ -37,12 +42,24 @@ class MockAppContainerBuilder {
             currentCurrency: _currentCurrency,
             currencies: ['GBP', 'USD', 'EUR']));
 
+    final statePersistence =
+        StatePersistence(localStorage: MockLocalStorage());
+
     return new MaterialApp(
-      home: ProviderScope(
-        overrides: [
-          appStateProvider.overrideWithValue(appState),
-        ],
-        child: _child,
+      home: StateContainer(
+        state: appState,
+        statePersistence: statePersistence,
+        child: Builder(
+          builder: (ctx) => ProviderScope(
+            overrides: [
+              appStateProvider.overrideWithValue(appState),
+            ],
+            child: LocalizedDataProvider(
+              data: LocalizedData.withLocale(const Locale('en')),
+              child: _child,
+            ),
+          ),
+        ),
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/model/country.dart';
 import 'package:travelconverter/services/currency_repository.dart';
+import 'package:travelconverter/services/legacy_currency_mapper.dart';
 
 final appStateProvider =
     Provider<AppState>((ref) => throw Exception("Not initialized"));
@@ -52,8 +53,10 @@ class AppState {
       : this.availableCurrencies = repository,
         this.conversion = new ConversionModel(
             currentAmount: json['currentAmount'],
-            currentCurrency: repository.getByCode(json['currentCurrency']),
-            currencies: List.castFrom(json['currencies'])),
+            currentCurrency: repository.getByCode(
+                LegacyCurrencyMapper.mapCode(json['currentCurrency'])),
+            currencies: LegacyCurrencyMapper.mapCodes(
+                List.castFrom(json['currencies']))),
         this.countries = countries,
         this.ratesLastUpdated = json['ratesLastUpdated'] != null
             ? DateTime.parse(json['ratesLastUpdated'])

@@ -29,4 +29,28 @@ void main() {
     expect(appState.conversion.currentCurrency.code, "USD");
     expect(appState.conversion.currencies, [ "USD", "EUR" ]);
   });
+
+  test('maps legacy VEF currency code to VES when loading saved state', () async {
+    final localStorage = new MockLocalStorage();
+    localStorage.setFile("state.json",
+        '{"currentAmount":100.0,"currentCurrency":"VEF","currencies":["VEF","USD"]}');
+
+    final statePersistence = new StatePersistence(localStorage: localStorage);
+    final appState = await statePersistence.load(assets);
+
+    expect(appState.conversion.currentCurrency.code, "VES");
+    expect(appState.conversion.currencies, ["VES", "USD"]);
+  });
+
+  test('maps legacy MRO currency code to MRU when loading saved state', () async {
+    final localStorage = new MockLocalStorage();
+    localStorage.setFile("state.json",
+        '{"currentAmount":50.0,"currentCurrency":"MRO","currencies":["MRO","EUR"]}');
+
+    final statePersistence = new StatePersistence(localStorage: localStorage);
+    final appState = await statePersistence.load(assets);
+
+    expect(appState.conversion.currentCurrency.code, "MRU");
+    expect(appState.conversion.currencies, ["MRU", "EUR"]);
+  });
 }
