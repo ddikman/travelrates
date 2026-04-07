@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -68,7 +67,6 @@ class _AppRootState extends State<AppRoot> {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         debugShowCheckedModeBanner: false,
-        locale: DevicePreview.locale(context),
         builder: (context, child) {
           final locale = Localizations.localeOf(context);
           debugPrint("context: ${locale}");
