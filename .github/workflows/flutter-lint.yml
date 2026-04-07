@@ -35,6 +35,8 @@ jobs:
 
       - name: Write API keys
         run: echo "${API_KEYS_JSON}" > assets/data/apiConfiguration.json
+        env:
+          API_KEYS_JSON: ${{ secrets.API_KEYS_JSON }}
 
       - name: Run linting
         run: flutter analyze
