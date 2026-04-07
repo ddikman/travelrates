@@ -22,7 +22,7 @@ Use [flutter_distribute](https://distributor.leanflutter.dev/).
 
 ```shell
 source .env
-node tools/update_local_rates.js
+dart run tools/update_local_rates.dart
 flutter_distributor release --name internal
 ```
 
@@ -38,9 +38,9 @@ This will upload to Testflight and/or Google Play internal track.
 
 Just run the `pub get` and the localizations should be generated. Access the locale by using `context.l10n.<name>`.
 
-To generate new localizations for country names and currencies, with NodeJs v10.9+ run (from project root folder):
+To generate new localizations for country names and currencies, run (from project root folder):
 ```bash
-$ node tools/generate_localizations.js
+$ dart run tools/generate_localizations.dart
 ```
 
 This will look at the `countries.json` and `currencies.json` files in `assets/l10n/` and generate output dart files with hardcoded maps into the `lib/l10n/` folder.

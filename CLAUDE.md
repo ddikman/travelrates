@@ -37,7 +37,7 @@ Localizations are auto-generated on `flutter pub get`. Access via `context.l10n.
 
 To generate country/currency localizations:
 ```bash
-node tools/generate_localizations.js
+dart run tools/generate_localizations.dart
 ```
 
 ### Icons and splash screen
