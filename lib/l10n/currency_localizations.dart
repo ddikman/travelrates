@@ -514,7 +514,7 @@ class CurrencyLocalizations {
 
   factory CurrencyLocalizations(String locale) {
     assert(_locales.containsKey(locale));
-    return new CurrencyLocalizations._internal(locale, _locales[locale]!);
+    return CurrencyLocalizations._internal(locale, _locales[locale]!);
   }
 
   String getLocalized(String currencyCode) {

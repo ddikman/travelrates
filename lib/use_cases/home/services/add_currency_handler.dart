@@ -7,14 +7,14 @@ import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/use_cases/currency_selection/state/selected_currencies_notifier.dart';
 
 class AddCurrencyHandler {
-  static final log = new Logger<AddCurrencyHandler>();
+  static final log = Logger<AddCurrencyHandler>();
 
   final Currency currency;
   final SelectedCurrenciesNotifier selectedCurrenciesNotifier;
 
   AddCurrencyHandler(this.currency, this.selectedCurrenciesNotifier);
 
-  _displayNotice(BuildContext context) {
+  void _displayNotice(BuildContext context) {
     log.event('currencyAlreadyAdded',
         "${currency.name} already added, showing snack instead",
         parameters: {'currency': currency.name});
@@ -26,7 +26,7 @@ class AddCurrencyHandler {
     AppSnackBar.showError(context, message);
   }
 
-  addCurrency(BuildContext context) {
+  void addCurrency(BuildContext context) {
     try {
       selectedCurrenciesNotifier.add(currency.code);
 

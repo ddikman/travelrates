@@ -4,8 +4,8 @@ class CurrencyRate {
   final double _rate;
 
   CurrencyRate(String currencyCode, double rate)
-      : this._currencyCode = currencyCode,
-        this._rate = rate;
+      : _currencyCode = currencyCode,
+        _rate = rate;
 
   String get currencyCode => _currencyCode;
 

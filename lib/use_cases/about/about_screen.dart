@@ -12,6 +12,8 @@ import 'package:travelconverter/use_cases/about/version_display.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
+  const AboutScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
@@ -31,9 +33,10 @@ class AboutScreen extends StatelessWidget {
             shrinkWrap: true,
             padding: const EdgeInsets.all(0),
             onTapLink: (text, href, title) {
-              if (href != null)
+              if (href != null) {
                 launchUrl(Uri.parse(href),
                     mode: LaunchMode.externalApplication);
+              }
             },
             data: context.l10n.about_callout,
             styleSheet: MarkdownStyle.of(context)),

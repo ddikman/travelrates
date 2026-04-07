@@ -18,6 +18,7 @@ class CurrencyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonCard(
+      onTap: onTap,
       child: Row(
         children: <Widget>[
           CurrencyIcon(iconName: iconName),
@@ -25,7 +26,6 @@ class CurrencyCard extends StatelessWidget {
           Expanded(child: content),
         ],
       ),
-      onTap: onTap,
     );
   }
 }

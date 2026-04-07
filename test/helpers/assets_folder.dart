@@ -24,6 +24,6 @@ abstract class AssetsFolder {
   static Directory get _inBaseFolder => _getDirectory('./assets');
 
   static Directory _getDirectory(String relative) {
-    return new Directory(Platform.script.resolve(relative).toFilePath());
+    return Directory(Platform.script.resolve(relative).toFilePath());
   }
 }

@@ -13,7 +13,7 @@ void main() {
   StreamController<List<ConnectivityResult>>? connectivityStream;
 
   setUp(() {
-    connectivityStream = new StreamController<List<ConnectivityResult>>(sync: true);
+    connectivityStream = StreamController<List<ConnectivityResult>>(sync: true);
   });
 
   tearDown(() {
@@ -22,13 +22,13 @@ void main() {
 
   InternetConnectivity getWithCurrentConnectivity(
       List<ConnectivityResult> connectivity) {
-    final mockConnectivity = new MockConnectivity();
+    final mockConnectivity = MockConnectivity();
     when(mockConnectivity.checkConnectivity())
         .thenAnswer((_) async => connectivity);
     when(mockConnectivity.onConnectivityChanged)
         .thenAnswer((_) => connectivityStream!.stream);
 
-    return new InternetConnectivityImpl(mockConnectivity);
+    return InternetConnectivityImpl(mockConnectivity);
   }
 
   test("is available after startup if connectivity is mobile", () async {

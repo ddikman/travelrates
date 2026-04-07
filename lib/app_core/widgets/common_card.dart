@@ -6,7 +6,7 @@ class CommonCard extends StatelessWidget {
   final Widget child;
   final Function? onTap;
 
-  CommonCard({required this.child, this.onTap});
+  const CommonCard({super.key, required this.child, this.onTap});
 
   @override
   Widget build(BuildContext context) {

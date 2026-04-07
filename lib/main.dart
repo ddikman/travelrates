@@ -42,6 +42,8 @@ void main() async {
       enabled: kDebugMode && false,
       availableLocales: AppLocalizations.supportedLocales,
       builder: (context) => StateContainer(
+        state: state,
+        statePersistence: statePersistence,
         child: Builder(
           builder: (ctx) => ProviderScope(overrides: [
             appStateProvider.overrideWithValue(StateContainer.of(ctx).appState),
@@ -49,8 +51,6 @@ void main() async {
             preferencesProvider.overrideWithValue(sharedPreferences)
           ], child: AppRoot(ratesApi: ratesApi)),
         ),
-        state: state,
-        statePersistence: statePersistence,
       ),
     ),
   );

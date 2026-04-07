@@ -14,14 +14,14 @@ class ReviewWidget extends StatefulWidget {
   final ReviewStorage reviewStorage;
   final Duration toastDelay;
 
-  ReviewWidget(
-      {required this.child,
+  const ReviewWidget(
+      {super.key, required this.child,
       required this.reviewStorage,
       this.toastDelay = const Duration(seconds: 1)});
 
   @override
   State<StatefulWidget> createState() {
-    return new ReviewWidgetState();
+    return ReviewWidgetState();
   }
 }
 
@@ -62,18 +62,18 @@ class ReviewWidgetState extends State<ReviewWidget> {
     if (_reviewRule.shouldReview) {
       _doReview();
     } else if (!_reviewRule.submitted) {
-      this.widget.reviewStorage.save(_reviewRule);
+      widget.reviewStorage.save(_reviewRule);
     }
   }
 
   Future<void> _reviewAccepted() async {
     _reviewRule.reviewAccepted();
-    await this.widget.reviewStorage.save(_reviewRule);
+    await widget.reviewStorage.save(_reviewRule);
   }
 
   void _doReview() async {
     _reviewRule.reviewRequested();
-    this.widget.reviewStorage.save(_reviewRule);
+    widget.reviewStorage.save(_reviewRule);
 
     final action = SnackBarAction(
         label: context.l10n.review_acceptReviewButtonText,
@@ -83,6 +83,7 @@ class ReviewWidgetState extends State<ReviewWidget> {
         });
 
     await Future.delayed(widget.toastDelay).then((_) {
+      if (!mounted) return;
       AppSnackBar.show(
         context,
         accentColor: context.themeColors.accent,

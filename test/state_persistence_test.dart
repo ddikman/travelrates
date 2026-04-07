@@ -5,11 +5,11 @@ import 'mocks/mock_bundle.dart';
 import 'mocks/mock_local_storage.dart';
 
 void main() {
-  var assets = new TestAssetBundle();
+  var assets = TestAssetBundle();
 
   test('can load default state', () async {
-    final localStorage = new MockLocalStorage();
-    final statePersistence = new StatePersistence(localStorage: localStorage);
+    final localStorage = MockLocalStorage();
+    final statePersistence = StatePersistence(localStorage: localStorage);
 
     final appState = await statePersistence.load(assets);
 
@@ -18,10 +18,10 @@ void main() {
   });
 
   test('can previous state', () async {
-    final localStorage = new MockLocalStorage();
+    final localStorage = MockLocalStorage();
     localStorage.setFile("state.json", '{"currentAmount":5.0,"currentCurrency":"USD","currencies":["USD","EUR"]}');
 
-    final statePersistence = new StatePersistence(localStorage: localStorage);
+    final statePersistence = StatePersistence(localStorage: localStorage);
 
     final appState = await statePersistence.load(assets);
 
@@ -31,11 +31,11 @@ void main() {
   });
 
   test('maps legacy VEF currency code to VES when loading saved state', () async {
-    final localStorage = new MockLocalStorage();
+    final localStorage = MockLocalStorage();
     localStorage.setFile("state.json",
         '{"currentAmount":100.0,"currentCurrency":"VEF","currencies":["VEF","USD"]}');
 
-    final statePersistence = new StatePersistence(localStorage: localStorage);
+    final statePersistence = StatePersistence(localStorage: localStorage);
     final appState = await statePersistence.load(assets);
 
     expect(appState.conversion.currentCurrency.code, "VES");
@@ -43,11 +43,11 @@ void main() {
   });
 
   test('maps legacy MRO currency code to MRU when loading saved state', () async {
-    final localStorage = new MockLocalStorage();
+    final localStorage = MockLocalStorage();
     localStorage.setFile("state.json",
         '{"currentAmount":50.0,"currentCurrency":"MRO","currencies":["MRO","EUR"]}');
 
-    final statePersistence = new StatePersistence(localStorage: localStorage);
+    final statePersistence = StatePersistence(localStorage: localStorage);
     final appState = await statePersistence.load(assets);
 
     expect(appState.conversion.currentCurrency.code, "MRU");

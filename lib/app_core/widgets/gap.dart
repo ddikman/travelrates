@@ -6,5 +6,5 @@ abstract class Gap {
   static const medium =
       SizedBox(height: Paddings.medium, width: Paddings.medium);
   static const list =
-      const SizedBox(height: Paddings.listGap, width: Paddings.listGap);
+      SizedBox(height: Paddings.listGap, width: Paddings.listGap);
 }

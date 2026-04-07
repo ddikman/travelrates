@@ -12,27 +12,27 @@ class MockWidgetFrame extends StatefulWidget {
 
   final AppState? appState;
 
-  MockWidgetFrame({required Widget child, this.appState}) : this._child = child;
+  const MockWidgetFrame({super.key, required Widget child, this.appState}) : _child = child;
 
   @override
-  _MockWidgetFrameState createState() {
-    return new _MockWidgetFrameState();
+  State<MockWidgetFrame> createState() {
+    return _MockWidgetFrameState();
   }
 }
 
 class _MockWidgetFrameState extends State<MockWidgetFrame> {
   final statePersistence =
-      new StatePersistence(localStorage: new MockLocalStorage());
+      StatePersistence(localStorage: MockLocalStorage());
 
   @override
   Widget build(BuildContext context) {
-    return new StateContainer(
+    return StateContainer(
         statePersistence: statePersistence,
         state: widget.appState ?? mockAppState(),
         child: MaterialApp(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
-            home: new Builder(builder: (BuildContext context) {
+            home: Builder(builder: (BuildContext context) {
               return widget._child;
             })));
   }

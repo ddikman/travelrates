@@ -83,8 +83,7 @@ void main() {
     }
 
     // Count currencies with complete translations for informational purposes
-    print(
-      '✓ Verified ${currencies.length} currencies have translations for all supported languages (${supportedLanguages.join(", ")})',
-    );
+    // ignore: avoid_print
+    print('✓ Verified ${currencies.length} currencies have translations for all supported languages (${supportedLanguages.join(", ")})');
   });
 }

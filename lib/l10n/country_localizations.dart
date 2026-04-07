@@ -521,9 +521,9 @@ class CountryLocalizations {
   factory CountryLocalizations(String locale) {
     assert(_allLocales.containsKey(locale) || locale == 'en');
     if (locale == 'en') {
-      return new CountryLocalizations._internal(locale, {});
+      return CountryLocalizations._internal(locale, {});
     } else {
-      return new CountryLocalizations._internal(locale, _allLocales[locale]!);
+      return CountryLocalizations._internal(locale, _allLocales[locale]!);
     }
   }
 

@@ -17,27 +17,24 @@ class AppState {
   final DateTime? ratesLastUpdated;
 
   const AppState(
-      {required ConversionModel conversion,
-      required CurrencyRepository availableCurrencies,
-      required List<Country> countries,
-      this.ratesLastUpdated})
-      : this.conversion = conversion,
-        this.countries = countries,
-        this.availableCurrencies = availableCurrencies;
+      {required this.conversion,
+      required this.availableCurrencies,
+      required this.countries,
+      this.ratesLastUpdated});
 
   AppState withConversion(ConversionModel conversion) {
-    return new AppState(
+    return AppState(
         conversion: conversion,
-        availableCurrencies: this.availableCurrencies,
-        countries: this.countries,
-        ratesLastUpdated: this.ratesLastUpdated);
+        availableCurrencies: availableCurrencies,
+        countries: countries,
+        ratesLastUpdated: ratesLastUpdated);
   }
 
   AppState withRatesLastUpdated(DateTime timestamp) {
-    return new AppState(
-        conversion: this.conversion,
-        availableCurrencies: this.availableCurrencies,
-        countries: this.countries,
+    return AppState(
+        conversion: conversion,
+        availableCurrencies: availableCurrencies,
+        countries: countries,
         ratesLastUpdated: timestamp);
   }
 
@@ -48,28 +45,24 @@ class AppState {
         'ratesLastUpdated': ratesLastUpdated?.toIso8601String()
       };
 
-  AppState.fromJson(Map<String, dynamic> json, CurrencyRepository repository,
-      List<Country> countries)
-      : this.availableCurrencies = repository,
-        this.conversion = new ConversionModel(
+  AppState.fromJson(Map<String, dynamic> json, this.availableCurrencies,
+      this.countries)
+      : conversion = ConversionModel(
             currentAmount: json['currentAmount'],
-            currentCurrency: repository.getByCode(
+            currentCurrency: availableCurrencies.getByCode(
                 LegacyCurrencyMapper.mapCode(json['currentCurrency'])),
             currencies: LegacyCurrencyMapper.mapCodes(
                 List.castFrom(json['currencies']))),
-        this.countries = countries,
-        this.ratesLastUpdated = json['ratesLastUpdated'] != null
+        ratesLastUpdated = json['ratesLastUpdated'] != null
             ? DateTime.parse(json['ratesLastUpdated'])
             : null;
 
   AppState.initial(
-      {required List<Country> countries,
-      required CurrencyRepository availableCurrencies})
-      : this.availableCurrencies = availableCurrencies,
-        this.countries = countries,
-        this.conversion = new ConversionModel(
+      {required this.countries,
+      required this.availableCurrencies})
+      : conversion = ConversionModel(
             currentAmount: 1.0,
             currentCurrency: availableCurrencies.baseCurrency,
             currencies: <String>[]),
-        this.ratesLastUpdated = null;
+        ratesLastUpdated = null;
 }

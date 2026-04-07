@@ -6,15 +6,19 @@ class MockAppLocalizations extends AppLocalizations {
   MockAppLocalizations() : super('en');
 
   @override
+  // ignore: non_constant_identifier_names
   String get time_justNow => 'just now';
 
   @override
+  // ignore: non_constant_identifier_names
   String time_minutesAgo(int minutes) => '${minutes}m ago';
 
   @override
+  // ignore: non_constant_identifier_names
   String time_hoursAgo(int hours) => '${hours}h ago';
 
   @override
+  // ignore: non_constant_identifier_names
   String time_daysAgo(int days) => '${days}d ago';
 
   @override

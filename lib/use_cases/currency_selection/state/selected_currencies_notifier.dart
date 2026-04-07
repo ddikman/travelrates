@@ -27,7 +27,7 @@ class SelectedCurrenciesNotifier extends Notifier<List<Currency>> {
         .toList();
   }
 
-  move({required Currency item, required int newIndex}) {
+  void move({required Currency item, required int newIndex}) {
     final stateContainer = ref.read(stateContainerProvider);
     stateContainer.reorderCurrency(item: item.code, newIndex: newIndex);
     state = _getCurrencies(stateContainer.appState);

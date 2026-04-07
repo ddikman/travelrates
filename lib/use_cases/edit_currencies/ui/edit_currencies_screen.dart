@@ -16,13 +16,15 @@ import 'package:travelconverter/use_cases/edit_currencies/ui/search_input.dart';
 import 'package:travelconverter/use_cases/edit_currencies/ui/select_currency_card.dart';
 
 class EditCurrenciesScreen extends StatelessWidget {
+  const EditCurrenciesScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return PageScaffold(
         body: Consumer(builder: (ctx, ref, _) => _buildCurrencyList(ctx, ref)));
   }
 
-  _buildCurrencyList(BuildContext context, WidgetRef ref) {
+  Column _buildCurrencyList(BuildContext context, WidgetRef ref) {
     final localization = context.l10nData;
     final selectedCurrencies = ref.watch(selectedCurrenciesNotifierProvider);
     // Convert to Set for O(1) lookup instead of O(n) List.contains()
@@ -104,9 +106,8 @@ class SearchCurrencyResultEntry extends ConsumerWidget {
   final Currency currency;
   final bool isSelected;
 
-  SearchCurrencyResultEntry(
-      {Key? key, required this.currency, required this.isSelected})
-      : super(key: key);
+  const SearchCurrencyResultEntry(
+      {super.key, required this.currency, required this.isSelected});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

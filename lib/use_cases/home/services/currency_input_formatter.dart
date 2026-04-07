@@ -5,10 +5,11 @@ import 'package:intl/intl.dart';
 // https://stackoverflow.com/questions/50395032/flutter-textfield-with-currency-format
 class CurrencyInputFormatter extends TextInputFormatter {
   final FilteringTextInputFormatter whiteListingFormatter =
-      new FilteringTextInputFormatter(new RegExp(r'[\d\.,]+'), allow: true);
+      FilteringTextInputFormatter(RegExp(r'[\d\.,]+'), allow: true);
 
-  static final RegExp _convertRegex = new RegExp(r'[^.\d]');
+  static final RegExp _convertRegex = RegExp(r'[^.\d]');
 
+  @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
     if (oldValue.text == newValue.text) {
@@ -19,7 +20,7 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
     // If a comma has been entered, treat it as a decimal
     // the comma input is an issue with the iOS 10 update
-    var newText = newValue.text.replaceAll(new RegExp(',\$'), '.');
+    var newText = newValue.text.replaceAll(RegExp(',\$'), '.');
 
     // Split anything below the decimal and join afterwards
     String newFormatted;
@@ -27,7 +28,7 @@ class CurrencyInputFormatter extends TextInputFormatter {
       var parts = newValue.text.split('.');
       var real = parts[0];
       var decimal = parts.length > 1 ? parts[1] : '';
-      newFormatted = formatted(real) + '.' + decimal;
+      newFormatted = '${formatted(real)}.$decimal';
     } else {
       newFormatted = formatted(newText);
     }
