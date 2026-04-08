@@ -19,6 +19,6 @@ releases:
           platform: ios
           target: ipa
           build_args:
-            export-method: ad-hoc
+            export-method: app-store
         publish:
           target: appstore
