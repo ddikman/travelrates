@@ -23,13 +23,13 @@ Use [fastforge](https://github.com/fastforgedev/fastforge).
 ```shell
 source .env
 fvm dart run tools/update_local_rates.dart
-fastforge release --name internal
+fvm dart run fastforge release --name internal
 ```
 
 Or for individual apps:
 ```shell
-fastforge release --name internal --jobs release-android
-fastforge release --name internal --jobs release-ios
+fvm dart run fastforge release --name internal --jobs release-android
+fvm dart run fastforge release --name internal --jobs release-ios
 ```
 
 This will upload to Testflight and/or Google Play internal track.

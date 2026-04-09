@@ -50,11 +50,11 @@ fvm dart run flutter_native_splash:create
 Uses [fastforge](https://github.com/fastforgedev/fastforge):
 ```bash
 source .env
-fastforge release --name internal
+fvm dart run fastforge release --name internal
 
 # Individual platforms:
-fastforge release --name internal --jobs release-android
-fastforge release --name internal --jobs release-ios
+fvm dart run fastforge release --name internal --jobs release-android
+fvm dart run fastforge release --name internal --jobs release-ios
 ```
 
 ## Architecture
