@@ -59,6 +59,7 @@ dev_dependencies:
   flutter_launcher_icons: ^0.14.1
   flutter_native_splash: ^2.4.3
   flutter_lints: ^6.0.0
+  fastforge: ^0.1.0
 
   connectivity_plus_platform_interface: any
 flutter_native_splash:
