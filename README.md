@@ -18,18 +18,24 @@ https://greycastle.gitlab.io/travel-rates/coverage/
 
 ## Building releases
 
-Use [fastforge](https://github.com/fastforgedev/fastforge).
+Use [Fastforge](https://fastforge.dev/) (formerly Flutter Distributor). It is a dev dependency so you run it with **FVM’s Dart** via `dart run`—that matches the project SDK. A globally installed `fastforge` on your `PATH` invokes whatever `dart` comes first, which is usually not what you want with FVM.
+
+The `:main` part is Fastforge’s script entry (`bin/main.dart`); it is required for `dart run`.
 
 ```shell
-source .env
+## Update rates
 fvm dart run tools/update_local_rates.dart
-fvm dart run fastforge release --name internal
+
+## Release
+source .env
+fvm dart run fastforge:main release --name internal
 ```
 
-Or for individual apps:
+Or for individual jobs:
+
 ```shell
-fvm dart run fastforge release --name internal --jobs release-android
-fvm dart run fastforge release --name internal --jobs release-ios
+fvm dart run fastforge:main release --name internal --jobs release-android
+fvm dart run fastforge:main release --name internal --jobs release-ios
 ```
 
 This will upload to Testflight and/or Google Play internal track.
