@@ -47,14 +47,14 @@ fvm dart run flutter_native_splash:create
 ```
 
 ### Building releases
-Uses [fastforge](https://github.com/fastforgedev/fastforge):
+Uses [Fastforge](https://fastforge.dev/) (`fastforge` dev dependency). Run it with FVM’s Dart so the CLI matches the project SDK (`:main` is the package entrypoint):
 ```bash
 source .env
-fvm dart run fastforge release --name internal
+fvm dart run fastforge:main release --name internal
 
 # Individual platforms:
-fvm dart run fastforge release --name internal --jobs release-android
-fvm dart run fastforge release --name internal --jobs release-ios
+fvm dart run fastforge:main release --name internal --jobs release-android
+fvm dart run fastforge:main release --name internal --jobs release-ios
 ```
 
 ## Architecture
