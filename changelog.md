@@ -1,3 +1,8 @@
+## 2.2.1+100
+
+- Improved app size
+- Fixed sizing of cards for long currency names
+
 ## 2.2.0+99
 
 - Added display of last update time for currency rates
