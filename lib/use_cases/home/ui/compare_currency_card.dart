@@ -24,27 +24,40 @@ class CompareCurrencyCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentValue = ref.watch(convertedAmountProvider(currency));
 
-    final contents = Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(context.l10nData.currencies.getLocalized(currency.code),
-                  style: ThemeTypography.small.bold),
-              Text(currency.code, style: ThemeTypography.verySmall.bold)
-            ],
-          ),
-          Gap.medium,
-          Expanded(
-            child: Text(
-              key: Key('ValueDisplay'),
-              _formatValue(currentValue),
-              textAlign: TextAlign.right,
-              style: ThemeTypography.large,
+    final contents = LayoutBuilder(builder: (context, constraints) {
+      final maxValueWidth = constraints.maxWidth * 0.6;
+      return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    context.l10nData.currencies.getLocalized(currency.code),
+                    style: ThemeTypography.small.bold,
+                    maxLines: 2,
+                    overflow: TextOverflow.clip,
+                  ),
+                  Text(currency.code, style: ThemeTypography.verySmall.bold),
+                ],
+              ),
             ),
-          )
-        ]);
+            Gap.medium,
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: maxValueWidth),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.topRight,
+                child: Text(
+                  key: Key('ValueDisplay'),
+                  _formatValue(currentValue),
+                  style: ThemeTypography.large,
+                ),
+              ),
+            ),
+          ]);
+    });
 
     return CurrencyCard(
         content: contents,
