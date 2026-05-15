@@ -1,3 +1,7 @@
+## 2.2.2+103
+
+- Allow installing the app on SD card / external storage on Android
+
 ## 2.2.1+102
 
 - Improved app size
