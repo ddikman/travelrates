@@ -1,4 +1,4 @@
-## 2.2.1+100
+## 2.2.1+102
 
 - Improved app size
 - Fixed sizing of cards for long currency names
