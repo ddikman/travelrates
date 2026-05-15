@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="se.greycastle.travelconverter">
+  package="se.greycastle.travelconverter"
+  android:installLocation="auto">
     <application
         android:label="TravelRates"
         android:name="${applicationName}"
