@@ -89,7 +89,7 @@ void writeDartFile(String path, String contents) {
 
 void main() {
   const sourceLocale = 'en';
-  const supportedLocales = ['en', 'ja', 'sv'];
+  const supportedLocales = ['en', 'ja', 'sv', 'fr'];
 
   print('building localization for supported locales: $supportedLocales');
   print("basing all locales on the default locale '$sourceLocale'");
