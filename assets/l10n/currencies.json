@@ -2,826 +2,991 @@
     "USD": {
         "en": "US Dollar",
         "sv": "Amerikanska Dollar",
-        "ja": "アメリカドル"
+        "ja": "アメリカドル",
+        "fr": "Dollar américain"
     },
     "CAD": {
         "en": "Canadian Dollar",
         "sv": "Kanadensiska Dollar",
-        "ja": "カナダドル"
+        "ja": "カナダドル",
+        "fr": "Dollar canadien"
     },
     "EUR": {
         "en": "Euro",
         "sv": "Euro",
-        "ja": "ユーロ"
+        "ja": "ユーロ",
+        "fr": "Euro"
     },
     "AED": {
         "en": "United Arab Emirates Dirham",
         "sv": "Förenade Arabemiratens Dirham",
-        "ja": "アラブ首長国連邦ディルハム"
+        "ja": "アラブ首長国連邦ディルハム",
+        "fr": "Dirham des Émirats arabes unis"
     },
     "AFN": {
         "en": "Afghan Afghani",
         "sv": "Afghanska Afghanistan",
-        "ja": "アフガニスタンアフガニ"
+        "ja": "アフガニスタンアフガニ",
+        "fr": "Afghani afghan"
     },
     "ALL": {
         "en": "Albanian Lek",
         "sv": "Albanska Lek",
-        "ja": "アルバニアレク"
+        "ja": "アルバニアレク",
+        "fr": "Lek albanais"
     },
     "AMD": {
         "en": "Armenian Dram",
         "sv": "Armeniska Drama",
-        "ja": "アルメニアドラム"
+        "ja": "アルメニアドラム",
+        "fr": "Dram arménien"
     },
     "ANG": {
         "en": "Netherlands Antillean Guilder",
         "sv": "Nederländska Antillernas Gulden",
-        "ja": "オランダ領アンティルギルダー"
+        "ja": "オランダ領アンティルギルダー",
+        "fr": "Florin des Antilles néerlandaises"
     },
     "AOA": {
         "en": "Angolan Kwanza",
         "sv": "Angolanska Kwanza",
-        "ja": "アンゴラクワンザ"
+        "ja": "アンゴラクワンザ",
+        "fr": "Kwanza angolais"
     },
     "ARS": {
         "en": "Argentine Peso",
         "sv": "Argentinska Peso",
-        "ja": "アルゼンチンペソ"
+        "ja": "アルゼンチンペソ",
+        "fr": "Peso argentin"
     },
     "AUD": {
         "en": "Australian Dollar",
         "sv": "Australiensiska Dollar",
-        "ja": "オーストラリアドル"
+        "ja": "オーストラリアドル",
+        "fr": "Dollar australien"
     },
     "AWG": {
         "en": "Aruban Florin",
         "sv": "Arubanska Florin",
-        "ja": "アルバフロリン"
+        "ja": "アルバフロリン",
+        "fr": "Florin arubais"
     },
     "AZN": {
         "en": "Azerbaijani Manat",
         "sv": "Azerbajdzjanska Manat",
-        "ja": "アゼルバイジャンマナト"
+        "ja": "アゼルバイジャンマナト",
+        "fr": "Manat azerbaïdjanais"
     },
     "BAM": {
         "en": "Bosnia-Herzegovina Convertible Mark",
         "sv": "Bosnien-Hercegovinaska Convertible Mark",
-        "ja": "ボスニアヘルツェゴビナコンバーチブルマーク"
+        "ja": "ボスニアヘルツェゴビナコンバーチブルマーク",
+        "fr": "Mark convertible de Bosnie-Herzégovine"
     },
     "BBD": {
         "en": "Barbadian Dollar",
         "sv": "Barbadianska Dollar",
-        "ja": "バルバドスドル"
+        "ja": "バルバドスドル",
+        "fr": "Dollar barbadien"
     },
     "BDT": {
         "en": "Bangladeshi Taka",
         "sv": "Bangladeshiska Taka",
-        "ja": "バングラデシュタカ"
+        "ja": "バングラデシュタカ",
+        "fr": "Taka bangladais"
     },
     "BGN": {
         "en": "Bulgarian Lev",
         "sv": "Bulgariska Lev",
-        "ja": "ブルガリアレフ"
+        "ja": "ブルガリアレフ",
+        "fr": "Lev bulgare"
     },
     "BHD": {
         "en": "Bahraini Dinar",
         "sv": "Bahrainiska Dinar",
-        "ja": "バーレーンディナール"
+        "ja": "バーレーンディナール",
+        "fr": "Dinar bahreïni"
     },
     "BIF": {
         "en": "Burundian Franc",
         "sv": "Burundianska Franc",
-        "ja": "ブルンジフラン"
+        "ja": "ブルンジフラン",
+        "fr": "Franc burundais"
     },
     "BND": {
         "en": "Brunei Dollar",
         "sv": "Bruneiska Dollar",
-        "ja": "ブルネイドル"
+        "ja": "ブルネイドル",
+        "fr": "Dollar de Brunei"
     },
     "BSD": {
         "en": "Bahamian Dollar",
         "sv": "Bahamanska Dollar",
-        "ja": "バハマドル"
+        "ja": "バハマドル",
+        "fr": "Dollar bahaméen"
     },
     "BTC": {
         "en": "Bitcoin",
         "sv": "Bitcoin",
-        "ja": "ビットコイン"
+        "ja": "ビットコイン",
+        "fr": "Bitcoin"
     },
     "BOB": {
         "en": "Bolivian Boliviano",
         "sv": "Bolivianska Boliviano",
-        "ja": "ボリビアボリビアーノ"
+        "ja": "ボリビアボリビアーノ",
+        "fr": "Boliviano bolivien"
     },
     "BTN": {
         "en": "Bhutanese Ngultrum",
         "sv": "Bhutanesiska Ngultrum",
-        "ja": "ブータンヌルタム"
+        "ja": "ブータンヌルタム",
+        "fr": "Ngultrum bhoutanais"
     },
     "BRL": {
         "en": "Brazilian Real",
         "sv": "Brasilianska Real",
-        "ja": "ブラジルレアル"
+        "ja": "ブラジルレアル",
+        "fr": "Réal brésilien"
     },
     "BWP": {
         "en": "Botswanan Pula",
         "sv": "Botswanas Pula",
-        "ja": "ボツワナプラ"
+        "ja": "ボツワナプラ",
+        "fr": "Pula botswanais"
     },
     "BYR": {
         "en": "Belarusian Ruble",
         "sv": "Vitryska Rubel",
-        "ja": "ベラルーシルーブル"
+        "ja": "ベラルーシルーブル",
+        "fr": "Rouble biélorusse"
     },
     "BYN": {
         "en": "Belarusian Ruble",
         "sv": "Vitryska Rubel",
-        "ja": "ベラルーシルーブル"
+        "ja": "ベラルーシルーブル",
+        "fr": "Rouble biélorusse"
     },
     "BZD": {
         "en": "Belize Dollar",
         "sv": "Belize Dollar",
-        "ja": "ベリーズドル"
+        "ja": "ベリーズドル",
+        "fr": "Dollar bélizien"
     },
     "CDF": {
         "en": "Congolese Franc",
         "sv": "Kongolesiska Franc",
-        "ja": "コンゴフラン"
+        "ja": "コンゴフラン",
+        "fr": "Franc congolais"
     },
     "CHF": {
         "en": "Swiss Franc",
         "sv": "Schweiziska Franc",
-        "ja": "スイスフラン"
+        "ja": "スイスフラン",
+        "fr": "Franc suisse"
     },
     "CLP": {
         "en": "Chilean Peso",
         "sv": "Chilenska Peso",
-        "ja": "チリペソ"
+        "ja": "チリペソ",
+        "fr": "Peso chilien"
     },
     "CLF": {
         "en": "Chilean Unit of Account (UF)",
         "sv": "Chilenska Räkneenhet (UF)",
-        "ja": "チリ計算単位 (UF)"
+        "ja": "チリ計算単位 (UF)",
+        "fr": "Unité de compte chilienne (UF)"
     },
     "CNY": {
         "en": "Chinese Yuan",
         "sv": "Kinesiska Yuan",
-        "ja": "中国人民元"
+        "ja": "中国人民元",
+        "fr": "Yuan chinois"
     },
     "COP": {
         "en": "Colombian Peso",
         "sv": "Colombianska Peso",
-        "ja": "コロンビアペソ"
+        "ja": "コロンビアペソ",
+        "fr": "Peso colombien"
     },
     "CRC": {
         "en": "Costa Rican Colón",
         "sv": "Costa Rica Colón",
-        "ja": "コスタリカコロン"
+        "ja": "コスタリカコロン",
+        "fr": "Colón costaricien"
     },
     "CUC": {
         "en": "Cuban Convertible Peso",
         "sv": "Kubanska Konvertibla Peso",
-        "ja": "キューバ兌換ペソ"
+        "ja": "キューバ兌換ペソ",
+        "fr": "Peso cubain convertible"
     },
     "CUP": {
         "en": "Cuban Peso",
         "sv": "Kubanska Peso",
-        "ja": "キューバペソ"
+        "ja": "キューバペソ",
+        "fr": "Peso cubain"
     },
     "CVE": {
         "en": "Cape Verdean Escudo",
         "sv": "Kap Verdeanska Escudo",
-        "ja": "カーボベルデエスクード"
+        "ja": "カーボベルデエスクード",
+        "fr": "Escudo capverdien"
     },
     "CZK": {
         "en": "Czech Republic Koruna",
         "sv": "Tjeckiska Koruna",
-        "ja": "チェココルナ"
+        "ja": "チェココルナ",
+        "fr": "Couronne tchèque"
     },
     "DJF": {
         "en": "Djiboutian Franc",
         "sv": "Djiboutianska Franc",
-        "ja": "ジブチフラン"
+        "ja": "ジブチフラン",
+        "fr": "Franc djiboutien"
     },
     "DKK": {
         "en": "Danish Krone",
         "sv": "Danska Kronor",
-        "ja": "デンマーククローネ"
+        "ja": "デンマーククローネ",
+        "fr": "Couronne danoise"
     },
     "DOP": {
         "en": "Dominican Peso",
         "sv": "Dominikanska Peso",
-        "ja": "ドミニカ共和国ペソ"
+        "ja": "ドミニカ共和国ペソ",
+        "fr": "Peso dominicain"
     },
     "DZD": {
         "en": "Algerian Dinar",
         "sv": "Algeriska Dinar",
-        "ja": "アルジェリアディナール"
+        "ja": "アルジェリアディナール",
+        "fr": "Dinar algérien"
     },
     "EEK": {
         "en": "Estonian Kroon",
         "sv": "Estniska Kroon",
-        "ja": "エストニアクローン"
+        "ja": "エストニアクローン",
+        "fr": "Couronne estonienne"
     },
     "EGP": {
         "en": "Egyptian Pound",
         "sv": "Egyptiska Pund",
-        "ja": "エジプトポンド"
+        "ja": "エジプトポンド",
+        "fr": "Livre égyptienne"
     },
     "ERN": {
         "en": "Eritrean Nakfa",
         "sv": "Eritreiska Nakfa",
-        "ja": "エリトリアンナクファ"
+        "ja": "エリトリアンナクファ",
+        "fr": "Nakfa érythréen"
     },
     "ETB": {
         "en": "Ethiopian Birr",
         "sv": "Etiopiska Birr",
-        "ja": "エチオピアビア"
+        "ja": "エチオピアビア",
+        "fr": "Birr éthiopien"
     },
     "FJD": {
         "en": "Fijian Dollar",
         "sv": "Fijianska Dollar",
-        "ja": "フィジードル"
+        "ja": "フィジードル",
+        "fr": "Dollar fidjien"
     },
     "FKP": {
         "en": "Falkland Islands Pound",
         "sv": "Falklandsöarna Pund",
-        "ja": "フォークランド諸島ポンド"
+        "ja": "フォークランド諸島ポンド",
+        "fr": "Livre des îles Malouines"
     },
     "GBP": {
         "en": "British Pound Sterling",
         "sv": "Brittiska Pund",
-        "ja": "イギリスポンド"
+        "ja": "イギリスポンド",
+        "fr": "Livre sterling"
     },
     "GEL": {
         "en": "Georgian Lari",
         "sv": "Georgiska Lari",
-        "ja": "グルジアラリ"
+        "ja": "グルジアラリ",
+        "fr": "Lari géorgien"
     },
     "GHS": {
         "en": "Ghanaian Cedi",
         "sv": "Ghanesiska Cedi",
-        "ja": "ガーナセディ"
+        "ja": "ガーナセディ",
+        "fr": "Cedi ghanéen"
     },
     "GNF": {
         "en": "Guinean Franc",
         "sv": "Guineanska Franc",
-        "ja": "ギニアフラン"
+        "ja": "ギニアフラン",
+        "fr": "Franc guinéen"
     },
     "GGP": {
         "en": "Guernsey Pound",
         "sv": "Guernsey Pund",
-        "ja": "ガーンジーポンド"
+        "ja": "ガーンジーポンド",
+        "fr": "Livre de Guernesey"
     },
     "GIP": {
         "en": "Gibraltar Pound",
         "sv": "Gibraltar Pund",
-        "ja": "ジブラルタルポンド"
+        "ja": "ジブラルタルポンド",
+        "fr": "Livre de Gibraltar"
     },
     "GMD": {
         "en": "Gambian Dalasi",
         "sv": "Gambianska Dalasi",
-        "ja": "ガンビアダラシ"
+        "ja": "ガンビアダラシ",
+        "fr": "Dalasi gambien"
     },
     "GYD": {
         "en": "Guyanese Dollar",
         "sv": "Guyanesiska Dollar",
-        "ja": "ガイアナドル"
+        "ja": "ガイアナドル",
+        "fr": "Dollar guyanien"
     },
     "GTQ": {
         "en": "Guatemalan Quetzal",
         "sv": "Guatemala Quetzal",
-        "ja": "グアテマラケベック"
+        "ja": "グアテマラケベック",
+        "fr": "Quetzal guatémaltèque"
     },
     "HKD": {
         "en": "Hong Kong Dollar",
         "sv": "Hongkong-Dollar",
-        "ja": "香港ドル"
+        "ja": "香港ドル",
+        "fr": "Dollar de Hong Kong"
     },
     "HNL": {
         "en": "Honduran Lempira",
         "sv": "Honduras Lempira",
-        "ja": "ホンジュラスレンピラ"
+        "ja": "ホンジュラスレンピラ",
+        "fr": "Lempira hondurien"
     },
     "HRK": {
         "en": "Croatian Kuna",
         "sv": "Kroatiska Kuna",
-        "ja": "クロアチアクーナ"
+        "ja": "クロアチアクーナ",
+        "fr": "Kuna croate"
     },
     "HUF": {
         "en": "Hungarian Forint",
         "sv": "Ungerska Forint",
-        "ja": "ハンガリーフォリント"
+        "ja": "ハンガリーフォリント",
+        "fr": "Forint hongrois"
     },
     "HTG": {
         "en": "Haitian Gourde",
         "sv": "Haitianska Gourde",
-        "ja": "ハイチグールド"
+        "ja": "ハイチグールド",
+        "fr": "Gourde haïtienne"
     },
     "IDR": {
         "en": "Indonesian Rupiah",
         "sv": "Indonesiska Rupiah",
-        "ja": "インドネシアルピア"
+        "ja": "インドネシアルピア",
+        "fr": "Roupie indonésienne"
     },
     "ILS": {
         "en": "Israeli New Sheqel",
         "sv": "Israeliska Nya Shekel",
-        "ja": "イスラエル新シェケル"
+        "ja": "イスラエル新シェケル",
+        "fr": "Nouveau shekel israélien"
     },
     "IMP": {
         "en": "Isle of Man Pound",
         "sv": "Isle of Man Pund",
-        "ja": "マン島ポンド"
+        "ja": "マン島ポンド",
+        "fr": "Livre de l'île de Man"
     },
     "INR": {
         "en": "Indian Rupee",
         "sv": "Indiska Rupi",
-        "ja": "インドルピー"
+        "ja": "インドルピー",
+        "fr": "Roupie indienne"
     },
     "IQD": {
         "en": "Iraqi Dinar",
         "sv": "Irakiska Dinar",
-        "ja": "イラクディナール"
+        "ja": "イラクディナール",
+        "fr": "Dinar irakien"
     },
     "IRR": {
         "en": "Iranian Rial",
         "sv": "Iranska Rialet",
-        "ja": "イランリアル"
+        "ja": "イランリアル",
+        "fr": "Rial iranien"
     },
     "ISK": {
         "en": "Icelandic Króna",
         "sv": "Isländska Kronor",
-        "ja": "アイスランドクローナ"
+        "ja": "アイスランドクローナ",
+        "fr": "Couronne islandaise"
     },
     "JMD": {
         "en": "Jamaican Dollar",
         "sv": "Jamaicanska Dollar",
-        "ja": "ジャマイカドル"
+        "ja": "ジャマイカドル",
+        "fr": "Dollar jamaïcain"
     },
     "JOD": {
         "en": "Jordanian Dinar",
         "sv": "Jordanska Dinar",
-        "ja": "ヨルダンディナール"
+        "ja": "ヨルダンディナール",
+        "fr": "Dinar jordanien"
     },
     "JEP": {
         "en": "Jersey Pound",
         "sv": "Jersey Pund",
-        "ja": "ジャージーポンド"
+        "ja": "ジャージーポンド",
+        "fr": "Livre de Jersey"
     },
     "JPY": {
         "en": "Japanese Yen",
         "sv": "Japanska Yen",
-        "ja": "日本円"
+        "ja": "日本円",
+        "fr": "Yen japonais"
     },
     "KES": {
         "en": "Kenyan Shilling",
         "sv": "Kenyanska Shilling",
-        "ja": "ケニアシリング"
+        "ja": "ケニアシリング",
+        "fr": "Shilling kényan"
     },
     "KHR": {
         "en": "Cambodian Riel",
         "sv": "Kambodjanska Riel",
-        "ja": "カンボジアリエル"
+        "ja": "カンボジアリエル",
+        "fr": "Riel cambodgien"
     },
     "KGS": {
         "en": "Kyrgystani Som",
         "sv": "Kirgizistanska Som",
-        "ja": "キルギスソム"
+        "ja": "キルギスソム",
+        "fr": "Som kirghize"
     },
     "KMF": {
         "en": "Comorian Franc",
         "sv": "Komoriska Franc",
-        "ja": "コモロフラン"
+        "ja": "コモロフラン",
+        "fr": "Franc comorien"
     },
     "KRW": {
         "en": "South Korean Won",
         "sv": "Sydkoreanska Vann",
-        "ja": "韓国ウォン"
+        "ja": "韓国ウォン",
+        "fr": "Won sud-coréen"
     },
     "KWD": {
         "en": "Kuwaiti Dinar",
         "sv": "Kuwaiti Dinar",
-        "ja": "クウェートディナール"
+        "ja": "クウェートディナール",
+        "fr": "Dinar koweïtien"
     },
     "KYD": {
         "en": "Cayman Islands Dollar",
         "sv": "Caymanöarna Dollar",
-        "ja": "ケイマン諸島ドル"
+        "ja": "ケイマン諸島ドル",
+        "fr": "Dollar des îles Caïmans"
     },
     "KPW": {
         "en": "North Korean Won",
         "sv": "Nordkoreanska Vann",
-        "ja": "北朝鮮ウォン"
+        "ja": "北朝鮮ウォン",
+        "fr": "Won nord-coréen"
     },
     "KZT": {
         "en": "Kazakhstani Tenge",
         "sv": "Kazakhstani Tenge",
-        "ja": "カザフスタンテンゲ"
+        "ja": "カザフスタンテンゲ",
+        "fr": "Tenge kazakh"
     },
     "LBP": {
         "en": "Lebanese Pound",
         "sv": "Libanesiska Pundet",
-        "ja": "レバノンポンド"
+        "ja": "レバノンポンド",
+        "fr": "Livre libanaise"
     },
     "LAK": {
         "en": "Laotian Kip",
         "sv": "Laotianska Kip",
-        "ja": "ラオスキップ"
+        "ja": "ラオスキップ",
+        "fr": "Kip laotien"
     },
     "LKR": {
         "en": "Sri Lankan Rupee",
         "sv": "Sri Lanka Rupi",
-        "ja": "スリランカルピー"
+        "ja": "スリランカルピー",
+        "fr": "Roupie srilankaise"
     },
     "LRD": {
         "en": "Liberian Dollar",
         "sv": "Liberianska Dollar",
-        "ja": "リベリアドル"
+        "ja": "リベリアドル",
+        "fr": "Dollar libérien"
     },
     "LSL": {
         "en": "Lesotho Loti",
         "sv": "Lesothiska Loti",
-        "ja": "レソトロティ"
+        "ja": "レソトロティ",
+        "fr": "Loti lesothan"
     },
     "LTL": {
         "en": "Lithuanian Litas",
         "sv": "Litauiska Litas",
-        "ja": "リトアニアリタス"
+        "ja": "リトアニアリタス",
+        "fr": "Litas lituanien"
     },
     "LVL": {
         "en": "Latvian Lats",
         "sv": "Lettiska Lats",
-        "ja": "ラトビアラット"
+        "ja": "ラトビアラット",
+        "fr": "Lats letton"
     },
     "LYD": {
         "en": "Libyan Dinar",
         "sv": "Libyska Dinar",
-        "ja": "リビアディナール"
+        "ja": "リビアディナール",
+        "fr": "Dinar libyen"
     },
     "MAD": {
         "en": "Moroccan Dirham",
         "sv": "Marockanska Dirham",
-        "ja": "モロッコディルハム"
+        "ja": "モロッコディルハム",
+        "fr": "Dirham marocain"
     },
     "MDL": {
         "en": "Moldovan Leu",
         "sv": "Moldaviska Leu",
-        "ja": "モルドバンルー"
+        "ja": "モルドバンルー",
+        "fr": "Leu moldave"
     },
     "MGA": {
         "en": "Malagasy Ariary",
         "sv": "Malagasiska Ariary",
-        "ja": "マダガスカルアリアリ"
+        "ja": "マダガスカルアリアリ",
+        "fr": "Ariary malgache"
     },
     "MKD": {
         "en": "Macedonian Denar",
         "sv": "Makedonska Denar",
-        "ja": "マケドニアデナール"
+        "ja": "マケドニアデナール",
+        "fr": "Denar macédonien"
     },
     "MMK": {
         "en": "Myanma Kyat",
         "sv": "Myanmaska Kyat",
-        "ja": "ミャンマーチャット"
+        "ja": "ミャンマーチャット",
+        "fr": "Kyat birman"
     },
     "MNT": {
         "en": "Mongolian Tugrik",
         "sv": "Mongoliska Tugrik",
-        "ja": "モンゴルトゥグルグ"
+        "ja": "モンゴルトゥグルグ",
+        "fr": "Tugrik mongol"
     },
     "MOP": {
         "en": "Macanese Pataca",
         "sv": "Macaneseiska Pataca",
-        "ja": "マカディパタカ"
+        "ja": "マカディパタカ",
+        "fr": "Pataca macanaise"
     },
     "MRU": {
         "en": "Mauritanian Ouguiya",
         "sv": "Mauretanska Ouguiya",
-        "ja": "モーリタニアウギア"
+        "ja": "モーリタニアウギア",
+        "fr": "Ouguiya mauritanien"
     },
     "MUR": {
         "en": "Mauritian Rupee",
         "sv": "Mauritianska Rupee",
-        "ja": "モーリシャンルピー"
+        "ja": "モーリシャンルピー",
+        "fr": "Roupie mauricienne"
     },
     "MVR": {
         "en": "Maldivian Rufiyaa",
         "sv": "Maldiviska Rufiyaa",
-        "ja": "モルディブルフィヤ"
+        "ja": "モルディブルフィヤ",
+        "fr": "Rufiyaa maldivien"
     },
     "MWK": {
         "en": "Malawian Kwacha",
         "sv": "Malawiska Kwacha",
-        "ja": "マラウイクワチャ"
+        "ja": "マラウイクワチャ",
+        "fr": "Kwacha malawien"
     },
     "MXN": {
         "en": "Mexican Peso",
         "sv": "Mexikanska Peso",
-        "ja": "メキシコペソ"
+        "ja": "メキシコペソ",
+        "fr": "Peso mexicain"
     },
     "MYR": {
         "en": "Malaysian Ringgit",
         "sv": "Malaysiska Ringgit",
-        "ja": "マレーシアリンギット"
+        "ja": "マレーシアリンギット",
+        "fr": "Ringgit malais"
     },
     "MZN": {
         "en": "Mozambican Metical",
         "sv": "Mocambicanska Metical",
-        "ja": "モザンビークメタリック"
+        "ja": "モザンビークメタリック",
+        "fr": "Metical mozambicain"
     },
     "NAD": {
         "en": "Namibian Dollar",
         "sv": "Namibisk Dollar",
-        "ja": "ナミビアドル"
+        "ja": "ナミビアドル",
+        "fr": "Dollar namibien"
     },
     "NGN": {
         "en": "Nigerian Naira",
         "sv": "Nigerianska Naira",
-        "ja": "ナイジェリアナイラ"
+        "ja": "ナイジェリアナイラ",
+        "fr": "Naira nigérian"
     },
     "NIO": {
         "en": "Nicaraguan Córdoba",
         "sv": "Nicaragua Córdoba",
-        "ja": "ニカラグアコルドバ"
+        "ja": "ニカラグアコルドバ",
+        "fr": "Córdoba nicaraguayen"
     },
     "NOK": {
         "en": "Norwegian Krone",
         "sv": "Norska Kronor",
-        "ja": "ノルウェークローネ"
+        "ja": "ノルウェークローネ",
+        "fr": "Couronne norvégienne"
     },
     "NPR": {
         "en": "Nepalese Rupee",
         "sv": "Nepalesiska Rupi",
-        "ja": "ネパールルピー"
+        "ja": "ネパールルピー",
+        "fr": "Roupie népalaise"
     },
     "NZD": {
         "en": "New Zealand Dollar",
         "sv": "Nya Zeelandska Dollar",
-        "ja": "ニュージーランドドル"
+        "ja": "ニュージーランドドル",
+        "fr": "Dollar néo-zélandais"
     },
     "OMR": {
         "en": "Omani Rial",
         "sv": "Omani Rial",
-        "ja": "オマーンリアル"
+        "ja": "オマーンリアル",
+        "fr": "Rial omanais"
     },
     "PAB": {
         "en": "Panamanian Balboa",
         "sv": "Panamanska Balboa",
-        "ja": "パナマバルボア"
+        "ja": "パナマバルボア",
+        "fr": "Balboa panaméen"
     },
     "PEN": {
         "en": "Peruvian Nuevo Sol",
         "sv": "Peruvian Nuevo Sol",
-        "ja": "ペルーヌエボソル"
+        "ja": "ペルーヌエボソル",
+        "fr": "Nuevo sol péruvien"
     },
     "PGK": {
         "en": "Papua New Guinean Kina",
         "sv": "Papua Nya Guineanska Kina",
-        "ja": "パプアニューギニアキナ"
+        "ja": "パプアニューギニアキナ",
+        "fr": "Kina papou-néo-guinéen"
     },
     "PHP": {
         "en": "Philippine Peso",
         "sv": "Filippinska Peso",
-        "ja": "フィリピンペソ"
+        "ja": "フィリピンペソ",
+        "fr": "Peso philippin"
     },
     "PKR": {
         "en": "Pakistani Rupee",
         "sv": "Pakistanska Rupi",
-        "ja": "パキスタンルピー"
+        "ja": "パキスタンルピー",
+        "fr": "Roupie pakistanaise"
     },
     "PLN": {
         "en": "Polish Zloty",
         "sv": "Polska Zloty",
-        "ja": "ポーランドズロチ"
+        "ja": "ポーランドズロチ",
+        "fr": "Zloty polonais"
     },
     "PYG": {
         "en": "Paraguayan Guarani",
         "sv": "Paraguayanska Guarani",
-        "ja": "パラグアイグアラニ"
+        "ja": "パラグアイグアラニ",
+        "fr": "Guarani paraguayen"
     },
     "QAR": {
         "en": "Qatari Rial",
         "sv": "Qatari Rial",
-        "ja": "カタールリヤル"
+        "ja": "カタールリヤル",
+        "fr": "Riyal qatari"
     },
     "RON": {
         "en": "Romanian Leu",
         "sv": "Rumänska Leu",
-        "ja": "ルーマニアレイ"
+        "ja": "ルーマニアレイ",
+        "fr": "Leu roumain"
     },
     "RSD": {
         "en": "Serbian Dinar",
         "sv": "Serbiska Dinar",
-        "ja": "セルビアディナール"
+        "ja": "セルビアディナール",
+        "fr": "Dinar serbe"
     },
     "RUB": {
         "en": "Russian Ruble",
         "sv": "Ryska Rubel",
-        "ja": "ロシアルーブル"
+        "ja": "ロシアルーブル",
+        "fr": "Rouble russe"
     },
     "RWF": {
         "en": "Rwandan Franc",
         "sv": "Rwandiska Franc",
-        "ja": "ルワンダフラン"
+        "ja": "ルワンダフラン",
+        "fr": "Franc rwandais"
     },
     "SAR": {
         "en": "Saudi Riyal",
         "sv": "Saudiarabiska Riyal",
-        "ja": "サウジリヤル"
+        "ja": "サウジリヤル",
+        "fr": "Riyal saoudien"
     },
     "SBD": {
         "en": "Solomon Islands Dollar",
         "sv": "Salomonöarna Dollar",
-        "ja": "ソロモン諸島ドル"
+        "ja": "ソロモン諸島ドル",
+        "fr": "Dollar des îles Salomon"
     },
     "SCR": {
         "en": "Seychellois Rupee",
         "sv": "Seychelliska Rupi",
-        "ja": "セイシェルルピー"
+        "ja": "セイシェルルピー",
+        "fr": "Roupie seychelloise"
     },
     "SDG": {
         "en": "Sudanese Pound",
         "sv": "Sudanesiska Pund",
-        "ja": "スーダンポンド"
+        "ja": "スーダンポンド",
+        "fr": "Livre soudanaise"
     },
     "SEK": {
         "en": "Swedish Krona",
         "sv": "Svenska Kronor",
-        "ja": "スウェーデンクローナ"
+        "ja": "スウェーデンクローナ",
+        "fr": "Couronne suédoise"
     },
     "SGD": {
         "en": "Singapore Dollar",
         "sv": "Singapore Dollar",
-        "ja": "シンガポールドル"
+        "ja": "シンガポールドル",
+        "fr": "Dollar de Singapour"
     },
     "SHP": {
         "en": "Saint Helena Pound",
         "sv": "Sankt Helena Pund",
-        "ja": "セントヘレナポンド"
+        "ja": "セントヘレナポンド",
+        "fr": "Livre de Sainte-Hélène"
     },
     "SLL": {
         "en": "Sierra Leonean Leone",
         "sv": "Sierra Leonesiska Leone",
-        "ja": "シエラレオネレオン"
+        "ja": "シエラレオネレオン",
+        "fr": "Leone sierra-léonais"
     },
     "SOS": {
         "en": "Somali Shilling",
         "sv": "Somaliska Shilling",
-        "ja": "ソマリアシリング"
+        "ja": "ソマリアシリング",
+        "fr": "Shilling somalien"
     },
     "SRD": {
         "en": "Surinamese Dollar",
         "sv": "Surinamesiska Dollar",
-        "ja": "スリナムドル"
+        "ja": "スリナムドル",
+        "fr": "Dollar surinamais"
     },
     "STD": {
         "en": "São Tomé and Príncipe Dobra",
         "sv": "São Tomé och Príncipe Dobra",
-        "ja": "サントメ・プリンシペドブラ"
+        "ja": "サントメ・プリンシペドブラ",
+        "fr": "Dobra de Sao Tomé-et-Principe"
     },
     "SVC": {
         "en": "Salvadoran Colón",
         "sv": "Salvadoranska Colón",
-        "ja": "エルサルバドルコロン"
+        "ja": "エルサルバドルコロン",
+        "fr": "Colón salvadorien"
     },
     "SZL": {
         "en": "Swazi Lilangeni",
         "sv": "Swaziländska Lilangeni",
-        "ja": "スワジランドリランゲニ"
+        "ja": "スワジランドリランゲニ",
+        "fr": "Lilangeni swazi"
     },
     "SYP": {
         "en": "Syrian Pound",
         "sv": "Syriska Pund",
-        "ja": "シリアポンド"
+        "ja": "シリアポンド",
+        "fr": "Livre syrienne"
     },
     "THB": {
         "en": "Thai Baht",
         "sv": "Thailändska Baht",
-        "ja": "タイバーツ"
+        "ja": "タイバーツ",
+        "fr": "Baht thaïlandais"
     },
     "TJS": {
         "en": "Tajikistani Somoni",
         "sv": "Tadzjikistanska Somoni",
-        "ja": "タジキスタンソモニ"
+        "ja": "タジキスタンソモニ",
+        "fr": "Somoni tadjik"
     },
     "TMT": {
         "en": "Turkmenistani Manat",
         "sv": "Turkmenistanska Manat",
-        "ja": "トルクメニスタンマナト"
+        "ja": "トルクメニスタンマナト",
+        "fr": "Manat turkmène"
     },
     "TND": {
         "en": "Tunisian Dinar",
         "sv": "Tunisiska Dinar",
-        "ja": "チュニジアディナール"
+        "ja": "チュニジアディナール",
+        "fr": "Dinar tunisien"
     },
     "TOP": {
         "en": "Tongan Paʻanga",
         "sv": "Tongan Pa'anga",
-        "ja": "トンガパアンガ"
+        "ja": "トンガパアンガ",
+        "fr": "Paʻanga tongien"
     },
     "TRY": {
         "en": "Turkish Lira",
         "sv": "Turkiska Lire",
-        "ja": "トルコリラ"
+        "ja": "トルコリラ",
+        "fr": "Livre turque"
     },
     "TTD": {
         "en": "Trinidad and Tobago Dollar",
         "sv": "Trinidad Och Tobago Dollar",
-        "ja": "トリニダードトバゴドル"
+        "ja": "トリニダードトバゴドル",
+        "fr": "Dollar de Trinité-et-Tobago"
     },
     "TWD": {
         "en": "New Taiwan Dollar",
         "sv": "Ny Taiwanesiska Dollar",
-        "ja": "新台湾ドル"
+        "ja": "新台湾ドル",
+        "fr": "Nouveau dollar taïwanais"
     },
     "TZS": {
         "en": "Tanzanian Shilling",
         "sv": "Tanzanianska Shilling",
-        "ja": "タンザニアシリング"
+        "ja": "タンザニアシリング",
+        "fr": "Shilling tanzanien"
     },
     "UAH": {
         "en": "Ukrainian Hryvnia",
         "sv": "Ukrainska Hryvnia",
-        "ja": "ウクライナグリブナ"
+        "ja": "ウクライナグリブナ",
+        "fr": "Hryvnia ukrainienne"
     },
     "UGX": {
         "en": "Ugandan Shilling",
         "sv": "Ugandanska Shilling",
-        "ja": "ウガンダシリング"
+        "ja": "ウガンダシリング",
+        "fr": "Shilling ougandais"
     },
     "UYU": {
         "en": "Uruguayan Peso",
         "sv": "Uruguayanska Peso",
-        "ja": "ウルグアイペソ"
+        "ja": "ウルグアイペソ",
+        "fr": "Peso uruguayen"
     },
     "UZS": {
         "en": "Uzbekistan Som",
         "sv": "Uzbekistanska Som",
-        "ja": "ウズベキスタンサム"
+        "ja": "ウズベキスタンサム",
+        "fr": "Som ouzbek"
     },
     "VES": {
         "en": "Venezuelan Bolívar Soberano",
         "sv": "Venezuelanska Bolívar Soberano",
-        "ja": "ベネズエラボリバル・ソベラノ"
+        "ja": "ベネズエラボリバル・ソベラノ",
+        "fr": "Bolívar souverain vénézuélien"
     },
     "VND": {
         "en": "Vietnamese Dong",
         "sv": "Vietnamesiska Dong",
-        "ja": "ベトナムドン"
+        "ja": "ベトナムドン",
+        "fr": "Dong vietnamien"
     },
     "VUV": {
         "en": "Vanuatu Vatu",
         "sv": "Vanuatiska Vatu",
-        "ja": "バヌアツバツ"
+        "ja": "バヌアツバツ",
+        "fr": "Vatu vanuatuan"
     },
     "WST": {
         "en": "Samoan Tala",
         "sv": "Samoanska Tala",
-        "ja": "サモアタラ"
+        "ja": "サモアタラ",
+        "fr": "Tala samoan"
     },
     "XAF": {
         "en": "CFA Franc BEAC",
         "sv": "CFA Franc BEAC",
-        "ja": "CFAフランBEAC"
+        "ja": "CFAフランBEAC",
+        "fr": "Franc CFA BEAC"
     },
     "XOF": {
         "en": "CFA Franc BCEAO",
         "sv": "CFA Franc BCEAO",
-        "ja": "CFAフラン (BCEAO)"
+        "ja": "CFAフラン (BCEAO)",
+        "fr": "Franc CFA BCEAO"
     },
     "XCD": {
         "en": "East Caribbean Dollar",
         "sv": "Östkaribiska Dollar",
-        "ja": "東カリブドル"
+        "ja": "東カリブドル",
+        "fr": "Dollar des Caraïbes orientales"
     },
     "XPF": {
         "en": "CFP Franc",
         "sv": "CFP Franc",
-        "ja": "CFPフラン"
+        "ja": "CFPフラン",
+        "fr": "Franc CFP"
     },
     "YER": {
         "en": "Yemeni Rial",
         "sv": "Yemeni Rial",
-        "ja": "イエメンリアル"
+        "ja": "イエメンリアル",
+        "fr": "Rial yéménite"
     },
     "ZAR": {
         "en": "South African Rand",
         "sv": "Sydafrikanska Rand",
-        "ja": "南アフリカランド"
+        "ja": "南アフリカランド",
+        "fr": "Rand sud-africain"
     },
     "ZMK": {
         "en": "Zambian Kwacha",
         "sv": "Zambian Kwacha",
-        "ja": "ザンビアクワチャ"
+        "ja": "ザンビアクワチャ",
+        "fr": "Kwacha zambien"
     },
     "ZMW": {
         "en": "Zambian Kwacha",
         "sv": "Zambian Kwacha",
-        "ja": "ザンビアクワチャ"
+        "ja": "ザンビアクワチャ",
+        "fr": "Kwacha zambien"
     },
     "ZWL": {
         "en": "Zimbabwean Dollar",
         "sv": "Zimbabwiska Dollar",
-        "ja": "ジンバブエドル"
+        "ja": "ジンバブエドル",
+        "fr": "Dollar zimbabwéen"
     }
 }

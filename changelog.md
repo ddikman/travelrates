@@ -1,3 +1,7 @@
+## 2.3.0+104
+
+- Added French language support
+
 ## 2.2.2+103
 
 - Allow installing the app on SD card / external storage on Android

@@ -139,8 +139,8 @@ Each use case contains:
 
 - Uses Flutter's intl package with ARB files in `lib/l10n/`
 - Template file: `app_en.arb`
-- Supported locales: English, Swedish, Japanese
-- Country/currency names generated via Node.js script from JSON files
+- Supported locales: English, Swedish, Japanese, French
+- Country/currency names generated via the Dart script `tools/generate_localizations.dart` from JSON files
 - Access via extension: `context.l10n.keyName`
 
 ## Important Configuration

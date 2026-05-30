@@ -1,0 +1,55 @@
+{
+  "@@locale": "fr",
+  "appName": "Travel Converter",
+  "currency_comparisons": "Comparaisons de devises",
+  "review_toastMessage": "TravelRates fonctionne-t-il bien pour vous ?\nSi vous pouvez laisser un avis, cela aide vraiment.",
+  "review_acceptReviewButtonText": "Bien sûr !",
+  "alreadySelectedWarning": "{currencyName} est déjà sélectionné !",
+  "about_title": "À propos de TravelRates",
+  "about_description": "J'ai écrit et publié TravelRates pour la première fois en 2019 à Bali, alors que j'étais enrhumé pendant mon voyage en sac à dos en Asie du Sud-Est.\n\nL'application a été conçue pour les routards, qui doivent comparer plusieurs devises et pour qui la rapidité, la simplicité et l'utilisation hors ligne comptent plus qu'une précision parfaite.\n\nLes taux sont mis à jour depuis une source en ligne dès que vous êtes connecté, et les taux en ligne sont actualisés une fois par jour.\n\nDites-moi si vous aimez l'application, chaque avis me motive à continuer de la maintenir (et à la garder gratuite) !",
+  "about_addReview": "Ajouter un avis",
+  "about_callout": "Je travaille comme développeur full stack indépendant.\n\nSi vous souhaitez me contacter, découvrir comment cette application est conçue ou même m'engager, rendez-vous sur [greycastle.se](https://greycastle.se).",
+  "theme_title": "Mode sombre",
+  "theme_dark": "Sombre",
+  "theme_light": "Clair",
+  "theme_system": "Système",
+  "addCurrency_title": "Ajouter une devise",
+  "addCurrency_description": "Recherchez des devises à ajouter par nom, pays d'utilisation ou code de devise",
+  "addCurrency_searchPlaceholder": "Rechercher",
+  "addCurrency_selectedCurrenciesTitle": "Devises sélectionnées",
+  "addCurrency_selectedCurrenciesSubtitle": "Appuyez longuement et faites glisser pour réorganiser",
+  "@addCurrency_usedInCountries": {
+    "placeholders": {
+      "countries": {
+        "type": "String"
+      }
+    }
+  },
+  "addCurrency_usedInCountries": "Utilisé dans des pays comme : {countries}",
+  "addCurrency_digitalCurrency": "Est une devise numérique utilisée dans le monde entier",
+  "time_justNow": "à l'instant",
+  "@time_minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "time_minutesAgo": "il y a {minutes} min",
+  "@time_hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "time_hoursAgo": "il y a {hours} h",
+  "@time_daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "time_daysAgo": "il y a {days} j"
+}
