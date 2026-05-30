@@ -3,7 +3,7 @@ name: Upload to Google Play
 on:
   push:
     tags:
-      - '**'
+      - 'none' #  Disable for now
 
 jobs:
   build:
