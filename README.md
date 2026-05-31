@@ -40,6 +40,24 @@ fvm dart run fastforge:main release --name internal --jobs release-ios
 
 This will upload to Testflight and/or Google Play internal track.
 
+### Release notes
+
+Release notes are published to Google Play and App Store Connect through a `release_notes.json` file in the repo root, which Codemagic auto-publishes when present. `changelog.md` (English) is the single source of truth; the other languages are translated by the Claude CLI.
+
+For each release:
+
+1. Add the new version's English notes at the top of `changelog.md`, using the existing `## <version>+<build>` header. The script uses the topmost (latest) entry.
+2. Generate the localized notes. This fills every supported store locale with the English text and then post-processes the file with `claude -p` to translate each entry:
+   ```bash
+   fvm dart run tools/generate_release_notes.dart
+   ```
+3. Review `release_notes.json`, then commit it together with `changelog.md`. Codemagic publishes the committed file on the next release build.
+
+Notes:
+- Requires the [Claude CLI](https://docs.claude.com/en/docs/claude-code) installed and signed in — it performs the translation.
+- Supported languages: English, Swedish, Japanese and French. `release_notes.json` carries both store locale variants per language (`en-US`, `sv` + `sv-SE`, `ja` + `ja-JP`, `fr-FR`); each store keeps the codes it supports and ignores the rest. Keep the `languages` list in `tools/generate_release_notes.dart` in sync with `AppLocalizations.supportedLocales`.
+- Apple rejects `<` and `>` in release notes; the script fails fast if they appear.
+
 ### Generating localizations
 
 Just run the `pub get` and the localizations should be generated. Access the locale by using `context.l10n.<name>`.

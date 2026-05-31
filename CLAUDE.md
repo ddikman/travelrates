@@ -57,6 +57,9 @@ fvm dart run fastforge:main release --name internal --jobs release-android
 fvm dart run fastforge:main release --name internal --jobs release-ios
 ```
 
+### Release notes
+`changelog.md` (English) is the source of truth. Per release: add the new `## <version>+<build>` entry at the top of `changelog.md` (the script uses the latest entry), run `fvm dart run tools/generate_release_notes.dart` (fills every store locale with the English text, then translates each via `claude -p`), review `release_notes.json`, then commit it with `changelog.md`. Codemagic auto-publishes the committed `release_notes.json` to Google Play and App Store Connect. Supported languages (en/sv/ja/fr) and their store locale codes live in the `languages` list in that script; requires the Claude CLI signed in. See README "Release notes" for details.
+
 ## Architecture
 
 ### State Management
