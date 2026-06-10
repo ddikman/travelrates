@@ -1,26 +1,26 @@
 [
   {
     "language": "en-US",
-    "text": "- Added French language support"
+    "text": "- Show thousand separators while entering amounts, making large numbers easier to read"
   },
   {
     "language": "sv",
-    "text": "- Lade till stöd för franska"
+    "text": "- Visa tusentalsavgränsare när du anger belopp, vilket gör stora tal lättare att läsa"
   },
   {
     "language": "sv-SE",
-    "text": "- Lade till stöd för franska"
+    "text": "- Visa tusentalsavgränsare när du anger belopp, vilket gör stora tal lättare att läsa"
   },
   {
     "language": "ja",
-    "text": "- フランス語のサポートを追加しました"
+    "text": "- 金額の入力中に桁区切りを表示し、大きな数字を読みやすくします"
   },
   {
     "language": "ja-JP",
-    "text": "- フランス語のサポートを追加しました"
+    "text": "- 金額の入力中に桁区切りを表示し、大きな数字を読みやすくします"
   },
   {
     "language": "fr-FR",
-    "text": "- Ajout de la prise en charge du français"
+    "text": "- Affiche les séparateurs de milliers lors de la saisie des montants, ce qui facilite la lecture des grands nombres"
   }
 ]

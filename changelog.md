@@ -1,3 +1,7 @@
+## 2.3.1+105
+
+- Show thousand separators while entering amounts, making large numbers easier to read
+
 ## 2.3.0+104
 
 - Added French language support
