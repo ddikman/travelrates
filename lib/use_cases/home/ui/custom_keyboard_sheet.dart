@@ -28,19 +28,14 @@ class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
 
   String _multiplyOrDivide = multiplication;
 
-  final CurrencyInputFormatter _currencyInputFormatter =
-      CurrencyInputFormatter();
+  /// Raw, unformatted source of truth: ASCII digits, '.', and the operators
+  /// '+ - × ÷'. The text field displays a locale-grouped derivation of this so
+  /// large amounts stay legible while the value remains trivially parseable.
+  String _expression = '';
 
   @override
   void initState() {
     _inputController = TextEditingController();
-    _inputController.addListener(() {
-      final lastCharacter = _inputController.text.characters.lastOrNull;
-      setState(() {
-        _multiplyOrDivide =
-            lastCharacter == multiplication ? division : multiplication;
-      });
-    });
     super.initState();
   }
 
@@ -60,9 +55,8 @@ class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
                 Expanded(
                     child: TextField(
                         controller: _inputController,
-                        inputFormatters: [_currencyInputFormatter],
-                        keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
+                        readOnly: true,
+                        showCursor: true,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                         ),
@@ -120,32 +114,55 @@ class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
     );
   }
 
+  /// Updates the raw [_expression] and reflects a locale-grouped derivation of
+  /// it in the text field. The keypad always edits the raw string; the field is
+  /// read-only and purely a formatted view.
+  void _setExpression(String expression) {
+    setState(() {
+      _expression = expression;
+      _multiplyOrDivide = expression.characters.lastOrNull == multiplication
+          ? division
+          : multiplication;
+    });
+    final display = _formatExpression(expression);
+    _inputController.value = TextEditingValue(
+      text: display,
+      selection: TextSelection.collapsed(offset: display.length),
+    );
+  }
+
+  /// Groups each numeric operand with thousand separators while leaving
+  /// operators and in-progress decimals untouched.
+  String _formatExpression(String expression) => expression.replaceAllMapped(
+      RegExp(r'\d+\.?\d*'),
+      (match) => CurrencyInputFormatter.formatGrouped(match.group(0)!));
+
   void _addDigit(int digit) {
-    final text = _inputController.text;
-    final newText = text + digit.toString();
-    _inputController.text = newText;
+    _setExpression(_expression + digit.toString());
   }
 
   void _addOperator(String operator) {
-    final text = _inputController.text;
-    if (_isOperator(text.characters.last)) {
-      final newText = text.substring(0, text.length - 1) + operator;
-      _inputController.text = newText;
+    if (_expression.isEmpty) {
+      return;
+    }
+    if (_isOperator(_expression.characters.last)) {
+      _setExpression(
+          _expression.substring(0, _expression.length - 1) + operator);
     } else {
-      _inputController.text = text + operator;
+      _setExpression(_expression + operator);
     }
   }
 
   void _submit(BuildContext context) {
     // If it's just a simple value, return as-is
-    final asValue = double.tryParse(_inputController.text);
+    final asValue = double.tryParse(_expression);
     if (asValue != null) {
       context.pop(asValue);
       return;
     }
 
     // otherwise, clean the string and evaluate the expression
-    final text = _inputController.text.replaceAll(RegExp(r'\D+$'), '');
+    final text = _expression.replaceAll(RegExp(r'\D+$'), '');
 
     // replace the multiplication and division symbols
     final cleanedText =
@@ -161,18 +178,14 @@ class _CustomKeyboardSheetState extends State<CustomKeyboardSheet> {
   }
 
   void _addPeriod() {
-    final text = _inputController.text;
-    if (!text.contains('.')) {
-      final newText = '$text.';
-      _inputController.text = newText;
+    if (!_expression.contains('.')) {
+      _setExpression('$_expression.');
     }
   }
 
   void _backspace() {
-    final text = _inputController.text;
-    if (text.isNotEmpty) {
-      final newText = text.substring(0, text.length - 1);
-      _inputController.text = newText;
+    if (_expression.isNotEmpty) {
+      _setExpression(_expression.substring(0, _expression.length - 1));
     }
   }
 

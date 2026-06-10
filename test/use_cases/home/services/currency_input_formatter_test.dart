@@ -124,4 +124,43 @@ void main() {
     expect(CurrencyInputFormatter.toDouble('1,000,000'), 1000000);
     expect(CurrencyInputFormatter.toDouble('100.150'), 100.15);
   });
+
+  group('formatGrouped', () {
+    test('groups thousands', () {
+      expect(CurrencyInputFormatter.formatGrouped('1000'), '1,000');
+    });
+
+    test('groups millions', () {
+      expect(CurrencyInputFormatter.formatGrouped('1000000'), '1,000,000');
+    });
+
+    test('leaves small numbers untouched', () {
+      expect(CurrencyInputFormatter.formatGrouped('100'), '100');
+    });
+
+    test('keeps decimals without rounding', () {
+      expect(CurrencyInputFormatter.formatGrouped('1000.5'), '1,000.5');
+    });
+
+    test('preserves a trailing decimal point', () {
+      expect(CurrencyInputFormatter.formatGrouped('1000.'), '1,000.');
+    });
+
+    test('preserves trailing decimal zeros', () {
+      expect(CurrencyInputFormatter.formatGrouped('1000.00'), '1,000.00');
+    });
+
+    test('strips leading zeros', () {
+      expect(CurrencyInputFormatter.formatGrouped('007'), '7');
+    });
+
+    test('keeps a lone zero', () {
+      expect(CurrencyInputFormatter.formatGrouped('0'), '0');
+      expect(CurrencyInputFormatter.formatGrouped('0.5'), '0.5');
+    });
+
+    test('handles an empty string', () {
+      expect(CurrencyInputFormatter.formatGrouped(''), '');
+    });
+  });
 }

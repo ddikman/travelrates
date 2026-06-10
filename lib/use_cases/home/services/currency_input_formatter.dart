@@ -56,6 +56,26 @@ class CurrencyInputFormatter extends TextInputFormatter {
     return format.format(value);
   }
 
+  /// Groups a single raw ASCII numeric token (digits, an optional single `.`
+  /// and optional decimals) with locale-aware separators for display.
+  ///
+  /// Unlike [formatValue] this preserves exactly what was typed: it never
+  /// rounds, keeps a trailing dot and trailing zeros, and only strips leading
+  /// zeros. It is intended for live formatting of on-screen keypad input where
+  /// the raw string remains the source of truth.
+  static String formatGrouped(String rawNumber) {
+    final symbols = NumberFormat('#,##0.#', Intl.getCurrentLocale()).symbols;
+    final dotIndex = rawNumber.indexOf('.');
+    var intPart = dotIndex == -1 ? rawNumber : rawNumber.substring(0, dotIndex);
+    intPart = intPart.replaceFirst(RegExp(r'^0+(?=\d)'), '');
+    final groupedInt = intPart.replaceAllMapped(
+        RegExp(r'(\d)(?=(\d{3})+$)'), (m) => '${m[1]}${symbols.GROUP_SEP}');
+    if (dotIndex == -1) {
+      return groupedInt;
+    }
+    return '$groupedInt${symbols.DECIMAL_SEP}${rawNumber.substring(dotIndex + 1)}';
+  }
+
   static double? toDouble(String value) {
     return double.tryParse(value.replaceAll(_convertRegex, ''));
   }
