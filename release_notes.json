@@ -13,14 +13,14 @@
   },
   {
     "language": "ja",
-    "text": "- 金額の入力時に桁区切りを表示し、大きな数字を読みやすくしました"
+    "text": "- 金額の入力中に桁区切りを表示し、大きな数字を読みやすくします"
   },
   {
     "language": "ja-JP",
-    "text": "- 金額の入力時に桁区切りを表示し、大きな数字を読みやすくしました"
+    "text": "- 金額の入力中に桁区切りを表示し、大きな数字を読みやすくします"
   },
   {
     "language": "fr-FR",
-    "text": "- Affiche les séparateurs de milliers lors de la saisie des montants, facilitant la lecture des grands nombres"
+    "text": "- Affiche les séparateurs de milliers lors de la saisie des montants, ce qui facilite la lecture des grands nombres"
   }
 ]
