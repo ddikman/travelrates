@@ -1,0 +1,14 @@
+TravelRates is a fast, simple currency converter app built for backpackers and independent travelers. Compare several currencies side by side, then keep converting with saved rates when you’re offline.
+
+Built for the road:
+• Compare multiple currencies at once
+• Use saved exchange rates without internet
+• Refresh rates automatically when online
+• Search by currency, code, or country
+• Split or multiply costs with the built-in calculator
+• Switch between light and dark modes
+• No ads, subscriptions, or in-app purchases
+
+From airport SIM cards and exchange desks to night markets, hostels, tours, and shared costs, TravelRates helps you understand prices quickly without accounts, graphs, or clutter.
+
+Rates update from the internet once a day and are stored on your device for offline use. Exchange rates are for reference and may differ from rates offered by your bank, card provider, or exchange service.

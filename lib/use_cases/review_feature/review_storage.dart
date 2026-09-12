@@ -17,10 +17,11 @@ class ReviewStorage {
   ReviewRule _createDefaultReviewRule(InternetConnectivity internet) {
     _log.debug("Creating new review data");
     return ReviewRule(
-        internet: internet,
-        conversionsDone: 0,
-        conversionsRequired: 5,
-        submitted: false);
+      internet: internet,
+      conversionsDone: 0,
+      conversionsRequired: 5,
+      submitted: false,
+    );
   }
 
   ReviewRule _parse(String json) {
@@ -32,8 +33,9 @@ class ReviewStorage {
         conversionsDone: reviews.conversionsDone,
         submitted: reviews.submitted,
       );
-    } on Exception catch (ex) {
+    } on Exception catch (ex, stackTrace) {
       _log.error("Error when trying to parse review json, will reset: $ex");
+      _log.unexpected(ex, stackTrace, reason: 'Invalid local review state');
       return _createDefaultReviewRule(_connectivity);
     }
   }
@@ -45,7 +47,8 @@ class ReviewStorage {
       var review = _parse(json);
       _log.debug("Loaded review data from file");
       _log.debug(
-          "Review submitted = ${review.submitted}, ${review.conversionsDone} conversions done");
+        "Review submitted = ${review.submitted}, ${review.conversionsDone} conversions done",
+      );
       return review;
     }
 
@@ -54,9 +57,10 @@ class ReviewStorage {
 
   String _encode(ReviewRule rule) {
     var model = ReviewStorageModel(
-        conversionsDone: rule.conversionsDone,
-        conversionsRequired: rule.conversionsRequired,
-        submitted: rule.submitted);
+      conversionsDone: rule.conversionsDone,
+      conversionsRequired: rule.conversionsRequired,
+      submitted: rule.submitted,
+    );
     return model.toJson();
   }
 

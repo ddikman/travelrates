@@ -1,0 +1,9 @@
+platform,period,measurement_date,period_start,period_end,impressions,top_search_terms,product_page_views,conversion_rate,acquisitions,notes
+google_play,baseline_28d,,,,,,,,,
+app_store,baseline_28d,,,,,,,,,
+google_play,day_7,,,,,,,,,
+app_store,day_7,,,,,,,,,
+google_play,day_14,,,,,,,,,
+app_store,day_14,,,,,,,,,
+google_play,day_28,,,,,,,,,
+app_store,day_28,,,,,,,,,

@@ -1,23 +1,12 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:travelconverter/services/crash_reporter.dart';
 
-/// Wrapper for logging enabling use of services such as Firebase in the future.
+/// Local logging with opt-in non-fatal error forwarding in release builds.
 class Logger<T> {
-  static FirebaseAnalytics? analytics;
-
-  /// This doesn't actually work so I might as well change it to a string.
-  final String name = T.runtimeType.toString();
+  final String name = T.toString();
 
   void _log(String eventType, String message) {
     debugPrint("$name:$eventType: $message");
-  }
-
-  void event(String name, String message, {Map<String, Object>? parameters}) {
-    _log('Event', message);
-
-    parameters = parameters ?? <String, Object>{};
-    parameters['message'] = message;
-    analytics?.logEvent(name: name, parameters: parameters);
   }
 
   void debug(String message) {
@@ -26,5 +15,17 @@ class Logger<T> {
 
   void error(String message, {StackTrace? stackTrace}) {
     _log('Error', "$message\n$stackTrace");
+  }
+
+  /// Reports only genuinely unexpected caught exceptions to Crashlytics.
+  /// Callers must not include currency amounts, user behavior, or expected
+  /// offline/network failures in [reason].
+  void unexpected(Object error, StackTrace stackTrace, {String? reason}) {
+    _log('Error', '${reason ?? error}\n$stackTrace');
+    CrashReporter.recordNonFatal(
+      error,
+      stackTrace,
+      reason: reason == null ? name : '$name: $reason',
+    );
   }
 }

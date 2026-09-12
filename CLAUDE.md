@@ -84,7 +84,7 @@ The app uses a **hybrid state management approach**:
 - Sets up Riverpod provider overrides
 
 **App Root** (`app_root.dart`):
-- Initializes Firebase Analytics
+- Loads independently of optional Firebase crash reporting
 - Loads online currency rates via `RatesLoader`
 - Configures theme (light/dark mode via Riverpod)
 - Sets up routing with go_router
@@ -128,7 +128,8 @@ Each use case contains:
 - **state_persistence.dart**: Persists app state to local storage
 - **local_storage.dart**: File-based storage wrapper
 - **preferences.dart**: Shared preferences wrapper
-- **logger.dart**: Logging and analytics integration
+- **logger.dart**: Local logging and opt-in nonfatal crash reporting
+- **crash_reporter.dart**: Release-only Firebase Crashlytics initialization
 
 ### Data Models (`lib/model/`)
 

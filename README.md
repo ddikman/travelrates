@@ -40,6 +40,10 @@ fvm dart run fastforge:main release --name internal --jobs release-ios
 
 This will upload to Testflight and/or Google Play internal track.
 
+### Store listing assets
+
+See [the store release guide](store/README.md) for updating source captures and localized copy, regenerating the framed Google Play and App Store artwork, and validating the upload-ready files.
+
 ### Release notes
 
 Release notes are published to Google Play and App Store Connect through a `release_notes.json` file in the repo root, which Codemagic auto-publishes when present. `changelog.md` (English) is the single source of truth; the other languages are translated by the Claude CLI.

@@ -1,0 +1,14 @@
+TravelRates est un convertisseur de devises rapide et simple, conçu pour les routards et les voyageurs indépendants. Comparez plusieurs devises côte à côte, puis continuez vos conversions hors ligne grâce aux taux enregistrés.
+
+Pensé pour la route :
+• Comparez plusieurs devises à la fois
+• Utilisez les taux enregistrés sans connexion internet
+• Actualisez automatiquement les taux lorsque vous êtes en ligne
+• Recherchez par devise, code ou pays
+• Divisez ou multipliez les dépenses avec la calculatrice intégrée
+• Passez du mode clair au mode sombre
+• Aucune publicité, aucun abonnement et aucun achat intégré
+
+Carte SIM à l’aéroport, bureau de change, marché de nuit, auberge, excursion ou dépenses partagées : TravelRates vous aide à comprendre les prix rapidement, sans compte, graphique ni interface encombrée.
+
+Les taux sont actualisés sur internet une fois par jour et enregistrés sur votre appareil pour une utilisation hors ligne. Ils sont fournis à titre indicatif et peuvent différer de ceux proposés par votre banque, l’émetteur de votre carte ou un service de change.

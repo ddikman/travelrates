@@ -4,7 +4,6 @@ import 'package:travelconverter/app_core/theme/app_theme.dart';
 import 'package:travelconverter/app_core/widgets/currency_card.dart';
 import 'package:travelconverter/app_core/widgets/gap.dart';
 import 'package:travelconverter/l10n/l10n_extension.dart';
-import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/use_cases/home/state/converted_amount_provider.dart';
 import 'package:travelconverter/use_cases/home/ui/custom_keyboard_sheet.dart';
 import 'package:travelconverter/model/currency.dart';
@@ -18,15 +17,14 @@ class CompareCurrencyCard extends ConsumerWidget {
 
   const CompareCurrencyCard({super.key, required this.currency});
 
-  static final log = Logger<CompareCurrencyCard>();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentValue = ref.watch(convertedAmountProvider(currency));
 
-    final contents = LayoutBuilder(builder: (context, constraints) {
-      final maxValueWidth = constraints.maxWidth * 0.6;
-      return Row(
+    final contents = LayoutBuilder(
+      builder: (context, constraints) {
+        final maxValueWidth = constraints.maxWidth * 0.6;
+        return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
@@ -56,13 +54,16 @@ class CompareCurrencyCard extends ConsumerWidget {
                 ),
               ),
             ),
-          ]);
-    });
+          ],
+        );
+      },
+    );
 
     return CurrencyCard(
-        content: contents,
-        onTap: () => _showConvertDialog(context, currentValue),
-        iconName: currency.icon);
+      content: contents,
+      onTap: () => _showConvertDialog(context, currentValue),
+      iconName: currency.icon,
+    );
   }
 
   String _formatValue(double value) {
@@ -91,18 +92,19 @@ class CompareCurrencyCard extends ConsumerWidget {
   }
 
   void _newValueReceived(BuildContext context, double value) {
-    log.event("convert", "converting $value ${currency.code}",
-        parameters: {'currency': currency.code, 'amount': value});
     final stateContainer = StateContainer.of(context);
     stateContainer.setAmount(value, currency);
   }
 
   void _showConvertDialog(BuildContext context, double currentValue) async {
     double? value = await showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        builder: (ctx) => CustomKeyboardSheet(
-            currencyCode: currency.code, initialValue: currentValue));
+      context: context,
+      isScrollControlled: true,
+      builder: (ctx) => CustomKeyboardSheet(
+        currencyCode: currency.code,
+        initialValue: currentValue,
+      ),
+    );
 
     if (value != null && context.mounted) {
       _newValueReceived(context, value);
