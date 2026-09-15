@@ -25,14 +25,13 @@ The generated screenshots and feature graphics are committed to the repository s
 Run the generator on macOS from the repository root. It requires:
 
 - ImageMagick 7, exposed as `magick`.
-- `jq`.
 - The macOS font `/System/Library/Fonts/Supplemental/Arial Unicode.ttf`.
-- FVM and the repository's configured Flutter SDK for validation.
+- FVM and the repository's configured Dart SDK.
 
 Install the command-line dependencies with Homebrew if needed:
 
 ```sh
-brew install imagemagick jq
+brew install imagemagick
 ```
 
 ### Source files
@@ -54,7 +53,7 @@ assets/store/source/ios/04-calculator.png
 assets/store/source/ios/05-appearance.png
 ```
 
-Replace captures in place without cropping away the platform status or navigation areas. Android captures must use Android chrome; iOS captures must use current iPhone chrome, including the Dynamic Island. Keep the numbered filenames and screen order unchanged unless the `sources` array in `tools/generate_store_creatives.sh` and the `screens` array in `store/creative_copy.json` are updated together.
+Replace captures in place without cropping away the platform status or navigation areas. Android captures must use Android chrome; iOS captures must use current iPhone chrome, including the Dynamic Island. Keep the numbered filenames and screen order unchanged unless the `_sources` list in `tools/generate_store_creatives.dart` and the `screens` array in `store/creative_copy.json` are updated together.
 
 Edit all four locale entries in `store/creative_copy.json` when copy changes, and increment its `version`. Use `\n` in a feature headline when a deliberate line break is required. Screenshot captions and feature-graphic text come from this manifest; the UI inside each device comes from the source capture itself.
 
@@ -63,14 +62,14 @@ Edit all four locale entries in `store/creative_copy.json` when copy changes, an
 Generate every Google Play and App Store asset:
 
 ```sh
-tools/generate_store_creatives.sh
+fvm dart run tools/generate_store_creatives.dart
 ```
 
 To update only one platform while iterating:
 
 ```sh
-tools/generate_store_creatives.sh google
-tools/generate_store_creatives.sh apple
+fvm dart run tools/generate_store_creatives.dart google
+fvm dart run tools/generate_store_creatives.dart apple
 ```
 
 The script adds the Android or iPhone frame, background treatment, localized headline, and shadow, then replaces the generated files under:
@@ -82,16 +81,9 @@ assets/store/app_store/<locale>/
 
 Google output contains five 1440×2560 screenshots plus a 1024×500 feature graphic per locale. Apple output contains five 1320×2868 screenshots per locale.
 
-### Validate and review
+### Review
 
-Run both checks after generation:
-
-```sh
-fvm dart run tools/validate_store_metadata.dart
-fvm flutter test test/store_metadata_test.dart
-```
-
-The validator checks localization completeness, store limits, UTF-8 keyword byte limits, required English terms, banned stale claims, copy-manifest shape, and final image dimensions.
+The generator stops immediately if required input, localized copy, or an ImageMagick operation fails. A successful run confirms that every requested output was rendered; store-specific copy limits should be checked in App Store Connect and Play Console when uploading.
 
 Before committing, visually inspect all five images and the feature graphic in every generated locale. Confirm that:
 
@@ -100,8 +92,6 @@ Before committing, visually inspect all five images and the feature graphic in e
 - Android assets show Android hardware chrome and Apple assets show the iPhone frame.
 - The image order matches `store/creative_copy.json`.
 - The generated source inputs and outputs are included in the same commit.
-
-After creating Android and iOS release builds, run `tools/verify_release_privacy.sh`. It fails if Analytics, an advertising framework, or Android’s Advertising ID permission is present, and it confirms that Android mapping data and the Apple dSYM exist.
 
 ## Privacy declarations
 
@@ -119,6 +109,4 @@ For the next Crashlytics-only binary:
 2. Send deliberate fatal and nonfatal test crashes from Android internal testing and TestFlight. Confirm reports arrive and symbols are readable before production rollout.
 3. Preview every localized listing and verify that each image matches the current app and locale.
 4. Once Apple is ready, manually release Apple and publish both refreshed listings together.
-5. Record the preceding 28-day baseline for impressions, search terms, product-page conversion, and acquisitions. Record the same measures 7, 14, and 28 days after release and evaluate the refresh as one package.
-
-Use `rollout_metrics.csv` for the baseline and follow-up snapshots.
+5. If evaluating the impact, record the preceding 28-day baseline for impressions, search terms, product-page conversion, and acquisitions. Compare it with the same measures 7, 14, and 28 days after release.
