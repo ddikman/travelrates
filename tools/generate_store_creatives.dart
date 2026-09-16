@@ -28,7 +28,7 @@ void main(List<String> arguments) {
 
   final manifest = File('${_root.path}/store/creative_copy.json');
   _background = File(
-    '${_root.path}/assets/store/source/beach-left-background.png',
+    '${_root.path}/store/assets/source/beach-left-background.png',
   );
   _requireFile(File('${_root.path}/pubspec.yaml'));
   _requireFile(manifest);
@@ -81,7 +81,7 @@ void main(List<String> arguments) {
     _temporaryDirectory.deleteSync(recursive: true);
   }
 
-  stdout.writeln('Generated localized store creatives under assets/store.');
+  stdout.writeln('Generated localized store creatives under store/assets.');
 }
 
 _Scope _parseScope(List<String> arguments) {
@@ -305,7 +305,7 @@ void _makeStoreScreenshot({
   required int height,
 }) {
   final source = File(
-    '${_root.path}/assets/store/source/${platform.name}/'
+    '${_root.path}/store/assets/source/${platform.name}/'
     '${_sources[index - 1]}.png',
   );
   _requireFile(source);
@@ -314,7 +314,7 @@ void _makeStoreScreenshot({
       ? 'app_store'
       : 'google_play';
   final outputDirectory = Directory(
-    '${_root.path}/assets/store/$platformDirectory/$locale',
+    '${_root.path}/store/assets/$platformDirectory/$locale',
   )..createSync(recursive: true);
   final output = File('${outputDirectory.path}/$index.png');
   final localeCopy = _localeCopy(locale);
@@ -396,7 +396,7 @@ void _makeStoreScreenshot({
 
 void _makeFeatureGraphic(String locale) {
   final outputDirectory = Directory(
-    '${_root.path}/assets/store/google_play/$locale',
+    '${_root.path}/store/assets/google_play/$locale',
   )..createSync(recursive: true);
   final localeCopy = _localeCopy(locale);
   final headline = localeCopy['featureHeadline'] as String;
