@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:travelconverter/app_state.dart';
 import 'package:travelconverter/model/conversion_model.dart';
 import 'package:travelconverter/model/currency_rate.dart';
-import 'package:travelconverter/services/logger.dart';
 import 'package:travelconverter/services/state_persistence.dart';
 
 import 'package:travelconverter/model/currency.dart';
@@ -12,22 +11,25 @@ import 'package:flutter/material.dart';
 
 import 'duplicate_currency_error.dart';
 
-final stateContainerProvider =
-    Provider<StateContainerState>((ref) => throw Exception("Not initialized"));
+final stateContainerProvider = Provider<StateContainerState>(
+  (ref) => throw Exception("Not initialized"),
+);
 
 class StateContainer extends StatefulWidget {
   final Widget child;
   final AppState state;
   final StatePersistence statePersistence;
 
-  const StateContainer(
-      {super.key, required this.child,
-      required this.state,
-      required this.statePersistence});
+  const StateContainer({
+    super.key,
+    required this.child,
+    required this.state,
+    required this.statePersistence,
+  });
 
   static StateContainerState of(BuildContext context) {
-    _InheritedStateContainer stateContainer =
-        context.dependOnInheritedWidgetOfExactType<_InheritedStateContainer>()!;
+    _InheritedStateContainer stateContainer = context
+        .dependOnInheritedWidgetOfExactType<_InheritedStateContainer>()!;
     return stateContainer.data;
   }
 
@@ -36,8 +38,6 @@ class StateContainer extends StatefulWidget {
 }
 
 class StateContainerState extends State<StateContainer> {
-  static final log = Logger<StateContainerState>();
-
   final StreamController<ConversionModel> _conversionUpdated =
       StreamController<ConversionModel>.broadcast();
 
@@ -60,10 +60,7 @@ class StateContainerState extends State<StateContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return _InheritedStateContainer(
-      data: this,
-      child: widget.child,
-    );
+    return _InheritedStateContainer(data: this, child: widget.child);
   }
 
   void setAppState(AppState state) {
@@ -83,8 +80,6 @@ class StateContainerState extends State<StateContainer> {
   void removeCurrency(String currencyCode) {
     final currencies = List<String>.from(appState.conversion.currencies);
     currencies.remove(currencyCode);
-    log.event("removeCurrency", "Currency removed: $currencyCode",
-        parameters: {"currency": currencyCode});
     _updateConversion(appState.conversion.withCurrencies(currencies));
   }
 
@@ -92,10 +87,9 @@ class StateContainerState extends State<StateContainer> {
     final currencies = List<String>.from(appState.conversion.currencies);
     if (currencies.contains(currencyCode)) {
       throw DuplicateCurrencyError(
-          "Currency '$currencyCode' has already been added");
+        "Currency '$currencyCode' has already been added",
+      );
     }
-    log.event("addCurrency", "Currency added: $currencyCode",
-        parameters: {"currency": currencyCode});
     currencies.add(currencyCode);
 
     var conversion = appState.conversion.withCurrencies(currencies);
@@ -111,8 +105,10 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void setAmount(double amount, Currency currency) {
-    var conversion =
-        appState.conversion.withAmount(amount: amount, currency: currency);
+    var conversion = appState.conversion.withAmount(
+      amount: amount,
+      currency: currency,
+    );
     _updateConversion(conversion);
     _conversionUpdated.add(conversion);
   }
@@ -126,8 +122,7 @@ class StateContainerState extends State<StateContainer> {
   void setRates(List<CurrencyRate> rates, [DateTime? timestamp]) {
     setState(() {
       appState.availableCurrencies.updateRates(rates);
-      appState =
-          appState.withRatesLastUpdated(timestamp ?? DateTime.now());
+      appState = appState.withRatesLastUpdated(timestamp ?? DateTime.now());
       ratesLoading = false;
     });
     unawaited(widget.statePersistence.store(appState));
@@ -135,7 +130,6 @@ class StateContainerState extends State<StateContainer> {
 
   /// Reorder a currency in the list, newPosition begin the new index, zero-based.
   void reorderCurrency({required String item, required int newIndex}) {
-    log.event("reorder", "reordering $item to be at index $newIndex..");
     final currencies = List<String>.from(appState.conversion.currencies);
 
     var insertIndex = newIndex;
@@ -159,10 +153,7 @@ class StateContainerState extends State<StateContainer> {
 class _InheritedStateContainer extends InheritedWidget {
   final StateContainerState data;
 
-  const _InheritedStateContainer({
-    required this.data,
-    required super.child,
-  });
+  const _InheritedStateContainer({required this.data, required super.child});
 
   @override
   bool updateShouldNotify(_InheritedStateContainer old) => true;

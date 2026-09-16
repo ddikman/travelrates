@@ -37,9 +37,11 @@ class RatesLoader {
       try {
         json = await _readCache();
         return decoder.decodeRates(json);
-      } on Exception catch (e) {
+      } on Exception catch (e, stackTrace) {
         log.error(
-            'Failed to parse cached local rates: ${e.toString()}\n\r$json');
+          'Failed to parse cached local rates: ${e.toString()}\n\r$json',
+        );
+        log.unexpected(e, stackTrace, reason: 'Invalid cached rates');
       }
     }
 
@@ -58,11 +60,17 @@ class RatesLoader {
 
     try {
       final ratesResponse = decoder.decodeRates(ratesJson.result!);
-      _cacheRates(ratesJson.result!);
+      try {
+        await _cacheRates(ratesJson.result!);
+      } on Exception catch (error, stackTrace) {
+        log.unexpected(error, stackTrace, reason: 'Failed to cache rates');
+      }
       return ratesResponse;
-    } on Exception catch (e) {
+    } on Exception catch (e, stackTrace) {
       log.error(
-          'Online rates invalid json: ${e.toString()}\r\n${ratesJson.result}');
+        'Online rates invalid json: ${e.toString()}\r\n${ratesJson.result}',
+      );
+      log.unexpected(e, stackTrace, reason: 'Invalid online rates');
       return await _cachedRates();
     }
   }

@@ -1,0 +1,57 @@
+{
+  "version": "2026-09-12.1",
+  "appVersion": "2.3.1+105",
+  "screens": [
+    "compare",
+    "offline",
+    "search",
+    "calculator",
+    "appearance"
+  ],
+  "locales": {
+    "en-US": {
+      "featureHeadline": "All your travel currencies.\nIn one single view.",
+      "featureTagline": "Offline currency conversion for backpackers",
+      "screenshots": [
+        "Compare multiple currencies at once.",
+        "Works offline wherever you travel.",
+        "Find currencies by country, code, or name.",
+        "Split travel costs with the built-in calculator.",
+        "Light or dark—your choice."
+      ]
+    },
+    "sv-SE": {
+      "featureHeadline": "Alla dina resevalutor.\nI en enda vy.",
+      "featureTagline": "Offline valutaomvandling för backpackers",
+      "screenshots": [
+        "Jämför flera valutor samtidigt.",
+        "Fungerar offline var du än reser.",
+        "Sök efter land, kod eller valuta.",
+        "Dela resekostnader med kalkylatorn.",
+        "Ljust eller mörkt – du väljer."
+      ]
+    },
+    "ja-JP": {
+      "featureHeadline": "旅先で使う通貨をすべて。\nひとつの画面で。",
+      "featureTagline": "バックパッカー向けオフライン通貨換算",
+      "screenshots": [
+        "複数の通貨をまとめて比較",
+        "旅先でもオフラインで使える",
+        "国名・コード・通貨名で検索",
+        "内蔵計算機で旅費を割り勘",
+        "ライトもダークもお好みで"
+      ]
+    },
+    "fr-FR": {
+      "featureHeadline": "Toutes vos devises de voyage.\nSur un seul écran.",
+      "featureTagline": "Conversion hors ligne pour les routards",
+      "screenshots": [
+        "Comparez plusieurs devises à la fois.",
+        "Fonctionne hors ligne partout en voyage.",
+        "Recherchez par pays, code ou devise.",
+        "Partagez les frais avec la calculatrice.",
+        "Mode clair ou sombre, à vous de choisir."
+      ]
+    }
+  }
+}

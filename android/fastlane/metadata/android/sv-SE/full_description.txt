@@ -1,0 +1,14 @@
+TravelRates är en snabb och enkel valutaomvandlare för backpackers och dig som reser på egen hand. Jämför flera valutor sida vid sida och fortsätt räkna med sparade kurser när du är offline.
+
+Gjord för resan:
+• Jämför flera valutor samtidigt
+• Använd sparade växelkurser utan internet
+• Uppdatera kurser automatiskt när du är online
+• Sök efter valuta, kod eller land
+• Dela eller multiplicera kostnader med den inbyggda kalkylatorn
+• Växla mellan ljust och mörkt läge
+• Inga annonser, prenumerationer eller köp i appen
+
+Oavsett om du köper SIM-kort på flygplatsen, växlar pengar, går på nattmarknad, bor på vandrarhem, bokar utflykter eller delar kostnader hjälper TravelRates dig att snabbt förstå priser – utan konto, diagram eller krångel.
+
+Kurser hämtas från internet en gång om dagen och sparas på enheten för användning offline. Växelkurserna är endast vägledande och kan skilja sig från de kurser som din bank, kortutgivare eller växlingstjänst erbjuder.

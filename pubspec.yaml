@@ -41,9 +41,9 @@ dependencies:
   expressions: ^0.2.5
   country_flags: ^4.1.0
 
-  # analytics and crashes
+  # crash reporting
   firebase_core: ^4.6.0
-  firebase_analytics: ^12.2.0
+  firebase_crashlytics: ^5.0.8
 
 dev_dependencies:
   flutter_driver:

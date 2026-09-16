@@ -10,15 +10,15 @@ class ReviewRule {
   int _conversionsRequired;
   bool _submitted = false;
 
-  ReviewRule(
-      {required InternetConnectivity internet,
-      int conversionsDone = 0,
-      int conversionsRequired = 0,
-      bool submitted = false})
-      : _internet = internet,
-        _conversionsDone = conversionsDone,
-        _conversionsRequired = conversionsRequired,
-        _submitted = submitted;
+  ReviewRule({
+    required InternetConnectivity internet,
+    int conversionsDone = 0,
+    int conversionsRequired = 0,
+    bool submitted = false,
+  }) : _internet = internet,
+       _conversionsDone = conversionsDone,
+       _conversionsRequired = conversionsRequired,
+       _submitted = submitted;
 
   int get conversionsDone => _conversionsDone;
   int get conversionsRequired => _conversionsRequired;
@@ -33,18 +33,18 @@ class ReviewRule {
     if (_submitted) return;
     _conversionsDone++;
     _log.debug(
-        "review will be done after $_conversionsRequired, conversions done now $_conversionsDone");
+      "review will be done after $_conversionsRequired, conversions done now $_conversionsDone",
+    );
   }
 
   void reviewRequested() {
     _conversionsRequired = _conversionsRequired * 2;
     _log.debug(
-        "review requested, next review will be requested after $_conversionsRequired conversions");
+      "review requested, next review will be requested after $_conversionsRequired conversions",
+    );
   }
 
   void reviewAccepted() {
     _submitted = true;
-    _log.event("review", "review request was accepted",
-        parameters: {'state': 'requested'});
   }
 }
